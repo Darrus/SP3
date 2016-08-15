@@ -69,6 +69,7 @@ GameObject* GoManager::FetchGO()
 	{
 		m_goList.push_back(new GameObject());
 	}
+
 	GameObject* go = *(m_goList.end() - 1);
 	go->active = true;
 	objCount++;

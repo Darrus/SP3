@@ -6,8 +6,7 @@ using std::cout;
 using std::endl;
 
 // Scenes
-#include "Assignment2.h"
-
+#include "SP3.h"
 
 SceneManager::SceneManager() :
 quit(false),

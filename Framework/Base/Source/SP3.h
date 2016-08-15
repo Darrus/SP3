@@ -16,9 +16,6 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderEditor();
-
-	MapEditor* editor;
 };
 
 #endif

@@ -24,9 +24,9 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	virtual void Init() = 0;
-	virtual void Update(double dt) = 0;
-	virtual void HandleCollision(GameObject* go, double dt);
+	virtual void Init();
+	virtual void Update(double dt);
+	//virtual void HandleCollision(GameObject* go, double dt);
 	virtual Mesh* GetMesh();
 
 	Vector3 pos;

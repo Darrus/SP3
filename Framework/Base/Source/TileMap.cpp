@@ -50,8 +50,8 @@ void TileMap::Init(const int screenHeight, const int screenWidth, const int tile
 	this->screenHeight = screenHeight;
 	this->screenWidth = screenWidth;
 	this->tileSize = tileSize;
-	this->numOfTiles_ScreenHeight = ceil((float)screenHeight / (float)tileSize);
-	this->numOfTiles_ScreenWidth = ceil((float)screenWidth / (float)tileSize);
+	this->numOfTiles_ScreenHeight = (int)ceil((float)screenHeight / (float)tileSize);
+	this->numOfTiles_ScreenWidth = (int)ceil((float)screenWidth / (float)tileSize);
 }
 
 void TileMap::Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize, bool collision)
