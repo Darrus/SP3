@@ -1,4 +1,5 @@
 #include "Weapon.h"
+#include "GoManager.h"
 
 Weapon::Weapon()
 {
@@ -102,21 +103,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 1)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 20;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 10;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 15;
 				}
@@ -130,21 +131,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 0.7)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 20;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 10;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 15;
 				}
@@ -158,21 +159,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 0.3)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 4 * dt;
 					damage = 15;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 5;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 10;
 				}
@@ -186,21 +187,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 2)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 5;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 2;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 3;
 				}
@@ -214,21 +215,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 3)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 4 * dt;
 					damage = 150;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 4 * dt;
 					damage = 100;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 4 * dt;
 					damage = 120;
 				}
@@ -242,21 +243,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 1.5)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 100;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 70;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 3 * dt;
 					damage = 80;
 				}
@@ -270,21 +271,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 0.3)
 			{
-				if (bullet.getBulletElement() == ELEMENT::FIRE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 40;
 				}
-				if (bullet.getBulletElement() == ELEMENT::ICE)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 30;
 				}
-				if (bullet.getBulletElement() == ELEMENT::LIGHTNING)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
 					damage = 20;
 				}
@@ -299,9 +300,9 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 		{
 			if (fireRate > 0.3)
 			{
-				if (bullet.getBulletElement() == ELEMENT::TRAPPER)
+				if (bullet.getBulletElement() == Bullet::ELEMENT::TRAPPER)
 				{
-					bullet.vel += bulletSpeed * dt;
+					bullet.vel += bullet.getBulletSpeed() * dt;
 					overHeatingRate += 10 * dt;
 					damage = 40;
 				}

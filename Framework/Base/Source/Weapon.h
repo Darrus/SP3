@@ -2,7 +2,7 @@
 #define WEAPON_H
 #include "Bullet.h"
 
-class Weapon:public Bullet
+class Weapon : public GameObject
 {
 public:
 
@@ -52,8 +52,8 @@ private:
 	WEAPON_TYPE weaponType;
 	Bullet *bullet;
 	Bullet bullets;
-	GameObject weapon;
-	Player player;
+	//GameObject weapon;
+	//Player player;
 };
 
 
