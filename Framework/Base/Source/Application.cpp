@@ -172,12 +172,12 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene *scene = new SP3();
+	Scene *scene = new LevelEditor();
 	scene->Init();
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 	{
-		controller->read();
+		controller->read(m_timer.getElapsedTime());
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();
 

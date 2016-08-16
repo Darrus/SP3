@@ -17,8 +17,8 @@ public:
 	~TileMap(void);
 
 	void Init(const int screenHeight, const int screenWidth, const int tileSize = 25);
-	void Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize = 25, bool collision = false);
-	bool LoadMap(const string graphicMap, const string collisionMap = "");
+	void Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize = 25);
+	bool LoadMap(const string name);
 	bool LoadTileSheet(const string fileLoc);
 
 	int GetNumOfTiles_ScreenHeight();		// Get the number of tiles for height of the screen
@@ -33,8 +33,9 @@ public:
 
 	Mesh* GetTileSheet();
 
-	vector<vector<int> > theScreenMap;
-	vector<vector<int> > theCollisionMap;
+	vector<vector<int> > frontMap;
+	vector<vector<int> > rearMap;
+	vector<vector<int> > collisionMap;
 
 private:
 	int screenHeight;
