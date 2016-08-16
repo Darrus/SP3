@@ -27,7 +27,10 @@ enum Controls
 
 	EXIT,
 	CTRL,
+	CYCLEBULLET,
+	USEITEM,
 	KEYS_SIZE,
+
 };
 
 class Controller
