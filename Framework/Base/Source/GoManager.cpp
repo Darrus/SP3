@@ -24,7 +24,7 @@ GoManager& GoManager::GetInstance()
 
 void GoManager::Update(double dt)
 {
-	for (int i = 0; i < m_goList.size(); ++i)
+	for (unsigned int i = 0; i < m_goList.size(); ++i)
 	{
 		if (m_goList[i]->active)
 			m_goList[i]->Update(dt);

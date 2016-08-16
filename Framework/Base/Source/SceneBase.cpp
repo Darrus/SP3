@@ -182,7 +182,6 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	if(!mesh || mesh->textureArray[0] <= 0)
 		return;
 
-	glDisable(GL_DEPTH_TEST);
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, m_screenWidth, 0, m_screenHeight, -10, 10);
 	projectionStack.PushMatrix();
@@ -214,7 +213,6 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
-	glEnable(GL_DEPTH_TEST);
 }
 
 void SceneBase::RenderObjOnScreen(Mesh* mesh, float size, float x, float y)

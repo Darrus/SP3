@@ -25,9 +25,10 @@ state(REAR_MAP)
 {
 	tilesID.clear();
 	collisionbox = MeshGenerator::GenerateTileSheet("Collision Box", "Image//collisionbox.tga", 1, 3);
+	mapbackground = MeshGenerator::GenerateQuad("Map background", Color(1.f, 1.f, 1.f), "Image//mapbackground.tga");
 	for (int i = 0; i < MapEditor::STATE_SIZE; ++i)
 	{
-		showMap[i] = false;
+		showMap[i] = true;
 	}
 }
 
@@ -36,7 +37,7 @@ MapEditor::~MapEditor()
 
 }
 
-void MapEditor::Init(int screenWidth, int screenHeight)
+void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
@@ -65,9 +66,6 @@ void MapEditor::Init(int screenWidth, int screenHeight)
 		{
 			cout << "Input name of map" << endl;
 			cin >> name;
-			cout << "Enter Tile Size" << endl;
-			int tileSize;
-			cin >> tileSize;
 			if (!LoadMap(name, tileSize))
 				return;
 		}
@@ -224,16 +222,17 @@ bool MapEditor::LoadMap(string name, int tileSize)
 void MapEditor::LoadTileSheet(string name, int row, int column)
 {
 	this->tileSheet = MeshGenerator::GenerateTileSheet(name, "Image\\" + name + ".tga", row, column);
-	this->row = row;
-	this->column = column;
-	for (int i = 0; i < row; ++i)
+	int size = row * column;
+	this->column = 3;
+	this->row = size / this->column;
+	for (int i = 0; i < this->row; ++i)
 	{
 		vector<int> columns;
 		columns.clear();
 
-		for (int j = 0; j < column; ++j)
+		for (int j = 0; j < this->column; ++j)
 		{
-			columns.push_back(i * column + j);
+			columns.push_back(i * this->column + j);
 		}
 
 		tilesID.push_back(columns);
@@ -302,16 +301,6 @@ void MapEditor::SaveMap(string name)
 void MapEditor::SetCamera(CameraFollow* camera)
 {
 	this->camera = camera;
-}
-
-Mesh* MapEditor::GetTileSheet()
-{
-	return tileSheet;
-}
-
-Mesh* MapEditor::GetCollisionBox()
-{
-	return collisionbox;
 }
 
 TileMap* MapEditor::GetMap()

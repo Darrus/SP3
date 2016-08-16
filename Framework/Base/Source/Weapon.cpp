@@ -18,7 +18,7 @@ Weapon::~Weapon()
 
 void Weapon::update(double dt)
 {
-	overHeatingRate -= 1 * dt;
+	overHeatingRate -= dt;
 	fireRate += 0.1 * dt;
 	overHeating();
 }
@@ -95,7 +95,7 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 	WEAPON_TYPE tmpWpType = weaponType;
 	Bullet tmpBullet = bullet;
 	bool tmpOverHeat = overHeat;
-	fireRate += dt;
+	fireRate += (float)dt;
 
 	if (tmpWpType == WEAPON_TYPE::PISTOL)
 	{

@@ -747,9 +747,9 @@ Mesh* MeshBuilder::GenerateTerrain(const std::string &meshName, std::vector<unsi
 	Vertex v;
 	unsigned terrainSize = (unsigned)sqrt((double)heightMap.size());
 
-	for (int z = 0; z < terrainSize; ++z)
+	for (unsigned int z = 0; z < terrainSize; ++z)
 	{
-		for (int x = 0; x < terrainSize; ++x)
+		for (unsigned int x = 0; x < terrainSize; ++x)
 		{
 			float scaledHeight = (float)heightMap[z * terrainSize + x] / SCALE_FACTOR;
 
@@ -761,9 +761,9 @@ Mesh* MeshBuilder::GenerateTerrain(const std::string &meshName, std::vector<unsi
 		}
 	}
 
-	for (int i = 0; i < terrainSize - 1; ++i)
+	for (unsigned int i = 0; i < terrainSize - 1; ++i)
 	{
-		for (int j = 0; j < terrainSize - 1; ++j)
+		for (unsigned int j = 0; j < terrainSize - 1; ++j)
 		{
 			Vector3 p0, p1, p2, e1, e2;
 			p0 = vertex_buffer_data[i * terrainSize + j].pos;
@@ -782,7 +782,7 @@ Mesh* MeshBuilder::GenerateTerrain(const std::string &meshName, std::vector<unsi
 		}
 	}
 
-	for (int i = 0; i < vertex_buffer_data.size(); ++i)
+	for (unsigned int i = 0; i < vertex_buffer_data.size(); ++i)
 	{
 		if (vertex_buffer_data[i].normal.x != 0 &&
 			vertex_buffer_data[i].normal.y != 0 && 
@@ -791,9 +791,9 @@ Mesh* MeshBuilder::GenerateTerrain(const std::string &meshName, std::vector<unsi
 	}
 
 	// Calculate the indices
-	for (int z = 0; z < terrainSize - 1; ++z)
+	for (unsigned int z = 0; z < terrainSize - 1; ++z)
 	{
-		for (int x = 0; x < terrainSize - 1; ++x)
+		for (unsigned int x = 0; x < terrainSize - 1; ++x)
 		{
 			index_buffer_data.push_back(terrainSize * z + x);
 			index_buffer_data.push_back(terrainSize * (z + 1) + x);

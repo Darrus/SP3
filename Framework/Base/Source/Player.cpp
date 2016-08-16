@@ -87,19 +87,19 @@ void Player::Move(double dt)
 
 	if (Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT))
 	{
-		pos.x -= PLAYER_SPEED * dt;
+		pos.x -= PLAYER_SPEED * (float)dt;
 
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(MOVE_UP))
 	{
-		pos.y += PLAYER_SPEED * dt;
+		pos.y += PLAYER_SPEED * (float)dt;
 
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN) && isClimbing == true)
 	{
-		pos.y -= PLAYER_SPEED * dt;
+		pos.y -= PLAYER_SPEED * (float)dt;
 	}
 }
 
@@ -223,52 +223,52 @@ void Player::CollisionCheck(double dt)
 
 	if (isGrounded)
 	{
-		if (map->theCollisionMap[checkY][currentX] == 1)
+		if (map->collisionMap[checkY][currentX] == 1)
 			newPos.y = pos.y;
 		else
 			isGrounded = false;
 
 		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth()
-			|| map->theCollisionMap[currentY][checkX] == 1)
+			|| map->collisionMap[currentY][checkX] == 1)
 			newPos.x = pos.x;
 	}
 	else if (isClimbing)
 	{
 		vel.y = 0.f;
-		if (map->theCollisionMap[checkY][currentX] == 1)
+		if (map->collisionMap[checkY][currentX] == 1)
 		{
 			isGrounded = true;
 			isClimbing = false;
 			newPos.y = ((map->GetNumOfTiles_MapHeight() - checkY) * map->GetTileSize()) + halfY;
 		}
-		else if (map->theCollisionMap[checkY][currentX] == 0)
+		else if (map->collisionMap[checkY][currentX] == 0)
 		{
 			isGrounded = false;
 			isClimbing = false;
 		}
 
 		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth()
-			|| map->theCollisionMap[currentY][checkX] == 1)
+			|| map->collisionMap[currentY][checkX] == 1)
 			newPos.x = pos.x;
 
 	}
 	else
 	{
-		if (map->theCollisionMap[checkY][currentX] == 1)
+		if (map->collisionMap[checkY][currentX] == 1)
 		{
 			newPos.y = ((map->GetNumOfTiles_MapHeight() - checkY) * map->GetTileSize()) + halfY;
 			isGrounded = true;
 			vel.y = 0.f;
 		}
-		else if (map->theCollisionMap[checkUpY][currentX] == 1)
+		else if (map->collisionMap[checkUpY][currentX] == 1)
 		{
 			vel.y = 0.f;
 			newPos.y = (map->GetNumOfTiles_MapHeight() - (currentY)) * map->GetTileSize() - halfY;
 		}
 
 		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth() ||
-			map->theCollisionMap[currentY][checkX] == 1 || map->theCollisionMap[checkY][checkX] == 1 ||
-			map->theCollisionMap[checkUpY][checkX] == 1)
+			map->collisionMap[currentY][checkX] == 1 || map->collisionMap[checkY][checkX] == 1 ||
+			map->collisionMap[checkUpY][checkX] == 1)
 			newPos.x = pos.x;
 	}
 	
@@ -316,7 +316,7 @@ void Player::playerJump(double dt)
 	}
 	if (isFalling == true)
 	{
-		pos.y -= JUMP_SPEED * dt;
+		pos.y -= JUMP_SPEED * (float)dt;
 	}
 
 }

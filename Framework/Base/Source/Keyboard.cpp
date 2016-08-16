@@ -1,5 +1,6 @@
 #include "Keyboard.h"
 #include "Application.h"
+
 Keyboard::Keyboard()
 {
 }
@@ -24,8 +25,8 @@ void Keyboard::create()
 	keys[JUMP].Assign(VK_SPACE);
 	keys[CTRL].Assign(VK_CONTROL);
 	keys[EXIT].Assign(VK_ESCAPE);
-	keys[SHOW_FRONT].Assign(VK_NUMPAD1);
-	keys[SHOW_REAR].Assign(VK_NUMPAD2);
+	keys[SHOW_REAR].Assign(VK_NUMPAD1);
+	keys[SHOW_FRONT].Assign(VK_NUMPAD2);
 	keys[SHOW_COLLISION].Assign(VK_NUMPAD3);
 	keys[CYCLEBULLET].Assign('Q');
 	keys[USEITEM].Assign('E');
@@ -35,7 +36,7 @@ void Keyboard::create()
 
 void Keyboard::read(double dt)
 {
-	timeBetweenPress -= dt;
+	timeBetweenPress -= (float)dt;
 
 	for (int i = 0; i < KEYS_SIZE; ++i)
 	{

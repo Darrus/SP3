@@ -23,7 +23,7 @@ public:
 	MapEditor();
 	~MapEditor();
 
-	void Init(int screenWidth, int screenHeight);
+	void Init(int screenWidth, int screenHeight, int tileSize);
 	void Update(double dt);
 	
 	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
@@ -35,8 +35,6 @@ public:
 
 	void SaveMap(string name);
 
-	Mesh* GetTileSheet();
-	Mesh* GetCollisionBox();
 	TileMap* GetMap();
 	EDIT_STATE GetState();
 
@@ -47,14 +45,15 @@ public:
 	vector<vector<int> > tilesID;
 	Vector2 offset;
 
+	Mesh* tileSheet;
+	Mesh* collisionbox;
+	Mesh* mapbackground;
+
 private:
 
 	string name;
 
 	TileMap* map;
-
-	Mesh* tileSheet;
-	Mesh* collisionbox;
 
 	int selectedTile;
 	int screenWidth, screenHeight;
