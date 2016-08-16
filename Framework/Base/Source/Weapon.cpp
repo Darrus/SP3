@@ -5,7 +5,7 @@ Weapon::Weapon()
 	fireRate = 0;
 	coolDown = 0;
 	damage = 0;
-	weaponType = WEAPON_TYPE::NONE;
+	weaponType = WEAPON_TYPE::PISTOL;
 	overHeat = false;
 	overHeatingRate = 0;
 }

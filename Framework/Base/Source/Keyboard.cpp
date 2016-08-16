@@ -24,6 +24,8 @@ void Keyboard::create()
 	keys[JUMP].Assign(VK_SPACE);
 	keys[CTRL].Assign(VK_CONTROL);
 	keys[EXIT].Assign(VK_ESCAPE);
+	keys[CYCLEBULLET].Assign('Q');
+	keys[USEITEM].Assign('E');
 }
 
 void Keyboard::read()

@@ -1,7 +1,6 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 #include "Bullet.h"
-#include "Player.h"
 
 class Weapon:public Bullet
 {

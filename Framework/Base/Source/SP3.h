@@ -16,6 +16,7 @@ public:
 	virtual void Exit();
 
 private:
+	TileMap* m_cMap;
 };
 
 #endif
