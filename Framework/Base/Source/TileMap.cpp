@@ -28,17 +28,21 @@ fineOffsetX(0),
 fineOffsetY(0),
 tileSheet(NULL)
 {
-	theScreenMap.clear();
-	theCollisionMap.clear();
+	frontMap.clear();
+	rearMap.clear();
+	collisionMap.clear();
 }
 
 TileMap::~TileMap()
 {
-	if (!theScreenMap.empty())
-		theScreenMap.clear();
+	if (!frontMap.empty())
+		frontMap.clear();
 
-	if (!theCollisionMap.empty())
-		theCollisionMap.clear();
+	if (!rearMap.empty())
+		rearMap.clear();
+
+	if (!collisionMap.empty())
+		collisionMap.clear();
 
 	if (tileSheet)
 		delete tileSheet;
@@ -50,11 +54,11 @@ void TileMap::Init(const int screenHeight, const int screenWidth, const int tile
 	this->screenHeight = screenHeight;
 	this->screenWidth = screenWidth;
 	this->tileSize = tileSize;
-	this->numOfTiles_ScreenHeight = (int)ceil((float)screenHeight / (float)tileSize);
-	this->numOfTiles_ScreenWidth = (int)ceil((float)screenWidth / (float)tileSize);
+	this->numOfTiles_ScreenHeight = ceil((float)screenHeight / (float)tileSize);
+	this->numOfTiles_ScreenWidth = ceil((float)screenWidth / (float)tileSize);
 }
 
-void TileMap::Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize, bool collision)
+void TileMap::Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
@@ -75,21 +79,35 @@ void TileMap::Create(const int screenWidth, const int screenHeight, const int ma
 			row.push_back(0);
 		}
 
-		theScreenMap.push_back(row);
-		if (collision)
-			theCollisionMap.push_back(row);
+		frontMap.push_back(row);
+		rearMap.push_back(row);
+		collisionMap.push_back(row);
 	}
 }
 
-bool TileMap::LoadMap(const string graphicMap, const string collisionMap)
+bool TileMap::LoadMap(const string name)
 {
-	bool check = false;
-	check = LoadFile(graphicMap, theScreenMap);
-
-	if (collisionMap != "")
-		check = LoadFile(collisionMap, theCollisionMap);
-	
-	return check;
+	string fileLoc = "Maps\\";
+	fileLoc.append(name);
+	if (!LoadFile(fileLoc + "_front.csv", frontMap))
+	{
+		cout << "Failed loading front map." << endl;
+		frontMap.clear();
+		return false;
+	}
+	if (!LoadFile(fileLoc + "_rear.csv", rearMap))
+	{
+		cout << "Failed loading rear map." << endl;
+		frontMap.clear();
+		return false;
+	}
+	if (!LoadFile(fileLoc + "_collision.csv", collisionMap))
+	{
+		cout << "Failed loading collision map." << endl;
+		frontMap.clear();
+		return false;
+	}
+	return true;
 }
 
 bool TileMap::LoadTileSheet(const string fileLoc)
@@ -122,6 +140,12 @@ bool TileMap::LoadFile(const string mapName, vector<vector<int> >& map)
 				lineOfTexts.push_back(aLineOfText);
 		}
 	}
+	else
+	{
+		cout << "Error opening file" << mapName << '.' << endl;
+		return false;
+	}
+
 	file.close();
 
 	while (!lineOfTexts.empty())
