@@ -24,15 +24,13 @@ void Keyboard::create()
 	keys[JUMP].Assign(VK_SPACE);
 	keys[CTRL].Assign(VK_CONTROL);
 	keys[EXIT].Assign(VK_ESCAPE);
-<<<<<<< HEAD
 	keys[SHOW_FRONT].Assign(VK_NUMPAD1);
 	keys[SHOW_REAR].Assign(VK_NUMPAD2);
 	keys[SHOW_COLLISION].Assign(VK_NUMPAD3);
-	timeBetweenPress = 0.f;
-=======
 	keys[CYCLEBULLET].Assign('Q');
 	keys[USEITEM].Assign('E');
->>>>>>> afaf74d5ece64b2b5a8b63b88dcb48d680f0f5ee
+
+	timeBetweenPress = 0.f;
 }
 
 void Keyboard::read(double dt)
