@@ -6,12 +6,11 @@
 class Keyboard : public Controller
 {
 public:
-	float timeBetweenPress;
 	Keyboard();
 	virtual ~Keyboard();
 
 	virtual void create();
-	virtual void read(double dt);
+	virtual void read();
 
 	virtual bool IsKeyPressed(Controls input) const;
 	virtual bool OnHold(Controls input) const;

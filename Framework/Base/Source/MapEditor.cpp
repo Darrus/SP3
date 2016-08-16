@@ -18,17 +18,13 @@ active(false),
 showTiles(false),
 selectedTile(0),
 map(NULL),
+rearMap(NULL),
 tileSheet(NULL),
 collisionbox(NULL),
-name(""),
-state(REAR_MAP)
+state(FRONT_MAP)
 {
 	tilesID.clear();
 	collisionbox = MeshGenerator::GenerateTileSheet("Collision Box", "Image//collisionbox.tga", 1, 3);
-	for (int i = 0; i < MapEditor::STATE_SIZE; ++i)
-	{
-		showMap[i] = false;
-	}
 }
 
 MapEditor::~MapEditor()
@@ -40,54 +36,16 @@ void MapEditor::Init(int screenWidth, int screenHeight)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
-
-	if (!map)
-	{
-		bool answer = true;
-		cout << "Create new map?" << endl;
-		cout << "0) Yes" << endl;
-		cout << "1) No" << endl;
-		cin >> answer;
-
-		if (answer == false)
-		{
-			int mapWidth, mapHeight, tileSize;
-			cout << "Please type in the Map's width." << endl;
-			cin >> mapWidth;
-			cout << "Please type in the Map's height." << endl;
-			cin >> mapHeight;
-			cout << "Please type in the Map's tile size." << endl;
-			cin >> tileSize;
-
-			CreateNewMap(mapWidth, mapHeight, tileSize);
-		}
-		else
-		{
-			cout << "Input name of map" << endl;
-			cin >> name;
-			cout << "Enter Tile Size" << endl;
-			int tileSize;
-			cin >> tileSize;
-			if (!LoadMap(name, tileSize))
-				return;
-		}
-	}
-
-	if (!tileSheet)
-	{
-		string tilename;
-		cout << "Input name of tilesheet" << endl;
-		cin >> tilename;
-		cout << "Please input tile sheet's rows" << endl;
-		cin >> row;
-		cout << "Please input tile sheet's cols" << endl;
-		cin >> column;
-		LoadTileSheet(tilename, row, column);
-	}
 }
 
 void MapEditor::Update(double dt)
 {
+	if (!map)
+	{
+		string name;
+		cout << "Input map name." << endl;
+		cin >> name;
+	}
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 		showTiles = true;
 
@@ -125,88 +83,62 @@ void MapEditor::Update(double dt)
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(ONE))
-		state = REAR_MAP;
-	if (Application::GetInstance().controller->IsKeyPressed(TWO))
 		state = FRONT_MAP;
+	if (Application::GetInstance().controller->IsKeyPressed(TWO))
+		state = REAR_MAP;
 	if (Application::GetInstance().controller->IsKeyPressed(THREE))
 		state = COLLISION_MAP;
 
-	if (Application::GetInstance().controller->IsKeyPressed(SHOW_REAR))
-		showMap[0] = !showMap[0];
-	if (Application::GetInstance().controller->IsKeyPressed(SHOW_FRONT))
-		showMap[1] = !showMap[1];
-	if (Application::GetInstance().controller->IsKeyPressed(SHOW_COLLISION))
-		showMap[2] = !showMap[2];
-
-	if (!showTiles)
+	if (Application::GetInstance().IsMousePressed(0))
 	{
-		if (Application::GetInstance().IsMousePressed(0))
+		double mouseX, mouseY;
+		Application::GetMousePos(mouseX, mouseY);
+		int tileX, tileY;
+		tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
+		tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
+		tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
+		if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 		{
-			double mouseX, mouseY;
-			Application::GetMousePos(mouseX, mouseY);
-			int tileX, tileY;
-			tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
-			tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
-			tileY = (screenHeight / map->GetTileSize()) - tileY;
-			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
+			switch (state)
 			{
-				switch (state)
-				{
-				case FRONT_MAP:
-					map->frontMap[tileY][tileX] = selectedTile;
-					break;
-				case REAR_MAP:
-					map->rearMap[tileY][tileX] = selectedTile;
-					break;
-				case COLLISION_MAP:
-					//map->collisionMap[tileY][tileX] = selectedTile;
-					break;
-				}
-
+			case FRONT_MAP:
+				map->theScreenMap[tileY][tileX] = selectedTile;
+				break;
+			case REAR_MAP:
+				rearMap->theScreenMap[tileY][tileX] = selectedTile;
+				break;
+			case COLLISION_MAP:
+				map->theCollisionMap[tileY][tileX] = selectedTile;
+				break;
 			}
-		}
 
-		if (Application::GetInstance().IsMousePressed(1))
-		{
-			double mouseX, mouseY;
-			Application::GetMousePos(mouseX, mouseY);
-			int tileX, tileY;
-			tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
-			tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
-			tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
-			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
-			{
-				switch (state)
-				{
-				case FRONT_MAP:
-					map->frontMap[tileY][tileX] = 0;
-					break;
-				case REAR_MAP:
-					map->rearMap[tileY][tileX] = 0;
-					break;
-				case COLLISION_MAP:
-					//map->collisionMap[tileY][tileX] = selectedTile;
-					break;
-				}
-			}
 		}
+	}
+
+	if (Application::GetInstance().IsMousePressed(1))
+	{
+		double mouseX, mouseY;
+		Application::GetMousePos(mouseX, mouseY);
+		int tileX, tileY;
+		tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
+		tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
+		tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
+		if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
+			map->theScreenMap[tileY][tileX] = 0;
 	}
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN))
 	{
-		if (name == "")
-		{
-			cout << "Please enter file name" << endl;
-			cin >> name;
-		}
+		cout << "Please enter file name" << endl;
+		string name;
+		cin >> name;
 		SaveMap(name);
 	}
 }
 
-void MapEditor::CreateNewMap(int mapWidth, int mapHeight, int tileSize)
+void MapEditor::CreateNewMap(int mapWidth, int mapHeight, int tileSize, bool front)
 {
-	map = new TileMap();
-	map->Create(screenWidth, screenHeight, mapWidth, mapHeight, tileSize);
+	
 }
 
 void MapEditor::LoadMap(TileMap* map)
@@ -214,16 +146,36 @@ void MapEditor::LoadMap(TileMap* map)
 	this->map = map;
 }
 
-bool MapEditor::LoadMap(string name, int tileSize)
+bool MapEditor::LoadMap(string name)
 {
-	map = new TileMap();
-	map->Init(screenHeight, screenWidth, tileSize);
-	return map->LoadMap(name);
+	ifstream file;
+	string graphicFileLoc = "Image//";
+	graphicFileLoc.append(name).append("_Graphic.csv");
+	file.open(graphicFileLoc);
+	
+	if (file.is_open())
+	{
+		string collisionFileLoc = "Image//";
+		collisionFileLoc.append(name).append("_Collision.csv");
+
+		map = new TileMap;
+		map->Init(screenHeight, screenWidth, 32);
+		map->LoadMap(graphicFileLoc, collisionFileLoc);
+
+		cout << "Input tileSheet name." << endl;
+		string tileSheetName;
+		cin >> tileSheetName;
+		string tileSheetFileLoc = "Image//";
+		tileSheetFileLoc.append(tileSheetName).append("tga");
+		map->LoadTileSheet(tileSheetFileLoc);
+		this->tileSheet = map->GetTileSheet();
+		return true;
+	}
 }
 
-void MapEditor::LoadTileSheet(string name, int row, int column)
+void MapEditor::LoadTileSheet(Mesh* tileSheet, int row, int column)
 {
-	this->tileSheet = MeshGenerator::GenerateTileSheet(name, "Image\\" + name + ".tga", row, column);
+	this->tileSheet = tileSheet;
 	this->row = row;
 	this->column = column;
 	for (int i = 0; i < row; ++i)
@@ -243,14 +195,32 @@ void MapEditor::LoadTileSheet(string name, int row, int column)
 void MapEditor::SaveMap(string name)
 {
 	ofstream file;
-	string fileLoc = "Maps\\";
-	fileLoc.append(name);
+	string fileLoc = "Image//";
+	fileLoc.append(name).append("_Graphic.csv");
+	file.open(fileLoc, std::ofstream::out);
 
-	// Save Front Map
-	file.open(fileLoc + "_front.csv", std::ofstream::out | std::ofstream::trunc);
-	if (file.is_open())
+	for (vector<vector<int> >::reverse_iterator it = map->theScreenMap.rbegin(); it != map->theScreenMap.rend(); ++it)
 	{
-		for (vector<vector<int> >::reverse_iterator it = map->frontMap.rbegin(); it != map->frontMap.rend(); ++it)
+		vector<int> token = *it;
+		std::stringstream iss;
+		for (vector<int>::iterator lineIt = token.begin(); lineIt != token.end(); lineIt++)
+		{
+			int value = *lineIt;
+			iss << value << ",";
+		}
+		iss << '\n';
+		file << iss.str();
+	}
+	file.close();
+	cout << "Saved " << fileLoc << " file." << endl;
+
+	if (!map->theCollisionMap.empty())
+	{
+		fileLoc = "Image//";
+		fileLoc.append(name).append("_Collision.csv");
+		file.open(fileLoc, std::ofstream::out);
+
+		for (vector<vector<int> >::reverse_iterator it = map->theCollisionMap.rbegin(); it != map->theCollisionMap.rend(); ++it)
 		{
 			vector<int> token = *it;
 			std::stringstream iss;
@@ -264,39 +234,8 @@ void MapEditor::SaveMap(string name)
 		}
 		file.close();
 	}
-	
-	// Save Rear Map
-	file.open(fileLoc + "_rear.csv", std::ofstream::out);
-	for (vector<vector<int> >::reverse_iterator it = map->rearMap.rbegin(); it != map->rearMap.rend(); ++it)
-	{
-		vector<int> token = *it;
-		std::stringstream iss;
-		for (vector<int>::iterator lineIt = token.begin(); lineIt != token.end(); lineIt++)
-		{
-			int value = *lineIt;
-			iss << value << ",";
-		}
-		iss << '\n';
-		file << iss.str();
-	}
-	file.close();
 
-	// Save Collision Map
-	file.open(fileLoc + "_collision.csv", std::ofstream::out);
-	for (vector<vector<int> >::reverse_iterator it = map->collisionMap.rbegin(); it != map->collisionMap.rend(); ++it)
-	{
-		vector<int> token = *it;
-		std::stringstream iss;
-		for (vector<int>::iterator lineIt = token.begin(); lineIt != token.end(); lineIt++)
-		{
-			int value = *lineIt;
-			iss << value << ",";
-		}
-		iss << '\n';
-		file << iss.str();
-	}
-	file.close();
-	cout << "Saved " << name << " file." << endl;
+	cout << "Saved " << fileLoc << " file." << endl;
 }
 
 void MapEditor::SetCamera(CameraFollow* camera)
@@ -319,7 +258,7 @@ TileMap* MapEditor::GetMap()
 	return map;
 }
 
-MapEditor::EDIT_STATE MapEditor::GetState()
+TileMap* MapEditor::GetRearMap()
 {
-	return state;
+	return rearMap;
 }

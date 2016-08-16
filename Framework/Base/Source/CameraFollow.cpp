@@ -55,7 +55,7 @@ void CameraFollow::Boundary()
 		position.y = map->GetMapHeight() - map->GetScreenHeight();
 }
 
-void CameraFollow::LookAt(GameObject *go)
+void CameraFollow::SetObject(GameObject *go)
 {
 	this->go = go;
 }

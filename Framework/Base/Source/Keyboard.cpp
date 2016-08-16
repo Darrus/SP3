@@ -24,30 +24,18 @@ void Keyboard::create()
 	keys[JUMP].Assign(VK_SPACE);
 	keys[CTRL].Assign(VK_CONTROL);
 	keys[EXIT].Assign(VK_ESCAPE);
-	keys[SHOW_FRONT].Assign(VK_NUMPAD1);
-	keys[SHOW_REAR].Assign(VK_NUMPAD2);
-	keys[SHOW_COLLISION].Assign(VK_NUMPAD3);
-	timeBetweenPress = 0.f;
 }
 
-void Keyboard::read(double dt)
+void Keyboard::read()
 {
-	timeBetweenPress -= dt;
-
 	for (int i = 0; i < KEYS_SIZE; ++i)
 	{
 		if ((GetAsyncKeyState(keys[i].key) & 0x8001) != 0)
 		{
-			if (keys[i].isPressed && !keys[i].onHold)
-			{
+			if (keys[i].isPressed)
 				keys[i].onHold = true;
-				keys[i].isPressed = false;
-			}
-			else if (!keys[i].isPressed && !keys[i].onHold && timeBetweenPress < 0.f)
-			{
+			else
 				keys[i].isPressed = true;
-				timeBetweenPress = 0.05f;
-			}
 		}
 		else if (keys[i].isPressed || keys[i].onHold)
 		{
@@ -57,6 +45,7 @@ void Keyboard::read(double dt)
 		}
 		else if (keys[i].isReleased)
 			keys[i].isReleased = false;
+
 	}
 }
 

@@ -12,25 +12,17 @@ using std::string;
 class MapEditor
 {
 public:
-	enum EDIT_STATE
-	{
-		REAR_MAP,
-		FRONT_MAP,
-		COLLISION_MAP,
-		STATE_SIZE,
-	};
-
 	MapEditor();
 	~MapEditor();
 
 	void Init(int screenWidth, int screenHeight);
 	void Update(double dt);
 	
-	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
+	void CreateNewMap(int mapWidth, int mapHeight, int tileSize, bool collision);
 	void LoadMap(TileMap* map);
-	bool LoadMap(string name, int tileSize);
+	bool LoadMap(string name);
 	void LoadRearMap(TileMap* map);
-	void LoadTileSheet(string name, int row, int column);
+	void LoadTileSheet(Mesh* tileSheet, int row, int column);
 	void SetCamera(CameraFollow* camera);
 
 	void SaveMap(string name);
@@ -38,20 +30,24 @@ public:
 	Mesh* GetTileSheet();
 	Mesh* GetCollisionBox();
 	TileMap* GetMap();
-	EDIT_STATE GetState();
+	TileMap* GetRearMap();
 
 	bool active;
-	bool showMap[STATE_SIZE];
 	bool showTiles;
 	int row, column;
 	vector<vector<int> > tilesID;
 	Vector2 offset;
 
 private:
-
-	string name;
+	enum EDIT_STATE
+	{
+		FRONT_MAP,
+		REAR_MAP,
+		COLLISION_MAP,
+	};
 
 	TileMap* map;
+	TileMap* rearMap;
 
 	Mesh* tileSheet;
 	Mesh* collisionbox;

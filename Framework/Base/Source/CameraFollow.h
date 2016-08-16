@@ -17,7 +17,7 @@ public:
 	virtual void Reset();
 
 	void SetNewPos(Vector3 newPos);
-	void LookAt(GameObject *go);
+	void SetObject(GameObject *go);
 	void SetMap(TileMap *map);
 
 	Vector2* GetTileOffset();
