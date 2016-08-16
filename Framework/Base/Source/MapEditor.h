@@ -5,7 +5,7 @@
 
 #include "TileMap.h"
 #include "Vector2.h"
-#include "CameraFollow.h"
+#include "CameraFree.h"
 
 using std::string;
 
@@ -31,7 +31,7 @@ public:
 	bool LoadMap(string name, int tileSize);
 	void LoadRearMap(TileMap* map);
 	void LoadTileSheet(string name, int row, int column);
-	void SetCamera(CameraFollow* camera);
+	void SetCamera(CameraFree* camera);
 
 	void SaveMap(string name);
 
@@ -58,7 +58,7 @@ private:
 	int selectedTile;
 	int screenWidth, screenHeight;
 
-	CameraFollow* camera;
+	CameraFree* camera;
 	EDIT_STATE state;
 	
 };

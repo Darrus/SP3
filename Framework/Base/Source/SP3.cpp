@@ -31,9 +31,9 @@ void SP3::Render()
 	// Camera matrix
 	viewStack.LoadIdentity();
 	viewStack.LookAt(
-		camera.position.x, camera.position.y, camera.position.z,
-		camera.target.x, camera.target.y, camera.target.z,
-		camera.up.x, camera.up.y, camera.up.z
+		camera->position.x, camera->position.y, camera->position.z,
+		camera->target.x, camera->target.y, camera->target.z,
+		camera->up.x, camera->up.y, camera->up.z
 		);
 
 	// Model matrix : an identity matrix (model will be at the origin)

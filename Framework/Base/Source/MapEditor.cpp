@@ -21,7 +21,8 @@ map(NULL),
 tileSheet(NULL),
 collisionbox(NULL),
 name(""),
-state(REAR_MAP)
+state(REAR_MAP),
+camera(NULL)
 {
 	tilesID.clear();
 	collisionbox = MeshGenerator::GenerateTileSheet("Collision Box", "Image//collisionbox.tga", 1, 3);
@@ -113,12 +114,20 @@ void MapEditor::Update(double dt)
 			int tileX, tileY;
 			tileX = mouseX / map->GetTileSize();
 			tileY = mouseY / map->GetTileSize();
-			tileX += offset.x;
-			tileY += offset.y;
-			if (tileX < column && tileX >= 0 && tileY >= 0 && tileY < row)
-				selectedTile = tilesID[tileY][tileX];
+			if (state != COLLISION_MAP)
+			{
+				tileX += offset.x;
+				tileY += offset.y;
+				if (tileX < column && tileX >= 0 && tileY >= 0 && tileY < row)
+					selectedTile = tilesID[tileY][tileX];
+				else
+					selectedTile = 0;
+			}
 			else
-				selectedTile = 0;
+			{
+				if (tileX < column && tileX >= 0 && tileY >= 0 && tileY < row)
+					selectedTile = tilesID[tileY][tileX];
+			}
 		}
 	}
 
@@ -127,7 +136,10 @@ void MapEditor::Update(double dt)
 	if (Application::GetInstance().controller->IsKeyPressed(TWO))
 		state = FRONT_MAP;
 	if (Application::GetInstance().controller->IsKeyPressed(THREE))
+	{
 		state = COLLISION_MAP;
+		selectedTile = 0;
+	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(SHOW_REAR))
 		showMap[0] = !showMap[0];
@@ -143,8 +155,8 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
-			tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
-			tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
+			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
+			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
 			tileY = (screenHeight / map->GetTileSize()) - tileY;
 			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 			{
@@ -157,10 +169,32 @@ void MapEditor::Update(double dt)
 					map->rearMap[tileY][tileX] = selectedTile;
 					break;
 				case COLLISION_MAP:
-					//map->collisionMap[tileY][tileX] = selectedTile;
+					map->collisionMap[tileY][tileX] = selectedTile;
 					break;
 				}
 
+			}
+		}
+
+		if (Application::GetInstance().IsMousePressed(2))
+		{
+			double mouseX, mouseY;
+			Application::GetMousePos(mouseX, mouseY);
+			int tileX, tileY;
+			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
+			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
+			tileY = (screenHeight / map->GetTileSize()) - tileY;
+			switch (state)
+			{
+			case FRONT_MAP:
+				selectedTile = map->frontMap[tileY][tileX];
+				break;
+			case REAR_MAP:
+				selectedTile = map->rearMap[tileY][tileX];
+				break;
+			case COLLISION_MAP:
+				selectedTile = map->collisionMap[tileY][tileX];
+				break;
 			}
 		}
 
@@ -169,8 +203,8 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
-			tileX = (mouseX + camera->GetFineOffset()->x) / map->GetTileSize() + camera->GetTileOffset()->x;
-			tileY = (mouseY - camera->GetFineOffset()->y) / map->GetTileSize() - camera->GetTileOffset()->y;
+			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
+			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
 			tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
 			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 			{
@@ -183,7 +217,7 @@ void MapEditor::Update(double dt)
 					map->rearMap[tileY][tileX] = 0;
 					break;
 				case COLLISION_MAP:
-					//map->collisionMap[tileY][tileX] = selectedTile;
+					map->collisionMap[tileY][tileX] = 0;
 					break;
 				}
 			}
@@ -298,7 +332,7 @@ void MapEditor::SaveMap(string name)
 	cout << "Saved " << name << " file." << endl;
 }
 
-void MapEditor::SetCamera(CameraFollow* camera)
+void MapEditor::SetCamera(CameraFree* camera)
 {
 	this->camera = camera;
 }

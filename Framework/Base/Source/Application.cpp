@@ -177,8 +177,9 @@ void Application::Run()
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 	{
-		controller->read(m_timer.getElapsedTime());
-		scene->Update(m_timer.getElapsedTime());
+		float delta = m_timer.getElapsedTime();
+		controller->read(delta);
+		scene->Update(delta);
 		scene->Render();
 
 		//Swap buffers

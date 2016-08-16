@@ -37,7 +37,6 @@ void Keyboard::create()
 void Keyboard::read(double dt)
 {
 	timeBetweenPress -= (float)dt;
-
 	for (int i = 0; i < KEYS_SIZE; ++i)
 	{
 		if ((GetAsyncKeyState(keys[i].key) & 0x8001) != 0)

@@ -1,6 +1,9 @@
 #include "CameraFree.h"
+#include "Application.h"
 
-CameraFree::CameraFree()
+CameraFree::CameraFree() :
+CAMERA_SPEED(100),
+map(NULL)
 {
 
 }
@@ -21,7 +24,23 @@ void CameraFree::Init(const Vector3& pos, const Vector3& target, const Vector3& 
 
 void CameraFree::Update(double dt)
 {
+	if (Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT) || Application::GetInstance().controller->OnHold(MOVE_RIGHT))
+		position.x += dt * CAMERA_SPEED;
 
+	if (Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT) || Application::GetInstance().controller->OnHold(MOVE_LEFT))
+		position.x -= dt * CAMERA_SPEED;
+
+	if (Application::GetInstance().controller->IsKeyPressed(MOVE_UP) || Application::GetInstance().controller->OnHold(MOVE_UP))
+		position.y += dt * CAMERA_SPEED;
+
+	if (Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN) || Application::GetInstance().controller->OnHold(MOVE_DOWN))
+		position.y -= dt * CAMERA_SPEED;
+
+	Boundary();
+
+	tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
+	fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
+	target.Set(position.x, position.y, 0.f);
 }
 
 void CameraFree::Reset()
@@ -42,4 +61,19 @@ void CameraFree::Boundary()
 
 	if (position.y > map->GetMapHeight() - map->GetScreenHeight())
 		position.y = map->GetMapHeight() - map->GetScreenHeight();
+}
+
+Vector2 CameraFree::GetTileOffset()
+{
+	return tileOffset;
+}
+
+Vector2 CameraFree::GetFineOffset()
+{
+	return fineOffset;
+}
+
+void CameraFree::SetMap(TileMap* map)
+{
+	this->map = map;
 }

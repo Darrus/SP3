@@ -3,11 +3,11 @@
 
 #include "Scene.h"
 #include "Mtx44.h"
-#include "CameraFollow.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
 #include "Light.h"
 #include <vector>
+#include "Camera.h"
 
 class SceneBase : public Scene
 {
@@ -72,7 +72,7 @@ protected:
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
 
-	CameraFollow camera;
+	Camera* camera;
 
 	MS modelStack;
 	MS viewStack;

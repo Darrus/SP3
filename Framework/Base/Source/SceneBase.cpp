@@ -8,7 +8,8 @@
 #include <sstream>
 #include "LoadTGA.h"
 
-SceneBase::SceneBase()
+SceneBase::SceneBase() :
+camera(NULL)
 {
 }
 
@@ -23,6 +24,10 @@ SceneBase::~SceneBase()
 			meshList[i] = NULL;
 		}
 	}
+
+	if (camera)
+		delete camera;
+	camera = NULL;
 
 	glDeleteProgram(m_programID);
 	glDeleteVertexArrays(1, &m_vertexArrayID);
@@ -115,7 +120,7 @@ void SceneBase::Init()
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
 
-	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	//camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{
@@ -371,6 +376,10 @@ void SceneBase::Exit()
 			meshList[i] = NULL;
 		}
 	}
+
+	if (camera)
+		delete camera;
+	camera = NULL;
 
 	glDeleteProgram(m_programID);
 	glDeleteVertexArrays(1, &m_vertexArrayID);
