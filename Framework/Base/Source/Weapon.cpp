@@ -292,5 +292,21 @@ void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
 			}
 		}
 	}
+
+	else if (tmpWpType == WEAPON_TYPE::TRAPGUN)
+	{
+		if (tmpOverHeat == false)
+		{
+			if (fireRate > 0.3)
+			{
+				if (bullet.getBulletElement() == ELEMENT::TRAPPER)
+				{
+					bullet.vel += bulletSpeed * dt;
+					overHeatingRate += 10 * dt;
+					damage = 40;
+				}
+			}
+		}
+	}
 }
 

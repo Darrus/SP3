@@ -15,6 +15,7 @@ public:
 		SHOTGUN,
 		GPMG,
 		SNIPER,
+		TRAPGUN,
 		NONE,
 	};
 

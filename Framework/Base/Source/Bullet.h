@@ -12,6 +12,7 @@ public:
 		FIRE = 0,
 		LIGHTNING,
 		ICE,
+		TRAPPER,
 		NONE,
 	};
 
