@@ -65,12 +65,12 @@ void CameraFollow::SetMap(TileMap *map)
 	this->map = map;
 }
 
-Vector2* CameraFollow::GetTileOffset()
+Vector2 CameraFollow::GetTileOffset()
 {
-	return &tileOffset;
+	return tileOffset;
 }
 
-Vector2* CameraFollow::GetFineOffset()
+Vector2 CameraFollow::GetFineOffset()
 {
-	return &fineOffset;
+	return fineOffset;
 }

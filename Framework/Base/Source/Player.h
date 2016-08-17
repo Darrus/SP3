@@ -62,7 +62,7 @@ private:
 	TileMap* map;
 	Vector3 newPos;
 	
-
+	SpriteAnimation* sprite;
 
 	PLAYER_STATE state;
 	ITEMLIST items;

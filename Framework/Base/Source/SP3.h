@@ -28,6 +28,8 @@ private:
 	Player player;
 	CameraFollow* camFollow;
 	CameraFree* camFree;
+	
+	float fps;
 };
 
 #endif

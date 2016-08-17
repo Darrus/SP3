@@ -156,12 +156,8 @@ void MapEditor::Update(double dt)
 			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
 
-			std::cout << map->GetNumOfTiles_MapWidth() << std::endl;
-
 			tileX = (mouseX + camera->position.x) / map->GetTileSize();
 			tileY = (screenHeight - mouseY) / map->GetTileSize();
-
-			std::cout << tileX << std::endl;
 
 			//tileX += camera->GetTileOffset().x;
 			//tileY += camera->GetTileOffset().y;

@@ -20,8 +20,8 @@ public:
 	void LookAt(GameObject *go);
 	void SetMap(TileMap *map);
 
-	Vector2* GetTileOffset();
-	Vector2* GetFineOffset();
+	Vector2 GetTileOffset();
+	Vector2 GetFineOffset();
 
 private:
 	void Boundary();
