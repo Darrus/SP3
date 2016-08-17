@@ -89,7 +89,7 @@ void LevelEditor::RenderEditor()
 		int n = 0;
 		for (int i = 0; i < editor->GetMap()->GetNumOfTiles_ScreenHeight() + 1; i++)
 		{
-			n = camFree->GetTileOffset().y + i;
+			n = tileOffset.y + i;
 			if (n >= editor->GetMap()->GetNumOfTiles_MapHeight())
 				break;
 
@@ -100,13 +100,13 @@ void LevelEditor::RenderEditor()
 					break;
 
 				if (editor->GetMap()->rearMap[n][m] > 0 && editor->showMap[0])
-					RenderTile(editor->tileSheet, editor->GetMap()->rearMap[n][m], k * tileSize - tileOffset.x - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
+					RenderTile(editor->tileSheet, editor->GetMap()->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
 
 				if (editor->GetMap()->frontMap[n][m] > 0 && editor->showMap[1])
-					RenderTile(editor->tileSheet, editor->GetMap()->frontMap[n][m], k * tileSize - tileOffset.x - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
+					RenderTile(editor->tileSheet, editor->GetMap()->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
 
 				if (editor->GetMap()->collisionMap[n][m] > 0 && editor->showMap[2])
-					RenderTile(editor->collisionbox, editor->GetMap()->collisionMap[n][m], k * tileSize - tileOffset.x - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
+					RenderTile(editor->collisionbox, editor->GetMap()->collisionMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
 			}
 		}
 	}

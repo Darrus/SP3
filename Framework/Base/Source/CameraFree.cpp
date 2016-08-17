@@ -24,16 +24,16 @@ void CameraFree::Init(const Vector3& pos, const Vector3& target, const Vector3& 
 
 void CameraFree::Update(double dt)
 {
-	if (Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT) || Application::GetInstance().controller->OnHold(MOVE_RIGHT))
+	if (Application::GetInstance().controller->OnHold(MOVE_RIGHT))
 		position.x += dt * CAMERA_SPEED;
 
-	if (Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT) || Application::GetInstance().controller->OnHold(MOVE_LEFT))
+	if (Application::GetInstance().controller->OnHold(MOVE_LEFT))
 		position.x -= dt * CAMERA_SPEED;
 
-	if (Application::GetInstance().controller->IsKeyPressed(MOVE_UP) || Application::GetInstance().controller->OnHold(MOVE_UP))
+	if (Application::GetInstance().controller->OnHold(MOVE_UP))
 		position.y += dt * CAMERA_SPEED;
 
-	if (Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN) || Application::GetInstance().controller->OnHold(MOVE_DOWN))
+	if (Application::GetInstance().controller->OnHold(MOVE_DOWN))
 		position.y -= dt * CAMERA_SPEED;
 
 	Boundary();
@@ -53,19 +53,16 @@ void CameraFree::Boundary()
 			position.x = 0.f;
 
 		float boundX = map->GetMapWidth() - map->GetScreenWidth();
-		float offsetX = boundX / map->GetTileSize();
-
 		float boundY = map->GetMapHeight() - map->GetScreenHeight();
-		float offsetY = boundY / map->GetTileSize();
 
-		if (position.x > boundX - offsetX)
-			position.x = boundX - offsetX;
+		if (position.x >= boundX)
+			position.x = boundX;
 
 		if (position.y < 0.f)
 			position.y = 0.f;
 
-		if (position.y > boundY - offsetY)
-			position.y = boundY - offsetY;
+		if (position.y >= boundY)
+			position.y = boundY;
 
 		tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
 		fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());

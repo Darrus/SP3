@@ -39,7 +39,7 @@ void SceneManager::Init()
 	AddScene("LevelEditor", newScene);;
 	newScene = new SP3();
 	AddScene("SP3", newScene);
-	currentScene = FindScene("SP3");
+	currentScene = FindScene("LevelEditor");
 }
 
 void SceneManager::Update(double dt)

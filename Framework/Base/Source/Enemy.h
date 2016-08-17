@@ -19,7 +19,7 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	virtual void HandleInteraction(GameObject* go, double dt);
+	//virtual void HandleInteraction(GameObject* go, double dt);
 
 	void SetIdleAnimation(int start, int end, float time);
 	void SetAttackAnimation(int start, int end, float time);
