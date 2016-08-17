@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Others">
       <UniqueIdentifier>{8b270962-1c0a-477a-8bc0-f8de1acbc644}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\WeaponSub">
+      <UniqueIdentifier>{f6c2db39-4825-4e25-8388-cf9767317ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\WeaponSub">
+      <UniqueIdentifier>{d523fe68-af15-4ac4-af51-87de5b4f7290}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -158,6 +164,18 @@
     </ClCompile>
     <ClCompile Include="Source\CameraFree.cpp">
       <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sniper.cpp">
+      <Filter>Source Files\GameObjects\WeaponSub</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shotgun.cpp">
+      <Filter>Source Files\GameObjects\WeaponSub</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rifle.cpp">
+      <Filter>Source Files\GameObjects\WeaponSub</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pistol.cpp">
+      <Filter>Source Files\GameObjects\WeaponSub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +298,18 @@
     </ClInclude>
     <ClInclude Include="Source\CameraFree.h">
       <Filter>Header Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pistol.h">
+      <Filter>Header Files\GameObjects\WeaponSub</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rifle.h">
+      <Filter>Header Files\GameObjects\WeaponSub</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shotgun.h">
+      <Filter>Header Files\GameObjects\WeaponSub</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sniper.h">
+      <Filter>Header Files\GameObjects\WeaponSub</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

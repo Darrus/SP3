@@ -20,9 +20,11 @@ public:
 	};
 
 	Weapon();
-	~Weapon();
+	virtual~Weapon();
 
-	void update(double dt);
+	virtual void update(double dt);
+	virtual bool overHeating();
+	virtual void firingWeapon(Bullet bullet, bool overHeat, double dt);
 
 	void setFireRate(float fireRate);
 	float getFireRate();
@@ -39,9 +41,6 @@ public:
 	void setOverHeatRate(int overHeatRate);
 	int getOverHeatRate();
 
-	bool overHeating();
-
-	void firingWeapon(Bullet bullet ,bool overHeat , double dt);
 
 private:
 	float fireRate;
