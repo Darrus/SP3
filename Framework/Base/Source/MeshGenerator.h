@@ -20,6 +20,8 @@ public:
 
 	static MeshGenerator& GetInstance();
 
+	void ClearMeshGenerator();
+
 	SpriteAnimation* GenerateSprite(string name, string textureLoc, int row, int column);
 	Mesh* GenerateQuad(string name, Color color, string textureLoc, float size = 1.f);
 	Mesh* Generate2D(string name, Color color, string textureLoc, float size = 1.f);

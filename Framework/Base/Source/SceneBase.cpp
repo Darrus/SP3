@@ -15,22 +15,7 @@ camera(NULL)
 
 SceneBase::~SceneBase()
 {
-	// Cleanup VBO
-	for (int i = 0; i < NUM_GEOMETRY; ++i)
-	{
-		if (meshList[i])
-		{
-			delete meshList[i];
-			meshList[i] = NULL;
-		}
-	}
-
-	if (camera)
-		delete camera;
-	camera = NULL;
-
-	glDeleteProgram(m_programID);
-	glDeleteVertexArrays(1, &m_vertexArrayID);
+	Exit();
 }
 
 void SceneBase::Init()

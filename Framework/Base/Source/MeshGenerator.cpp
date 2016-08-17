@@ -15,11 +15,7 @@ MeshGenerator::MeshGenerator()
 
 MeshGenerator::~MeshGenerator()
 {
-	while (!store.empty())
-	{
-		delete store.back();
-		store.pop_back();
-	}
+	ClearMeshGenerator();
 }
 
 MeshGenerator& MeshGenerator::GetInstance()
@@ -62,4 +58,13 @@ Mesh* MeshGenerator::GenerateTileSheet(string name, string textureLoc, int row, 
 	mesh->textureArray[0] = LoadTGA(textureLoc.c_str());
 	store.push_back(mesh);
 	return mesh;
+}
+
+void MeshGenerator::ClearMeshGenerator()
+{
+	while (!store.empty())
+	{
+		delete store.back();
+		store.pop_back();
+	}
 }

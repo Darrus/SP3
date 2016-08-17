@@ -26,14 +26,13 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	//virtual void HandleCollision(GameObject* go, double dt);
+	virtual void HandleInteraction(GameObject* go, double dt);
 
 	Mesh* mesh;
 
 	Vector3 pos;
 	Vector3 view;
 	Vector3 scale;
-	Vector3 normal;
 	Vector3 vel;
 
 	float mass;

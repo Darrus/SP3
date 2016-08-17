@@ -172,7 +172,7 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene *scene = new SP3();
+	/*Scene *scene = new SP3();
 	scene->Init();
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
@@ -189,17 +189,18 @@ void Application::Run()
 		m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
 	} //Check if the ESC key had been pressed or if the window had been closed
-	scene->Exit();
+	scene->Exit();*/
 
-	/*SceneManager::GetInstance().Init();
+	SceneManager::GetInstance().Init();
 	m_timer.startTimer();
 	while (!SceneManager::GetInstance().quit && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 	{
 		SceneManager::GetInstance().InitCurrent();
 		while (!SceneManager::GetInstance().changeScene && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 		{
-			controller->read();
-			SceneManager::GetInstance().Update(m_timer.getElapsedTime());
+			float delta = m_timer.getElapsedTime();
+			controller->read(delta);
+			SceneManager::GetInstance().Update(delta);
 			SceneManager::GetInstance().Render();
 
 			//Swap buffers
@@ -209,7 +210,7 @@ void Application::Run()
 			m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.
 		}
 		SceneManager::GetInstance().CheckChange();
-	}*/
+	}
 }
 
 void Application::Exit()

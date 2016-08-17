@@ -7,6 +7,7 @@ using std::endl;
 
 // Scenes
 #include "SP3.h"
+#include "LevelEditor.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -34,9 +35,11 @@ SceneManager& SceneManager::GetInstance()
 void SceneManager::Init()
 {
 	quit = false;
-	//Scene* newScene = new Assignment2();
-	//AddScene("Assignment2", newScene);;
-	//currentScene = FindScene("Assignment2");
+	Scene* newScene = new LevelEditor();
+	AddScene("LevelEditor", newScene);;
+	newScene = new SP3();
+	AddScene("SP3", newScene);
+	currentScene = FindScene("SP3");
 }
 
 void SceneManager::Update(double dt)

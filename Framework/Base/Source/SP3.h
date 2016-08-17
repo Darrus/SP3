@@ -6,7 +6,6 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "CameraFollow.h"
-#include "CameraFree.h"
 
 class SP3 : public SceneBase
 {
@@ -27,7 +26,6 @@ private:
 	ParallaxBackground background;
 	Player player;
 	CameraFollow* camFollow;
-	CameraFree* camFree;
 	
 	float fps;
 };

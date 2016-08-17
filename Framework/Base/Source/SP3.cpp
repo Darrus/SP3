@@ -1,5 +1,7 @@
 #include "SP3.h"
 #include "Application.h"
+#include "SceneManager.h"
+#include "MeshGenerator.h"
 #include <sstream>
 
 SP3::SP3()
@@ -9,7 +11,7 @@ SP3::SP3()
 
 SP3::~SP3()
 {
-
+	Exit();
 }
 
 void SP3::Init()
@@ -28,14 +30,9 @@ void SP3::Init()
 	camFollow->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
 	camFollow->LookAt(&player);
 	camFollow->SetMap(map);
-
-	camFree = new CameraFree();
-	camFree->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 1.f), Vector3(0.f, 1.f, 0.f));
-	camFree->SetMap(map);
+	camera = camFollow;
 	
 	fps = 0.f;
-
-	camera = camFollow;
 }
 
 void SP3::Update(double dt)
@@ -44,6 +41,9 @@ void SP3::Update(double dt)
 	camera->Update(dt);
 	player.Update(dt);
 	fps = 1 / dt;
+
+	if (Application::GetInstance().controller->IsKeyPressed(JUMP))
+		SceneManager::GetInstance().ChangeScene("LevelEditor");
 }
 
 void SP3::Render()
@@ -78,6 +78,10 @@ void SP3::Render()
 void SP3::Exit()
 {
 	SceneBase::Exit();
+	if (map)
+		delete map;
+	map = NULL;
+	MeshGenerator::GetInstance().ClearMeshGenerator();
 }
 
 // Renders

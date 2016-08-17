@@ -1,5 +1,8 @@
 #include "LevelEditor.h"
+#include "SceneManager.h"
 #include "CameraFree.h"
+#include "Application.h"
+#include "MeshGenerator.h"
 
 LevelEditor::LevelEditor() :
 editor(NULL)
@@ -9,9 +12,7 @@ editor(NULL)
 
 LevelEditor::~LevelEditor()
 {
-	if (editor)
-		delete editor;
-	editor = NULL;
+	Exit();
 }
 
 void LevelEditor::Init()
@@ -36,6 +37,9 @@ void LevelEditor::Update(double dt)
 	camera->Update(dt);
 	if (editor->active)
 		editor->Update(dt);
+
+	if (Application::GetInstance().controller->IsKeyPressed(JUMP))
+		SceneManager::GetInstance().ChangeScene("SP3");
 }
 
 void LevelEditor::Render()
@@ -63,6 +67,11 @@ void LevelEditor::Render()
 void LevelEditor::Exit()
 {
 	SceneBase::Exit();
+	if (editor)
+		delete editor;
+	editor = NULL;
+
+	MeshGenerator::GetInstance().ClearMeshGenerator();
 }
 
 // Renders
