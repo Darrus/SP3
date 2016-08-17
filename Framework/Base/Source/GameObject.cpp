@@ -24,8 +24,3 @@ void GameObject::Update(double dt)
 {
 	pos += vel * dt;
 }
-
-Mesh* GameObject::GetMesh()
-{
-	return NULL;
-}

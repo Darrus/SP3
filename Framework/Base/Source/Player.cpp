@@ -13,10 +13,9 @@ playerHealth(200),
 JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
-isUsed(true),
+isUsed(true)
 //skills(P_SKILL1),
 //bullets(P_TYPE1),
-mesh(nullptr)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
 }
@@ -319,11 +318,4 @@ void Player::playerJump(double dt)
 		pos.y -= JUMP_SPEED * (float)dt;
 	}
 
-}
-
-
-
-SpriteAnimation* Player::GetMesh()
-{
-	return mesh;
 }

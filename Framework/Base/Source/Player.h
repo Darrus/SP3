@@ -59,7 +59,6 @@ private:
 	bool isClimbing;
 	bool isGrounded;
 
-	SpriteAnimation* mesh;
 	TileMap* map;
 	Vector3 newPos;
 	

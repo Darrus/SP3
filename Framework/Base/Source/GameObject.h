@@ -27,7 +27,8 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	//virtual void HandleCollision(GameObject* go, double dt);
-	virtual Mesh* GetMesh();
+
+	Mesh* mesh;
 
 	Vector3 pos;
 	Vector3 view;
