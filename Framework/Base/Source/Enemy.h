@@ -24,10 +24,7 @@ public:
 	void SetAttackAnimation(int start, int end, float time);
 	void SetPlayer(Player* player);
 
-	virtual SpriteAnimation* GetMesh();
-
 protected:
-	SpriteAnimation* mesh;
 	Animation animIdle;
 	Animation animAttack;
 	ENEMY_STATE state;

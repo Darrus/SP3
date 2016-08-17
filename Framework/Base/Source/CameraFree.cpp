@@ -37,9 +37,6 @@ void CameraFree::Update(double dt)
 		position.y -= dt * CAMERA_SPEED;
 
 	Boundary();
-
-	tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
-	fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
 	target.Set(position.x, position.y, 0.f);
 }
 
@@ -50,17 +47,30 @@ void CameraFree::Reset()
 
 void CameraFree::Boundary()
 {
-	if (position.x < 0.f)
-		position.x = 0.f;
+	if (map)
+	{
+		if (position.x < 0.f)
+			position.x = 0.f;
 
-	if (position.x > map->GetMapWidth() - map->GetScreenWidth())
-		position.x = map->GetMapWidth() - map->GetScreenWidth();
+		float boundX = map->GetMapWidth() - map->GetScreenWidth();
+		float offsetX = boundX / map->GetTileSize();
 
-	if (position.y < 0.f)
-		position.y = 0.f;
+		float boundY = map->GetMapHeight() - map->GetScreenHeight();
+		float offsetY = boundY / map->GetTileSize();
 
-	if (position.y > map->GetMapHeight() - map->GetScreenHeight())
-		position.y = map->GetMapHeight() - map->GetScreenHeight();
+		if (position.x > boundX - offsetX)
+			position.x = boundX - offsetX;
+
+		if (position.y < 0.f)
+			position.y = 0.f;
+
+		if (position.y > boundY - offsetY)
+			position.y = boundY - offsetY;
+
+		tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
+		fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
+	}
+	
 }
 
 Vector2 CameraFree::GetTileOffset()

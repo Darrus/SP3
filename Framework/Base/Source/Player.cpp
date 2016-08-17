@@ -18,7 +18,7 @@ isUsed(true),
 //bullets(P_TYPE1),
 mesh(nullptr)
 {
-	mesh = MeshGenerator::GenerateSprite("player", "Image//player.tga", 4, 9);	
+	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
 }
 
 Player::~Player()

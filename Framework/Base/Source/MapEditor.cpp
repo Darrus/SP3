@@ -25,8 +25,8 @@ state(REAR_MAP),
 camera(NULL)
 {
 	tilesID.clear();
-	collisionbox = MeshGenerator::GenerateTileSheet("Collision Box", "Image//collisionbox.tga", 1, 3);
-	mapbackground = MeshGenerator::GenerateQuad("Map background", Color(1.f, 1.f, 1.f), "Image//mapbackground.tga");
+	collisionbox = MeshGenerator::GetInstance().GenerateTileSheet("Collision Box", "Image//collisionbox.tga", 1, 3);
+	mapbackground = MeshGenerator::GetInstance().GenerateQuad("Map background", Color(1.f, 1.f, 1.f), "Image//mapbackground.tga");
 	for (int i = 0; i < MapEditor::STATE_SIZE; ++i)
 	{
 		showMap[i] = true;
@@ -155,9 +155,17 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
-			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
-			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
-			tileY = (screenHeight / map->GetTileSize()) - tileY;
+
+			std::cout << map->GetNumOfTiles_MapWidth() << std::endl;
+
+			tileX = (mouseX + camera->position.x) / map->GetTileSize();
+			tileY = (screenHeight - mouseY) / map->GetTileSize();
+
+			std::cout << tileX << std::endl;
+
+			//tileX += camera->GetTileOffset().x;
+			//tileY += camera->GetTileOffset().y;
+
 			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 			{
 				switch (state)
@@ -255,7 +263,7 @@ bool MapEditor::LoadMap(string name, int tileSize)
 
 void MapEditor::LoadTileSheet(string name, int row, int column)
 {
-	this->tileSheet = MeshGenerator::GenerateTileSheet(name, "Image\\" + name + ".tga", row, column);
+	this->tileSheet = MeshGenerator::GetInstance().GenerateTileSheet(name, "Image\\" + name + ".tga", row, column);
 	int size = row * column;
 	this->column = 3;
 	this->row = size / this->column;

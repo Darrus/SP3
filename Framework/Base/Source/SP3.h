@@ -2,7 +2,11 @@
 #define STUDIO_PROJECT_3_H
 
 #include "SceneBase.h"
-#include "MapEditor.h"
+#include "ParallaxBackground.h"
+#include "TileMap.h"
+#include "Player.h"
+#include "CameraFollow.h"
+#include "CameraFree.h"
 
 class SP3 : public SceneBase
 {
@@ -16,7 +20,14 @@ public:
 	virtual void Exit();
 
 private:
-	TileMap* m_cMap;
+	void RenderMap(TileMap* map);
+	void RenderObject(GameObject* go);
+
+	TileMap* map;
+	ParallaxBackground background;
+	Player player;
+	CameraFollow* camFollow;
+	CameraFree* camFree;
 };
 
 #endif
