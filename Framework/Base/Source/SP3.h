@@ -1,12 +1,16 @@
 #ifndef STUDIO_PROJECT_3_H
 #define STUDIO_PROJECT_3_H
 
+#include <vector>
 #include "SceneBase.h"
 #include "ParallaxBackground.h"
 #include "TileMap.h"
 #include "Player.h"
 #include "CameraFollow.h"
-#include "MeleeEnemy.h"
+#include "Pistol.h"
+#include "Bullet.h"
+
+using std::vector;
 
 class SP3 : public SceneBase
 {
@@ -25,9 +29,19 @@ private:
 
 	TileMap* map;
 	ParallaxBackground background;
-	Player* player;
+	Player player;
 	CameraFollow* camFollow;
-	MeleeEnemy* enemy;
+
+	Pistol pistol;
+	Bullet* bullet;
+
+	//vector<GameObject *> m_goList;
+	GameObject * go;
+
+	Vector3 direction;
+
+	float bulletRate;
+
 
 	float fps;
 };

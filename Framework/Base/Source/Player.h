@@ -33,6 +33,7 @@ public:
 	int GetPlayerHealth(void);
 	void SetPlayerHealth(int playerHealth);
 	SpriteAnimation* GetMesh();
+	PLAYER_STATE getState();
 
 private:
 	void Move(double dt);
@@ -46,6 +47,7 @@ private:
 
 	int GetHealthRegain(void);
 	int GetPotionCount(void);
+
 
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);

@@ -11,6 +11,7 @@ public:
 	{
 		GO_BALL,
 		GO_WALL,
+		GO_BULLET,
 	};
 
 	enum COLLIDER_TYPE

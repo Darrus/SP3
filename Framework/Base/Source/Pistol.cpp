@@ -1,4 +1,5 @@
 #include "Pistol.h"
+#include "MeshGenerator.h"
 
 Pistol::Pistol()
 {
@@ -8,6 +9,7 @@ Pistol::Pistol()
 	weaponType = WEAPON_TYPE::PISTOL;
 	overHeat = false;
 	overHeatingRate = 0;
+	mesh = MeshGenerator::GetInstance().GenerateQuad("weapon",Color(1,1,1) , "Image//pistol.tga",1.2f);
 }
 
 Pistol::~Pistol()
@@ -54,8 +56,11 @@ void Pistol::firingWeapon(Bullet bullet, bool overHeat, double dt)
 			{
 				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
+					bullet.vel = bullet.getBulletSpeed() * dt;
+					overHeatingRate += 2 * dt;
 					bullet.vel += bullet.getBulletSpeed() * (float)dt;
 					overHeatingRate += 2 * (float)dt;
+
 					damage = 20;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)

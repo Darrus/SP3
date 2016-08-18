@@ -5,7 +5,7 @@ Sniper::Sniper()
 	fireRate = 0;
 	coolDown = 0;
 	damage = 0;
-	weaponType = WEAPON_TYPE::SNIPER;
+	//weaponType = WEAPON_TYPE::SNIPER;
 	overHeat = false;
 	overHeatingRate = 0;
 }

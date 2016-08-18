@@ -5,7 +5,7 @@ Shotgun::Shotgun()
 	fireRate = 0;
 	coolDown = 0;
 	damage = 0;
-	weaponType = WEAPON_TYPE::SHOTGUN;
+	//weaponType = WEAPON_TYPE::SHOTGUN;
 	overHeat = false;
 	overHeatingRate = 0;
 }
