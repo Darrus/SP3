@@ -29,7 +29,7 @@ public:
 	void AddScene(string name, Scene* scene);
 	void RemoveScene(string name);
 	void ChangeScene(string name);
-	void CheckChange();
+	bool CheckChange();
 	Scene* FindScene(string name);
 
 	void InitCurrent();

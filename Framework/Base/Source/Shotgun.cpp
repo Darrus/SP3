@@ -53,20 +53,20 @@ void Shotgun::firingWeapon(Bullet bullet, bool overHeat, double dt)
 			{
 				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 2 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 2 * (float)dt;
 					damage = 5;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 2 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 2 * (float)dt;
 					damage = 2;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 2 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 2 * (float)dt;
 					damage = 3;
 				}
 				fireRate = 0;

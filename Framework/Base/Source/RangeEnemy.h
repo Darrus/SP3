@@ -1,13 +1,13 @@
-#ifndef MELEE_MOB_H
-#define MELEE_MOB_H
+#ifndef RANGE_ENEMY_H
+#define RANGE_ENEMY_H
 
-#include "Enemy.h"
+#include "GameObject.h"
 
-class MeleeMob
+class RangeEnemy
 {
 public:
-	MeleeMob();
-	virtual ~MeleeMob();
+	RangeEnemy();
+	virtual ~RangeEnemy();
 
 	virtual void Init();
 	virtual void Update(double dt);
