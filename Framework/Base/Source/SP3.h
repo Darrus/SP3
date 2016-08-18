@@ -29,7 +29,7 @@ private:
 
 	TileMap* map;
 	ParallaxBackground background;
-	Player player;
+	Player* player;
 	CameraFollow* camFollow;
 
 	Pistol pistol;

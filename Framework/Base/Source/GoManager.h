@@ -18,6 +18,7 @@ public:
 	void Add(GameObject* go);
 	void Update(double dt);
 	void ClearList();
+	int GetObjCount();
 	GameObject* FetchGO();
 
 private:

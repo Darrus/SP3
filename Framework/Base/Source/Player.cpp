@@ -83,7 +83,6 @@ void Player::Update(double dt)
 	double mouseX, mouseY;
 	Application::GetMousePos(mouseX, mouseY);
 	mouseY = 600 - mouseY;
-	std::cout << mouseY << std::endl;
 	if (mouseX != 0 && mouseY != 0)
 		view.Set(mouseX, mouseY, 0.f);
 	else
