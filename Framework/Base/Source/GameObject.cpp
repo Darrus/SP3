@@ -22,5 +22,4 @@ void GameObject::Init()
 
 void GameObject::Update(double dt)
 {
-	pos += vel * dt;
 }

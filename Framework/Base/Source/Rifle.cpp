@@ -5,7 +5,7 @@ Rifle::Rifle()
 	fireRate = 0;
 	coolDown = 0;
 	damage = 0;
-	weaponType = WEAPON_TYPE::RIFLE;
+	//weaponType = WEAPON_TYPE::RIFLE;
 	overHeat = false;
 	overHeatingRate = 0;
 }

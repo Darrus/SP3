@@ -35,11 +35,11 @@ SceneManager& SceneManager::GetInstance()
 void SceneManager::Init()
 {
 	quit = false;
-	Scene* newScene = new LevelEditor();
-	AddScene("LevelEditor", newScene);;
-	newScene = new SP3();
+	Scene* newScene = new SP3();
+	//AddScene("LevelEditor", newScene);;
+	//newScene = new SP3();
 	AddScene("SP3", newScene);
-	currentScene = FindScene("LevelEditor");
+	currentScene = FindScene("SP3");
 }
 
 void SceneManager::Update(double dt)

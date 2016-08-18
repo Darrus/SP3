@@ -17,9 +17,9 @@ public:
 	};
 
 	Bullet();
-	~Bullet();
+	virtual ~Bullet();
 
-	void update(double dt);
+	virtual void Update(double dt);
 
 	void setBulletSpeed(float bulletSpeed);
 	float getBulletSpeed();

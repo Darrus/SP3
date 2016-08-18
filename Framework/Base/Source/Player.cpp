@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Application.h"
 #include "MeshGenerator.h"
-
 #include <iostream>
 
 Player::Player() :
@@ -80,7 +79,22 @@ void Player::Update(double dt)
 	playerJump(dt);
 	useItem();
 	changeWeapon();
-	sprite->Update(dt);
+
+	double mouseX, mouseY;
+	Application::GetMousePos(mouseX, mouseY);
+	mouseY = 600 - mouseY;
+	std::cout << mouseY << std::endl;
+	if (mouseX != 0 && mouseY != 0)
+		view.Set(mouseX, mouseY, 0.f);
+	else
+		view.Set(1.f, 0.f, 0.f);
+	view.Normalize();
+	//sprite->Update(dt);
+}
+
+Player::PLAYER_STATE Player::getState()
+{
+	return this->state;
 }
 
 void Player::Move(double dt)

@@ -1,6 +1,7 @@
 #ifndef PISTOL_H
 #define PISTOL_H
 #include "Weapon.h"
+#include "Mesh.h"
 
 class Pistol : public Weapon
 {
