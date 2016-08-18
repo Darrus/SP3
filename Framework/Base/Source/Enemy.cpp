@@ -2,7 +2,8 @@
 
 
 Enemy::Enemy() :
-sprite(NULL)
+sprite(NULL),
+collidedWall(false)
 {
 }
 
@@ -38,61 +39,78 @@ void Enemy::MapCollision(double dt)
 
 	// Init Variables
 	int tileSize = map->GetTileSize();
-	int currentX, currentY, checkX, checkY;
-	currentX = currentY = checkX = checkY = 0;
+	int currentX, currentY, checkRight, checkLeft, checkUp, checkDown, checkX, checkY;
+	currentX = currentY = checkRight = checkLeft = checkDown = checkUp = checkX = checkY = 0;
 
 	// Make sure object doesnt move out of screen
 	if (newPos.x - scale.x * 0.5f <= 0 || newPos.x + scale.x * 0.5f >= map->GetMapWidth())
+	{
+		collidedWall = true;
 		newPos.x = pos.x;
+
+	}
+
 	if (newPos.y - scale.y * 0.5f <= 0 || newPos.y + scale.y * 0.5f >= map->GetMapHeight())
 		newPos.y = pos.y;
 
 	// Get Current Tile
-	currentX = (int)newPos.x / tileSize;
-	currentY = (int)newPos.y / tileSize;
+	currentX = newPos.x / tileSize;
+	currentY = newPos.y / tileSize;
 
 	// Check which direction is the player moving in the X axis
-	short dir = 0;
+	float dir = 0;
 	dir = newPos.x - pos.x;
 
 	// Checks next tile according to player's scale
+	checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
+	checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+	checkUp = (newPos.y + scale.y * 0.5f) / tileSize;
+	checkDown = (newPos.y - scale.y * 0.5f) / tileSize;
+
 	if (dir > 0)
-		checkX = (newPos.x + scale.x * 0.5f) / tileSize;
+		checkX = checkRight;
 	else
-		checkX = (newPos.x - scale.x * 0.5f) / tileSize;
+		checkX = checkLeft;
 
 
-	if (isGrounded) // If player is grounded
+	if (isGrounded) // If enemy is grounded
 	{
-		// Checks the tile below player
-		if (map->collisionMap[currentY - 1][currentX] != 1)
+		// Checks the tile below enemy
+		if (map->collisionMap[currentY - 1][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1)
 			isGrounded = false;
 
 		// Check the next tile
 		if (map->collisionMap[currentY][checkX] == 1)
-			newPos.x = pos.x;
-	}
-	else if (!isGrounded) // If player is in the air
-	{
-		// Checks which direction is the player moving in the Y axis
-		dir = newPos.y - pos.y;
-		if (dir > 0)
-			checkY = (newPos.y + scale.y * 0.5f) / tileSize;
-		else
-			checkY = (newPos.y - scale.y * 0.5f) / tileSize;
-
-		// Checks Y axis
-		if (map->collisionMap[checkY][currentX] == 1)
 		{
-			if (dir <= 0)
-				isGrounded = true;
+			newPos.x = pos.x;
+			collidedWall = true;
+		}
+	}
+	else if (!isGrounded) // If enemy is in the air
+	{
+		// Checks X
+		if (map->collisionMap[checkUp][checkX] == 1 || map->collisionMap[checkDown][checkX] == 1)
+		{
+			newPos.x = pos.x;
+			checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
+			checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+		}
+
+		// Checks Down
+		if (map->collisionMap[checkDown][checkLeft] == 1 || map->collisionMap[checkDown][checkRight] == 1)
+		{
+			isGrounded = true;
 			newPos.y = (currentY * tileSize) + tileSize * 0.5f;
 			vel.y = 0.f;
 		}
 
-		// Check X axis
-		if (map->collisionMap[checkY][checkX] == 1 || map->collisionMap[currentY][checkX] == 1)
-			newPos.x = pos.x;
+		// Checks Up
+		if (map->collisionMap[checkUp][checkLeft] == 1 || map->collisionMap[checkUp][checkRight] == 1)
+		{
+			newPos.y = checkUp * tileSize - tileSize * 0.5f;
+			if (vel.y > 0.f)
+				vel.y = 0.f;
+		}
 	}
 
 	pos = newPos;

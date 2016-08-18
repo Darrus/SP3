@@ -227,7 +227,7 @@ void Player::CollisionCheck(double dt)
 	currentY = newPos.y / tileSize;
 
 	// Check which direction is the player moving in the X axis
-	short dir = 0;
+	float dir = 0;
 	dir = newPos.x - pos.x;
 	
 	// Checks next tile according to player's scale
@@ -242,17 +242,17 @@ void Player::CollisionCheck(double dt)
 		checkX = checkLeft;
 		
 
-	if (isGrounded) // If player is grounded
+	if (isGrounded) // If enemy is grounded
 	{
-		// Checks the tile below player
-		if (map->collisionMap[currentY - 1][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1)
+		// Checks the tile below enemy
+		if (map->collisionMap[checkDown][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1)
 			isGrounded = false;
 
 		// Check the next tile
 		if (map->collisionMap[currentY][checkX] == 1)
 			newPos.x = pos.x;
 	}
-	else if (!isGrounded) // If player is in the air
+	else if (!isGrounded) // If enemy is in the air
 	{
 		// Checks X
 		if (map->collisionMap[checkUp][checkX] == 1 || map->collisionMap[checkDown][checkX] == 1)

@@ -4,7 +4,7 @@
 
 MeleeEnemy::MeleeEnemy() :
 AlertRange(50),
-EnemySpeed(100)
+EnemySpeed(50)
 {
 	sprite = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
 	mesh = sprite;
@@ -29,8 +29,15 @@ void MeleeEnemy::Update(double dt)
 {
 	if (state)
 		state->Update(dt);
+
+	collidedWall = false;
+
 	if (sprite)
 		sprite->Update(dt);
+	if (!isGrounded)
+		vel.y -= 9.8;
+
+	MapCollision(dt);
 }
 
 void MeleeEnemy::HandleInteraction(GameObject* go, double dt)

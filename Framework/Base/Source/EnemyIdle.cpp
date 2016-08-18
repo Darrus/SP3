@@ -18,12 +18,11 @@ void EnemyIdle::Enter(Enemy& enemy, Player& player)
 	patrolDistance = 100.f;
 	Math::InitRNG();
 	dir = Math::RandIntMinMax(-1, 1);
-	MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(&enemy);
 	if (dir > 0)
 		enemy.sprite->SetAnimation(enemy.animWalkRight);
 	else
 		enemy.sprite->SetAnimation(enemy.animWalkLeft);
-
+	MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(&enemy);
 	enemy.vel.Set(melee->EnemySpeed * dir, 0.f, 0.f);
 	patrolPos.Set(enemy.pos.x + patrolDistance * dir, enemy.pos.y, enemy.pos.z);
 
@@ -53,8 +52,15 @@ EnemyStates* EnemyIdle::CheckState(Enemy& enemy, Player& player)
 
 void EnemyIdle::Update(double dt)
 {
-	if (enemy->pos.x <= enemy->newPos.x)
+	if (enemy->collidedWall)
 	{
-		enemy->pos.x += enemy->vel.x * dt;
+		MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(enemy);
+		dir *= -1;
+		if (dir > 0)
+			enemy->sprite->SetAnimation(enemy->animWalkRight);
+		else
+			enemy->sprite->SetAnimation(enemy->animWalkLeft);
+		enemy->vel.Set(melee->EnemySpeed * dir, 0.f, 0.f);
 	}
+	enemy->newPos.x += enemy->vel.x * dt;
 }

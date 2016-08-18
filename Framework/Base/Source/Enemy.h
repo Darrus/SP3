@@ -26,6 +26,7 @@ public:
 	Animation animAttack;
 	SpriteAnimation* sprite;
 
+	bool collidedWall;
 protected:
 	void MapCollision(double dt);
 

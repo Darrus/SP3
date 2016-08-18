@@ -36,8 +36,9 @@ void SP3::Init()
 	enemy = new MeleeEnemy();
 	enemy->Init(map);
 	enemy->SetPlayer(player);
-	enemy->pos.Set(300.f, 200.f, 1.f);
+	enemy->pos.Set(400.f, 400.f, 1.f);
 	enemy->scale.Set(32.f, 32.f, 32.f);
+
 	fps = 0.f;
 }
 
@@ -75,13 +76,6 @@ void SP3::Render()
 	RenderMap(map);
 	RenderObject(player);
 	RenderObject(enemy);
-
-	modelStack.PushMatrix();
-	modelStack.Translate(player->pos.x + player->scale.x * 0.5f, player->pos.y - player->scale.y * 0.5f, 1);
-	modelStack.Scale(2.f, 2.f, 2.f);
-	RenderMesh(meshList[GEO_BALL]);
-	modelStack.PopMatrix();
-
 
 	std::stringstream text;
 	text << fps;
