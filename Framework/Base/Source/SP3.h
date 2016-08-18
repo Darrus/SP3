@@ -6,6 +6,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "CameraFollow.h"
+#include "MeleeEnemy.h"
 
 class SP3 : public SceneBase
 {
@@ -24,9 +25,10 @@ private:
 
 	TileMap* map;
 	ParallaxBackground background;
-	Player player;
+	Player* player;
 	CameraFollow* camFollow;
-	
+	MeleeEnemy* enemy;
+
 	float fps;
 };
 

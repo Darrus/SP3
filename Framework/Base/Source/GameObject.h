@@ -2,7 +2,6 @@
 #define GAMEOBJECT_H
 
 #include "Vector3.h"
-
 #include "Mesh.h"
 
 class GameObject

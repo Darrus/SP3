@@ -12,6 +12,7 @@ public:
 
 	virtual void Enter(Enemy& enemy, Player& player);
 	virtual EnemyStates* CheckState(Enemy& enemy, Player& player);
+	virtual void Exit();
 	virtual void Update(double dt);
 };
 

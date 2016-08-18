@@ -67,6 +67,15 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{7fc504c1-2bd4-4d2a-b8ea-938368843208}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States\Enemy States">
+      <UniqueIdentifier>{17b4e4a1-87fa-4108-94c9-dd1e26cb1b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Enemy">
+      <UniqueIdentifier>{a9ed27fe-b6fc-4482-9f6e-5bcd60eb20a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enemy">
+      <UniqueIdentifier>{ff302746-8ebf-4bc7-a810-171cb470c97f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -138,9 +147,6 @@
     <ClCompile Include="Source\Background.cpp">
       <Filter>Source Files\Others</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SoundEngine.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
@@ -188,6 +194,18 @@
     </ClCompile>
     <ClCompile Include="Source\EnemyStates.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeleeEnemy.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RangeEnemy.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyChase.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +296,6 @@
     <ClInclude Include="Source\Background.h">
       <Filter>Header Files\Others</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SoundEngine.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
@@ -323,17 +338,29 @@
     <ClInclude Include="Source\Sniper.h">
       <Filter>Header Files\GameObjects\WeaponSub</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemyAttack.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyIdle.h">
+    <ClInclude Include="Source\PlayerState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyStates.h">
-      <Filter>Header Files\States</Filter>
+      <Filter>Header Files\States\Enemy States</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerState.h">
-      <Filter>Header Files\States</Filter>
+    <ClInclude Include="Source\EnemyAttack.h">
+      <Filter>Header Files\States\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyIdle.h">
+      <Filter>Header Files\States\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyChase.h">
+      <Filter>Header Files\States\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeleeEnemy.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RangeEnemy.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,40 +4,36 @@
 #include "GameObject.h"
 #include "SpriteAnimation.h"
 #include "Player.h"
+#include "TileMap.h"
 
 class Enemy : public GameObject
 {
 public:
-	enum ENEMY_STATE
-	{
-		IDLE,
-		ATTACK,
-	};
-
 	Enemy();
 	virtual ~Enemy();
 
-	virtual void Init();
+	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
 	//virtual void HandleInteraction(GameObject* go, double dt);
 
-	void SetIdleAnimation(int start, int end, float time);
 	void SetAttackAnimation(int start, int end, float time);
 	void SetPlayer(Player* player);
 
-	void SetState(ENEMY_STATE state);
+	Vector3 newPos;
 
-protected:
-	Animation animIdle;
+	Animation animWalkLeft;
+	Animation animWalkRight;
 	Animation animAttack;
-
-	ENEMY_STATE state;
-
 	SpriteAnimation* sprite;
 
+protected:
+	void MapCollision(double dt);
+
+	TileMap* map;
+
 	Player* player;
-	float timeBetweenAttack;
-	bool attacked;
+
+	bool isGrounded;
 };
 
 #endif

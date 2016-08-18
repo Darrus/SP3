@@ -54,20 +54,20 @@ void Rifle::firingWeapon(Bullet bullet, bool overHeat, double dt)
 			{
 				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 3 * (float)dt;
 					damage = 20;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 3 * (float)dt;
 					damage = 10;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
 				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
+					bullet.vel += bullet.getBulletSpeed() * (float)dt;
+					overHeatingRate += 3 * (float)dt;
 					damage = 15;
 				}
 				fireRate = 0;

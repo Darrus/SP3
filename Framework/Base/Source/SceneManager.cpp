@@ -35,11 +35,11 @@ SceneManager& SceneManager::GetInstance()
 void SceneManager::Init()
 {
 	quit = false;
-	Scene* newScene = new LevelEditor();
-	AddScene("LevelEditor", newScene);;
-	newScene = new SP3();
+	Scene* newScene = new SP3();
+	//AddScene("SP3", newScene);
+	//newScene = new LevelEditor();
 	AddScene("SP3", newScene);
-	currentScene = FindScene("LevelEditor");
+	currentScene = FindScene("SP3");
 }
 
 void SceneManager::Update(double dt)
@@ -105,7 +105,7 @@ void SceneManager::ExitCurrent()
 		currentScene->Exit();
 }
 
-void SceneManager::CheckChange()
+bool SceneManager::CheckChange()
 {
 	if (changeScene)
 	{
@@ -114,13 +114,16 @@ void SceneManager::CheckChange()
 		{
 			currentScene->Exit();
 			currentScene = it->second;
+			return true;
 		}
 		else
 		{
 			cout << "Scene " << changeName << " does not exist" << endl;
 			changeScene = false;
+			return false;
 		}
 	}
+	return false;
 }
 
 Scene* SceneManager::FindScene(string name)

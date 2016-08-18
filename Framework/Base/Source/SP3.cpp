@@ -22,16 +22,22 @@ void SP3::Init()
 	map->LoadMap("test");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
-	player.Init(map);
-	player.pos.Set(50.f, 100.f, 0.f);
-	player.scale.Set(32.f, 32.f, 32.f);
+	player = new Player();
+	player->Init(map);
+	player->pos.Set(50.f, 100.f, 0.f);
+	player->scale.Set(32.f, 32.f, 32.f);
 
 	camFollow = new CameraFollow();
 	camFollow->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
-	camFollow->LookAt(&player);
+	camFollow->LookAt(player);
 	camFollow->SetMap(map);
 	camera = camFollow;
 	
+	enemy = new MeleeEnemy();
+	enemy->Init(map);
+	enemy->SetPlayer(player);
+	enemy->pos.Set(300.f, 200.f, 1.f);
+	enemy->scale.Set(32.f, 32.f, 32.f);
 	fps = 0.f;
 }
 
@@ -39,11 +45,12 @@ void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
 	camera->Update(dt);
-	player.Update(dt);
-	fps = 1 / dt;
+	player->Update(dt);
+	enemy->Update(dt);
+	fps = 1 / (float)dt;
 
-	if (Application::GetInstance().controller->IsKeyPressed(JUMP))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+	//if (Application::GetInstance().controller->IsKeyPressed(JUMP))
+		//SceneManager::GetInstance().ChangeScene("LevelEditor");
 }
 
 void SP3::Render()
@@ -66,9 +73,15 @@ void SP3::Render()
 	modelStack.LoadIdentity();
 
 	RenderMap(map);
-	RenderObject(&player);
+	RenderObject(player);
+	RenderObject(enemy);
 
-	int test = player.pos.y - player.scale.y * 0.5f;
+	modelStack.PushMatrix();
+	modelStack.Translate(player->pos.x + player->scale.x * 0.5f, player->pos.y - player->scale.y * 0.5f, 1);
+	modelStack.Scale(2.f, 2.f, 2.f);
+	RenderMesh(meshList[GEO_BALL]);
+	modelStack.PopMatrix();
+
 
 	std::stringstream text;
 	text << fps;

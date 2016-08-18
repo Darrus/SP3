@@ -22,6 +22,7 @@
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DepthFBO.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyChase.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
     <ClCompile Include="Source\EnemyStates.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MapEditor.cpp" />
+    <ClCompile Include="Source\MeleeEnemy.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\MeshGenerator.cpp" />
@@ -39,6 +41,7 @@
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\Pistol.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\RangeEnemy.cpp" />
     <ClCompile Include="Source\Rifle.cpp" />
     <ClCompile Include="Source\SceneBase.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
@@ -62,10 +65,12 @@
     <ClInclude Include="Source\DepthFBO.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />
+    <ClInclude Include="Source\EnemyChase.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
     <ClInclude Include="Source\EnemyStates.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
+    <ClInclude Include="Source\MeleeEnemy.h" />
     <ClInclude Include="Source\Pistol.h" />
     <ClInclude Include="Source\Key.h" />
     <ClInclude Include="Source\LevelEditor.h" />
@@ -86,6 +91,7 @@
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PlayerState.h" />
+    <ClInclude Include="Source\RangeEnemy.h" />
     <ClInclude Include="Source\Rifle.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBase.h" />

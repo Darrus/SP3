@@ -208,88 +208,18 @@ void Player::regainHealth()
 
 void Player::CollisionCheck(double dt)
 {
-	/*newPos = pos + vel * (float)dt;
-
-	int currentX, currentY;
-	currentX = newPos.x / map->GetTileSize();
-	currentY = map->GetNumOfTiles_MapHeight() - newPos.y / map->GetTileSize();
-
-	int checkDir = newPos.x - pos.x;
-	int checkX = 0, checkY = 0;
-	float halfX = scale.x * 0.5f;
-	float halfY = scale.y * 0.5f;
-	int checkUpY = map->GetNumOfTiles_MapHeight() - ((newPos.y + halfY) / map->GetTileSize());
-
-	if (checkDir > 0)
-		checkX = (newPos.x + halfX) / map->GetTileSize();
-	else if (checkDir < 0)
-		checkX = (newPos.x - halfX) / map->GetTileSize();
-
-	checkY = map->GetNumOfTiles_MapHeight() - ((newPos.y - halfY) / map->GetTileSize());
-
-	if (isGrounded)
-	{
-		if (map->collisionMap[checkY][currentX] == 1)
-			newPos.y = pos.y;
-		else
-			isGrounded = false;
-
-		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth()
-			|| map->collisionMap[currentY][checkX] == 1)
-			newPos.x = pos.x;
-	}
-	else if (isClimbing)
-	{
-		vel.y = 0.f;
-		if (map->collisionMap[checkY][currentX] == 1)
-		{
-			isGrounded = true;
-			isClimbing = false;
-			newPos.y = ((map->GetNumOfTiles_MapHeight() - checkY) * map->GetTileSize()) + halfY;
-		}
-		else if (map->collisionMap[checkY][currentX] == 0)
-		{
-			isGrounded = false;
-			isClimbing = false;
-		}
-
-		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth()
-			|| map->collisionMap[currentY][checkX] == 1)
-			newPos.x = pos.x;
-
-	}
-	else
-	{
-		if (map->collisionMap[checkY][currentX] == 1)
-		{
-			newPos.y = ((map->GetNumOfTiles_MapHeight() - checkY) * map->GetTileSize()) + halfY;
-			isGrounded = true;
-			vel.y = 0.f;
-		}
-		else if (map->collisionMap[checkUpY][currentX] == 1)
-		{
-			vel.y = 0.f;
-			newPos.y = (map->GetNumOfTiles_MapHeight() - (currentY)) * map->GetTileSize() - halfY;
-		}
-
-		if (newPos.x - halfX <= 0 || newPos.x + halfX >= map->GetMapWidth() ||
-			map->collisionMap[currentY][checkX] == 1 || map->collisionMap[checkY][checkX] == 1 ||
-			map->collisionMap[checkUpY][checkX] == 1)
-			newPos.x = pos.x;
-	}*/
-
 	// Updates position
 	newPos = pos + vel * (float)dt;
 	
 	// Init Variables
 	int tileSize = map->GetTileSize();
-	int currentX, currentY, checkX, checkY;
-	currentX = currentY = checkX = checkY = 0;
+	int currentX, currentY, checkRight, checkLeft, checkUp, checkDown, checkX, checkY;
+	currentX = currentY = checkRight = checkLeft = checkDown = checkUp = checkX = checkY = 0;
 
 	// Make sure object doesnt move out of screen
-	if (newPos.x - scale.x * 0.5f <= 0 || newPos.x + scale.x * 0.5f >= map->GetScreenWidth())
+	if (newPos.x - scale.x * 0.5f <= 0 || newPos.x + scale.x * 0.5f >= map->GetMapWidth())
 		newPos.x = pos.x;
-	if (newPos.y - scale.y * 0.5f <= 0 || newPos.y + scale.y * 0.5f >= map->GetScreenHeight())
+	if (newPos.y - scale.y * 0.5f <= 0 || newPos.y + scale.y * 0.5f >= map->GetMapHeight())
 		newPos.y = pos.y;
 	
 	// Get Current Tile
@@ -301,16 +231,21 @@ void Player::CollisionCheck(double dt)
 	dir = newPos.x - pos.x;
 	
 	// Checks next tile according to player's scale
-	if (dir > 0)
-		checkX = (newPos.x + scale.x * 0.5f) / tileSize;
-	else
-		checkX = (newPos.x - scale.x * 0.5f) / tileSize;
+	checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
+	checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+	checkUp = (newPos.y + scale.y * 0.5f) / tileSize;
+	checkDown = (newPos.y - scale.y * 0.5f) / tileSize;
 
-	
+	if (dir > 0)
+		checkX = checkRight;
+	else
+		checkX = checkLeft;
+		
+
 	if (isGrounded) // If player is grounded
 	{
 		// Checks the tile below player
-		if (map->collisionMap[currentY - 1][currentX] != 1)
+		if (map->collisionMap[currentY - 1][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1)
 			isGrounded = false;
 
 		// Check the next tile
@@ -319,25 +254,29 @@ void Player::CollisionCheck(double dt)
 	}
 	else if (!isGrounded) // If player is in the air
 	{
-		// Checks which direction is the player moving in the Y axis
-		dir = newPos.y - pos.y;
-		if (dir > 0)
-			checkY = (newPos.y + scale.y * 0.5f) / tileSize;
-		else
-			checkY = (newPos.y - scale.y * 0.5f) / tileSize;
-
-		// Checks Y axis
-		if (map->collisionMap[checkY][currentX] == 1)
+		// Checks X
+		if (map->collisionMap[checkUp][checkX] == 1 || map->collisionMap[checkDown][checkX] == 1)
 		{
-			if (dir <= 0)
-				isGrounded = true;
+			newPos.x = pos.x;
+			checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
+			checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+		}
+
+		// Checks Down
+		if (map->collisionMap[checkDown][checkLeft] == 1 || map->collisionMap[checkDown][checkRight] == 1)
+		{
+			isGrounded = true;
 			newPos.y = (currentY * tileSize) + tileSize * 0.5f;
 			vel.y = 0.f;
 		}
 
-		// Check X axis
-		if (map->collisionMap[checkY][checkX] == 1 || map->collisionMap[currentY][checkX] == 1)
-			newPos.x = pos.x;
+		// Checks Up
+		if (map->collisionMap[checkUp][checkLeft] == 1 || map->collisionMap[checkUp][checkRight] == 1)
+		{
+			newPos.y = checkUp * tileSize - tileSize * 0.5f;
+			if (vel.y > 0.f)
+				vel.y = 0.f;
+		}
 	}
 	
 	pos = newPos;

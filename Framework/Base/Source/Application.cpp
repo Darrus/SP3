@@ -193,10 +193,11 @@ void Application::Run()
 
 	SceneManager::GetInstance().Init();
 	m_timer.startTimer();
+
 	while (!SceneManager::GetInstance().quit && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 	{
 		SceneManager::GetInstance().InitCurrent();
-		while (!SceneManager::GetInstance().changeScene && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
+		while (!SceneManager::GetInstance().CheckChange() && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
 		{
 			float delta = m_timer.getElapsedTime();
 			controller->read(delta);
@@ -209,7 +210,6 @@ void Application::Run()
 			glfwPollEvents();
 			m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.
 		}
-		SceneManager::GetInstance().CheckChange();
 	}
 }
 
