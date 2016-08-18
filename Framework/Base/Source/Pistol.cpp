@@ -56,13 +56,11 @@ void Pistol::firingWeapon(Bullet bullet, bool overHeat, double dt)
 			{
 				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
 				{
-<<<<<<< HEAD
 					bullet.vel = bullet.getBulletSpeed() * dt;
 					overHeatingRate += 2 * dt;
-=======
 					bullet.vel += bullet.getBulletSpeed() * (float)dt;
 					overHeatingRate += 2 * (float)dt;
->>>>>>> 0cd48c134c4ccd7691cdea10da42ff6261351479
+
 					damage = 20;
 				}
 				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
