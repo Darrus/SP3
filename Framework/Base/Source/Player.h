@@ -32,6 +32,7 @@ public:
 	virtual void Update(double dt);
 	int GetPlayerHealth(void);
 	void SetPlayerHealth(int playerHealth);
+	void SetMousePos(float mouseX, float mouseY);
 	SpriteAnimation* GetMesh();
 	PLAYER_STATE getState();
 
@@ -86,6 +87,8 @@ private:
 
 	int healthRegain;
 	int potionCount;
+
+	float mouseX, mouseY;
 
 	Weapon weapon;
 	Bullet bullet;

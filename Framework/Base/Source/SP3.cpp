@@ -20,6 +20,7 @@ SP3::~SP3()
 void SP3::Init()
 {
 	SceneBase::Init();
+
 	map = new TileMap();
 	map->Init(m_screenHeight, m_screenWidth, 32);
 	map->LoadMap("test");
@@ -54,12 +55,24 @@ void SP3::Init()
 void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
+
 	camera->Update(dt);
+
+	//Get mouse pos in world
+	double mouseX, mouseY;
+	Application::GetInstance().GetMousePos(mouseX, mouseY);
+	double worldX, worldY;
+	mouseY = m_screenHeight - mouseY;
+	worldX = mouseX + camera->position.x;
+	worldY = mouseY + camera->position.y;
+	player->SetMousePos((float)worldX, (float)worldY);
 	player->Update(dt);
-	pistol.update(dt);
 	GoManager::GetInstance().Update(dt);
 
+	pistol.update(dt);
 	bulletRate += dt;
+
+	
 
 	if (player->getState() == 1)
 	{
@@ -79,6 +92,7 @@ void SP3::Update(double dt)
 		bullet->type = GameObject::GO_BULLET;
 		bullet->scale.Set(1, 1, 1);
 		bullet->pos = player->pos;
+		
 		Vector3 dir = player->view;
 
 		bullet->vel = dir * 100;
@@ -89,8 +103,6 @@ void SP3::Update(double dt)
 		}
 		bulletRate = 0.f;
 	}
-
-	std::cout << GoManager::GetInstance().GetObjCount() << std::endl;
 }
 
 

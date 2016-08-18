@@ -80,14 +80,9 @@ void Player::Update(double dt)
 	useItem();
 	changeWeapon();
 
-	double mouseX, mouseY;
-	Application::GetMousePos(mouseX, mouseY);
-	mouseY = 600 - mouseY;
-	if (mouseX != 0 && mouseY != 0)
-		view.Set(mouseX, mouseY, 0.f);
-	else
-		view.Set(1.f, 0.f, 0.f);
+	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
+
 	//sprite->Update(dt);
 }
 
@@ -339,4 +334,10 @@ void Player::playerJump(double dt)
 		pos.y -= JUMP_SPEED * (float)dt;
 	}
 
+}
+
+void Player::SetMousePos(float mouseX, float mouseY)
+{
+	this->mouseX = mouseX;
+	this->mouseY = mouseY;
 }

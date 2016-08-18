@@ -9,6 +9,7 @@
 #include "CameraFollow.h"
 #include "Pistol.h"
 #include "Bullet.h"
+#include "MousePicker.h"
 
 using std::vector;
 
@@ -35,13 +36,7 @@ private:
 	Pistol pistol;
 	Bullet* bullet;
 
-	//vector<GameObject *> m_goList;
-	GameObject * go;
-
-	Vector3 direction;
-
 	float bulletRate;
-
 
 	float fps;
 };
