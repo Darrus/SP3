@@ -16,9 +16,6 @@ public:
 	virtual void HandleInteraction(GameObject* go, double dt);
 
 	EnemyStates* state;
-
-	const int AlertRange;
-	const int EnemySpeed;
 };
 
 #endif

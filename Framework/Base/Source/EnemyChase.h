@@ -7,7 +7,11 @@ class EnemyChase : public EnemyStates
 {
 public:
 	EnemyChase();
-	~EnemyChase();
+	virtual ~EnemyChase();
+
+	virtual void Enter(Enemy* enemy, Player* player);
+	virtual EnemyStates* CheckState();
+	virtual void Update(double dt);
 };
 
 #endif

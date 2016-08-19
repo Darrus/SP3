@@ -10,12 +10,13 @@ EnemyStates::~EnemyStates()
 
 }
 
-void EnemyStates::Enter(Enemy& enemy, Player& player)
+void EnemyStates::Enter(Enemy* enemy, Player* player)
 {
-
+	this->enemy = enemy;
+	this->player = player;
 }
 
-EnemyStates* EnemyStates::CheckState(Enemy& enemy, Player& player)
+EnemyStates* EnemyStates::CheckState()
 {
 	return NULL;
 }

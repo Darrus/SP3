@@ -21,19 +21,27 @@ public:
 
 	Vector3 newPos;
 
+	SpriteAnimation* sprite;
 	Animation animWalkLeft;
 	Animation animWalkRight;
 	Animation animAttack;
-	SpriteAnimation* sprite;
 
 	bool collidedWall;
+	float AlertRange;
+	float AttackRange;
+	float PatrolRange;
+
+	float EnemySpeed;
+	float MaxSpeed;
+
+	float AttackDamage;
+	float TimeBetweenAttack;
+	float AttackCooldown;
 protected:
 	void MapCollision(double dt);
 
 	TileMap* map;
-
 	Player* player;
-
 	bool isGrounded;
 };
 

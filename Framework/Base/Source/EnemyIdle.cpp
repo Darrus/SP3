@@ -13,54 +13,47 @@ EnemyIdle::~EnemyIdle()
 
 }
 
-void EnemyIdle::Enter(Enemy& enemy, Player& player)
+void EnemyIdle::Enter(Enemy* enemy, Player* player)
 {
 	patrolDistance = 100.f;
+	this->enemy = enemy;
+	this->player = player;
 	Math::InitRNG();
 	dir = Math::RandIntMinMax(-1, 1);
-	if (dir > 0)
-		enemy.sprite->SetAnimation(enemy.animWalkRight);
-	else
-		enemy.sprite->SetAnimation(enemy.animWalkLeft);
-	MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(&enemy);
-	enemy.vel.Set(melee->EnemySpeed * dir, 0.f, 0.f);
-	patrolPos.Set(enemy.pos.x + patrolDistance * dir, enemy.pos.y, enemy.pos.z);
 
-	this->enemy = &enemy;
+	if (dir == 0)
+		dir = 1;
+
+	if (dir > 0)
+		enemy->sprite->SetAnimation(enemy->animWalkRight);
+	else
+		enemy->sprite->SetAnimation(enemy->animWalkLeft);
+
+	enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
 }
 
-EnemyStates* EnemyIdle::CheckState(Enemy& enemy, Player& player)
+EnemyStates* EnemyIdle::CheckState()
 {
-	float dist = (enemy.pos - player.pos).LengthSquared();
-	MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(&enemy);
-	RangeEnemy* range = dynamic_cast<RangeEnemy*>(&enemy);
+	float dist = (enemy->pos - player->pos).LengthSquared();
 
-	if (melee)
-	{
-		if (dist < melee->AlertRange * melee->AlertRange)
-		{
-			return new EnemyChase();
-		}
-	}
-	else if (range)
-	{
-		
-	}
+	if (dist < enemy->AlertRange * enemy->AlertRange)
+		return new EnemyChase();
 
 	return this;
 }
 
 void EnemyIdle::Update(double dt)
 {
-	if (enemy->collidedWall)
+	if (enemy->collidedWall || patrolDistance > enemy->PatrolRange)
 	{
-		MeleeEnemy* melee = dynamic_cast<MeleeEnemy*>(enemy);
+		patrolDistance = 0.f;
 		dir *= -1;
 		if (dir > 0)
 			enemy->sprite->SetAnimation(enemy->animWalkRight);
 		else
 			enemy->sprite->SetAnimation(enemy->animWalkLeft);
-		enemy->vel.Set(melee->EnemySpeed * dir, 0.f, 0.f);
+		enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
 	}
 	enemy->newPos.x += enemy->vel.x * dt;
+	patrolDistance += enemy->vel.x * dt;
 }
