@@ -21,19 +21,14 @@ void EnemyAttack::Enter(Enemy* enemy, Player* player)
 EnemyStates* EnemyAttack::CheckState()
 {
 	float dist = (player->pos - enemy->pos).LengthSquared();
+	std::cout << enemy->AttackRange * enemy->AttackRange << std::endl;
 	if (dist > enemy->AttackRange * enemy->AttackRange)
-	{
 		return new EnemyChase();
-	}
 
 	return this;
 }
 
 void EnemyAttack::Update(double dt)
 {
-	if (enemy->AttackCooldown < 0)
-	{
-		enemy->AttackCooldown = enemy->TimeBetweenAttack;
-	}
-
+	enemy->Attack();
 }

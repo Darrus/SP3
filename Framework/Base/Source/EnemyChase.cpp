@@ -44,18 +44,5 @@ EnemyStates* EnemyChase::CheckState()
 
 void EnemyChase::Update(double dt)
 {
-	float dir = player->pos.x - enemy->pos.x;
-	if (dir > 0)
-	{
-		dir = 1;
-		enemy->sprite->SetAnimation(enemy->animWalkRight);
-	}
-	else
-	{
-		dir = -1;
-		enemy->sprite->SetAnimation(enemy->animWalkLeft);
-	}
-
-	enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
 	enemy->newPos.x += enemy->vel.x * dt;
 }
