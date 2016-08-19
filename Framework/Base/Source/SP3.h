@@ -9,7 +9,6 @@
 #include "CameraFollow.h"
 #include "Pistol.h"
 #include "Bullet.h"
-#include "MousePicker.h"
 
 using std::vector;
 

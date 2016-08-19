@@ -10,10 +10,13 @@ public:
 	EnemyStates();
 	virtual ~EnemyStates();
 
-	virtual void Enter(Enemy& enemy, Player& player);
-	virtual EnemyStates* CheckState(Enemy& enemy, Player& player);
+	virtual void Enter(Enemy* enemy, Player* player);
+	virtual EnemyStates* CheckState();
 	virtual void Exit();
 	virtual void Update(double dt);
+
+	Enemy* enemy;
+	Player* player;
 };
 
 #endif

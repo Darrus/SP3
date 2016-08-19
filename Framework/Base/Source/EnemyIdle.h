@@ -10,11 +10,10 @@ public:
 	EnemyIdle();
 	virtual ~EnemyIdle();
 
-	virtual void Enter(Enemy& enemy, Player& player);
-	virtual EnemyStates* CheckState(Enemy& enemy, Player& player);
+	virtual void Enter(Enemy* enemy, Player* player);
+	virtual EnemyStates* CheckState();
 	virtual void Update(double dt);
 
-	Vector3 patrolPos;
 	float patrolDistance;
 	int dir;
 	Enemy* enemy;

@@ -41,6 +41,7 @@ void SP3::Init()
 	camera = camFollow;
 
 	MeleeEnemy* enemy = new MeleeEnemy();
+	enemy->SetPlayer(player);
 	enemy->Init(map);
 	enemy->pos.Set(200.f, 200.f, 0.f);
 	enemy->scale.Set(32.f, 32.f, 32.f);
