@@ -9,7 +9,6 @@
 #include "CameraFollow.h"
 #include "Pistol.h"
 #include "Bullet.h"
-#include "MousePicker.h"
 
 using std::vector;
 
@@ -27,6 +26,7 @@ public:
 private:
 	void RenderMap(TileMap* map);
 	void RenderObject(GameObject* go);
+	void RenderWeaponObject(GameObject * go);
 
 	TileMap* map;
 	ParallaxBackground background;
@@ -39,6 +39,9 @@ private:
 	float bulletRate;
 
 	float fps;
+
+	double worldX, worldY;
+	double mouseX, mouseY;
 };
 
 #endif

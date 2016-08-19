@@ -9,7 +9,7 @@ Pistol::Pistol()
 	weaponType = WEAPON_TYPE::PISTOL;
 	overHeat = false;
 	overHeatingRate = 0;
-	mesh = MeshGenerator::GetInstance().GenerateQuad("weapon",Color(1,1,1) , "Image//pistol.tga",1.2f);
+	mesh = MeshGenerator::GetInstance().GenerateQuad("weapon",Color(1,1,1) , "Image//pistol.tga",1.5f);
 }
 
 Pistol::~Pistol()
