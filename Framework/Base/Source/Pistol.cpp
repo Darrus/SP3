@@ -10,6 +10,8 @@ Pistol::Pistol()
 	overHeat = false;
 	overHeatingRate = 0;
 	mesh = MeshGenerator::GetInstance().GenerateQuad("weapon",Color(1,1,1) , "Image//pistol.tga",1.5f);
+	offset = 15.f;
+	fineOffset.Set(0.f, -2.f, 0.f);
 }
 
 Pistol::~Pistol()
@@ -17,11 +19,9 @@ Pistol::~Pistol()
 
 }
 
-void Pistol::update(double dt)
+void Pistol::Update(double dt)
 {
-	overHeatingRate -= dt;
-	fireRate += 0.1 * dt;
-	overHeating();
+	Weapon::Update(dt);
 }
 
 bool Pistol::overHeating()

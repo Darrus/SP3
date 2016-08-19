@@ -30,9 +30,14 @@ public:
 
 	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
+	
 	int GetPlayerHealth(void);
+	Weapon* GetWeapon();
+	
 	void SetPlayerHealth(int playerHealth);
 	void SetMousePos(float mouseX, float mouseY);
+
+
 	SpriteAnimation* GetMesh();
 	PLAYER_STATE getState();
 
@@ -45,10 +50,12 @@ private:
 	void cycleBullets();
 	void useItem();
 	void changeWeapon();
+	void playerJump(double dt);
+
+	void ShootWeapon();
 
 	int GetHealthRegain(void);
 	int GetPotionCount(void);
-
 
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
@@ -72,25 +79,15 @@ private:
 	/*PLAYER_SKILLS skills;
 	PLAYER_BULLETS bullets;*/
 
-	//Jump stuff
-	bool isJumping;
-	bool isFalling;
-	bool jumping(void);
-	bool falling(void);
-	bool grounded(void);
-
-	void playerJump(double dt);
 
 	int jumpHeight;
-
 	int playerHealth;
-
 	int healthRegain;
 	int potionCount;
 
 	float mouseX, mouseY;
 
-	Weapon weapon;
+	Weapon* weapon;
 	Bullet bullet;
 
 	bool isUsed;

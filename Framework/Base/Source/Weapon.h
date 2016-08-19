@@ -22,9 +22,9 @@ public:
 	Weapon();
 	virtual~Weapon();
 
-	virtual void update(double dt);
+	virtual void Update(double dt);
+	virtual void Shoot(Bullet::ELEMENT element);
 	virtual bool overHeating();
-	virtual void firingWeapon(Bullet bullet, bool overHeat, double dt);
 
 	void setFireRate(float fireRate);
 	float getFireRate();
@@ -41,18 +41,21 @@ public:
 	void setOverHeatRate(int overHeatRate);
 	int getOverHeatRate();
 
+	void ReferencePlayerPos(Vector3* pos);
+	void ReferencePlayerView(Vector3* view);
 
-private:
+protected:
+	float defaultFireRate;
 	float fireRate;
 	float coolDown;
 	int damage;
 	int overHeatingRate;
 	bool overHeat;
 	WEAPON_TYPE weaponType;
-	Bullet *bullet;
-	Bullet bullets;
-	//GameObject weapon;
-	//Player player;
+	Vector3 *playerPos, *playerView;
+
+	float offset;
+	Vector3 fineOffset;
 };
 
 

@@ -1,5 +1,7 @@
 #include "Weapon.h"
 #include "GoManager.h"
+#include "Application.h"
+#include "Bullet.h"
 
 Weapon::Weapon()
 {
@@ -9,6 +11,7 @@ Weapon::Weapon()
 	weaponType = WEAPON_TYPE::NONE;
 	overHeat = false;
 	overHeatingRate = 0;
+	scale.Set(16, 16, 16);
 }
 
 Weapon::~Weapon()
@@ -16,14 +19,17 @@ Weapon::~Weapon()
 
 }
 
-void Weapon::update(double dt)
+void Weapon::Update(double dt)
 {
-
+	fireRate -= dt;
+	view = *playerView;
+	pos = *playerPos + (view * offset) + fineOffset;
 }
 
 void Weapon::setFireRate(float fireRate)
 {
-	this->fireRate = fireRate;
+	this->defaultFireRate = fireRate;
+	this->fireRate = 0.f;
 }
 
 float Weapon::getFireRate()
@@ -76,7 +82,33 @@ bool Weapon::overHeating()
 	return false;
 }
 
-void Weapon::firingWeapon(Bullet bullet, bool overHeat, double dt)
+void Weapon::Shoot(Bullet::ELEMENT element)
 { 
+	if (fireRate < 0.f)
+	{
+		Bullet* bullet = new Bullet;
+		bullet->scale.Set(1, 1, 1);
+		bullet->pos = pos;
+		bullet->active = true;
+		Vector3 dir = view;
+		bullet->vel = dir * 750;
+		if (bullet->vel.LengthSquared() > 750 * 750)
+		{
+			bullet->vel.Normalize();
+			bullet->vel *= 750;
+		}
+		fireRate = defaultFireRate;
+		GoManager::GetInstance().Add(bullet);
+	}
+}
+
+void Weapon::ReferencePlayerPos(Vector3* pos)
+{
+	playerPos = pos;
+}
+
+void Weapon::ReferencePlayerView(Vector3* view)
+{
+	playerView = view;
 }
 

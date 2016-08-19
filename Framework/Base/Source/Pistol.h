@@ -9,7 +9,7 @@ public:
 	Pistol();
 	~Pistol();
 
-	virtual void update(double dt);
+	virtual void Update(double dt);
 	virtual bool overHeating();
 	virtual void firingWeapon(Bullet bullet, bool overHeat, double dt);
 

@@ -186,6 +186,7 @@ operator* overload for scalar multiplication
 \exception None
 \return Resulting vector
 */
+/******************************************************************************/
 Vector3 Vector3::operator*( float scalar ) const
 {
 	return Vector3(scalar * x, scalar * y, scalar * z);
@@ -207,6 +208,41 @@ Vector3& Vector3::operator*=( float scalar )
 	x *= scalar;
 	y *= scalar;
 	z *= scalar;
+	return *this;
+}
+
+/******************************************************************************/
+/*!
+\brief
+operator* overload for vector multiplication
+
+\param rhs - vector to multiply with
+
+\exception None
+\return Resulting vector
+*/
+/******************************************************************************/
+Vector3 Vector3::operator*(const Vector3& rhs) const
+{
+	return Vector3(x * rhs.x, y * rhs.y, z * rhs.z);
+}
+
+/******************************************************************************/
+/*!
+\brief
+operator*= overload for vector multiplication and assignment
+
+\param rhs
+Vector3 to multiply with
+\return
+Resulting vector
+*/
+/******************************************************************************/
+Vector3& Vector3::operator*=(const Vector3& rhs)
+{
+	x *= rhs.x;
+	y *= rhs.y;
+	z *= rhs.z;
 	return *this;
 }
 

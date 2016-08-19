@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "MeshGenerator.h"
 #include <iostream>
+#include "Pistol.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -13,14 +14,16 @@ JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
 isUsed(true)
-//skills(P_SKILL1),
-//bullets(P_TYPE1),
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
 	sprite = dynamic_cast<SpriteAnimation*>(mesh);
 	Animation test;
 	test.Set(18, 18, 1.f, true);
 	sprite->SetAnimation(test);
+	weapon = new Pistol();
+	weapon->setFireRate(0.2f);
+	weapon->ReferencePlayerPos(&pos);
+	weapon->ReferencePlayerView(&view);
 }
 
 Player::~Player()
@@ -67,11 +70,6 @@ void Player::Init(TileMap* map)
 void Player::Update(double dt)
 {
 	Move(dt);
-	if (!isGrounded)
-	{
-		vel.y += -9.8f;
-	}
-
 	CollisionCheck(dt);
 	playerDeath();
 	selectSkill();
@@ -79,6 +77,9 @@ void Player::Update(double dt)
 	playerJump(dt);
 	useItem();
 	changeWeapon();
+	ShootWeapon();
+	if (weapon)
+		weapon->Update(dt);
 
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
@@ -115,6 +116,11 @@ void Player::Move(double dt)
 		vel.y = 300.f;
 		isGrounded = false;
 	}
+
+	if (!isGrounded)
+	{
+		vel.y += -9.8f;
+	}
 }
 
 void Player::playerDeath()
@@ -141,7 +147,7 @@ void Player::selectSkill()
 
 void Player::changeWeapon()
 {
-	if (Application::GetInstance().controller->IsKeyPressed(TAB))
+	/*if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
 		weaponType++;
 		if (weaponType == 0)
@@ -168,7 +174,7 @@ void Player::changeWeapon()
 		else if (weaponType >= 7)
 			weaponType = 0;
 		
-	}
+	}*/
 }
 
 
@@ -290,54 +296,33 @@ void Player::CollisionCheck(double dt)
 	pos = newPos;
 }
 
-//Jump stuff
-bool Player::grounded(void)
-{
-	if (isJumping == false && isFalling == false)
-		return true;
-
-	return false;
-}
-
-bool Player::jumping(void)
-{
-	if (isGrounded == false && isFalling == false)
-		return true;
-
-	return false;
-}
-
-bool Player::falling(void)
-{
-	if (isGrounded == false && isJumping == false)
-		return true;
-
-	return false;
-}
-
 void Player::playerJump(double dt)
 {
 	if (Application::GetInstance().controller->IsKeyPressed(JUMP) && isGrounded == true)
-	{
-		if (isJumping == false && isFalling == false)
-		{
-			pos.y += JUMP_SPEED * dt;
-		}
-	}
-	if (pos.y == MAX_HEIGHT)
-	{
-		isJumping = false;
-		isFalling = true;
-	}
-	if (isFalling == true)
-	{
-		pos.y -= JUMP_SPEED * (float)dt;
-	}
-
+		pos.y += JUMP_SPEED * dt;
 }
 
 void Player::SetMousePos(float mouseX, float mouseY)
 {
 	this->mouseX = mouseX;
 	this->mouseY = mouseY;
+}
+
+void Player::ShootWeapon()
+{
+	if (weapon)
+	{
+		if (Application::IsMousePressed(0))
+		{
+			Bullet::ELEMENT elem = Bullet::NONE;
+			weapon->Shoot(elem);
+		}
+	}
+}
+
+Weapon* Player::GetWeapon()
+{
+	if (weapon)
+		return weapon;
+	return NULL;
 }

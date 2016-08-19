@@ -33,11 +33,6 @@ private:
 	Player* player;
 	CameraFollow* camFollow;
 
-	Pistol pistol;
-	Bullet* bullet;
-
-	float bulletRate;
-
 	float fps;
 
 	double worldX, worldY;

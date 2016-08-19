@@ -31,9 +31,6 @@ void SP3::Init()
 	player->pos.Set(50.f, 100.f, 0.f);
 	player->scale.Set(32.f, 32.f, 32.f);
 
-	pistol.pos.Set(player->pos.x + 6, player->pos.y - 5, player->pos.z);
-	pistol.scale.Set(16,16,16);
-
 	camFollow = new CameraFollow();
 	camFollow->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
 	camFollow->LookAt(player);
@@ -51,8 +48,6 @@ void SP3::Init()
 	background.Init(&camera->position,800,600);
 	
 	fps = 0.f;
-
-	bulletRate = 1;
 
 	background.LoadBackground("Image//RearBg.tga", Vector3(map->GetMapWidth(), map->GetMapHeight(), 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(map->GetMapWidth(), map->GetMapHeight(), 0));
@@ -74,46 +69,7 @@ void SP3::Update(double dt)
 	player->Update(dt);
 	background.Update();
 	GoManager::GetInstance().Update(dt);
-
-	pistol.update(dt);
-	bulletRate += dt;
-
-
-
-
-	if (mouseX > player->pos.x)
-	{
-		pistol.pos.Set(player->pos.x + 6, player->pos.y - 5, player->pos.z);
-		pistol.view = player->view;
-	}
-	else if (mouseX < player->pos.x)
-	{
-		pistol.pos.Set(player->pos.x - 6 , player->pos.y - 5, player->pos.z);
-		pistol.view = player->view;
-	}
-
 	fps = 1 / dt;
-
-	if (Application::IsMousePressed(0) && bulletRate > 0.2f)
-	{
-		bullet = new Bullet;
-		GoManager::GetInstance().Add(bullet);
-		bullet->active = true;
-		bullet->type = GameObject::GO_BULLET;
-		bullet->scale.Set(1, 1, 1);
-		bullet->pos = player->pos;
-		
-		Vector3 dir = player->view;
-
-		bullet->vel = dir * 750;
-		if (bullet->vel.LengthSquared() > 750 * 750)
-		{
-			bullet->vel.Normalize();
-			bullet->vel *= 750;
-		}
-		bulletRate = 0.f;
-	}
-
 }
 
 
@@ -148,7 +104,8 @@ void SP3::Render()
 
 	RenderMap(map);
 	RenderObject(player);
-
+	if (player->GetWeapon())
+		RenderWeaponObject(player->GetWeapon());
 
 	for (vector<GameObject *>::iterator it = GoManager::GetInstance().GetList().begin(); it != GoManager::GetInstance().GetList().end(); ++it)
 	{
@@ -158,11 +115,6 @@ void SP3::Render()
 			RenderObject(go);
 		}
 	}
-
-	modelStack.PushMatrix();
-	RenderWeaponObject(&pistol);
-	modelStack.PopMatrix();
-
 
 	std::stringstream text;
 	text << fps;
@@ -220,7 +172,7 @@ void SP3::RenderObject(GameObject* go)
 
 void SP3::RenderWeaponObject(GameObject* go)
 {
-	if (mouseX > player->pos.x)
+	if (go->view.x > 0)
 	{
 		float weaponRot = Math::RadianToDegree(atan2(go->view.y, go->view.x));
 		modelStack.PushMatrix();
@@ -230,7 +182,7 @@ void SP3::RenderWeaponObject(GameObject* go)
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
 	}
-	if (mouseX < player->pos.x)
+	else
 	{
 		float weaponRot = Math::RadianToDegree(atan2(go->view.y, go->view.x));
 		modelStack.PushMatrix();
