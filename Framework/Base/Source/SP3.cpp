@@ -30,6 +30,8 @@ void SP3::Init()
 	player->Init(map);
 	player->pos.Set(50.f, 100.f, 0.f);
 	player->scale.Set(32.f, 32.f, 32.f);
+	player->active = true;
+	GoManager::GetInstance().Add(player);
 
 	camFollow = new CameraFollow();
 	camFollow->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
@@ -38,7 +40,6 @@ void SP3::Init()
 	camera = camFollow;
 
 	MeleeEnemy* enemy = new MeleeEnemy();
-	enemy->SetPlayer(player);
 	enemy->Init(map);
 	enemy->pos.Set(200.f, 200.f, 0.f);
 	enemy->scale.Set(32.f, 32.f, 32.f);
@@ -58,15 +59,14 @@ void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
 
-	camera->Update(dt);
-
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
 	mouseY = m_screenHeight - mouseY;
 	worldX = mouseX + camera->position.x;
 	worldY = mouseY + camera->position.y;
 	player->SetMousePos((float)worldX, (float)worldY);
-	player->Update(dt);
+
+	camera->Update(dt);
 	background.Update();
 	GoManager::GetInstance().Update(dt);
 	fps = 1 / dt;

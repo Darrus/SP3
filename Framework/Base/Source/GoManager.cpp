@@ -1,4 +1,5 @@
 #include "GoManager.h"
+#include "Player.h"
 
 GoManager::GoManager() : 
 objCount(0)
@@ -29,6 +30,14 @@ void GoManager::Update(double dt)
 		if (m_goList[i]->active)
 		{
 			m_goList[i]->Update(dt);
+			for (unsigned int k = 0; k < m_goList.size(); ++k)
+			{
+				if (m_goList[i] == m_goList[k])
+					continue;
+
+				if (m_goList[k]->active)
+					m_goList[i]->HandleInteraction(m_goList[k], dt);
+			}
 		}
 		else
 		{

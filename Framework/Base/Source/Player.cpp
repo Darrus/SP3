@@ -28,8 +28,6 @@ isUsed(true)
 
 Player::~Player()
 {
-	if (mesh)
-		delete mesh;
 }
 
 int Player::GetPlayerHealth(void) //getters for health

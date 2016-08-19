@@ -22,6 +22,7 @@
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DepthFBO.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyAttack.cpp" />
     <ClCompile Include="Source\EnemyChase.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
     <ClCompile Include="Source\EnemyStates.cpp" />
