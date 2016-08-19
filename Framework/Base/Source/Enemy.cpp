@@ -1,6 +1,5 @@
 #include "Enemy.h"
-#include "Player.h"
-#include "EnemyIdle.h"
+
 
 Enemy::Enemy() :
 sprite(NULL),
@@ -20,7 +19,7 @@ void Enemy::Init(TileMap* map)
 
 void Enemy::Update(double dt)
 {
-	
+
 }
 
 void Enemy::SetAttackAnimation(int start, int end, float time)
@@ -28,15 +27,10 @@ void Enemy::SetAttackAnimation(int start, int end, float time)
 	animAttack.Set(start, end, time, false);
 }
 
-void Enemy::Attack()
-{
-
-}
-
-/*void Enemy::SetPlayer(Player* player)
+void Enemy::SetPlayer(Player* player)
 {
 	this->player = player;
-}*/
+}
 
 void Enemy::MapCollision(double dt)
 {
@@ -53,6 +47,7 @@ void Enemy::MapCollision(double dt)
 	{
 		collidedWall = true;
 		newPos.x = pos.x;
+
 	}
 
 	if (newPos.y - scale.y * 0.5f <= 0 || newPos.y + scale.y * 0.5f >= map->GetMapHeight())
@@ -119,9 +114,4 @@ void Enemy::MapCollision(double dt)
 	}
 
 	pos = newPos;
-}
-
-void Enemy::HandleInteraction(GameObject* go, double dt)
-{
-	
 }

@@ -26,7 +26,7 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	virtual void HandleInteraction(GameObject* go, double dt);
+	//virtual void HandleInteraction(GameObject* go, double dt);
 
 	Mesh* mesh;
 

@@ -2,8 +2,7 @@
 #include "EnemyIdle.h"
 #include "MeshGenerator.h"
 
-MeleeEnemy::MeleeEnemy() :
-state(NULL)
+MeleeEnemy::MeleeEnemy()
 {
 	sprite = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
 	mesh = sprite;
@@ -31,49 +30,36 @@ MeleeEnemy::~MeleeEnemy()
 void MeleeEnemy::Init(TileMap* map)
 {
 	this->map = map;
+	state = new EnemyIdle();
+	state->Enter(this, player);
+	AttackRange = scale.x + player->scale.x;
 }
 
 void MeleeEnemy::Update(double dt)
 {
-	AttackCooldown -= dt;	
+	EnemyStates* tempState = state->CheckState();
+	AttackCooldown -= dt;
+	if (state != tempState)
+	{
+		delete state;
+		state = tempState;
+		state->Enter(this, player);
+	}
+
 	if (state)
 		state->Update(dt);
+
 	collidedWall = false;
 
 	if (sprite)
 		sprite->Update(dt);
 	if (!isGrounded)
 		vel.y -= 9.8;
-	
 
 	MapCollision(dt);
 }
 
-void MeleeEnemy::Attack()
-{
-	if (AttackCooldown < 0)
-	{
-		AttackCooldown = TimeBetweenAttack;
-	}
-}
-
 void MeleeEnemy::HandleInteraction(GameObject* go, double dt)
 {
-	Player* player = dynamic_cast<Player*>(go);
-	if (state)
-	{
-		EnemyStates* tempState = state->CheckState();
-		if (state != tempState)
-		{
-			delete state;
-			state = tempState;
- 			state->Enter(this, player);
-		}
-	}
-	else
-	{
-		state = new EnemyIdle();
-		state->Enter(this, player);
-		AttackRange = scale.x;
-	}
+
 }

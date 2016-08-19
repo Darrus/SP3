@@ -28,6 +28,8 @@ isUsed(true)
 
 Player::~Player()
 {
+	if (mesh)
+		delete mesh;
 }
 
 int Player::GetPlayerHealth(void) //getters for health
@@ -111,7 +113,7 @@ void Player::Move(double dt)
 
 	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)
 	{
-		vel.y = 300.f;
+		vel.y = 400.f;
 		isGrounded = false;
 	}
 

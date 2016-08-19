@@ -23,8 +23,3 @@ void GameObject::Init()
 void GameObject::Update(double dt)
 {
 }
-
-void GameObject::HandleInteraction(GameObject* go, double dt)
-{
-
-}

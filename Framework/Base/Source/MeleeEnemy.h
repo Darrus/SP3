@@ -13,9 +13,7 @@ public:
 
 	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
-	virtual void Attack();
 	virtual void HandleInteraction(GameObject* go, double dt);
-
 
 	EnemyStates* state;
 };
