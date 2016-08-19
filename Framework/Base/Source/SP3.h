@@ -27,6 +27,7 @@ private:
 	void RenderMap(TileMap* map);
 	void RenderObject(GameObject* go);
 	void RenderWeaponObject(GameObject * go);
+	void RenderUI();
 
 	TileMap* map;
 	ParallaxBackground background;

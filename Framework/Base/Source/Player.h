@@ -37,9 +37,15 @@ public:
 	void SetPlayerHealth(int playerHealth);
 	void SetMousePos(float mouseX, float mouseY);
 
-
 	SpriteAnimation* GetMesh();
 	PLAYER_STATE getState();
+
+	int GetHealthRegain(void);
+	int GetPotionCount(void);
+
+	void SetHealthRegain(int healthRegain);
+	void SetPotionCount(int potionCount);
+
 
 private:
 	void Move(double dt);
@@ -53,13 +59,6 @@ private:
 	void playerJump(double dt);
 
 	void ShootWeapon();
-
-	int GetHealthRegain(void);
-	int GetPotionCount(void);
-
-	void SetHealthRegain(int healthRegain);
-	void SetPotionCount(int potionCount);
-
 	void regainHealth();
 
 	const float PLAYER_SPEED;

@@ -45,15 +45,21 @@ void MeleeEnemy::Update(double dt)
 		sprite->Update(dt);
 	if (!isGrounded)
 		vel.y -= 9.8;
-	
 
 	MapCollision(dt);
 }
 
 void MeleeEnemy::Attack(Player* player)
 {
+	int tmp = player->GetPlayerHealth();
+
 	if (AttackCooldown < 0)
+	{
 		AttackCooldown = TimeBetweenAttack;
+		tmp -= 20;
+		player->SetPlayerHealth(tmp);
+	}
+
 }
 
 void MeleeEnemy::HandleInteraction(GameObject* go, double dt)

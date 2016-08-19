@@ -119,6 +119,13 @@ void SceneBase::Init()
 	meshList[GEO_TEXT]->textureArray[0] = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
+	meshList[GEO_HEALTH] = MeshBuilder::GenerateQuad("HealthBar",Color(1,1,1),0.5f);
+	meshList[GEO_HEALTH]->textureArray[0] = LoadTGA("Image//healthBarFront.tga");
+
+	meshList[GEO_HEALTHBACK] = MeshBuilder::GenerateQuad("HealthBar", Color(1, 1, 1), 0.5f);
+	meshList[GEO_HEALTHBACK]->textureArray[0] = LoadTGA("Image//healthBarBacK.tga");
+
+
 	bLightEnabled = false;
 }
 
@@ -205,7 +212,7 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	projectionStack.PopMatrix();
 }
 
-void SceneBase::RenderObjOnScreen(Mesh* mesh, float size, float x, float y)
+void SceneBase::RenderObjOnScreen(Mesh* mesh, float sizeX , float sizeY ,float sizeZ, float x, float y)
 {
 	if (!mesh || mesh->textureID <= 0)
 		return;
@@ -220,12 +227,12 @@ void SceneBase::RenderObjOnScreen(Mesh* mesh, float size, float x, float y)
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
-	modelStack.Scale(size, size, size);
+	modelStack.Scale(sizeX, sizeY, sizeZ);
 	RenderMesh(mesh, false);
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 }
 
 void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)

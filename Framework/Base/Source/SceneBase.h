@@ -51,7 +51,7 @@ public:
 
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
-	void RenderObjOnScreen(Mesh* mesh, float size, float x, float y);
+	void RenderObjOnScreen(Mesh* mesh, float sizeX, float sizeY,float sizeZ, float x, float y);
 	void Render2DMesh(Mesh *mesh, bool enableLight, float size, float x, float y, bool flip);
 	void RenderMesh(Mesh *mesh, bool enableLight = false);
 	void RenderTile(Mesh *mesh, int id, float x, float y, float size);
@@ -63,6 +63,8 @@ protected:
 		GEO_TEXT,
 		GEO_BALL,
 		GEO_CUBE,
+		GEO_HEALTH,
+		GEO_HEALTHBACK,
 
 		NUM_GEOMETRY,
 	};

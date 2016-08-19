@@ -23,7 +23,7 @@ void SP3::Init()
 
 	map = new TileMap();
 	map->Init(m_screenHeight, m_screenWidth, 32);
-	map->LoadMap("test");
+	map->LoadMap("Level01");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
@@ -46,13 +46,15 @@ void SP3::Init()
 	enemy->active = true;
 	GoManager::GetInstance().Add(enemy);
 
+	enemy->Attack(player);
+
 	background.Init(&camera->position,800,600);
 	
 	fps = 0.f;
 
-	background.LoadBackground("Image//RearBg.tga", Vector3(map->GetMapWidth(), map->GetMapHeight(), 0));
-	background.LoadBackground("Image//MidBg.tga", Vector3(map->GetMapWidth(), map->GetMapHeight(), 0));
-	background.LoadBackground("Image//FrontBg.tga", Vector3(map->GetMapWidth(), map->GetMapHeight(), 0));
+	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
+	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
+	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 }
 
 void SP3::Update(double dt)
@@ -92,6 +94,7 @@ void SP3::Render()
 	// Model matrix : an identity matrix (model will be at the origin)
 	modelStack.LoadIdentity();
 
+
 	for (int i = 0; i < background.GetBackgroundCount(); ++i)
 	{
 		Background* bg = background.GetBackground(i);
@@ -103,6 +106,7 @@ void SP3::Render()
 	}
 
 	RenderMap(map);
+
 	RenderObject(player);
 	if (player->GetWeapon())
 		RenderWeaponObject(player->GetWeapon());
@@ -119,6 +123,12 @@ void SP3::Render()
 	std::stringstream text;
 	text << fps;
 	RenderTextOnScreen(meshList[GEO_TEXT], text.str() , Color(0.f, 1.f, 0.f), 20, 10, 10);
+
+	std::stringstream text2;
+	text2 << player->GetPlayerHealth();
+	RenderTextOnScreen(meshList[GEO_TEXT], text2.str(), Color(0.f, 1.f, 0.f), 20, 10, 20);
+
+	RenderUI();
 }
 
 void SP3::Exit()
@@ -161,7 +171,6 @@ void SP3::RenderMap(TileMap* map)
 
 void SP3::RenderObject(GameObject* go)
 {
-
 	modelStack.PushMatrix();
 	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
@@ -193,4 +202,16 @@ void SP3::RenderWeaponObject(GameObject* go)
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
 	}
+}
+
+void SP3::RenderUI()
+{
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_HEALTH], player->GetPlayerHealth(),5.f,1.f, 10,100);
+	modelStack.PopMatrix();
+
 }

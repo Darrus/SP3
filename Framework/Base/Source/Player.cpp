@@ -37,6 +37,10 @@ int Player::GetPlayerHealth(void) //getters for health
 
 void Player::SetPlayerHealth(int playerHealth) //setters for health
 {
+	if (playerHealth < 0)
+	{
+		playerHealth = 0;
+	}
 	this->playerHealth = playerHealth;
 }
 
@@ -82,6 +86,8 @@ void Player::Update(double dt)
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
 
+	std::cout << playerHealth << std::endl;
+
 	//sprite->Update(dt);
 }
 
@@ -111,7 +117,7 @@ void Player::Move(double dt)
 
 	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)
 	{
-		vel.y = 300.f;
+		vel.y = 450.f;
 		isGrounded = false;
 	}
 
