@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "SpriteAnimation.h"
 #include "TileMap.h"
+#include "Player.h"
 
 class Enemy : public GameObject
 {
@@ -13,12 +14,11 @@ public:
 
 	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
-	virtual void Attack();
+	virtual void Attack(Player* player);
 	virtual void HandleInteraction(GameObject* go, double dt);
 
 
 	void SetAttackAnimation(int start, int end, float time);
-	//void SetPlayer(Player* player);
 
 	Vector3 newPos;
 
@@ -43,7 +43,6 @@ protected:
 	void MapCollision(double dt);
 
 	TileMap* map;
-	//Player* player;
 	bool isGrounded;
 };
 

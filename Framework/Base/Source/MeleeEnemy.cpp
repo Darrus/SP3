@@ -35,7 +35,8 @@ void MeleeEnemy::Init(TileMap* map)
 
 void MeleeEnemy::Update(double dt)
 {
-	AttackCooldown -= dt;	
+	AttackCooldown -= dt;
+
 	if (state)
 		state->Update(dt);
 	collidedWall = false;
@@ -49,7 +50,7 @@ void MeleeEnemy::Update(double dt)
 	MapCollision(dt);
 }
 
-void MeleeEnemy::Attack()
+void MeleeEnemy::Attack(Player* player)
 {
 	if (AttackCooldown < 0)
 		AttackCooldown = TimeBetweenAttack;

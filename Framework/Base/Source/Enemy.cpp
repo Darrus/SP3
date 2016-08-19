@@ -28,15 +28,10 @@ void Enemy::SetAttackAnimation(int start, int end, float time)
 	animAttack.Set(start, end, time, false);
 }
 
-void Enemy::Attack()
+void Enemy::Attack(Player* player)
 {
 
 }
-
-/*void Enemy::SetPlayer(Player* player)
-{
-	this->player = player;
-}*/
 
 void Enemy::MapCollision(double dt)
 {

@@ -30,5 +30,5 @@ EnemyStates* EnemyAttack::CheckState()
 
 void EnemyAttack::Update(double dt)
 {
-	enemy->Attack();
+	enemy->Attack(player);
 }
