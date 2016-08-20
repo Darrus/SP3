@@ -214,4 +214,10 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_HEALTH], player->GetPlayerHealth(),5.f,1.f, 10,100);
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	modelStack.Translate(worldX, worldY, 1);
+	modelStack.Scale(50, 50, 50);
+	RenderMesh(meshList[GEO_CROSSHAIR], false);
+	modelStack.PopMatrix();
+
 }

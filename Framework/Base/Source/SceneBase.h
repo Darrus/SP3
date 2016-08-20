@@ -65,6 +65,7 @@ protected:
 		GEO_CUBE,
 		GEO_HEALTH,
 		GEO_HEALTHBACK,
+		GEO_CROSSHAIR,
 
 		NUM_GEOMETRY,
 	};
