@@ -16,6 +16,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
+    <ClCompile Include="Source\BulletFactory.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CameraFollow.cpp" />
     <ClCompile Include="Source\CameraFree.cpp" />
@@ -24,12 +25,16 @@
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttack.cpp" />
     <ClCompile Include="Source\EnemyChase.cpp" />
+    <ClCompile Include="Source\EnemyFactory.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
     <ClCompile Include="Source\EnemyStates.cpp" />
+    <ClCompile Include="Source\FireBullet.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GoManager.cpp" />
+    <ClCompile Include="Source\IceBullet.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
     <ClCompile Include="Source\LevelEditor.cpp" />
+    <ClCompile Include="Source\LightningBullet.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -60,6 +65,7 @@
     <ClInclude Include="Source\AABB_2D.h" />
     <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Bullet.h" />
+    <ClInclude Include="Source\BulletFactory.h" />
     <ClInclude Include="Source\CameraFree.h" />
     <ClInclude Include="Source\CircleCollider.h" />
     <ClInclude Include="Source\Collider.h" />
@@ -67,10 +73,14 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />
     <ClInclude Include="Source\EnemyChase.h" />
+    <ClInclude Include="Source\EnemyFactory.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
     <ClInclude Include="Source\EnemyStates.h" />
+    <ClInclude Include="Source\FireBullet.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
+    <ClInclude Include="Source\IceBullet.h" />
+    <ClInclude Include="Source\LightningBullet.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
     <ClInclude Include="Source\Pistol.h" />
     <ClInclude Include="Source\Key.h" />

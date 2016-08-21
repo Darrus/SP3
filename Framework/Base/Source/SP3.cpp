@@ -4,7 +4,7 @@
 #include "MeshGenerator.h"
 #include <sstream>
 #include "GoManager.h"
-#include "MeleeEnemy.h"
+#include "EnemyFactory.h"
 
 
 SP3::SP3()
@@ -22,7 +22,7 @@ void SP3::Init()
 	SceneBase::Init();
 
 	map = new TileMap();
-	map->Init(m_screenHeight, m_screenWidth, 32);
+	map->Init((int)m_screenHeight, (int)m_screenWidth, 32);
 	map->LoadMap("Level01");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
@@ -39,16 +39,9 @@ void SP3::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
-	MeleeEnemy* enemy = new MeleeEnemy();
-	enemy->Init(map);
-	enemy->pos.Set(200.f, 200.f, 0.f);
-	enemy->scale.Set(32.f, 32.f, 32.f);
-	enemy->active = true;
-	GoManager::GetInstance().Add(enemy);
-
-	enemy->Attack(player);
-
 	background.Init(&camera->position,800,600);
+
+	EnemyFactory::Create("Goblin", Vector3(200.f, 200.f, 0.f), map);
 	
 	fps = 0.f;
 
@@ -71,7 +64,7 @@ void SP3::Update(double dt)
 	camera->Update(dt);
 	background.Update();
 	GoManager::GetInstance().Update(dt);
-	fps = 1 / dt;
+	fps = 1 / (float)dt;
 }
 
 
@@ -143,21 +136,21 @@ void SP3::Exit()
 // Renders
 void SP3::RenderMap(TileMap* map)
 {
-	float tileSize = map->GetTileSize();
+	int tileSize = map->GetTileSize();
 	Vector2 tileOffset = camFollow->GetTileOffset();
 	Vector2 fineOffset = camFollow->GetFineOffset();
 
 	int m, n;
 	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
 	{
-		n = i + tileOffset.y;
+		n = i + (int)tileOffset.y;
 
 		if (n >= map->GetNumOfTiles_MapHeight())
 			break;
 
 		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
 		{
-			m = k + tileOffset.x;
+			m = k + (int)tileOffset.x;
 
 			if (m >= map->GetNumOfTiles_MapWidth())
 				break;
@@ -211,11 +204,11 @@ void SP3::RenderUI()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_HEALTH], player->GetPlayerHealth(),5.f,1.f, 10,100);
+	RenderObjOnScreen(meshList[GEO_HEALTH], (float)player->GetPlayerHealth(),5.f,1.f, 10,100);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(worldX, worldY, 1);
+	modelStack.Translate((float)worldX, (float)worldY, 1);
 	modelStack.Scale(50, 50, 50);
 	RenderMesh(meshList[GEO_CROSSHAIR], false);
 	modelStack.PopMatrix();

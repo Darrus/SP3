@@ -1,25 +1,26 @@
 #ifndef BULLET_H
 #define BULLET_H
 #include "GameObject.h"
-//#include "Player.h"
+#include "TileMap.h"
 
-class Bullet:public GameObject
+class Bullet : public GameObject
 {
 public:
 
 	enum ELEMENT
 	{
-		FIRE = 0,
+		NONE,
+		FIRE,
 		LIGHTNING,
 		ICE,
-		TRAPPER,
-		NONE,
+		ELEM_SIZE,
 	};
 
 	Bullet();
 	virtual ~Bullet();
 
 	virtual void Update(double dt);
+	virtual void HandleInteraction(GameObject* go, double dt);
 
 	void setBulletSpeed(float bulletSpeed);
 	float getBulletSpeed();
@@ -27,12 +28,16 @@ public:
 	void setBulletElement(ELEMENT bulletElement);
 	ELEMENT getBulletElement();
 
+	void SetMap(TileMap* map);
 
 protected:
+	void CheckCollision();
+
 	float bulletSpeed;
+	int damage;
 	ELEMENT bulletElement;
 	GameObject object;
-
+	TileMap* map;
 };
 
 #endif

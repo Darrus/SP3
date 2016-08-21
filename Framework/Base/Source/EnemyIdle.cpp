@@ -21,13 +21,15 @@ void EnemyIdle::Enter(Enemy* enemy, Player* player)
 	Math::InitRNG();
 	dir = Math::RandIntMinMax(-1, 1);
 
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(enemy->mesh);
+
 	if (dir == 0)
 		dir = 1;
 
 	if (dir > 0)
-		enemy->sprite->SetAnimation(enemy->animWalkRight);
+		sprite->SetAnimation(enemy->animWalkRight);
 	else
-		enemy->sprite->SetAnimation(enemy->animWalkLeft);
+		sprite->SetAnimation(enemy->animWalkLeft);
 
 	enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
 }
@@ -44,14 +46,16 @@ EnemyStates* EnemyIdle::CheckState()
 
 void EnemyIdle::Update(double dt)
 {
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(enemy->mesh);
+
 	if (enemy->collidedWall || patrolDistance > enemy->PatrolRange)
 	{
 		patrolDistance = 0.f;
 		dir *= -1;
 		if (dir > 0)
-			enemy->sprite->SetAnimation(enemy->animWalkRight);
+			sprite->SetAnimation(enemy->animWalkRight);
 		else
-			enemy->sprite->SetAnimation(enemy->animWalkLeft);
+			sprite->SetAnimation(enemy->animWalkLeft);
 		enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
 	}
 	enemy->newPos.x += enemy->vel.x * dt;

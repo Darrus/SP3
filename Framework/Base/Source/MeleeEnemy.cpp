@@ -2,24 +2,8 @@
 #include "EnemyIdle.h"
 #include "MeshGenerator.h"
 
-MeleeEnemy::MeleeEnemy() :
-state(NULL)
+MeleeEnemy::MeleeEnemy()
 {
-	sprite = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-	mesh = sprite;
-
-	animWalkLeft.Set(15, 17, 1.f, true, 1, true);
-	animWalkRight.Set(27, 29, 1.f, true, 1, true);
-
-	AlertRange = 50.f;
-	PatrolRange = 200.f;
-	EnemySpeed = 100.f;
-
-	AttackDamage = 10.f;
-	TimeBetweenAttack = 1.f;
-	AttackCooldown = 0.f;
-
-	collidedWall = false;
 }
 
 MeleeEnemy::~MeleeEnemy()
@@ -41,8 +25,10 @@ void MeleeEnemy::Update(double dt)
 		state->Update(dt);
 	collidedWall = false;
 
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(mesh);
 	if (sprite)
 		sprite->Update(dt);
+
 	if (!isGrounded)
 		vel.y -= 9.8;
 

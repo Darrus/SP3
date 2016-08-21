@@ -16,17 +16,18 @@ void EnemyChase::Enter(Enemy* enemy, Player* player)
 {
 	this->enemy = enemy;
 	this->player = player;
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(enemy->mesh);
 
 	float dir = player->pos.x - enemy->pos.x;
 	if (dir > 0)
 	{
 		dir = 1;
-		enemy->sprite->SetAnimation(enemy->animWalkRight);
+		sprite->SetAnimation(enemy->animWalkRight);
 	}
 	else
 	{
 		dir = -1;
-		enemy->sprite->SetAnimation(enemy->animWalkLeft);
+		sprite->SetAnimation(enemy->animWalkLeft);
 	}
 
 	enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);

@@ -1,13 +1,14 @@
 #include "GameObject.h"
 
-GameObject::GameObject()
+GameObject::GameObject() :
+mesh(NULL),
+active(false)
 {
 	pos.SetZero();
 	scale.Set(1.f, 1.f, 1.f);
 	view.SetZero();
 	collider = COL_BALL;
 	type = GO_BALL;
-	active = false;
 }
 
 GameObject::~GameObject()

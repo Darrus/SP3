@@ -87,7 +87,7 @@ private:
 	float mouseX, mouseY;
 
 	Weapon* weapon;
-	Bullet bullet;
+	Bullet::ELEMENT bulletElem;
 
 	bool isUsed;
 	int weaponType;

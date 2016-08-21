@@ -1,7 +1,6 @@
 #include "Weapon.h"
-#include "GoManager.h"
 #include "Application.h"
-#include "Bullet.h"
+#include "BulletFactory.h"
 
 Weapon::Weapon()
 {
@@ -19,9 +18,14 @@ Weapon::~Weapon()
 
 }
 
+void Weapon::Init()
+{
+
+}
+
 void Weapon::Update(double dt)
 {
-	fireRate -= dt;
+	fireRate -= (float)dt;
 	view = *playerView;
 	pos = *playerPos + (view * offset) + fineOffset;
 }
@@ -67,7 +71,7 @@ Weapon::WEAPON_TYPE Weapon::getWeaponType()
 	return this->weaponType;
 }
 
-void Weapon::setOverHeatRate(int overHeatingRate)
+void Weapon::setOverHeatRate(float overHeatingRate)
 {
 	this->overHeatingRate = overHeatingRate;
 }
@@ -77,28 +81,17 @@ int Weapon::getOverHeatRate()
 	return this->overHeatingRate;
 }
 
-bool Weapon::overHeating()
+bool Weapon::Overheating()
 {
 	return false;
 }
 
-void Weapon::Shoot(Bullet::ELEMENT element)
+void Weapon::Shoot(Bullet::ELEMENT element, TileMap* map)
 { 
 	if (fireRate < 0.f)
 	{
-		Bullet* bullet = new Bullet;
-		bullet->scale.Set(1, 1, 1);
-		bullet->pos = pos;
-		bullet->active = true;
-		Vector3 dir = view;
-		bullet->vel = dir * 750;
-		if (bullet->vel.LengthSquared() > 750 * 750)
-		{
-			bullet->vel.Normalize();
-			bullet->vel *= 750;
-		}
+		Bullet* bullet = BulletFactory::Create(element, pos, view, map);
 		fireRate = defaultFireRate;
-		GoManager::GetInstance().Add(bullet);
 	}
 }
 

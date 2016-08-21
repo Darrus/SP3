@@ -129,4 +129,5 @@ Scene* SceneManager::FindScene(string name)
 	map<string, Scene*>::iterator it = scenes.find(name);
 	if (it != scenes.end())
 		return it->second;
+	return NULL;
 }

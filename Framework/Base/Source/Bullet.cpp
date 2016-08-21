@@ -1,14 +1,15 @@
 #include "Bullet.h"
 #include "MeshGenerator.h"
 #include "Application.h"
-#include "CameraFollow.h"
+#include "Enemy.h"
 
 Bullet::Bullet()
 {
-	bulletSpeed = 100;
-	bulletElement = ELEMENT::FIRE;
-
-	mesh = mesh = MeshGenerator::GetInstance().GenerateQuad("weapon", Color(1, 1, 1), "Image//Bullet.tga", 10.f);
+	scale.Set(10.f, 10.f, 10.f);
+	bulletElement = NONE;
+	bulletSpeed = 750.f;
+	damage = 10;
+	active = true;
 }
 
 Bullet::~Bullet()
@@ -18,28 +19,29 @@ Bullet::~Bullet()
 
 void Bullet::Update(double dt)
 {
+	vel.y -= 9.8f;
 	pos += vel * dt;
+	CheckCollision();
+}
 
-	CameraFollow camera;
+void Bullet::HandleInteraction(GameObject* go, double dt)
+{
+	Enemy* enemy = dynamic_cast<Enemy*>(go);
+	if (enemy)
+	{
+		float dist = (enemy->pos - pos).LengthSquared();
+		float size = enemy->scale.x + scale.x;
+		if (dist < size * size)
+		{
+			enemy->active = false;
+			active = false;
+		}
+	}
+}
 
-	float w = Application::GetWindowWidth() + camera.position.x;
-
-	if (pos.y > Application::GetWindowHeight())
-	{
-		active = false;
-	}
-	else if (pos.y < 0)
-	{
-		active = false;
-	}
-	if (pos.x > Application::GetWindowWidth())
-	{
-		active = false;
-	}
-	else if (pos.x < 0)
-	{
-		active = false;
-	}
+void Bullet::SetMap(TileMap* map)
+{
+	this->map = map;
 }
 
 void Bullet::setBulletElement(ELEMENT bulletElement)
@@ -60,4 +62,25 @@ void Bullet::setBulletSpeed(float bulletSpeed)
 float Bullet::getBulletSpeed()
 {
 	return this->bulletSpeed;
+}
+
+void Bullet::CheckCollision()
+{
+	// Init Variables
+	int tileSize = map->GetTileSize();
+	int currentX, currentY;
+	currentX = currentY = 0;
+
+	// Make sure object doesnt move out of screen
+	if (pos.x - scale.x * 0.5f <= 0 || pos.x + scale.x * 0.5f >= map->GetMapWidth())
+		active = false;
+	if (pos.y - scale.y * 0.5f <= 0 || pos.y + scale.y * 0.5f >= map->GetMapHeight())
+		active = false;
+
+	// Get Current Tile
+	currentX = pos.x / tileSize;
+	currentY = pos.y / tileSize;
+
+	if (map->collisionMap[currentY][currentX] != 0 && active)
+		active = false;
 }

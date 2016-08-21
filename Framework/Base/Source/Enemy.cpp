@@ -3,8 +3,19 @@
 #include "EnemyIdle.h"
 
 Enemy::Enemy() :
-sprite(NULL),
-collidedWall(false)
+collidedWall(false),
+AlertRange(0.f),
+AttackRange(0.f),
+PatrolRange(0.f),
+EnemySpeed(0.f),
+MaxSpeed(0.f),
+AttackDamage(0.f),
+TimeBetweenAttack(0.f),
+AttackCooldown(0.f),
+health(0),
+maxHealth(0),
+map(NULL),
+state(NULL)
 {
 }
 

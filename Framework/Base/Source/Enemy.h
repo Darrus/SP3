@@ -2,9 +2,10 @@
 #define ENEMY_H
 
 #include "GameObject.h"
-#include "SpriteAnimation.h"
 #include "TileMap.h"
 #include "Player.h"
+
+class EnemyStates;
 
 class Enemy : public GameObject
 {
@@ -22,7 +23,6 @@ public:
 
 	Vector3 newPos;
 
-	SpriteAnimation* sprite;
 	Animation animWalkLeft;
 	Animation animWalkRight;
 	Animation animAttack;
@@ -39,10 +39,14 @@ public:
 	float TimeBetweenAttack;
 	float AttackCooldown;
 
+	int health;
+	int maxHealth;
+
 protected:
 	void MapCollision(double dt);
 
 	TileMap* map;
+	EnemyStates* state;
 	bool isGrounded;
 };
 

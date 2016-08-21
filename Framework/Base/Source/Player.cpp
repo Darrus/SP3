@@ -21,9 +21,9 @@ isUsed(true)
 	test.Set(18, 18, 1.f, true);
 	sprite->SetAnimation(test);
 	weapon = new Pistol();
-	weapon->setFireRate(0.2f);
 	weapon->ReferencePlayerPos(&pos);
 	weapon->ReferencePlayerView(&view);
+	bulletElem = Bullet::NONE;
 }
 
 Player::~Player()
@@ -85,8 +85,6 @@ void Player::Update(double dt)
 
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
-
-	std::cout << playerHealth << std::endl;
 
 	//sprite->Update(dt);
 }
@@ -187,18 +185,10 @@ void Player::cycleBullets()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEBULLET))
 	{
-		bulletType++;
-		if (bulletType == 0)
-			bullet.setBulletElement(bullet.FIRE);
-
-		else if (bulletType == 1)
-			bullet.setBulletElement(bullet.LIGHTNING);
-
-		else if (bulletType == 2)
-			bullet.setBulletElement(bullet.ICE);
-
-		else if (bulletType >= 3)
-			bulletType = 0;
+		int currentElem = bulletElem;
+		currentElem = (currentElem + 1) % (int)Bullet::ELEM_SIZE;
+		bulletElem = (Bullet::ELEMENT)currentElem;
+		std::cout << bulletElem << std::endl;
 	}
 }
 
@@ -241,18 +231,18 @@ void Player::CollisionCheck(double dt)
 		newPos.y = pos.y;
 	
 	// Get Current Tile
-	currentX = newPos.x / tileSize;
-	currentY = newPos.y / tileSize;
+	currentX = (int)newPos.x / tileSize;
+	currentY = (int)newPos.y / tileSize;
 
 	// Check which direction is the player moving in the X axis
 	float dir = 0;
 	dir = newPos.x - pos.x;
 	
 	// Checks next tile according to player's scale
-	checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
-	checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
-	checkUp = (newPos.y + scale.y * 0.5f) / tileSize;
-	checkDown = (newPos.y - scale.y * 0.5f) / tileSize;
+	checkRight = (int)((newPos.x + scale.x * 0.5f) / tileSize);
+	checkLeft = (int)((newPos.x - scale.x * 0.5f) / tileSize);
+	checkUp = (int)((newPos.y + scale.y * 0.5f) / tileSize);
+	checkDown = (int)((newPos.y - scale.y * 0.5f) / tileSize);
 
 	if (dir > 0)
 		checkX = checkRight;
@@ -276,8 +266,8 @@ void Player::CollisionCheck(double dt)
 		if (map->collisionMap[checkUp][checkX] == 1 || map->collisionMap[checkDown][checkX] == 1)
 		{
 			newPos.x = pos.x;
-			checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
-			checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+			checkRight = (int)((newPos.x + scale.x * 0.5f) / tileSize);
+			checkLeft = (int)((newPos.x - scale.x * 0.5f) / tileSize);
 		}
 
 		// Checks Down
@@ -303,7 +293,7 @@ void Player::CollisionCheck(double dt)
 void Player::playerJump(double dt)
 {
 	if (Application::GetInstance().controller->IsKeyPressed(JUMP) && isGrounded == true)
-		pos.y += JUMP_SPEED * dt;
+		pos.y += JUMP_SPEED * (float)dt;
 }
 
 void Player::SetMousePos(float mouseX, float mouseY)
@@ -315,13 +305,8 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon)
-	{
 		if (Application::IsMousePressed(0))
-		{
-			Bullet::ELEMENT elem = Bullet::NONE;
-			weapon->Shoot(elem);
-		}
-	}
+			weapon->Shoot(bulletElem, map);
 }
 
 Weapon* Player::GetWeapon()

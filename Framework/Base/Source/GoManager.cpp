@@ -46,6 +46,8 @@ void GoManager::Update(double dt)
 			objCount--;
 		}
 	}
+
+	std::cout << objCount << std::endl;
 }
 
 void GoManager::Add(GameObject* go)

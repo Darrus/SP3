@@ -76,6 +76,18 @@
     <Filter Include="Header Files\GameObjects\Weapons">
       <UniqueIdentifier>{f6c2db39-4825-4e25-8388-cf9767317ea0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Bullets">
+      <UniqueIdentifier>{c37f496b-a714-44da-a8bc-222bf2b59bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Bullets">
+      <UniqueIdentifier>{80283a20-2480-487a-9eb5-7f98b16768bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Factories">
+      <UniqueIdentifier>{b6b48c0b-a9e8-4429-b4df-8d400966da79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Factories">
+      <UniqueIdentifier>{e6d8db44-0b65-4bb3-b843-e07faaf2a1df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -168,9 +180,6 @@
     <ClCompile Include="Source\LevelEditor.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Bullet.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CameraFree.cpp">
       <Filter>Source Files\Camera</Filter>
     </ClCompile>
@@ -209,6 +218,24 @@
     </ClCompile>
     <ClCompile Include="Source\Weapon.cpp">
       <Filter>Source Files\GameObjects\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FireBullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IceBullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightningBullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletFactory.cpp">
+      <Filter>Source Files\GameObjects\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyFactory.cpp">
+      <Filter>Source Files\GameObjects\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,9 +344,6 @@
     <ClInclude Include="Source\LevelEditor.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Bullet.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CameraFree.h">
       <Filter>Header Files\Camera</Filter>
     </ClInclude>
@@ -364,6 +388,24 @@
     </ClInclude>
     <ClInclude Include="Source\Particle.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FireBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IceBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightningBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BulletFactory.h">
+      <Filter>Header Files\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyFactory.h">
+      <Filter>Header Files\GameObjects\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
