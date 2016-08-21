@@ -125,6 +125,13 @@ void SceneBase::Init()
 	meshList[GEO_HEALTHBACK] = MeshBuilder::GenerateQuad("HealthBar", Color(1, 1, 1), 0.5f);
 	meshList[GEO_HEALTHBACK]->textureArray[0] = LoadTGA("Image//healthBarBacK.tga");
 
+	meshList[GEO_OVERHEAT] = MeshBuilder::GenerateQuad("OverHeat", Color(1, 1, 1), 0.5f);
+	meshList[GEO_OVERHEAT]->textureArray[0] = LoadTGA("Image//OverHeatBarFront.tga");
+
+	meshList[GEO_OVERHEATBACK] = MeshBuilder::GenerateQuad("OverHeatBack", Color(1, 1, 1), 0.5f);
+	meshList[GEO_OVERHEATBACK]->textureArray[0] = LoadTGA("Image//OverHeatBarBack.tga");
+
+
 	meshList[GEO_CROSSHAIR] = MeshBuilder::GenerateQuad("GEO_CROSSHAIR", Color(1, 1, 1), 1.f);
 	meshList[GEO_CROSSHAIR]->textureArray[0] = LoadTGA("Image//CrossHair.tga");
 

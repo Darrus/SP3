@@ -316,10 +316,14 @@ void Player::ShootWeapon()
 {
 	if (weapon)
 	{
-		if (Application::IsMousePressed(0))
+		if (weapon->overHeating() == false)
 		{
-			Bullet::ELEMENT elem = Bullet::NONE;
-			weapon->Shoot(elem);
+			if (Application::IsMousePressed(0))
+			{
+				Bullet::ELEMENT elem = Bullet::NONE;
+				weapon->Shoot(elem);
+
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #include "Pistol.h"
 #include "MeshGenerator.h"
+#include "Application.h"
 
 Pistol::Pistol()
 {
@@ -22,23 +23,39 @@ Pistol::~Pistol()
 void Pistol::Update(double dt)
 {
 	Weapon::Update(dt);
+
+	overHeatingRate -= 40 * dt;
+
+	if (overHeatingRate < 0)
+	{
+		overHeatingRate = 0;
+	}
+	else if (overHeatingRate > 100)
+	{
+		overHeatingRate = 100;
+	}
+
+	if (Application::IsMousePressed(0))
+	{
+		if (overHeat == false)
+		{
+			overHeatingRate++;
+		}
+	}
+	if (overHeat == false && overHeatingRate > 100)
+	{
+		overHeat = true;
+	}
+	else if (overHeat == true && overHeatingRate < 1)
+	{
+		overHeat = false;
+	}
+	std::cout << overHeatingRate << std::endl;
 }
 
 bool Pistol::overHeating()
 {
-	if (overHeatingRate >= 10)
-	{
-		return true;
-	}
-	else if (overHeatingRate <= 0)
-	{
-		overHeatingRate = 0;
-		return false;
-	}
-	else
-	{
-		return false;
-	}
+	return this->overHeat;
 }
 
 void Pistol::firingWeapon(Bullet bullet, bool overHeat, double dt)

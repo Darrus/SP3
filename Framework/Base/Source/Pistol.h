@@ -17,7 +17,7 @@ private:
 	float fireRate;
 	float coolDown;
 	int damage;
-	int overHeatingRate;
+	float overHeatingRate;
 	bool overHeat;
 	WEAPON_TYPE weaponType;
 	Bullet *bullet;
