@@ -305,8 +305,8 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon)
-		if (Application::IsMousePressed(0))
-			weapon->Shoot(bulletElem, map);
+		if (!weapon->Overheating() && Application::IsMousePressed(0))
+				weapon->Shoot(bulletElem, map);
 }
 
 Weapon* Player::GetWeapon()

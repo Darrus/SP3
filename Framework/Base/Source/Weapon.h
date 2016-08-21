@@ -50,10 +50,9 @@ protected:
 
 	float coolDown;
 	float overHeatingRate;
+	bool overHeat;
 
 	int damage;
-
-	bool overHeat;
 	float gunForce;
 
 	WEAPON_TYPE weaponType;
