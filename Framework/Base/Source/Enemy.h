@@ -17,33 +17,52 @@ public:
 	virtual void Update(double dt);
 	virtual void Attack(Player* player);
 	virtual void HandleInteraction(GameObject* go, double dt);
+	void TakeDamage(int damage);
 
+	void SetAttackAnim(int start, int end, float time);
+	void SetWalkLeftAnim(int start, int end, float time);
+	void SetWalkRightAnim(int start, int end, float time);
+	void SetAlertRange(float range);
+	void SetAttackRange(float range);
+	void SetPatrolRange(float range);
+	void SetAttackDamage(float damage);
+	void SetTimeBetweenAttack(float time);
+	void SetHealth(int health);
+	void SetSpeed(float speed);
 
-	void SetAttackAnimation(int start, int end, float time);
+	float GetAlertRange();
+	float GetAttackRange();
+	float GetPatrolRange();
+	float GetAttackDamage();
+	float GetHealth();
+	float GetMaxHealth();
+	float GetSpeed();
+	Animation GetWalkLeftAnim();
+	Animation GetWalkRightAnim();
+	Animation GetAttackAnim();
 
 	Vector3 newPos;
+	bool collidedWall;
+protected:
+	void MapCollision(double dt);
 
 	Animation animWalkLeft;
 	Animation animWalkRight;
 	Animation animAttack;
 
-	bool collidedWall;
-	float AlertRange;
-	float AttackRange;
-	float PatrolRange;
+	float alertRange;
+	float attackRange;
+	float patrolRange;
 
-	float EnemySpeed;
-	float MaxSpeed;
+	float speed;
+	float defaultSpeed;
 
-	float AttackDamage;
-	float TimeBetweenAttack;
-	float AttackCooldown;
+	float attackDamage;
+	float timeBetweenAttack;
+	float attackCooldown;
 
 	int health;
 	int maxHealth;
-
-protected:
-	void MapCollision(double dt);
 
 	TileMap* map;
 	EnemyStates* state;

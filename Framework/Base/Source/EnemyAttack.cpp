@@ -15,13 +15,13 @@ void EnemyAttack::Enter(Enemy* enemy, Player* player)
 {
 	this->enemy = enemy;
 	this->player = player;
-	enemy->vel.SetZero();
+	enemy->vel.x = 0.f;
 }
 
 EnemyStates* EnemyAttack::CheckState()
 {
 	float dist = (player->pos - enemy->pos).LengthSquared();
-	if (dist > enemy->AttackRange * enemy->AttackRange)
+	if (dist > enemy->GetAttackRange() * enemy->GetAttackRange())
 		return new EnemyChase();
 
 	return this;

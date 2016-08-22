@@ -24,6 +24,7 @@
     <ClCompile Include="Source\DepthFBO.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttack.cpp" />
+    <ClCompile Include="Source\Enemybullet.cpp" />
     <ClCompile Include="Source\EnemyChase.cpp" />
     <ClCompile Include="Source\EnemyFactory.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Source\DepthFBO.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />
+    <ClInclude Include="Source\EnemyBullet.h" />
     <ClInclude Include="Source\EnemyChase.h" />
     <ClInclude Include="Source\EnemyFactory.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
@@ -103,7 +105,6 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\PlayerState.h" />
     <ClInclude Include="Source\RangeEnemy.h" />
     <ClInclude Include="Source\Rifle.h" />
     <ClInclude Include="Source\Scene.h" />

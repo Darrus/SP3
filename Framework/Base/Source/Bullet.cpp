@@ -19,7 +19,7 @@ Bullet::~Bullet()
 
 void Bullet::Update(double dt)
 {
-	vel.y -= 9.8f;
+	vel.y -= 2.f;
 	pos += vel * dt;
 	CheckCollision();
 }
@@ -33,7 +33,7 @@ void Bullet::HandleInteraction(GameObject* go, double dt)
 		float size = enemy->scale.x + scale.x;
 		if (dist < size * size)
 		{
-			enemy->active = false;
+			enemy->TakeDamage(damage);
 			active = false;
 		}
 	}

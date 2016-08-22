@@ -61,9 +61,6 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{7fc504c1-2bd4-4d2a-b8ea-938368843208}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\States\Enemy States">
-      <UniqueIdentifier>{17b4e4a1-87fa-4108-94c9-dd1e26cb1b34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameObjects\Enemy">
       <UniqueIdentifier>{a9ed27fe-b6fc-4482-9f6e-5bcd60eb20a1}</UniqueIdentifier>
     </Filter>
@@ -240,6 +237,9 @@
     <ClCompile Include="Source\NetBullet.cpp">
       <Filter>Source Files\GameObjects\Bullets</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemybullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -362,21 +362,6 @@
     <ClInclude Include="Source\Sniper.h">
       <Filter>Header Files\GameObjects\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyStates.h">
-      <Filter>Header Files\States\Enemy States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyAttack.h">
-      <Filter>Header Files\States\Enemy States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyIdle.h">
-      <Filter>Header Files\States\Enemy States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemyChase.h">
-      <Filter>Header Files\States\Enemy States</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
@@ -411,6 +396,21 @@
       <Filter>Header Files\GameObjects\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\NetBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAttack.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyChase.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyIdle.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyStates.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyBullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
   </ItemGroup>

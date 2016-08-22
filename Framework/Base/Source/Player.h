@@ -30,12 +30,13 @@ public:
 
 	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
-	
-	int GetPlayerHealth(void);
-	Weapon* GetWeapon();
+	void TakeDamage(int damage);
 	
 	void SetPlayerHealth(int playerHealth);
 	void SetMousePos(float mouseX, float mouseY);
+
+	int GetPlayerHealth(void);
+	Weapon* GetWeapon();
 
 	SpriteAnimation* GetMesh();
 	PLAYER_STATE getState();
