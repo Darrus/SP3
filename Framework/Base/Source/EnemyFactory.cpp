@@ -28,12 +28,18 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		enemy->SetWalkRightAnim(27, 29, 1.f);
 		enemy->SetAlertRange(50.f);
 		enemy->SetPatrolRange(200.f);
-		enemy->SetSpeed(100.f);
+		enemy->SetDefaultSpeed(100.f);
 		enemy->SetAttackDamage(10.f);
 		enemy->SetTimeBetweenAttack(1.f);
 		enemy->SetHealth(100);
 		GoManager::GetInstance().Add(enemy);
 		return enemy;
+	}
+
+	if (name == "Random")
+	{
+		//Enemy* enemy = Create(name, pos, map);
+		//return enemy;
 	}
 	return NULL;
 }

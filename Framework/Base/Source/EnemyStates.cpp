@@ -18,7 +18,7 @@ void EnemyStates::Enter(Enemy* enemy, Player* player)
 
 EnemyStates* EnemyStates::CheckState()
 {
-	return NULL;
+	return this;
 }
 
 void EnemyStates::Update(double dt)

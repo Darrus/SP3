@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "TileMap.h"
 #include "Player.h"
+#include "StatusEffects.h"
 
 class EnemyStates;
 
@@ -28,7 +29,9 @@ public:
 	void SetAttackDamage(float damage);
 	void SetTimeBetweenAttack(float time);
 	void SetHealth(int health);
+	void SetDefaultSpeed(float speed);
 	void SetSpeed(float speed);
+	void SetState(EnemyStates* state);
 
 	float GetAlertRange();
 	float GetAttackRange();
@@ -36,13 +39,16 @@ public:
 	float GetAttackDamage();
 	float GetHealth();
 	float GetMaxHealth();
+	float GetDefaultSpeed();
 	float GetSpeed();
+	EnemyStates* GetState();
 	Animation GetWalkLeftAnim();
 	Animation GetWalkRightAnim();
 	Animation GetAttackAnim();
 
 	Vector3 newPos;
 	bool collidedWall;
+	StatusEffects status;
 protected:
 	void MapCollision(double dt);
 

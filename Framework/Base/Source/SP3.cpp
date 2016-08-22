@@ -117,6 +117,11 @@ void SP3::Render()
 		if (go->active == true)
 		{
 			RenderObject(go);
+			Enemy* enemy = dynamic_cast<Enemy*>(go);
+			if (enemy)
+			{
+				
+			}
 		}
 	}
 

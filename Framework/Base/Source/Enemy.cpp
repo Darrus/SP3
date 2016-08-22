@@ -17,6 +17,7 @@ maxHealth(0),
 map(NULL),
 state(NULL)
 {
+	status.SetObject(this);
 }
 
 Enemy::~Enemy()
@@ -31,6 +32,8 @@ void Enemy::Init(TileMap* map)
 
 void Enemy::Update(double dt)
 {
+	status.Update(dt);
+
 	attackCooldown -= dt;
 
 	if (state)
@@ -49,6 +52,7 @@ void Enemy::Update(double dt)
 
 	if (health <= 0)
 		active = false;
+
 }
 
 void Enemy::HandleInteraction(GameObject* go, double dt)
@@ -195,10 +199,28 @@ void Enemy::SetHealth(int health)
 	this->health = health;
 }
 
-void Enemy::SetSpeed(float speed)
+void Enemy::SetDefaultSpeed(float speed)
 {
 	this->speed = speed;
 	defaultSpeed = speed;
+}
+
+void Enemy::SetSpeed(float speed)
+{
+	this->speed = speed;
+}
+
+void Enemy::SetState(EnemyStates* state)
+{
+	if (this->state)
+		delete this->state;
+
+	this->state = state;
+}
+
+float Enemy::GetDefaultSpeed()
+{
+	return defaultSpeed;
 }
 
 float Enemy::GetAlertRange()
@@ -234,6 +256,11 @@ float Enemy::GetMaxHealth()
 float Enemy::GetSpeed()
 {
 	return speed;
+}
+
+EnemyStates* Enemy::GetState()
+{
+	return state;
 }
 
 Animation Enemy::GetWalkLeftAnim()

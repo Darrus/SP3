@@ -47,7 +47,6 @@ public:
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
-
 private:
 	void Move(double dt);
 	void Jump(double dt);

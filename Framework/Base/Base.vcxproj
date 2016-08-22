@@ -29,6 +29,7 @@
     <ClCompile Include="Source\EnemyFactory.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
     <ClCompile Include="Source\EnemyStates.cpp" />
+    <ClCompile Include="Source\EnemyStun.cpp" />
     <ClCompile Include="Source\FireBullet.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GoManager.cpp" />
@@ -55,10 +56,14 @@
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Shotgun.cpp" />
+    <ClCompile Include="Source\SlowStatus.cpp" />
     <ClCompile Include="Source\Sniper.cpp" />
     <ClCompile Include="Source\SoundEngine.cpp" />
     <ClCompile Include="Source\SP3.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
+    <ClCompile Include="Source\Status.cpp" />
+    <ClCompile Include="Source\StatusEffects.cpp" />
+    <ClCompile Include="Source\StunStatus.cpp" />
     <ClCompile Include="Source\TileMap.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
@@ -79,6 +84,7 @@
     <ClInclude Include="Source\EnemyFactory.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
     <ClInclude Include="Source\EnemyStates.h" />
+    <ClInclude Include="Source\EnemyStun.h" />
     <ClInclude Include="Source\FireBullet.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
@@ -112,11 +118,15 @@
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Shotgun.h" />
+    <ClInclude Include="Source\SlowStatus.h" />
     <ClInclude Include="Source\Sniper.h" />
     <ClInclude Include="Source\SoundEngine.h" />
     <ClInclude Include="Source\SP3.h" />
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\CameraFollow.h" />
+    <ClInclude Include="Source\Status.h" />
+    <ClInclude Include="Source\StatusEffects.h" />
+    <ClInclude Include="Source\StunStatus.h" />
     <ClInclude Include="Source\TileMap.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />

@@ -37,9 +37,6 @@
     <Filter Include="Header Files\Main">
       <UniqueIdentifier>{81784673-7625-4b59-b12b-3a23e44a25d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Others">
-      <UniqueIdentifier>{cd485ad8-bd5f-427a-a32b-c995ea902f46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Graphics">
       <UniqueIdentifier>{a6a16825-61bc-43aa-bf8e-3b092d351475}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,15 @@
     </Filter>
     <Filter Include="Header Files\GameObjects\Factories">
       <UniqueIdentifier>{e6d8db44-0b65-4bb3-b843-e07faaf2a1df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StatusEffects">
+      <UniqueIdentifier>{ad275fc2-4ba4-452e-9e34-2b1763e64044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StatusEffects">
+      <UniqueIdentifier>{129d86d9-719c-4697-bc12-2df85a2f4b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Others">
+      <UniqueIdentifier>{cd485ad8-bd5f-427a-a32b-c995ea902f46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +245,21 @@
     </ClCompile>
     <ClCompile Include="Source\Enemybullet.cpp">
       <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Status.cpp">
+      <Filter>Source Files\StatusEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatusEffects.cpp">
+      <Filter>Source Files\StatusEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SlowStatus.cpp">
+      <Filter>Source Files\StatusEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyStun.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StunStatus.cpp">
+      <Filter>Source Files\StatusEffects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -412,6 +433,21 @@
     </ClInclude>
     <ClInclude Include="Source\EnemyBullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Status.h">
+      <Filter>Header Files\StatusEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatusEffects.h">
+      <Filter>Header Files\StatusEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SlowStatus.h">
+      <Filter>Header Files\StatusEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyStun.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StunStatus.h">
+      <Filter>Header Files\StatusEffects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

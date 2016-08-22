@@ -23,7 +23,7 @@ isUsed(true)
 	weapon = new Pistol();
 	weapon->ReferencePlayerPos(&pos);
 	weapon->ReferencePlayerView(&view);
-	bulletElem = Bullet::NONE;
+	bulletElem = Bullet::LIGHTNING;
 }
 
 Player::~Player()
@@ -183,8 +183,6 @@ void Player::changeWeapon()
 		
 	}*/
 }
-
-
 
 void Player::cycleBullets()
 {

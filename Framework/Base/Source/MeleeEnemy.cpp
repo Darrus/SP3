@@ -15,7 +15,6 @@ MeleeEnemy::~MeleeEnemy()
 void MeleeEnemy::Init(TileMap* map)
 {
 	this->map = map;
-	attackRange = scale.x;
 }
 
 void MeleeEnemy::Update(double dt)
@@ -35,19 +34,24 @@ void MeleeEnemy::Attack(Player* player)
 void MeleeEnemy::HandleInteraction(GameObject* go, double dt)
 {
 	Player* player = dynamic_cast<Player*>(go);
-	if (state)
+	if (player)
 	{
-		EnemyStates* tempState = state->CheckState();
-		if (state != tempState)
+		attackRange = scale.x + player->scale.x;
+		if (state)
 		{
-			delete state;
-			state = tempState;
- 			state->Enter(this, player);
+			EnemyStates* tempState = state->CheckState();
+			if (state != tempState)
+			{
+				delete state;
+				state = tempState;
+				state->Enter(this, player);
+			}
+		}
+		else
+		{
+			state = new EnemyIdle();
+			state->Enter(this, player);
 		}
 	}
-	else
-	{
-		state = new EnemyIdle();
-		state->Enter(this, player);
-	}
+	
 }
