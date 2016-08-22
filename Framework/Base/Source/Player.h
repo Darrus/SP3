@@ -47,6 +47,7 @@ public:
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
+	int GetWeaponType();
 
 private:
 	void Move(double dt);
@@ -56,7 +57,7 @@ private:
 	void selectSkill();
 	void cycleBullets();
 	void useItem();
-	void changeWeapon(double dt);
+	void changeWeapon();
 	void playerJump(double dt);
 
 	void ShootWeapon();

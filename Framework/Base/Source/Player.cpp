@@ -86,7 +86,7 @@ void Player::Update(double dt)
 	cycleBullets();
 	playerJump(dt);
 	useItem();
-	changeWeapon(dt);
+	changeWeapon();
 	ShootWeapon();
 
 	for (int i = 0; i < 2; ++i)
@@ -99,6 +99,11 @@ void Player::Update(double dt)
 	view.Normalize();
 
 	//sprite->Update(dt);
+}
+
+int Player::GetWeaponType()
+{
+	return weaponType;
 }
 
 void Player::TakeDamage(int damage)
@@ -164,7 +169,7 @@ void Player::selectSkill()
 	}
 }
 
-void Player::changeWeapon(double dt)
+void Player::changeWeapon()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
@@ -178,8 +183,6 @@ void Player::changeWeapon(double dt)
 	{
 		weaponType = 0;
 	}
-
-	std::cout << weaponType << std::endl;
 }
 
 
