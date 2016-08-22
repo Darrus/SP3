@@ -30,7 +30,7 @@ void Pistol::Init()
 
 void Pistol::Update(double dt)
 {
-	fireRate -= dt;
+	fireRate -= 0.2*dt;
 	view = *playerView;
 	pos = *playerPos + (view * offset) + fineOffset;
 	
