@@ -136,7 +136,7 @@ void SP3::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 98, 547);
 
 	std::stringstream text3;
-	text3 << (int)player->GetWeapon()->getOverHeatRate();
+	text3 << (int)player->GetWeapon()->GetOverheatBar();
 	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 98, 520);
 }
 
@@ -228,7 +228,7 @@ void SP3::RenderUI()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 95);
+	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->GetOverheatBar() * 2, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();

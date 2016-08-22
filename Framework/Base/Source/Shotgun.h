@@ -7,12 +7,6 @@ class Shotgun : public Weapon
 public:
 	Shotgun();
 	~Shotgun();
-
-	virtual void Init();
-	virtual void Update(double dt);
-	virtual bool Overheating();
-	virtual void Shoot(Bullet::ELEMENT element, TileMap* map);
-
 };
 
 

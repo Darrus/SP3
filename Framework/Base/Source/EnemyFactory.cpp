@@ -30,6 +30,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		enemy->SetPatrolRange(200.f);
 		enemy->SetDefaultSpeed(100.f);
 		enemy->SetAttackDamage(10.f);
+		enemy->SetAttackRange(40.f);
 		enemy->SetTimeBetweenAttack(1.f);
 		enemy->SetHealth(100);
 		GoManager::GetInstance().Add(enemy);

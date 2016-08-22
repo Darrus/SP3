@@ -1,10 +1,12 @@
 #ifndef MESH_BUILDER_H
 #define MESH_BUILDER_H
 
+#include <vector>
 #include "Mesh.h"
 #include "SpriteAnimation.h"
 #include "Vertex.h"
-#include "AABB.h"
+
+using std::vector;
 
 /******************************************************************************/
 /*!
@@ -35,9 +37,7 @@ public:
 	static Mesh* GenerateMinimapBorder(const std::string &meshName, Color color, float length = 1.f);
 	static Mesh* GenerateMinimapAvatar(const std::string &meshName, Color color, float length = 1.f);
 
-	static Mesh* GenerateAABB(const std::string &meshName, Color color, AABB box);
 	static Mesh* GenerateCircle(const std::string &meshName, Color color, unsigned numSlices);
-
 	static Mesh* Generate2DMesh(const std::string &meshName, Color color, int pos_x, int pos_y, int width, int height);
 };
 

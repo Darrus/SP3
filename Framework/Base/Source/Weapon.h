@@ -26,17 +26,13 @@ public:
 	void setFireRate(float fireRate);
 	float getFireRate();
 
-	void setCoolDown(float coolDown);
-	float getCoolDown();
-
 	void setDamage(int damage);
 	int getDamage();
 
 	void setWeaponType(WEAPON_TYPE weaponType);
 	WEAPON_TYPE getWeaponType();
 
-	virtual void setOverHeatRate(float overHeatRate);
-	virtual float getOverHeatRate();
+	float GetOverheatBar();
 
 	void ReferencePlayerPos(Vector3* pos);
 	void ReferencePlayerView(Vector3* view);
@@ -45,12 +41,13 @@ protected:
 	float defaultFireRate;
 	float fireRate;
 
-	float coolDown;
-	float overHeatingRate;
-	bool overHeat;
+	bool overheated;
+	float overheatBar;
+	float overheatRate;
+	float cooldownRate;
 
 	int damage;
-	float gunForce;
+	float bulletSpeed;
 
 	WEAPON_TYPE weaponType;
 	Vector3 *playerPos, *playerView;

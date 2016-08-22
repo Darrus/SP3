@@ -91,7 +91,7 @@ void Player::Update(double dt)
 
 	for (int i = 0; i < 2; ++i)
 	{
-		weapon[weaponType]->Update(dt);
+		weapon[i]->Update(dt);
 	}
 
 

@@ -11,16 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\AABB.cpp" />
-    <ClCompile Include="Source\AABB_2D.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\BulletFactory.cpp" />
+    <ClCompile Include="Source\BurnStatus.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CameraFollow.cpp" />
     <ClCompile Include="Source\CameraFree.cpp" />
-    <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\DepthFBO.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttack.cpp" />
@@ -69,13 +67,11 @@
     <ClCompile Include="Source\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\AABB_2D.h" />
     <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Bullet.h" />
     <ClInclude Include="Source\BulletFactory.h" />
+    <ClInclude Include="Source\BurnStatus.h" />
     <ClInclude Include="Source\CameraFree.h" />
-    <ClInclude Include="Source\CircleCollider.h" />
-    <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\DepthFBO.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />
@@ -99,7 +95,6 @@
     <ClInclude Include="Source\MeshGenerator.h" />
     <ClInclude Include="Source\ParallaxBackground.h" />
     <ClInclude Include="Source\Particle.h" />
-    <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Controller.h" />

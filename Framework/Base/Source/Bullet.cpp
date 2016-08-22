@@ -9,7 +9,7 @@ Bullet::Bullet()
 	bulletElement = NONE;
 	bulletSpeed = 750.f;
 	damage = 10;
-	active = true;
+	active = false;
 }
 
 Bullet::~Bullet()
@@ -42,26 +42,6 @@ void Bullet::HandleInteraction(GameObject* go, double dt)
 void Bullet::SetMap(TileMap* map)
 {
 	this->map = map;
-}
-
-void Bullet::setBulletElement(ELEMENT bulletElement)
-{
-	this->bulletElement = bulletElement;
-}
-
-Bullet::ELEMENT Bullet::getBulletElement()
-{
-	return this->bulletElement;
-}
-
-void Bullet::setBulletSpeed(float bulletSpeed)
-{
-	this->bulletSpeed = bulletSpeed;
-}
-
-float Bullet::getBulletSpeed()
-{
-	return this->bulletSpeed;
 }
 
 void Bullet::CheckCollision()

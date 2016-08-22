@@ -230,7 +230,7 @@ float Enemy::GetAlertRange()
 
 float Enemy::GetAttackRange()
 {
-	return attackDamage;
+	return attackRange;
 }
 
 float Enemy::GetPatrolRange()

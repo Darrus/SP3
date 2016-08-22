@@ -1,6 +1,5 @@
 #include "MeshBuilder.h"
 #include <GL\glew.h>
-#include <vector>
 #include "Vertex.h"
 #include "MyMath.h"
 #include "LoadOBJ.h"
@@ -954,96 +953,6 @@ Mesh* MeshBuilder::GenerateMinimapAvatar(const std::string &meshName, Color colo
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 	mesh->indexSize = index_buffer_data.size();
 	mesh->mode = Mesh::DRAW_TRIANGLES;
-	return mesh;
-}
-
-Mesh* MeshBuilder::GenerateAABB(const std::string &meshName, Color color, AABB box)
-{
-	std::vector<Vertex> vertex_buffer_data;
-	std::vector<GLuint> index_buffer_data;
-	Vertex v;
-
-	//Front
-	v.pos.Set(box.GetMin().x, box.GetMin().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMin().x, box.GetMax().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMin().x, box.GetMin().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMin().x, box.GetMin().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMin().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMin().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	// Meh
-
-	v.pos.Set(box.GetMax().x, box.GetMax().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMin().x, box.GetMax().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMax().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMin().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMax().y, box.GetMax().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-	v.pos.Set(box.GetMax().x, box.GetMax().y, box.GetMin().z);
-	v.normal.Set(0, 0, 1);
-	v.color = color;
-	vertex_buffer_data.push_back(v);
-
-
-
-
-	for (int a = 0; a < 12; a++)
-	{
-		index_buffer_data.push_back(a);
-	}
-
-	Mesh *mesh = new Mesh(meshName);
-
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->indexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
-
-	mesh->indexSize = 12;
-	mesh->mode = Mesh::DRAW_LINES;
-
 	return mesh;
 }
 

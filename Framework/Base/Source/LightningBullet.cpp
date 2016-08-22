@@ -4,6 +4,9 @@
 
 LightningBullet::LightningBullet()
 {
+	bulletElement = LIGHTNING;
+	bulletSpeed = 400.f;
+	damage = 5;
 }
 
 LightningBullet::~LightningBullet()

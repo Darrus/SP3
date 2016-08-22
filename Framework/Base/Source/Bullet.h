@@ -21,22 +21,12 @@ public:
 
 	virtual void Update(double dt);
 	virtual void HandleInteraction(GameObject* go, double dt);
-
-	void setBulletSpeed(float bulletSpeed);
-	float getBulletSpeed();
-
-	void setBulletElement(ELEMENT bulletElement);
-	ELEMENT getBulletElement();
-
 	void SetMap(TileMap* map);
-
-protected:
 	void CheckCollision();
 
 	float bulletSpeed;
 	int damage;
 	ELEMENT bulletElement;
-	GameObject object;
 	TileMap* map;
 };
 

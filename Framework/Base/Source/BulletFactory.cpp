@@ -16,7 +16,7 @@ BulletFactory::~BulletFactory()
 
 }
 
-Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, TileMap* map)
+Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, float speed, float damage, TileMap* map)
 {
 	Bullet* bullet = NULL;
 	switch (elem)
@@ -26,6 +26,8 @@ Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, Ti
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
 	case Bullet::FIRE:
+		bullet = new FireBullet();
+		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
 	case Bullet::ICE:
 		bullet = new IceBullet();
@@ -40,7 +42,8 @@ Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, Ti
 	if (bullet)
 	{
 		bullet->pos = pos;
-		bullet->vel = dir * bullet->getBulletSpeed();
+		bullet->vel = dir * (bullet->bulletSpeed + speed);
+		bullet->damage += damage;
 		bullet->SetMap(map);
 		bullet->active = true;
 		GoManager::GetInstance().Add(bullet);

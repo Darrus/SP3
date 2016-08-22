@@ -36,7 +36,6 @@ void MeleeEnemy::HandleInteraction(GameObject* go, double dt)
 	Player* player = dynamic_cast<Player*>(go);
 	if (player)
 	{
-		attackRange = scale.x + player->scale.x;
 		if (state)
 		{
 			EnemyStates* tempState = state->CheckState();

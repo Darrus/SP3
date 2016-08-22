@@ -25,12 +25,6 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{e33b42e6-57a9-42c0-a627-29ff236d22f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Collider">
-      <UniqueIdentifier>{64b10753-9695-4a24-92a4-e003c2fdd894}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Collider">
-      <UniqueIdentifier>{8165467d-caa7-4dcc-b1c6-0334a8d32c18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Camera">
       <UniqueIdentifier>{205c5391-1ffc-4ce1-a91a-19c5ba5ff35b}</UniqueIdentifier>
     </Filter>
@@ -105,12 +99,6 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Collider.cpp">
-      <Filter>Source Files\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AABB_2D.cpp">
-      <Filter>Source Files\Collider</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files\Camera</Filter>
     </ClCompile>
@@ -125,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="Source\Keyboard.cpp">
       <Filter>Source Files\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AABB.cpp">
-      <Filter>Source Files\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Source\MeshBuilder.cpp">
       <Filter>Source Files\Graphics</Filter>
@@ -261,6 +246,9 @@
     <ClCompile Include="Source\StunStatus.cpp">
       <Filter>Source Files\StatusEffects</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BurnStatus.cpp">
+      <Filter>Source Files\StatusEffects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -278,15 +266,6 @@
     <ClInclude Include="Source\Player.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Collider.h">
-      <Filter>Header Files\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AABB_2D.h">
-      <Filter>Header Files\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CircleCollider.h">
-      <Filter>Header Files\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Camera.h">
       <Filter>Header Files\Camera</Filter>
     </ClInclude>
@@ -298,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="Source\Controller.h">
       <Filter>Header Files\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AABB.h">
-      <Filter>Header Files\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Source\Keyboard.h">
       <Filter>Header Files\Main</Filter>
@@ -447,6 +423,9 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="Source\StunStatus.h">
+      <Filter>Header Files\StatusEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BurnStatus.h">
       <Filter>Header Files\StatusEffects</Filter>
     </ClInclude>
   </ItemGroup>

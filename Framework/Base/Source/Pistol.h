@@ -7,12 +7,6 @@ class Pistol : public Weapon
 public:
 	Pistol();
 	~Pistol();
-
-	virtual void Init();
-	virtual void Update(double dt);
-	virtual bool Overheating();
-	virtual void Shoot(Bullet::ELEMENT element, TileMap* map);
-
 };
 
 #endif 

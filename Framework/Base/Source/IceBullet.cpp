@@ -4,7 +4,9 @@
 
 IceBullet::IceBullet()
 {
-
+	bulletElement = ICE;
+	bulletSpeed = 500.f;
+	damage = 5;
 }
 
 IceBullet::~IceBullet()

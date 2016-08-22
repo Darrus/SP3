@@ -49,7 +49,7 @@ void RangeEnemy::Attack(Player* player)
 		attackCooldown = timeBetweenAttack;
 		Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//Bullet.tga", map);
 		bullet->pos = pos;
-		bullet->setBulletSpeed(200.f);
-		bullet->vel = (player->pos - pos).Normalized() * bullet->getBulletSpeed();
+		//bullet->setBulletSpeed(200.f);
+		//bullet->vel = (player->pos - pos).Normalized() * bullet->getBulletSpeed();
 	}
 }

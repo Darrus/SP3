@@ -8,7 +8,7 @@ class BulletFactory
 public:
 	BulletFactory();
 	~BulletFactory();
-	static Bullet* Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, TileMap* map);
+	static Bullet* Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, float speed, float damage, TileMap* map);
 	static Bullet* CreateEnemyBullet(string imageLoc, TileMap* map);
 };
 
