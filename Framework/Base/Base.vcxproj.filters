@@ -237,6 +237,9 @@
     <ClCompile Include="Source\EnemyFactory.cpp">
       <Filter>Source Files\GameObjects\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NetBullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Source\EnemyFactory.h">
       <Filter>Header Files\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NetBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

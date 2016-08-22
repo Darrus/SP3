@@ -43,6 +43,7 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\MeshGenerator.cpp" />
+    <ClCompile Include="Source\NetBullet.cpp" />
     <ClCompile Include="Source\ParallaxBackground.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\Pistol.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Source\IceBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
+    <ClInclude Include="Source\NetBullet.h" />
     <ClInclude Include="Source\Pistol.h" />
     <ClInclude Include="Source\Key.h" />
     <ClInclude Include="Source\LevelEditor.h" />

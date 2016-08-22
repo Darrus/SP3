@@ -72,10 +72,12 @@ void Bullet::CheckCollision()
 	currentX = currentY = 0;
 
 	// Make sure object doesnt move out of screen
-	if (pos.x - scale.x * 0.5f <= 0 || pos.x + scale.x * 0.5f >= map->GetMapWidth())
+	if (pos.x - scale.x * 0.5f <= 0 || pos.x + scale.x * 0.5f >= map->GetMapWidth() ||
+		pos.y - scale.y * 0.5f <= 0 || pos.y + scale.y * 0.5f >= map->GetMapHeight())
+	{
 		active = false;
-	if (pos.y - scale.y * 0.5f <= 0 || pos.y + scale.y * 0.5f >= map->GetMapHeight())
-		active = false;
+		return;
+	} 
 
 	// Get Current Tile
 	currentX = pos.x / tileSize;
