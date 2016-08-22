@@ -38,8 +38,8 @@ public:
 	void setWeaponType(WEAPON_TYPE weaponType);
 	WEAPON_TYPE getWeaponType();
 
-	void setOverHeatRate(float overHeatRate);
-	int getOverHeatRate();
+	virtual void setOverHeatRate(float overHeatRate);
+	virtual float getOverHeatRate();
 
 	void ReferencePlayerPos(Vector3* pos);
 	void ReferencePlayerView(Vector3* view);

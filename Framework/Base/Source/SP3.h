@@ -33,6 +33,7 @@ private:
 	ParallaxBackground background;
 	Player* player;
 	CameraFollow* camFollow;
+	Weapon* weapon;
 
 	float fps;
 
