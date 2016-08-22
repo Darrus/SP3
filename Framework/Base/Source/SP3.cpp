@@ -45,6 +45,10 @@ void SP3::Init()
 	background.Init(&camera->position,800,600);
 
 	EnemyFactory::Create("Goblin", Vector3(200.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Goblin", Vector3(550.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Goblin", Vector3(1500.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Goblin", Vector3(1700.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Goblin", Vector3(2000.f, 200.f, 0.f), map);
 	
 	fps = 0.f;
 
@@ -211,11 +215,11 @@ void SP3::RenderUI()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_OVERHEATBACK], 200.f, 5.f, 1.f, 10, 90);
+	RenderObjOnScreen(meshList[GEO_OVERHEATBACK], 200.f, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 90);
+	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
 
 	std::cout << (float)weapon->getOverHeatRate() * 100 << std::endl;
