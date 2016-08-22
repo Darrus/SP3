@@ -25,8 +25,3 @@ void EnemyStates::Update(double dt)
 {
 
 }
-
-void EnemyStates::Exit()
-{
-
-}

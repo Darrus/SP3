@@ -218,8 +218,6 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 90);
 	modelStack.PopMatrix();
 
-	std::cout << (float)weapon->getOverHeatRate() * 100 << std::endl;
-
 	modelStack.PushMatrix();
 	modelStack.Translate((float)worldX, (float)worldY, 1);
 	modelStack.Scale(50, 50, 50);

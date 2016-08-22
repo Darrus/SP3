@@ -4,14 +4,14 @@
 
 Enemy::Enemy() :
 collidedWall(false),
-AlertRange(0.f),
-AttackRange(0.f),
-PatrolRange(0.f),
-EnemySpeed(0.f),
-MaxSpeed(0.f),
-AttackDamage(0.f),
-TimeBetweenAttack(0.f),
-AttackCooldown(0.f),
+alertRange(0.f),
+attackRange(0.f),
+patrolRange(0.f),
+speed(0.f),
+defaultSpeed(0.f),
+attackDamage(0.f),
+timeBetweenAttack(0.f),
+attackCooldown(0.f),
 health(0),
 maxHealth(0),
 map(NULL),
@@ -26,22 +26,39 @@ Enemy::~Enemy()
 
 void Enemy::Init(TileMap* map)
 {
-
+	this->map = map;
 }
 
 void Enemy::Update(double dt)
 {
+	attackCooldown -= dt;
+
+	if (state)
+		state->Update(dt);
+
+	collidedWall = false;
+
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(mesh);
+	if (sprite)
+		sprite->Update(dt);
+
+	if (!isGrounded)
+		vel.y -= 9.8;
+
+	MapCollision(dt);
+
+	if (health <= 0)
+		active = false;
+}
+
+void Enemy::HandleInteraction(GameObject* go, double dt)
+{
 	
 }
 
-void Enemy::SetAttackAnimation(int start, int end, float time)
+void Enemy::TakeDamage(int damage)
 {
-	animAttack.Set(start, end, time, false);
-}
-
-void Enemy::Attack(Player* player)
-{
-
+	this->health -= damage;
 }
 
 void Enemy::MapCollision(double dt)
@@ -127,7 +144,109 @@ void Enemy::MapCollision(double dt)
 	pos = newPos;
 }
 
-void Enemy::HandleInteraction(GameObject* go, double dt)
+void Enemy::Attack(Player* player)
 {
-	
+
+}
+
+void Enemy::SetAttackAnim(int start, int end, float time)
+{
+	animAttack.Set(start, end, time, true, 1);
+}
+
+void Enemy::SetWalkLeftAnim(int start, int end, float time)
+{
+	animWalkLeft.Set(start, end, time, true, 1, true);
+}
+
+void Enemy::SetWalkRightAnim(int start, int end, float time)
+{
+	animWalkRight.Set(start, end, time, 1, true);
+}
+
+void Enemy::SetAlertRange(float range)
+{
+	alertRange = range;
+}
+
+void Enemy::SetAttackRange(float range)
+{
+	attackRange = range;
+}
+
+void Enemy::SetPatrolRange(float range)
+{
+	patrolRange = range;
+}
+
+void Enemy::SetAttackDamage(float damage)
+{
+	attackDamage = damage;
+}
+
+void Enemy::SetTimeBetweenAttack(float time)
+{
+	timeBetweenAttack = time;
+}
+
+void Enemy::SetHealth(int health)
+{
+	maxHealth = health;
+	this->health = health;
+}
+
+void Enemy::SetSpeed(float speed)
+{
+	this->speed = speed;
+	defaultSpeed = speed;
+}
+
+float Enemy::GetAlertRange()
+{
+	return alertRange;
+}
+
+float Enemy::GetAttackRange()
+{
+	return attackDamage;
+}
+
+float Enemy::GetPatrolRange()
+{
+	return patrolRange;
+}
+
+float Enemy::GetAttackDamage()
+{
+	return attackDamage;
+}
+
+float Enemy::GetHealth()
+{
+	return health;
+}
+
+float Enemy::GetMaxHealth()
+{
+	return maxHealth;
+}
+
+float Enemy::GetSpeed()
+{
+	return speed;
+}
+
+Animation Enemy::GetWalkLeftAnim()
+{
+	return animWalkLeft;
+}
+
+Animation Enemy::GetWalkRightAnim()
+{
+	return animWalkRight;
+}
+
+Animation Enemy::GetAttackAnim()
+{
+	return animAttack;
 }

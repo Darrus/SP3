@@ -12,6 +12,8 @@ public:
 	virtual void Enter(Enemy* enemy, Player* player);
 	virtual EnemyStates* CheckState();
 	virtual void Update(double dt);
+
+	float dir;
 };
 
 #endif

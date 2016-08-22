@@ -27,18 +27,18 @@ void EnemyIdle::Enter(Enemy* enemy, Player* player)
 		dir = 1;
 
 	if (dir > 0)
-		sprite->SetAnimation(enemy->animWalkRight);
+		sprite->SetAnimation(enemy->GetWalkRightAnim());
 	else
-		sprite->SetAnimation(enemy->animWalkLeft);
+		sprite->SetAnimation(enemy->GetWalkLeftAnim());
 
-	enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
+	enemy->vel.x = enemy->GetSpeed() * dir;
 }
 
 EnemyStates* EnemyIdle::CheckState()
 {
 	float dist = (enemy->pos - player->pos).LengthSquared();
 
-	if (dist < enemy->AlertRange * enemy->AlertRange)
+	if (dist < enemy->GetAlertRange() * enemy->GetAlertRange())
 		return new EnemyChase();
 
 	return this;
@@ -47,16 +47,16 @@ EnemyStates* EnemyIdle::CheckState()
 void EnemyIdle::Update(double dt)
 {
 	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(enemy->mesh);
-
-	if (enemy->collidedWall || patrolDistance > enemy->PatrolRange)
+	enemy->vel.x = enemy->GetSpeed() * dir;
+	if (enemy->collidedWall || patrolDistance > enemy->GetPatrolRange())
 	{
 		patrolDistance = 0.f;
-		dir *= -1;
+		dir = -dir;
 		if (dir > 0)
-			sprite->SetAnimation(enemy->animWalkRight);
+			sprite->SetAnimation(enemy->GetWalkRightAnim());
 		else
-			sprite->SetAnimation(enemy->animWalkLeft);
-		enemy->vel.Set(enemy->EnemySpeed * dir, 0.f, 0.f);
+			sprite->SetAnimation(enemy->GetWalkLeftAnim());
+		enemy->vel.x = enemy->GetSpeed() * dir;
 	}
 	enemy->newPos.x += enemy->vel.x * dt;
 	patrolDistance += enemy->vel.x * dt;

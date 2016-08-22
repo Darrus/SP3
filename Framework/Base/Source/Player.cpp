@@ -89,6 +89,11 @@ void Player::Update(double dt)
 	//sprite->Update(dt);
 }
 
+void Player::TakeDamage(int damage)
+{
+	playerHealth -= damage;
+}
+
 Player::PLAYER_STATE Player::getState()
 {
 	return this->state;
@@ -253,7 +258,7 @@ void Player::CollisionCheck(double dt)
 	if (isGrounded) // If enemy is grounded
 	{
 		// Checks the tile below enemy
-		if (map->collisionMap[checkDown][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1)
+		if (map->collisionMap[currentY - 1][checkRight] != 1 && map->collisionMap[currentY - 1][checkLeft] != 1 && map->collisionMap[currentY - 1][currentX] != 1)
 			isGrounded = false;
 
 		// Check the next tile

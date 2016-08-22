@@ -15,37 +15,21 @@ MeleeEnemy::~MeleeEnemy()
 void MeleeEnemy::Init(TileMap* map)
 {
 	this->map = map;
+	attackRange = scale.x;
 }
 
 void MeleeEnemy::Update(double dt)
 {
-	AttackCooldown -= dt;
-
-	if (state)
-		state->Update(dt);
-	collidedWall = false;
-
-	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(mesh);
-	if (sprite)
-		sprite->Update(dt);
-
-	if (!isGrounded)
-		vel.y -= 9.8;
-
-	MapCollision(dt);
+	Enemy::Update(dt);
 }
 
 void MeleeEnemy::Attack(Player* player)
 {
-	int tmp = player->GetPlayerHealth();
-
-	if (AttackCooldown < 0)
+	if (attackCooldown < 0)
 	{
-		AttackCooldown = TimeBetweenAttack;
-		tmp -= 20;
-		player->SetPlayerHealth(tmp);
+		attackCooldown = timeBetweenAttack;
+		player->TakeDamage(attackDamage);
 	}
-
 }
 
 void MeleeEnemy::HandleInteraction(GameObject* go, double dt)
@@ -65,6 +49,5 @@ void MeleeEnemy::HandleInteraction(GameObject* go, double dt)
 	{
 		state = new EnemyIdle();
 		state->Enter(this, player);
-		AttackRange = scale.x;
 	}
 }
