@@ -3,6 +3,7 @@
 #include "MeshGenerator.h"
 #include <iostream>
 #include "Pistol.h"
+#include "Rifle.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -13,6 +14,7 @@ playerHealth(200),
 JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
+weaponType(0),
 isUsed(true)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
@@ -20,10 +22,16 @@ isUsed(true)
 	Animation test;
 	test.Set(18, 18, 1.f, true);
 	sprite->SetAnimation(test);
-	weapon = new Pistol();
-	weapon->ReferencePlayerPos(&pos);
-	weapon->ReferencePlayerView(&view);
-	bulletElem = Bullet::LIGHTNING;
+
+	weapon[0] = new Pistol();
+	weapon[0]->ReferencePlayerPos(&pos);
+	weapon[0]->ReferencePlayerView(&view);
+
+	weapon[1] = new Rifle();
+	weapon[1]->ReferencePlayerPos(&pos);
+	weapon[1]->ReferencePlayerView(&view);
+
+	bulletElem = Bullet::NONE;
 }
 
 Player::~Player()
@@ -80,13 +88,22 @@ void Player::Update(double dt)
 	useItem();
 	changeWeapon();
 	ShootWeapon();
-	if (weapon)
-		weapon->Update(dt);
+
+	for (int i = 0; i < 2; ++i)
+	{
+		weapon[weaponType]->Update(dt);
+	}
+
 
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
 
 	//sprite->Update(dt);
+}
+
+int Player::GetWeaponType()
+{
+	return weaponType;
 }
 
 void Player::TakeDamage(int damage)
@@ -154,34 +171,18 @@ void Player::selectSkill()
 
 void Player::changeWeapon()
 {
-	/*if (Application::GetInstance().controller->IsKeyPressed(TAB))
+	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
 		weaponType++;
-		if (weaponType == 0)
-			weapon.setWeaponType(weapon.PISTOL);
-
-		else if (weaponType == 1)
-			weapon.setWeaponType(weapon.RIFLE);
-			
-		else if (weaponType == 2)
-			weapon.setWeaponType(weapon.SMG);
-
-		else if (weaponType == 3)
-			weapon.setWeaponType(weapon.RPG);
-
-		else if (weaponType == 4)
-			weapon.setWeaponType(weapon.SHOTGUN);
-
-		else if (weaponType == 5)
-			weapon.setWeaponType(weapon.GPMG);
-
-		else if (weaponType == 6)
-			weapon.setWeaponType(weapon.SNIPER);
-
-		else if (weaponType >= 7)
-			weaponType = 0;
-		
-	}*/
+	}
+	if (weaponType > 1)
+	{
+		weaponType = 0;
+	}
+	else if (weaponType < 0)
+	{
+		weaponType = 0;
+	}
 }
 
 void Player::cycleBullets()
@@ -191,7 +192,6 @@ void Player::cycleBullets()
 		int currentElem = bulletElem;
 		currentElem = (currentElem + 1) % (int)Bullet::ELEM_SIZE;
 		bulletElem = (Bullet::ELEMENT)currentElem;
-		std::cout << bulletElem << std::endl;
 	}
 }
 
@@ -307,14 +307,14 @@ void Player::SetMousePos(float mouseX, float mouseY)
 
 void Player::ShootWeapon()
 {
-	if (weapon)
-		if (!weapon->Overheating() && Application::IsMousePressed(0))
-				weapon->Shoot(bulletElem, map);
+	if (weapon[weaponType])
+		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0))
+				weapon[weaponType]->Shoot(bulletElem, map);
 }
 
 Weapon* Player::GetWeapon()
 {
-	if (weapon)
-		return weapon;
+	if (weapon[weaponType])
+		return weapon[weaponType];
 	return NULL;
 }

@@ -34,7 +34,10 @@ void Pistol::Update(double dt)
 	view = *playerView;
 	pos = *playerPos + (view * offset) + fineOffset;
 	
-	overHeatingRate -= 40 * dt;
+	if (overHeat == false)
+		overHeatingRate -= 40 * dt;
+	else
+		overHeatingRate -= 20 * dt;
 
 	if (overHeatingRate < 0)
 	{

@@ -47,6 +47,8 @@ public:
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
+	int GetWeaponType();
+
 private:
 	void Move(double dt);
 	void Jump(double dt);
@@ -86,7 +88,7 @@ private:
 
 	float mouseX, mouseY;
 
-	Weapon* weapon;
+	Weapon* weapon[2];
 	Bullet::ELEMENT bulletElem;
 
 	bool isUsed;

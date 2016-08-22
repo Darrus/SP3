@@ -1,76 +1,80 @@
 #include "Sniper.h"
+#include "MeshGenerator.h"
+#include "BulletFactory.h"
+#include "Application.h"
 
 Sniper::Sniper()
 {
-	fireRate = 0;
+	fireRate = 0.f;
+	defaultFireRate = 0.2f;
 	coolDown = 0;
 	damage = 0;
-	//weaponType = WEAPON_TYPE::SNIPER;
+	weaponType = WEAPON_TYPE::SNIPER;
 	overHeat = false;
 	overHeatingRate = 0;
+	scale.Set(20, 20, 1);
+	mesh = MeshGenerator::GetInstance().GenerateQuad("Sniper", Color(1.f, 1.f, 1.f), "Image//Pistol.tga", 1.f);
+	offset = 15.f;
+	fineOffset.Set(0.f, -2.f, 0.f);
 }
 
 Sniper::~Sniper()
 {
+
 }
 
-void Sniper::update(double dt)
+void Sniper::Init()
 {
-	overHeatingRate -= dt;
-	fireRate += 0.1 * dt;
-	overHeating();
+
 }
 
-bool Sniper::overHeating()
+void Sniper::Update(double dt)
 {
-	if (overHeatingRate >= 10)
-	{
-		return true;
-	}
-	else if (overHeatingRate <= 0)
+	fireRate -= dt;
+	view = *playerView;
+	pos = *playerPos + (view * offset) + fineOffset;
+
+	if (overHeat == false)
+		overHeatingRate -= 40 * dt;
+	else
+		overHeatingRate -= 20 * dt;
+
+	if (overHeatingRate < 0)
 	{
 		overHeatingRate = 0;
-		return false;
 	}
-	else
+	else if (overHeatingRate > 100)
 	{
-		return false;
+		overHeatingRate = 100;
+	}
+
+	if (Application::IsMousePressed(0))
+	{
+		if (overHeat == false)
+		{
+			overHeatingRate++;
+		}
+	}
+	if (overHeat == false && overHeatingRate > 100)
+	{
+		overHeat = true;
+	}
+	else if (overHeat == true && overHeatingRate < 1)
+	{
+		overHeat = false;
 	}
 }
 
-void Sniper::firingWeapon(Bullet bullet, bool overHeat, double dt)
+bool Sniper::Overheating()
 {
-	WEAPON_TYPE tmpWpType = weaponType;
-	Bullet tmpBullet = bullet;
-	bool tmpOverHeat = overHeat;
-	fireRate += (float)dt;
+	return this->overHeat;
+}
 
-	if (tmpWpType == WEAPON_TYPE::SNIPER)
+void Sniper::Shoot(Bullet::ELEMENT element, TileMap* map)
+{
+	if (fireRate < 0.f)
 	{
-		if (tmpOverHeat == false)
-		{
-			if (fireRate > 1.5)
-			{
-				if (bullet.getBulletElement() == Bullet::ELEMENT::FIRE)
-				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
-					damage = 100;
-				}
-				if (bullet.getBulletElement() == Bullet::ELEMENT::ICE)
-				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
-					damage = 70;
-				}
-				if (bullet.getBulletElement() == Bullet::ELEMENT::LIGHTNING)
-				{
-					bullet.vel += bullet.getBulletSpeed() * dt;
-					overHeatingRate += 3 * dt;
-					damage = 80;
-				}
-				fireRate = 0;
-			}
-		}
+		Bullet* bullet = BulletFactory::Create(element, pos, view, map);
+		fireRate = defaultFireRate;
 	}
 }

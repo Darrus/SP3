@@ -9,10 +9,7 @@ public:
 	{
 		PISTOL = 0,
 		RIFLE,
-		SMG,
-		RPG,
 		SHOTGUN,
-		GPMG,
 		SNIPER,
 		TRAPGUN,
 		NONE,

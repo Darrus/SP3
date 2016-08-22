@@ -131,6 +131,14 @@ void SceneBase::Init()
 	meshList[GEO_OVERHEATBACK] = MeshBuilder::GenerateQuad("OverHeatBack", Color(1, 1, 1), 0.5f);
 	meshList[GEO_OVERHEATBACK]->textureArray[0] = LoadTGA("Image//OverHeatBarBack.tga");
 
+	meshList[GEO_PISTOL] = MeshBuilder::GenerateQuad("Pistol", Color(1, 1, 1), 1.f);
+	meshList[GEO_PISTOL]->textureArray[0] = LoadTGA("Image//Pistol.tga");
+
+	meshList[GEO_RIFLE] = MeshBuilder::GenerateQuad("Rifle", Color(1, 1, 1), 1.f);
+	meshList[GEO_RIFLE]->textureArray[0] = LoadTGA("Image//Rifle.tga");
+
+	meshList[GEO_WEAPONUI] = MeshBuilder::GenerateQuad("UI", Color(1, 1, 1), 1.f);
+	meshList[GEO_WEAPONUI]->textureArray[0] = LoadTGA("Image//WeaponUI.tga");
 
 	meshList[GEO_CROSSHAIR] = MeshBuilder::GenerateQuad("GEO_CROSSHAIR", Color(1, 1, 1), 1.f);
 	meshList[GEO_CROSSHAIR]->textureArray[0] = LoadTGA("Image//CrossHair.tga");

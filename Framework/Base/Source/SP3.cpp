@@ -125,15 +125,19 @@ void SP3::Render()
 		}
 	}
 
+	RenderUI();
+
 	std::stringstream text;
 	text << fps;
 	RenderTextOnScreen(meshList[GEO_TEXT], text.str() , Color(0.f, 1.f, 0.f), 20, 10, 10);
 
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();
-	RenderTextOnScreen(meshList[GEO_TEXT], text2.str(), Color(0.f, 1.f, 0.f), 20, 10, 20);
+	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 98, 547);
 
-	RenderUI();
+	std::stringstream text3;
+	text3 << (int)player->GetWeapon()->getOverHeatRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 98, 520);
 }
 
 void SP3::Exit()
@@ -226,6 +230,24 @@ void SP3::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_WEAPONUI], 35.f, 15.f, 10.f, 170, 98);
+	modelStack.PopMatrix();
+
+	switch (player->GetWeaponType())
+	{
+	case 0:
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_PISTOL],10.f, 10.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+		break;
+	case 1:
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_RIFLE],25.f, 10.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+		break;
+	}
 
 	modelStack.PushMatrix();
 	modelStack.Translate((float)worldX, (float)worldY, 1);
