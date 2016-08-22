@@ -12,6 +12,7 @@ public:
 	virtual bool overHeating();
 	virtual void firingWeapon(Bullet bullet, bool overHeat, double dt);
 
+
 private:
 	float fireRate;
 	float coolDown;

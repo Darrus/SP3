@@ -39,6 +39,9 @@ void SP3::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
+	weapon = new Weapon();
+
+
 	background.Init(&camera->position,800,600);
 
 	EnemyFactory::Create("Goblin", Vector3(200.f, 200.f, 0.f), map);
@@ -207,13 +210,15 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_HEALTH], (float)player->GetPlayerHealth(),5.f,1.f, 10,100);
 	modelStack.PopMatrix();
 
-	//modelStack.PushMatrix();
-	//RenderObjOnScreen(meshList[GEO_OVERHEATBACK], 200.f, 5.f, 1.f, 10, 90);
-	//modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_OVERHEATBACK], 200.f, 5.f, 1.f, 10, 90);
+	modelStack.PopMatrix();
 
-	//modelStack.PushMatrix();
-	//RenderObjOnScreen(meshList[GEO_OVERHEAT],0, 5.f, 1.f, 10, 90);
-	//modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->getOverHeatRate() * 2, 5.f, 1.f, 10, 90);
+	modelStack.PopMatrix();
+
+	std::cout << (float)weapon->getOverHeatRate() * 100 << std::endl;
 
 	modelStack.PushMatrix();
 	modelStack.Translate((float)worldX, (float)worldY, 1);

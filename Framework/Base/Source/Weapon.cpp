@@ -76,7 +76,7 @@ void Weapon::setOverHeatRate(float overHeatingRate)
 	this->overHeatingRate = overHeatingRate;
 }
 
-int Weapon::getOverHeatRate()
+float Weapon::getOverHeatRate()
 {
 	return this->overHeatingRate;
 }
