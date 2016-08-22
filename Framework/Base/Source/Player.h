@@ -55,7 +55,7 @@ private:
 	void selectSkill();
 	void cycleBullets();
 	void useItem();
-	void changeWeapon();
+	void changeWeapon(double dt);
 	void playerJump(double dt);
 
 	void ShootWeapon();
@@ -86,7 +86,7 @@ private:
 
 	float mouseX, mouseY;
 
-	Weapon* weapon;
+	Weapon* weapon[2];
 	Bullet::ELEMENT bulletElem;
 
 	bool isUsed;

@@ -8,20 +8,10 @@ public:
 	Rifle();
 	~Rifle();
 
-	virtual void update(double dt);
-	virtual bool overHeating();
-	virtual void firingWeapon(Bullet bullet, bool overHeat, double dt);
-
-
-private:
-	float fireRate;
-	float coolDown;
-	int damage;
-	int overHeatingRate;
-	bool overHeat;
-	WEAPON_TYPE weaponType;
-	Bullet *bullet;
-	Bullet bullets;
+	virtual void Init();
+	virtual void Update(double dt);
+	virtual bool Overheating();
+	virtual void Shoot(Bullet::ELEMENT element, TileMap* map);
 
 };
 
