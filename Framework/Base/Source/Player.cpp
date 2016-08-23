@@ -5,6 +5,7 @@
 #include "Pistol.h"
 #include "Rifle.h"
 #include "BulletFactory.h"
+#include "Shotgun.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -33,12 +34,18 @@ net(NULL)
 	weapon[1]->ReferencePlayerPos(&pos);
 	weapon[1]->ReferencePlayerView(&view);
 
+	weapon[2] = new Shotgun();
+	weapon[2]->ReferencePlayerPos(&pos);
+	weapon[2]->ReferencePlayerView(&view);
+
 	bulletElem[0] = -1;
 	for (int i = 1; i < ELEM_SIZE; ++i)
 	{
 		bulletElem[i] = 0;
 	}
 	selectedElem = NONE;
+
+	
 }
 
 Player::~Player()
@@ -102,7 +109,7 @@ void Player::Update(double dt)
 	ShootWeapon();
 	TossNet();
 
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		weapon[i]->Update(dt);
 	}
@@ -188,7 +195,7 @@ void Player::ChangeWeapon()
 	{
 		weaponType++;
 	}
-	if (weaponType > 1)
+	if (weaponType > 2)
 	{
 		weaponType = 0;
 	}

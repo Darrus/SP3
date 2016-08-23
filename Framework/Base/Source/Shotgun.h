@@ -6,7 +6,8 @@ class Shotgun : public Weapon
 {
 public:
 	Shotgun();
-	~Shotgun();
+	virtual ~Shotgun();
+	virtual void Shoot(ELEMENTS element, TileMap* map);
 };
 
 

@@ -93,10 +93,12 @@ private:
 
 	float mouseX, mouseY;
 
-	Weapon* weapon[2];
+
 	int bulletElem[ELEM_SIZE];
 	ELEMENTS selectedElem;
 	NetBullet* net;
+	Weapon* weapon[3];
+
 
 	bool isUsed;
 	int weaponType;

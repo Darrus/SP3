@@ -10,6 +10,7 @@ Weapon::Weapon()
 	cooldownRate = 0.f;
 	overheatRate = 0.f;
 	overheatBar = 0.f;
+	bulletSpeed = 0.f;
 	overheated = false;
 	scale.Set(16, 16, 16);
 }
