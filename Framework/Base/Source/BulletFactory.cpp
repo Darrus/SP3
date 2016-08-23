@@ -61,7 +61,7 @@ Bullet* BulletFactory::CreateNet(Vector3 pos, Vector3 dir, Player* player, TileM
 	net->vel = dir * net->bulletSpeed;
 	net->pos = pos;
 	net->active = true;
-	net->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
+	net->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Net.tga", 3.f);
 	GoManager::GetInstance().Add(net);
 	return net;
 }
