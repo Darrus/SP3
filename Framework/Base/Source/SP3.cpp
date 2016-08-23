@@ -207,7 +207,7 @@ void SP3::RenderWeaponObject(GameObject* go)
 			modelStack.PushMatrix();
 			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 			modelStack.Rotate(weaponRot, 0, 0, 1);
-			modelStack.Scale((worldPos - player->pos).Length()*2 , 3, 10);
+			modelStack.Scale(((worldPos - player->pos)).Length() * 2, 3, 10);
 			RenderMesh(meshList[GEO_LASER], false);
 			modelStack.PopMatrix();
 		}
@@ -231,7 +231,7 @@ void SP3::RenderWeaponObject(GameObject* go)
 			modelStack.PushMatrix();
 			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 			modelStack.Rotate(weaponRot, 0, 0, 1);
-			modelStack.Scale((worldPos - player->pos).Length()*2, 3, 10);
+			modelStack.Scale(((worldPos - player->pos)).Length() * 2, 3, 10);
 			RenderMesh(meshList[GEO_LASER], false);
 			modelStack.PopMatrix();
 		}

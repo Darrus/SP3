@@ -46,7 +46,7 @@ net(NULL)
 	bulletElem[0] = -1;
 	for (int i = 1; i < ELEM_SIZE; ++i)
 	{
-		bulletElem[i] = 0;
+		bulletElem[i] = 10;
 	}
 	selectedElem = NONE;
 

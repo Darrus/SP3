@@ -28,15 +28,15 @@ Bullet* BulletFactory::Create(ELEMENTS elem, Vector3 pos, Vector3 dir, float spe
 		break;
 	case FIRE:
 		bullet = new FireBullet();
-		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
+		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//FireBullet.tga", 1.f);
 		break;
 	case ICE:
 		bullet = new IceBullet();
-		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
+		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//IceBullet.tga", 1.f);
 		break;
 	case LIGHTNING:
 		bullet = new LightningBullet();
-		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
+		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//LightningBullet.tga", 1.f);
 		break;
 	}
 
