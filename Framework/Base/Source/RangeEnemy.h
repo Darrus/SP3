@@ -9,7 +9,7 @@ public:
 	RangeEnemy();
 	virtual ~RangeEnemy();
 
-	virtual void Init();
+	virtual void Init(TileMap* map);
 	virtual void Update(double dt);
 	virtual void HandleInteraction(GameObject* go, double dt);
 	virtual void Attack(Player* player);

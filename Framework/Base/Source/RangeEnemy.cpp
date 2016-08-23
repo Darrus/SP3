@@ -13,9 +13,9 @@ RangeEnemy::~RangeEnemy()
 
 }
 
-void RangeEnemy::Init()
+void RangeEnemy::Init(TileMap* map)
 {
-
+	this->map = map;
 }
 
 void RangeEnemy::Update(double dt)
@@ -26,20 +26,23 @@ void RangeEnemy::Update(double dt)
 void RangeEnemy::HandleInteraction(GameObject* go, double dt)
 {
 	Player* player = dynamic_cast<Player*>(go);
-	if (state)
+	if (player)
 	{
-		EnemyStates* tempState = state->CheckState();
-		if (state != tempState)
+		if (state)
 		{
-			delete state;
-			state = tempState;
+			EnemyStates* tempState = state->CheckState();
+			if (state != tempState)
+			{
+				delete state;
+				state = tempState;
+				state->Enter(this, player);
+			}
+		}
+		else
+		{
+			state = new EnemyIdle();
 			state->Enter(this, player);
 		}
-	}
-	else
-	{
-		state = new EnemyIdle();
-		state->Enter(this, player);
 	}
 }
 void RangeEnemy::Attack(Player* player)
@@ -49,7 +52,8 @@ void RangeEnemy::Attack(Player* player)
 		attackCooldown = timeBetweenAttack;
 		Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//Bullet.tga", map);
 		bullet->pos = pos;
-		//bullet->setBulletSpeed(200.f);
-		//bullet->vel = (player->pos - pos).Normalized() * bullet->getBulletSpeed();
+		bullet->bulletSpeed = 200.f;
+		bullet->damage = attackDamage;
+		bullet->vel = (player->pos - pos).Normalized() * bullet->bulletSpeed;
 	}
 }

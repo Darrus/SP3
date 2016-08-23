@@ -7,9 +7,19 @@
 class EnemyFactory
 { 
 public:
+	enum ENEMY_TYPES
+	{
+		Goblin,
+		Range,
+		ENEMY_SIZE
+	};
+
 	EnemyFactory();
 	~EnemyFactory();
 	static Enemy* Create(const string& name, Vector3 pos, TileMap* map);
+
+private:
+	static string GetName(ENEMY_TYPES type);
 };
 
 #endif

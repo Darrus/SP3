@@ -34,6 +34,7 @@
     <ClCompile Include="Source\IceBullet.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
     <ClCompile Include="Source\LevelEditor.cpp" />
+    <ClCompile Include="Source\LifeStealBullet.cpp" />
     <ClCompile Include="Source\LightningBullet.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
     <ClInclude Include="Source\IceBullet.h" />
+    <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
     <ClInclude Include="Source\NetBullet.h" />

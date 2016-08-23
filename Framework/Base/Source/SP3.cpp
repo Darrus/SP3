@@ -44,11 +44,11 @@ void SP3::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
 
-	EnemyFactory::Create("Goblin", Vector3(200.f, 200.f, 0.f), map);
-	EnemyFactory::Create("Goblin", Vector3(550.f, 200.f, 0.f), map);
-	EnemyFactory::Create("Goblin", Vector3(1500.f, 200.f, 0.f), map);
-	EnemyFactory::Create("Goblin", Vector3(1700.f, 200.f, 0.f), map);
-	EnemyFactory::Create("Goblin", Vector3(2000.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(200.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(550.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1500.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1700.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2000.f, 200.f, 0.f), map);
 	
 	fps = 0.f;
 

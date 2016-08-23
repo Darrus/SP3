@@ -249,6 +249,9 @@
     <ClCompile Include="Source\BurnStatus.cpp">
       <Filter>Source Files\StatusEffects</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LifeStealBullet.cpp">
+      <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -430,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="Source\Element.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LifeStealBullet.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
