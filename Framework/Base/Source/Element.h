@@ -7,6 +7,7 @@ enum ELEMENTS
 	FIRE,
 	LIGHTNING,
 	ICE,
+	LIFESTEAL,
 	ELEM_SIZE,
 };
 

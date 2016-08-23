@@ -2,6 +2,7 @@
 #include "FireBullet.h"
 #include "LightningBullet.h"
 #include "IceBullet.h"
+#include "LifeStealBullet.h"
 #include "EnemyBullet.h"
 #include "NetBullet.h"
 #include "GoManager.h"
@@ -37,6 +38,10 @@ Bullet* BulletFactory::Create(ELEMENTS elem, Vector3 pos, Vector3 dir, float spe
 	case LIGHTNING:
 		bullet = new LightningBullet();
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//LightningBullet.tga", 1.f);
+		break;
+	case LIFESTEAL:
+		bullet = new LifeStealBullet();
+		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//LifeStealBullet.tga", 1.f);
 		break;
 	}
 

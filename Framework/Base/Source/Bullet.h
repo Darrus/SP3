@@ -16,6 +16,7 @@ public:
 	void CheckCollision();
 
 	float bulletSpeed;
+	int lifeStealRate;
 	int damage;
 	ELEMENTS bulletElement;
 	TileMap* map;
