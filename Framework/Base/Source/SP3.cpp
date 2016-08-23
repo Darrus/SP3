@@ -199,6 +199,20 @@ void SP3::RenderWeaponObject(GameObject* go)
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
+
+
+		if (player->GetWeaponType() == 3)
+		{
+			Vector3 worldPos(worldX, worldY, 0.f);
+			modelStack.PushMatrix();
+			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
+			modelStack.Rotate(weaponRot, 0, 0, 1);
+			modelStack.Scale((worldPos - player->pos).Length()*2 , 3, 10);
+			RenderMesh(meshList[GEO_LASER], false);
+			modelStack.PopMatrix();
+		}
+	
+
 	}
 	else
 	{
@@ -210,6 +224,17 @@ void SP3::RenderWeaponObject(GameObject* go)
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
+
+		if (player->GetWeaponType() == 3)
+		{
+			Vector3 worldPos(worldX, worldY, 0.f);
+			modelStack.PushMatrix();
+			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
+			modelStack.Rotate(weaponRot, 0, 0, 1);
+			modelStack.Scale((worldPos - player->pos).Length()*2, 3, 10);
+			RenderMesh(meshList[GEO_LASER], false);
+			modelStack.PopMatrix();
+		}
 	}
 }
 
@@ -241,23 +266,45 @@ void SP3::RenderUI()
 		modelStack.PushMatrix();
 		RenderObjOnScreen(meshList[GEO_PISTOL],10.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate((float)worldX, (float)worldY, 1);
+		modelStack.Scale(50, 50, 50);
+		RenderMesh(meshList[GEO_CROSSHAIR], false);
+		modelStack.PopMatrix();
+
 		break;
 	case 1:
 		modelStack.PushMatrix();
 		RenderObjOnScreen(meshList[GEO_RIFLE],25.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate((float)worldX, (float)worldY, 1);
+		modelStack.Scale(50, 50, 50);
+		RenderMesh(meshList[GEO_CROSSHAIR], false);
+		modelStack.PopMatrix();
+
 		break;
 	case 2:
 		modelStack.PushMatrix();
 		RenderObjOnScreen(meshList[GEO_SHOTGUN], 25.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate((float)worldX, (float)worldY, 1);
+		modelStack.Scale(50, 50, 50);
+		RenderMesh(meshList[GEO_CROSSHAIR], false);
+		modelStack.PopMatrix();
+
+		break;
+	case 3:
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_SNIPER], 25.f, 10.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+
 		break;
 	}
 
-	modelStack.PushMatrix();
-	modelStack.Translate((float)worldX, (float)worldY, 1);
-	modelStack.Scale(50, 50, 50);
-	RenderMesh(meshList[GEO_CROSSHAIR], false);
-	modelStack.PopMatrix();
 
 }

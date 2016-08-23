@@ -74,6 +74,8 @@ protected:
 		GEO_SHOTGUN,
 		GEO_SNIPER,
 
+		GEO_LASER,
+
 		GEO_WEAPONUI,
 
 		GEO_CROSSHAIR,

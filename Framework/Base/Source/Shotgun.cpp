@@ -29,12 +29,12 @@ void Shotgun::Shoot(Bullet::ELEMENT element, TileMap* map)
 	if (fireRate < 0.f)
 	{
 		Mtx44 rotate;
-		
+
 		rotate.SetToRotation(0, 0, 0, 1);
 		Bullet* bullet1 = BulletFactory::Create(element, pos, view, bulletSpeed, damage, map);
 		rotate.SetToRotation(10, 0, 0, 1);
 		Bullet* bullet2 = BulletFactory::Create(element, pos, rotate* view, bulletSpeed, damage, map);
-		rotate.SetToRotation(-10,0,0,1);
+		rotate.SetToRotation(-10, 0, 0, 1);
 		Bullet* bullet3 = BulletFactory::Create(element, pos, rotate* view, bulletSpeed, damage, map);
 		rotate.SetToRotation(-20, 0, 0, 1);
 		Bullet* bullet4 = BulletFactory::Create(element, pos, rotate* view, bulletSpeed, damage, map);

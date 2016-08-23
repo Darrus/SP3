@@ -5,6 +5,7 @@
 #include "Pistol.h"
 #include "Rifle.h"
 #include "Shotgun.h"
+#include "Sniper.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -35,6 +36,10 @@ isUsed(true)
 	weapon[2] = new Shotgun();
 	weapon[2]->ReferencePlayerPos(&pos);
 	weapon[2]->ReferencePlayerView(&view);
+
+	weapon[3] = new Sniper();
+	weapon[3]->ReferencePlayerPos(&pos);
+	weapon[3]->ReferencePlayerView(&view);
 
 	bulletElem = Bullet::NONE;
 }
@@ -94,7 +99,7 @@ void Player::Update(double dt)
 	changeWeapon();
 	ShootWeapon();
 
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		weapon[i]->Update(dt);
 	}
@@ -180,7 +185,7 @@ void Player::changeWeapon()
 	{
 		weaponType++;
 	}
-	if (weaponType > 2)
+	if (weaponType > 3)
 	{
 		weaponType = 0;
 	}
