@@ -50,7 +50,7 @@ void Enemy::Update(double dt)
 
 	MapCollision(dt);
 
-	if (health <= 0)
+	if (health <= 0 && active)
 		active = false;
 
 }
@@ -218,6 +218,12 @@ void Enemy::SetState(EnemyStates* state)
 	this->state = state;
 }
 
+void Enemy::SetElement(ELEMENTS elem, int worth)
+{
+	element = elem;
+	captureWorth = worth;
+}
+
 float Enemy::GetDefaultSpeed()
 {
 	return defaultSpeed;
@@ -256,6 +262,16 @@ float Enemy::GetMaxHealth()
 float Enemy::GetSpeed()
 {
 	return speed;
+}
+
+ELEMENTS Enemy::GetElement()
+{
+	return element;
+}
+
+int Enemy::GetWorth()
+{
+	return captureWorth;
 }
 
 EnemyStates* Enemy::GetState()

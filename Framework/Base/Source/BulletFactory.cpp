@@ -3,6 +3,7 @@
 #include "LightningBullet.h"
 #include "IceBullet.h"
 #include "EnemyBullet.h"
+#include "NetBullet.h"
 #include "GoManager.h"
 #include "MeshGenerator.h"
 
@@ -16,24 +17,24 @@ BulletFactory::~BulletFactory()
 
 }
 
-Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, float speed, float damage, TileMap* map)
+Bullet* BulletFactory::Create(ELEMENTS elem, Vector3 pos, Vector3 dir, float speed, float damage, TileMap* map)
 {
 	Bullet* bullet = NULL;
 	switch (elem)
 	{
-	case Bullet::NONE:
+	case NONE:
 		bullet = new Bullet();
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
-	case Bullet::FIRE:
+	case FIRE:
 		bullet = new FireBullet();
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
-	case Bullet::ICE:
+	case ICE:
 		bullet = new IceBullet();
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
-	case Bullet::LIGHTNING:
+	case LIGHTNING:
 		bullet = new LightningBullet();
 		bullet->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
 		break;
@@ -50,6 +51,19 @@ Bullet* BulletFactory::Create(Bullet::ELEMENT elem, Vector3 pos, Vector3 dir, fl
 	}
 
 	return bullet;
+}
+
+Bullet* BulletFactory::CreateNet(Vector3 pos, Vector3 dir, Player* player, TileMap* map)
+{
+	NetBullet* net = new NetBullet();
+	net->SetPlayer(player);
+	net->SetMap(map);
+	net->vel = dir * net->bulletSpeed;
+	net->pos = pos;
+	net->active = true;
+	net->mesh = MeshGenerator::GetInstance().GenerateQuad("Bullet", Color(1, 1, 1), "Image//Bullet.tga", 1.f);
+	GoManager::GetInstance().Add(net);
+	return net;
 }
 
 Bullet* BulletFactory::CreateEnemyBullet(string imageLoc, TileMap* map)

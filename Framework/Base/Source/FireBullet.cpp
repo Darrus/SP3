@@ -6,7 +6,7 @@ FireBullet::FireBullet()
 {
 	bulletElement = FIRE;
 	bulletSpeed = 600.f;
-	damage = 5;
+	damage = 0;
 }
 
 FireBullet::~FireBullet()
@@ -25,6 +25,7 @@ void FireBullet::HandleInteraction(GameObject* go, double dt)
 		{
 			Status* burn = new BurnStatus();
 			enemy->status.AddStatus(burn);
+			enemy->TakeDamage(damage);
 			active = false;
 		}
 	}

@@ -24,7 +24,7 @@ Shotgun::~Shotgun()
 
 }
 
-void Shotgun::Shoot(Bullet::ELEMENT element, TileMap* map)
+void Shotgun::Shoot(ELEMENTS element, TileMap* map)
 {
 	if (fireRate < 0.f)
 	{

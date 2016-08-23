@@ -8,7 +8,7 @@ Bullet::Bullet()
 	scale.Set(10.f, 10.f, 10.f);
 	bulletElement = NONE;
 	bulletSpeed = 750.f;
-	damage = 10;
+	damage = 5;
 	active = false;
 }
 

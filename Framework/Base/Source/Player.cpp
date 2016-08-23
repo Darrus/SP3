@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Pistol.h"
 #include "Rifle.h"
+#include "BulletFactory.h"
 #include "Shotgun.h"
 #include "Sniper.h"
 
@@ -17,7 +18,8 @@ JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
 weaponType(0),
-isUsed(true)
+isUsed(true),
+net(NULL)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
 	sprite = dynamic_cast<SpriteAnimation*>(mesh);
@@ -41,7 +43,14 @@ isUsed(true)
 	weapon[3]->ReferencePlayerPos(&pos);
 	weapon[3]->ReferencePlayerView(&view);
 
-	bulletElem = Bullet::NONE;
+	bulletElem[0] = -1;
+	for (int i = 1; i < ELEM_SIZE; ++i)
+	{
+		bulletElem[i] = 0;
+	}
+	selectedElem = NONE;
+
+	
 }
 
 Player::~Player()
@@ -82,6 +91,11 @@ void Player::SetPotionCount(int potionCount)
 	this->potionCount = potionCount;
 }
 
+void Player::AddBullet(ELEMENTS elem, int amount)
+{
+	bulletElem[elem] += amount;
+}
+
 void Player::Init(TileMap* map)
 {
 	this->map = map;
@@ -93,11 +107,12 @@ void Player::Update(double dt)
 	CollisionCheck(dt);
 	playerDeath();
 	selectSkill();
-	cycleBullets();
-	playerJump(dt);
+	CycleBullets();
+	PlayerJump(dt);
 	useItem();
-	changeWeapon();
+	ChangeWeapon();
 	ShootWeapon();
+	TossNet();
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -179,7 +194,7 @@ void Player::selectSkill()
 	}
 }
 
-void Player::changeWeapon()
+void Player::ChangeWeapon()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
@@ -195,14 +210,10 @@ void Player::changeWeapon()
 	}
 }
 
-void Player::cycleBullets()
+void Player::CycleBullets()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEBULLET))
-	{
-		int currentElem = bulletElem;
-		currentElem = (currentElem + 1) % (int)Bullet::ELEM_SIZE;
-		bulletElem = (Bullet::ELEMENT)currentElem;
-	}
+		selectedElem = (ELEMENTS)((selectedElem + 1) % (int)ELEM_SIZE);
 }
 
 void Player::useItem()
@@ -303,7 +314,7 @@ void Player::CollisionCheck(double dt)
 	pos = newPos;
 }
 
-void Player::playerJump(double dt)
+void Player::PlayerJump(double dt)
 {
 	if (Application::GetInstance().controller->IsKeyPressed(JUMP) && isGrounded == true)
 		pos.y += JUMP_SPEED * (float)dt;
@@ -318,8 +329,26 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon[weaponType])
-		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0))
-				weapon[weaponType]->Shoot(bulletElem, map);
+	{
+		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0) && bulletElem[selectedElem] != 0)
+		{
+			weapon[weaponType]->Shoot(selectedElem, map);
+			if (selectedElem != NONE)
+				bulletElem[selectedElem] -= 1;
+		}
+	}
+		
+}
+
+void Player::TossNet()
+{
+	if (net && !net->active)
+		net = NULL;
+
+	if (Application::IsMousePressed(1) && !net)
+	{
+		net = dynamic_cast<NetBullet*>(BulletFactory::CreateNet(pos, view, this, map));
+	}
 }
 
 Weapon* Player::GetWeapon()

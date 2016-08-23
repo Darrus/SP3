@@ -428,5 +428,8 @@
     <ClInclude Include="Source\BurnStatus.h">
       <Filter>Header Files\StatusEffects</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

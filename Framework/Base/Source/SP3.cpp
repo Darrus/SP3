@@ -21,6 +21,8 @@ void SP3::Init()
 {
 	SceneBase::Init();
 
+	Math::InitRNG();
+
 	map = new TileMap();
 	map->Init((int)m_screenHeight, (int)m_screenWidth, 32);
 	map->LoadMap("Level01");
@@ -40,8 +42,6 @@ void SP3::Init()
 	camera = camFollow;
 
 	weapon = new Weapon();
-
-
 	background.Init(&camera->position,800,600);
 
 	EnemyFactory::Create("Goblin", Vector3(200.f, 200.f, 0.f), map);

@@ -2,20 +2,11 @@
 #define BULLET_H
 #include "GameObject.h"
 #include "TileMap.h"
+#include "Element.h"
 
 class Bullet : public GameObject
 {
 public:
-
-	enum ELEMENT
-	{
-		NONE,
-		FIRE,
-		LIGHTNING,
-		ICE,
-		ELEM_SIZE,
-	};
-
 	Bullet();
 	virtual ~Bullet();
 
@@ -26,7 +17,7 @@ public:
 
 	float bulletSpeed;
 	int damage;
-	ELEMENT bulletElement;
+	ELEMENTS bulletElement;
 	TileMap* map;
 };
 
