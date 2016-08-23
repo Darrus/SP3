@@ -32,6 +32,7 @@ public:
 	void SetDefaultSpeed(float speed);
 	void SetSpeed(float speed);
 	void SetState(EnemyStates* state);
+	void SetElement(ELEMENTS elem, int worth);
 
 	float GetAlertRange();
 	float GetAttackRange();
@@ -41,6 +42,8 @@ public:
 	float GetMaxHealth();
 	float GetDefaultSpeed();
 	float GetSpeed();
+	ELEMENTS GetElement();
+	int GetWorth();
 	EnemyStates* GetState();
 	Animation GetWalkLeftAnim();
 	Animation GetWalkRightAnim();
@@ -69,6 +72,9 @@ protected:
 
 	int health;
 	int maxHealth;
+
+	ELEMENTS element;
+	int captureWorth;
 
 	TileMap* map;
 	EnemyStates* state;

@@ -82,7 +82,7 @@ bool Weapon::Overheating()
 	return this->overheated;
 }
 
-void Weapon::Shoot(Bullet::ELEMENT element, TileMap* map)
+void Weapon::Shoot(ELEMENTS element, TileMap* map)
 { 
 	if (fireRate < 0.f)
 	{

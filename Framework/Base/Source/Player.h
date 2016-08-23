@@ -5,6 +5,7 @@
 #include "TileMap.h"
 #include "SpriteAnimation.h"
 #include "Weapon.h"
+#include "NetBullet.h"
 
 class Player : public GameObject
 {
@@ -47,21 +48,25 @@ public:
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
+	void AddBullet(ELEMENTS elem, int amount);
+
 	int GetWeaponType();
+
 
 private:
 	void Move(double dt);
-	void Jump(double dt);
+	void CycleBullets();
+	void ChangeWeapon();
 	void CollisionCheck(double dt);
+	void PlayerJump(double dt);
+	void ShootWeapon();
+	void TossNet();
+
 	void playerDeath();
 	void selectSkill();
-	void cycleBullets();
 	void useItem();
-	void changeWeapon();
-	void playerJump(double dt);
-
-	void ShootWeapon();
 	void regainHealth();
+
 
 	const float PLAYER_SPEED;
 	const float JUMP_SPEED;
@@ -89,7 +94,9 @@ private:
 	float mouseX, mouseY;
 
 	Weapon* weapon[2];
-	Bullet::ELEMENT bulletElem;
+	int bulletElem[ELEM_SIZE];
+	ELEMENTS selectedElem;
+	NetBullet* net;
 
 	bool isUsed;
 	int weaponType;

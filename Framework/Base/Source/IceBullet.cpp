@@ -6,7 +6,7 @@ IceBullet::IceBullet()
 {
 	bulletElement = ICE;
 	bulletSpeed = 500.f;
-	damage = 5;
+	damage = 2;
 }
 
 IceBullet::~IceBullet()
@@ -30,6 +30,7 @@ void IceBullet::HandleInteraction(GameObject* go, double dt)
 		{
 			Status* slow = new SlowStatus();
 			enemy->status.AddStatus(slow);
+			enemy->TakeDamage(damage);
 			active = false;
 		}
 	}

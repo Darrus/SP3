@@ -42,6 +42,7 @@ void GoManager::Update(double dt)
 		else
 		{
 			delete m_goList[i];
+			m_goList[i] = NULL;
 			m_goList.erase(m_goList.begin() + i);
 			objCount--;
 		}

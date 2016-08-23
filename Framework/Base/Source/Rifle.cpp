@@ -7,7 +7,7 @@ Rifle::Rifle()
 {
 	fireRate = 0.f;
 	defaultFireRate = 0.1f;
-	damage = 20;
+	damage = 10;
 	bulletSpeed = 200.f;
 	weaponType = WEAPON_TYPE::RIFLE;
 	overheated = false;

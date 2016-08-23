@@ -73,6 +73,7 @@
     <ClInclude Include="Source\BurnStatus.h" />
     <ClInclude Include="Source\CameraFree.h" />
     <ClInclude Include="Source\DepthFBO.h" />
+    <ClInclude Include="Source\Element.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />
     <ClInclude Include="Source\EnemyBullet.h" />

@@ -6,7 +6,7 @@ LightningBullet::LightningBullet()
 {
 	bulletElement = LIGHTNING;
 	bulletSpeed = 400.f;
-	damage = 5;
+	damage = 2;
 }
 
 LightningBullet::~LightningBullet()
@@ -28,8 +28,13 @@ void LightningBullet::HandleInteraction(GameObject* go, double dt)
 		float size = enemy->scale.x + scale.x;
 		if (dist < size * size)
 		{
-			Status* stun = new StunStatus();
-			enemy->status.AddStatus(stun);
+			int chance = Math::RandIntMinMax(0, 10);
+			if (chance <= 5)
+			{
+				Status* stun = new StunStatus();
+				enemy->status.AddStatus(stun);
+			}
+			enemy->TakeDamage(damage);
 			active = false;
 		}
 	}
