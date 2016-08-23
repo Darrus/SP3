@@ -247,6 +247,11 @@ void SP3::RenderUI()
 		RenderObjOnScreen(meshList[GEO_RIFLE],25.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 		break;
+	case 2:
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_SHOTGUN], 25.f, 10.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+		break;
 	}
 
 	modelStack.PushMatrix();

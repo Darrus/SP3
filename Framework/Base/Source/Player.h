@@ -88,7 +88,7 @@ private:
 
 	float mouseX, mouseY;
 
-	Weapon* weapon[2];
+	Weapon* weapon[3];
 	Bullet::ELEMENT bulletElem;
 
 	bool isUsed;
