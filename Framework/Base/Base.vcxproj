@@ -36,6 +36,7 @@
     <ClCompile Include="Source\LevelEditor.cpp" />
     <ClCompile Include="Source\LifeStealBullet.cpp" />
     <ClCompile Include="Source\LightningBullet.cpp" />
+    <ClCompile Include="Source\LightningParticle.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -47,6 +48,8 @@
     <ClCompile Include="Source\NetBullet.cpp" />
     <ClCompile Include="Source\ParallaxBackground.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ParticleFactory.cpp" />
+    <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\Pistol.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\RangeEnemy.cpp" />
@@ -69,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Background.h" />
+    <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\Bullet.h" />
     <ClInclude Include="Source\BulletFactory.h" />
     <ClInclude Include="Source\BurnStatus.h" />
@@ -89,8 +93,11 @@
     <ClInclude Include="Source\IceBullet.h" />
     <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
+    <ClInclude Include="Source\LightningParticle.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
     <ClInclude Include="Source\NetBullet.h" />
+    <ClInclude Include="Source\ParticleFactory.h" />
+    <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\Pistol.h" />
     <ClInclude Include="Source\Key.h" />
     <ClInclude Include="Source\LevelEditor.h" />

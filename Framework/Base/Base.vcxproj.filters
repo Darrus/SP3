@@ -70,12 +70,6 @@
     <Filter Include="Source Files\GameObjects\Bullets">
       <UniqueIdentifier>{80283a20-2480-487a-9eb5-7f98b16768bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\Factories">
-      <UniqueIdentifier>{b6b48c0b-a9e8-4429-b4df-8d400966da79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Factories">
-      <UniqueIdentifier>{e6d8db44-0b65-4bb3-b843-e07faaf2a1df}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\StatusEffects">
       <UniqueIdentifier>{ad275fc2-4ba4-452e-9e34-2b1763e64044}</UniqueIdentifier>
     </Filter>
@@ -84,6 +78,18 @@
     </Filter>
     <Filter Include="Header Files\Others">
       <UniqueIdentifier>{cd485ad8-bd5f-427a-a32b-c995ea902f46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Particles">
+      <UniqueIdentifier>{7745e546-f910-491a-92f3-374e498be35c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Particles">
+      <UniqueIdentifier>{4db49bc4-5bc5-46ea-bf37-4a0623ea9d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Factories">
+      <UniqueIdentifier>{e6d8db44-0b65-4bb3-b843-e07faaf2a1df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factories">
+      <UniqueIdentifier>{b6b48c0b-a9e8-4429-b4df-8d400966da79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +133,6 @@
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\DepthFBO.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Particle.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\shader.cpp">
@@ -220,10 +223,10 @@
       <Filter>Source Files\GameObjects\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="Source\BulletFactory.cpp">
-      <Filter>Source Files\GameObjects\Factories</Filter>
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyFactory.cpp">
-      <Filter>Source Files\GameObjects\Factories</Filter>
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
     <ClCompile Include="Source\NetBullet.cpp">
       <Filter>Source Files\GameObjects\Bullets</Filter>
@@ -251,6 +254,18 @@
     </ClCompile>
     <ClCompile Include="Source\LifeStealBullet.cpp">
       <Filter>Source Files\GameObjects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Particle.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleManager.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightningParticle.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,9 +389,6 @@
     <ClInclude Include="Source\Weapon.h">
       <Filter>Header Files\GameObjects\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Particle.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Bullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
@@ -390,10 +402,10 @@
       <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="Source\BulletFactory.h">
-      <Filter>Header Files\GameObjects\Factories</Filter>
+      <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyFactory.h">
-      <Filter>Header Files\GameObjects\Factories</Filter>
+      <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\NetBullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
@@ -436,6 +448,21 @@
     </ClInclude>
     <ClInclude Include="Source\LifeStealBullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Particle.h">
+      <Filter>Header Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleManager.h">
+      <Filter>Header Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightningParticle.h">
+      <Filter>Header Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleFactory.h">
+      <Filter>Header Files\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 
 NetBullet::NetBullet()
 {
-	bulletSpeed = 100.f;
+	bulletSpeed = 250.f;
 }
 
 NetBullet::~NetBullet()

@@ -25,7 +25,6 @@ struct Animation
 	bool unlimited;
 	bool ended;
 	bool animActive;
-
 };
 
 

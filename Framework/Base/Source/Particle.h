@@ -2,6 +2,8 @@
 #define PARTICLE_H
 
 #include "Vector3.h"
+#include "GameObject.h"
+#include "Mesh.h"
 
 enum ParticleObject_TYPE
 {
@@ -17,6 +19,8 @@ public:
 	ParticleObject(ParticleObject_TYPE = P_SNOW);
 	~ParticleObject();
 
+	virtual void Update(double dt);
+
 	ParticleObject_TYPE  type; // Particle Type
 	Vector3 pos; // Position
 	Vector3 vel; // Velocity
@@ -24,6 +28,8 @@ public:
 	float rotation;
 	float rotationSpeed;
 
+	GameObject* go;
+	Mesh* mesh;
 	bool active;
 };
 

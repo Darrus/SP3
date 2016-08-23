@@ -13,3 +13,8 @@ active(false)
 ParticleObject::~ParticleObject()
 {
 }
+
+void ParticleObject::Update(double dt)
+{
+
+}

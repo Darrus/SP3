@@ -211,8 +211,6 @@ void SP3::RenderWeaponObject(GameObject* go)
 			RenderMesh(meshList[GEO_LASER], false);
 			modelStack.PopMatrix();
 		}
-	
-
 	}
 	else
 	{

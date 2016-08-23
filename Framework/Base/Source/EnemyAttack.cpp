@@ -23,7 +23,6 @@ EnemyStates* EnemyAttack::CheckState()
 	float dist = (player->pos - enemy->pos).LengthSquared();
 	if (dist > enemy->GetAttackRange() * enemy->GetAttackRange())
 		return new EnemyChase();
-
 	return this;
 }
 
