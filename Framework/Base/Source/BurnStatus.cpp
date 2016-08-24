@@ -1,10 +1,10 @@
 #include "BurnStatus.h"
 #include "ParticleFactory.h"
+#include "ParticleManager.h"
 #include <istream>
 
 using std::stringstream;
-BurnStatus::BurnStatus() :
-particle(NULL)
+BurnStatus::BurnStatus()
 {
 	duration = 5.f;
 	timeBetweenBurn = 0.f;
@@ -13,8 +13,7 @@ particle(NULL)
 
 BurnStatus::~BurnStatus()
 {
-	if (particle)
-		particle->active = false;
+	ParticleManager::GetInstance().Remove(particle);
 }
 
 void BurnStatus::Update(double dt)
@@ -35,5 +34,5 @@ void BurnStatus::ApplyStatus(GameObject* go)
 {
 	enemy = dynamic_cast<Enemy*>(go);
 	damage = 0.05 * enemy->GetMaxHealth();
-	//particle = ParticleFactory::CreateFollow(P_BURN, enemy);
+	particle = ParticleFactory::CreateFollow(P_BURN, enemy);
 }

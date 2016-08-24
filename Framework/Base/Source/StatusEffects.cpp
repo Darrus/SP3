@@ -11,7 +11,8 @@ StatusEffects::~StatusEffects()
 	map<string, Status*>::iterator it = statusList.begin();
 	while (it != statusList.end())
 	{
-		delete it->second;
+		if (it->second)
+			delete it->second;
 		it = statusList.erase(it);
 	}
 }
