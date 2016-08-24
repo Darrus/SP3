@@ -53,7 +53,11 @@ public:
 
 	int GetWeaponType();
 
+	ELEMENTS GetElement();
+	int GetElementCount(ELEMENTS elem);
+
 	AABB_2D collider;
+
 private:
 	void Move(double dt);
 	void CycleBullets();

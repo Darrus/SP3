@@ -7,6 +7,7 @@
 #include "EnemyFactory.h"
 
 
+
 SP3::SP3()
 {
 
@@ -53,6 +54,7 @@ void SP3::Init()
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
+
 }
 
 void SP3::Update(double dt)
@@ -118,24 +120,12 @@ void SP3::Render()
 			Enemy* enemy = dynamic_cast<Enemy*>(go);
 			if (enemy)
 			{
-				
+
 			}
 		}
 	}
 
 	RenderUI();
-
-	std::stringstream text;
-	text << fps;
-	RenderTextOnScreen(meshList[GEO_TEXT], text.str() , Color(0.f, 1.f, 0.f), 20, 10, 10);
-
-	std::stringstream text2;
-	text2 << player->GetPlayerHealth();
-	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 98, 547);
-
-	std::stringstream text3;
-	text3 << (int)player->GetWeapon()->GetOverheatBar();
-	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 98, 520);
 }
 
 void SP3::Exit()
@@ -252,8 +242,57 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->GetOverheatBar() * 2, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
 
+
+	if (player->GetElement() == ELEMENTS::NONE)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_WEAPONUI1], 35.f, 15.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+	}
+	else if (player->GetElement() ==  ELEMENTS::FIRE)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_WEAPONUI2], 35.f, 15.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+	}
+	else if (player->GetElement() == ELEMENTS::LIGHTNING)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_WEAPONUI3], 35.f, 15.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+	}
+	else if (player->GetElement() == ELEMENTS::ICE)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_WEAPONUI4], 35.f, 15.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+	}
+	else if (player->GetElement() == ELEMENTS::LIFESTEAL)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_WEAPONUI5], 35.f, 15.f, 10.f, 170, 98);
+		modelStack.PopMatrix();
+	}
+
+
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_WEAPONUI], 35.f, 15.f, 10.f, 170, 98);
+	RenderObjOnScreen(meshList[GEO_WEAPONUI1], 87.5f, 10.f, 10.f, 105, 98);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_BULLET1], 5, 5, 5, 70, 98);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_BULLET2], 5, 5, 5, 90, 98);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_BULLET3], 5, 5, 5, 110, 98);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_BULLET4], 5, 5, 5, 130, 98);
 	modelStack.PopMatrix();
 
 	switch (player->GetWeaponType())
@@ -302,5 +341,31 @@ void SP3::RenderUI()
 		break;
 	}
 
+	std::stringstream text;
+	text << fps;
+	RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
 
+	std::stringstream text2;
+	text2 << player->GetPlayerHealth();
+	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 98, 659);
+
+	std::stringstream text3;
+	text3 << (int)player->GetWeapon()->GetOverheatBar();
+	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 98, 626);
+
+	std::stringstream text4;
+	text4 << player->GetElementCount(ELEMENTS::FIRE);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text4.str(), Color(1.f, 1.f, 1.f), 23, 490, 643);
+
+	std::stringstream text5;
+	text5 << player->GetElementCount(ELEMENTS::LIGHTNING);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text5.str(), Color(1.f, 1.f, 1.f), 23, 625, 643);
+
+	std::stringstream text6;
+	text6 << player->GetElementCount(ELEMENTS::ICE);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text6.str(), Color(1.f, 1.f, 1.f), 23, 755, 643);
+
+	std::stringstream text7;
+	text7 << player->GetElementCount(ELEMENTS::ICE);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 23, 885, 643);
 }
