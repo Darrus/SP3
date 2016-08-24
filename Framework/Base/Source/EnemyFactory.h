@@ -11,6 +11,8 @@ public:
 	{
 		Goblin,
 		Range,
+		BigGoblin,
+		BigRange,
 		ENEMY_SIZE
 	};
 

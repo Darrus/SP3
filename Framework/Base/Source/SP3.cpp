@@ -48,11 +48,31 @@ void SP3::Init()
 	EnemyFactory::Create("Random", Vector3(200.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(100.f, 600.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(200.f, 400.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(400.f, 500.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(600.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(550.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(600.f, 700.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(900.f, 650.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1000.f, 480.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1100.f, 300.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(930.f, 720.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1200.f, 800.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1400.f, 800.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(1500.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(1700.f, 200.f, 0.f), map);
-	EnemyFactory::Create("Random", Vector3(2000.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1700.f, 100.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2000.f, 100.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(1950.f, 645.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2340.f, 600.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2477.f, 400.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(3020.f, 666.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2724.f, 538.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2800.f, 794.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(3389.f, 602.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(3219.f, 378.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(3219.f, 100.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2982.f, 100.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(2576.f, 100.f, 0.f), map);
 	
 	fps = 0.f;
 
@@ -60,11 +80,14 @@ void SP3::Init()
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 
+
 }
 
 void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
+	std::cout << player->pos.x << " " << player->pos.y << std::endl;
+
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);

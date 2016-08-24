@@ -98,10 +98,10 @@ void Enemy::MapCollision(double dt)
 	dir = newPos.x - pos.x;
 
 	// Checks next tile according to player's scale
-	checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
-	checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
-	checkUp = (newPos.y + scale.y * 0.5f) / tileSize;
-	checkDown = (newPos.y - scale.y * 0.5f) / tileSize;
+	checkRight = (newPos.x + 1.f + scale.x * 0.5f) / tileSize;
+	checkLeft = (newPos.x - 1.f - scale.x * 0.5f) / tileSize;
+	checkUp = (newPos.y + 1.f + scale.y * 0.5f) / tileSize;
+	checkDown = (newPos.y - 1.f - scale.y * 0.5f) / tileSize;
 
 	if (dir > 0)
 		checkX = checkRight;
@@ -112,7 +112,7 @@ void Enemy::MapCollision(double dt)
 	if (isGrounded) // If enemy is grounded
 	{
 		// Checks the tile below enemy
-		if (map->collisionMap[currentY - 1][checkX] != 1)
+		if (map->collisionMap[checkDown][checkX] != 1)
 		{
 			isGrounded = false;
 			collidedWall = true;
@@ -139,16 +139,8 @@ void Enemy::MapCollision(double dt)
 		if (map->collisionMap[checkDown][checkLeft] == 1 || map->collisionMap[checkDown][checkRight] == 1)
 		{
 			isGrounded = true;
-			newPos.y = (currentY * tileSize) + tileSize * 0.5f;
+			newPos.y = checkDown * tileSize + scale.y * 0.5f + tileSize;
 			vel.y = 0.f;
-		}
-
-		// Checks Up
-		if (map->collisionMap[checkUp][checkLeft] == 1 || map->collisionMap[checkUp][checkRight] == 1)
-		{
-			newPos.y = checkUp * tileSize - tileSize * 0.5f;
-			if (vel.y > 0.f)
-				vel.y = 0.f;
 		}
 	}
 
