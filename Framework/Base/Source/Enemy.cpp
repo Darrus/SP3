@@ -112,7 +112,7 @@ void Enemy::MapCollision(double dt)
 	if (isGrounded) // If enemy is grounded
 	{
 		// Checks the tile below enemy
-		if (map->collisionMap[currentY - 1][checkRight] != 1 || map->collisionMap[currentY - 1][checkLeft] != 1)
+		if (map->collisionMap[currentY - 1][checkX] != 1)
 		{
 			isGrounded = false;
 			collidedWall = true;

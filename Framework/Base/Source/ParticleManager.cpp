@@ -59,8 +59,9 @@ void ParticleManager::ClearList()
 {
 	while (!store.empty())
 	{
-		delete store.back();
-		store.back() = NULL;
+		ParticleObject* particle = store.back();
+		delete particle;
+		particle = NULL;
 		store.pop_back();
 	}
 }
