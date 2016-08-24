@@ -366,6 +366,6 @@ void SP3::RenderUI()
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text6.str(), Color(1.f, 1.f, 1.f), 23, 755, 643);
 
 	std::stringstream text7;
-	text7 << player->GetElementCount(ELEMENTS::ICE);
+	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 23, 885, 643);
 }

@@ -339,15 +339,10 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon[weaponType])
-	{
 		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0) && bulletElem[selectedElem] != 0)
-		{
-			weapon[weaponType]->Shoot(selectedElem, map);
-			if (selectedElem != NONE)
-				bulletElem[selectedElem] -= 1;
-		}
-	}
-		
+			if (weapon[weaponType]->Shoot(selectedElem, map))
+				if (selectedElem != NONE)
+					bulletElem[selectedElem] -= 1;
 }
 
 void Player::TossNet()

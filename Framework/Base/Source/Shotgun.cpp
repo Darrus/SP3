@@ -24,7 +24,7 @@ Shotgun::~Shotgun()
 
 }
 
-void Shotgun::Shoot(ELEMENTS element, TileMap* map)
+bool Shotgun::Shoot(ELEMENTS element, TileMap* map)
 {
 	if (fireRate < 0.f)
 	{
@@ -47,5 +47,7 @@ void Shotgun::Shoot(ELEMENTS element, TileMap* map)
 			overheated = true;
 			overheatBar = 100.f;
 		}
+		return true;
 	}
+	return false;
 }

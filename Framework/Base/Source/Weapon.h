@@ -20,7 +20,7 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	virtual void Shoot(ELEMENTS element, TileMap* map);
+	virtual bool Shoot(ELEMENTS element, TileMap* map);
 	virtual bool Overheating();
 
 	void setFireRate(float fireRate);

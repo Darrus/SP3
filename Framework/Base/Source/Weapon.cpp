@@ -83,7 +83,7 @@ bool Weapon::Overheating()
 	return this->overheated;
 }
 
-void Weapon::Shoot(ELEMENTS element, TileMap* map)
+bool Weapon::Shoot(ELEMENTS element, TileMap* map)
 { 
 	if (fireRate < 0.f)
 	{
@@ -95,7 +95,9 @@ void Weapon::Shoot(ELEMENTS element, TileMap* map)
 			overheated = true;
 			overheatBar = 100.f;
 		}
+		return true;
 	}
+	return false;
 }
 
 void Weapon::ReferencePlayerPos(Vector3* pos)

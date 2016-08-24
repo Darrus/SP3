@@ -7,7 +7,7 @@ class Shotgun : public Weapon
 public:
 	Shotgun();
 	virtual ~Shotgun();
-	virtual void Shoot(ELEMENTS element, TileMap* map);
+	virtual bool Shoot(ELEMENTS element, TileMap* map);
 };
 
 
