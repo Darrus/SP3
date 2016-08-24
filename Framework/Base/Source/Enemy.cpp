@@ -25,9 +25,12 @@ Enemy::~Enemy()
 	
 }
 
-void Enemy::Init(TileMap* map)
+void Enemy::Init(TileMap* map, Vector3 pos, Vector3 scale)
 {
 	this->map = map;
+	this->pos = pos;
+	this->scale = scale;
+	collider.Init(&this->pos, scale);
 }
 
 void Enemy::Update(double dt)
@@ -53,6 +56,7 @@ void Enemy::Update(double dt)
 	if (health <= 0 && active)
 		active = false;
 
+	collider.Update();
 }
 
 void Enemy::HandleInteraction(GameObject* go, double dt)

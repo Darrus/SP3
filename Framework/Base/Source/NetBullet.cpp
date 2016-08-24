@@ -22,9 +22,7 @@ void NetBullet::HandleInteraction(GameObject* go, double dt)
 	Enemy* enemy = dynamic_cast<Enemy*>(go);
 	if (enemy)
 	{
-		float dist = (enemy->pos - pos).LengthSquared();
-		float size = enemy->scale.x + scale.x;
-		if (dist < size * size)
+		if (collider.CheckCollision(enemy->collider))
 		{
 			if ((float)enemy->GetHealth() / (float)enemy->GetMaxHealth() < 0.4f)
 			{

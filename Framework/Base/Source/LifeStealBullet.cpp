@@ -31,9 +31,7 @@ void LifeStealBullet::HandleInteraction(GameObject* go, double dt)
 
 	if (enemy)
 	{
-		float dist = (enemy->pos - pos).LengthSquared();
-		float size = enemy->scale.x + scale.x;
-		if (dist < size * size)
+		if (collider.CheckCollision(enemy->collider))
 		{
 			int playerTmpHP = player->GetPlayerHealth();
 			playerTmpHP += lifeStealRate;

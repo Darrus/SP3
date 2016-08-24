@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AABB_2D.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Source\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AABB_2D.h" />
     <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\Bullet.h" />

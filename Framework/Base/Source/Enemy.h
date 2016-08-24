@@ -5,6 +5,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "StatusEffects.h"
+#include "AABB_2D.h"
 
 class EnemyStates;
 
@@ -14,7 +15,7 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	virtual void Init(TileMap* map);
+	virtual void Init(TileMap* map, Vector3 pos, Vector3 scale);
 	virtual void Update(double dt);
 	virtual void Attack(Player* player);
 	virtual void HandleInteraction(GameObject* go, double dt);
@@ -52,6 +53,8 @@ public:
 	Vector3 newPos;
 	bool collidedWall;
 	StatusEffects status;
+
+	AABB_2D collider;
 protected:
 	void MapCollision(double dt);
 

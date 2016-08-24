@@ -96,9 +96,12 @@ void Player::AddBullet(ELEMENTS elem, int amount)
 	bulletElem[elem] += amount;
 }
 
-void Player::Init(TileMap* map)
+void Player::Init(TileMap* map, Vector3 pos, Vector3 scale)
 {
 	this->map = map;
+	this->pos = pos;
+	this->scale = scale;
+	collider.Init(&this->pos, scale);
 }
 
 void Player::Update(double dt)
@@ -113,6 +116,8 @@ void Player::Update(double dt)
 	ChangeWeapon();
 	ShootWeapon();
 	TossNet();
+
+	collider.Update();
 
 	for (int i = 0; i < 4; ++i)
 	{

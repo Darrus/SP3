@@ -6,6 +6,7 @@
 #include "SpriteAnimation.h"
 #include "Weapon.h"
 #include "NetBullet.h"
+#include "AABB_2D.h"
 
 class Player : public GameObject
 {
@@ -29,7 +30,7 @@ public:
 	Player();
 	~Player();
 
-	virtual void Init(TileMap* map);
+	virtual void Init(TileMap* map, Vector3 pos, Vector3 scale);
 	virtual void Update(double dt);
 	void TakeDamage(int damage);
 	
@@ -52,7 +53,7 @@ public:
 
 	int GetWeaponType();
 
-
+	AABB_2D collider;
 private:
 	void Move(double dt);
 	void CycleBullets();

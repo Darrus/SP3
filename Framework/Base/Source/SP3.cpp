@@ -29,9 +29,7 @@ void SP3::Init()
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
-	player->Init(map);
-	player->pos.Set(50.f, 100.f, 0.f);
-	player->scale.Set(32.f, 32.f, 32.f);
+	player->Init(map, Vector3(50.f, 100.f, 0.f), Vector3(32.f, 32.f, 32.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 

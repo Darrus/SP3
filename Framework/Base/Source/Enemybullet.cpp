@@ -20,9 +20,7 @@ void EnemyBullet::HandleInteraction(GameObject* go, double dt)
 	Player* player = dynamic_cast<Player*>(go);
 	if (player)
 	{
-		float dist = (player->pos - pos).LengthSquared();
-		float combinedRadius = player->scale.x + scale.x;
-		if (dist < combinedRadius * combinedRadius)
+		if (collider.CheckCollision(player->collider))
 		{
 			player->TakeDamage(damage);
 			active = false;

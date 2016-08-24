@@ -12,11 +12,6 @@ MeleeEnemy::~MeleeEnemy()
 		delete state;
 }
 
-void MeleeEnemy::Init(TileMap* map)
-{
-	this->map = map;
-}
-
 void MeleeEnemy::Update(double dt)
 {
 	Enemy::Update(dt);

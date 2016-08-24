@@ -19,9 +19,7 @@ void FireBullet::HandleInteraction(GameObject* go, double dt)
 	Enemy* enemy = dynamic_cast<Enemy*>(go);
 	if (enemy)
 	{
-		float dist = (enemy->pos - pos).LengthSquared();
-		float size = enemy->scale.x + scale.x;
-		if (dist < size * size)
+		if (collider.CheckCollision(enemy->collider))
 		{
 			Status* burn = new BurnStatus();
 			enemy->status.AddStatus(burn);

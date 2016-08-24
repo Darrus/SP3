@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "TileMap.h"
 #include "Element.h"
-
+#include "AABB_2D.h"
 class Bullet : public GameObject
 {
 public:
@@ -20,6 +20,7 @@ public:
 	int damage;
 	ELEMENTS bulletElement;
 	TileMap* map;
+	AABB_2D collider;
 };
 
 #endif

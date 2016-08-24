@@ -19,11 +19,8 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	if (name == "Goblin")
 	{
 		MeleeEnemy* enemy = new MeleeEnemy();
-		enemy->Init(map);
-		enemy->pos = pos;
+		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->scale.Set(32.f, 32.f, 32.f);
-		enemy->active = true;
 		enemy->SetWalkLeftAnim(15, 17, 1.f);
 		enemy->SetWalkRightAnim(27, 29, 1.f);
 		enemy->SetAlertRange(50.f);
@@ -34,6 +31,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		enemy->SetTimeBetweenAttack(1.f);
 		enemy->SetHealth(100);
 		enemy->SetElement(FIRE, 10);
+		enemy->active = true;
 		GoManager::GetInstance().Add(enemy);
 		return enemy;
 	}
@@ -41,11 +39,8 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	if (name == "Range")
 	{
 		RangeEnemy* enemy = new RangeEnemy();
-		enemy->Init(map);
-		enemy->pos = pos;
+		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->scale.Set(32.f, 32.f, 32.f);
-		enemy->active = true;
 		enemy->SetWalkLeftAnim(60, 62, 1.f);
 		enemy->SetWalkRightAnim(72, 74, 1.f);
 		enemy->SetAlertRange(150.f);
@@ -56,6 +51,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		enemy->SetTimeBetweenAttack(1.f);
 		enemy->SetHealth(100);
 		enemy->SetElement(LIGHTNING, 10);
+		enemy->active = true;
 		GoManager::GetInstance().Add(enemy);
 		return enemy;
 	}

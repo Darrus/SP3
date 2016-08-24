@@ -10,6 +10,7 @@ Bullet::Bullet()
 	bulletSpeed = 750.f;
 	damage = 5;
 	active = false;
+	collider.Init(&this->pos, scale);
 }
 
 Bullet::~Bullet()
@@ -20,6 +21,7 @@ Bullet::~Bullet()
 void Bullet::Update(double dt)
 {
 	vel.y -= 2.f;
+	collider.Update();
 	pos += vel * dt;
 	CheckCollision();
 }
@@ -29,9 +31,7 @@ void Bullet::HandleInteraction(GameObject* go, double dt)
 	Enemy* enemy = dynamic_cast<Enemy*>(go);
 	if (enemy)
 	{
-		float dist = (enemy->pos - pos).LengthSquared();
-		float size = enemy->scale.x + scale.x;
-		if (dist < size * size)
+		if (collider.CheckCollision(enemy->collider))
 		{
 			enemy->TakeDamage(damage);
 			active = false;

@@ -13,11 +13,6 @@ RangeEnemy::~RangeEnemy()
 
 }
 
-void RangeEnemy::Init(TileMap* map)
-{
-	this->map = map;
-}
-
 void RangeEnemy::Update(double dt)
 {
 	Enemy::Update(dt);
@@ -52,7 +47,7 @@ void RangeEnemy::Attack(Player* player)
 		attackCooldown = timeBetweenAttack;
 		Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//Bullet.tga", map);
 		bullet->pos = pos;
-		bullet->bulletSpeed = 200.f;
+		bullet->bulletSpeed = 400.f;
 		bullet->damage = attackDamage;
 		bullet->vel = (player->pos - pos).Normalized() * bullet->bulletSpeed;
 	}
