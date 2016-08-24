@@ -1,5 +1,8 @@
 #include "BurnStatus.h"
+#include "ParticleFactory.h"
+#include <istream>
 
+using std::stringstream;
 BurnStatus::BurnStatus()
 {
 	duration = 5.f;
@@ -20,6 +23,9 @@ void BurnStatus::Update(double dt)
 	{
 		enemy->TakeDamage(damage);
 		timeBetweenBurn = 1.f;
+		stringstream ss;
+		ss << damage;
+		ParticleFactory::CreateText(ss.str(), 1.f, Vector3(enemy->pos.x, enemy->pos.y + enemy->scale.y * 0.5f, enemy->pos.z), Vector3(20.f, 20.f, 1.f));
 	}
 }
 

@@ -7,16 +7,15 @@
 
 enum ParticleObject_TYPE
 {
-	P_SNOWFLAKE,
-	P_SNOW,
-	P_SMOKE,
+	P_NORMAL,
+	P_TEXT,
 	P_TOTAL
 };
 
 class ParticleObject
 {
 public:
-	ParticleObject(ParticleObject_TYPE = P_SNOW);
+	ParticleObject(ParticleObject_TYPE = P_NORMAL);
 	~ParticleObject();
 
 	virtual void Update(double dt);

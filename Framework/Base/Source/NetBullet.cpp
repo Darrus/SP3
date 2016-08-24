@@ -1,6 +1,7 @@
 #include "NetBullet.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "ParticleFactory.h"
 
 NetBullet::NetBullet()
 {
@@ -28,7 +29,10 @@ void NetBullet::HandleInteraction(GameObject* go, double dt)
 			{
 				enemy->active = false;
 				player->AddBullet(enemy->GetElement(), enemy->GetWorth());
+				ParticleFactory::CreateText("Captured!", 1.f, pos, Vector3(15.f, 15.f, 1.f));
 			}
+			else
+				ParticleFactory::CreateText("Failed!", 1.f, pos, Vector3(15.f, 15.f, 1.f));
 			active = false;
 		}
 	}

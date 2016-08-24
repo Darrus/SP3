@@ -5,6 +5,8 @@
 #include <sstream>
 #include "GoManager.h"
 #include "EnemyFactory.h"
+#include "ParticleManager.h"
+#include "TextParticle.h"
 
 
 
@@ -71,9 +73,9 @@ void SP3::Update(double dt)
 	camera->Update(dt);
 	background.Update();
 	GoManager::GetInstance().Update(dt);
+	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 }
-
 
 void SP3::Render()
 {
@@ -114,7 +116,7 @@ void SP3::Render()
 	for (vector<GameObject *>::iterator it = GoManager::GetInstance().GetList().begin(); it != GoManager::GetInstance().GetList().end(); ++it)
 	{
 		GameObject *go = (GameObject *)*it;
-		if (go->active == true)
+		if (go->active)
 		{
 			RenderObject(go);
 			Enemy* enemy = dynamic_cast<Enemy*>(go);
@@ -124,6 +126,8 @@ void SP3::Render()
 			}
 		}
 	}
+
+	RenderParticle();
 
 	RenderUI();
 }
@@ -174,7 +178,6 @@ void SP3::RenderObject(GameObject* go)
 	RenderMesh(go->mesh);
 	modelStack.PopMatrix();
 }
-
 
 void SP3::RenderWeaponObject(GameObject* go)
 {
@@ -368,4 +371,24 @@ void SP3::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 23, 885, 643);
+}
+
+void SP3::RenderParticle()
+{
+	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
+	{
+		ParticleObject* particle = (ParticleObject *)*it;
+		if (particle->active)
+		{
+			if (particle->type == P_TEXT)
+			{
+				TextParticle* textParticle = dynamic_cast<TextParticle*>(particle);
+				modelStack.PushMatrix();
+				modelStack.Translate(textParticle->pos.x, textParticle->pos.y, textParticle->pos.z);
+				modelStack.Scale(textParticle->scale.x, textParticle->scale.y, textParticle->scale.z);
+				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
+				modelStack.PopMatrix();
+			}
+		}
+	}
 }

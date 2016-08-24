@@ -67,6 +67,7 @@
     <ClCompile Include="Source\Status.cpp" />
     <ClCompile Include="Source\StatusEffects.cpp" />
     <ClCompile Include="Source\StunStatus.cpp" />
+    <ClCompile Include="Source\TextParticle.cpp" />
     <ClCompile Include="Source\TileMap.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Source\Status.h" />
     <ClInclude Include="Source\StatusEffects.h" />
     <ClInclude Include="Source\StunStatus.h" />
+    <ClInclude Include="Source\TextParticle.h" />
     <ClInclude Include="Source\TileMap.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />

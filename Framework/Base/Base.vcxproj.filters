@@ -268,7 +268,10 @@
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
     <ClCompile Include="Source\AABB_2D.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextParticle.cpp">
+      <Filter>Source Files\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -468,7 +471,10 @@
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\AABB_2D.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextParticle.h">
+      <Filter>Header Files\Particles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

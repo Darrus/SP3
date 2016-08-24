@@ -19,7 +19,7 @@ public:
 	~ParticleFactory();
 	
 	static ParticleObject* Create(PARTICLES_TYPE type, Vector3 pos, Vector3 view, GameObject* go = NULL);
-	static ParticleObject* CreateText(string text, float duration);
+	static ParticleObject* CreateText(string text, float duration, Vector3 pos, Vector3 scale);
 };
 
 #endif

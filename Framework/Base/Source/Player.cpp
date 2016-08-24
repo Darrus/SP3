@@ -341,7 +341,7 @@ void Player::ShootWeapon()
 	if (weapon[weaponType])
 		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0) && bulletElem[selectedElem] != 0)
 			if (weapon[weaponType]->Shoot(selectedElem, map))
-				if (selectedElem != NONE)
+				if (bulletElem[selectedElem] > 0)
 					bulletElem[selectedElem] -= 1;
 }
 
