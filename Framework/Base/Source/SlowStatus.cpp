@@ -2,7 +2,7 @@
 
 SlowStatus::SlowStatus()
 {
-	duration = 1.f;
+	duration = 5.f;
 	name = "Slow";
 }
 
