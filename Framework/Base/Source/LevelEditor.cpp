@@ -114,7 +114,7 @@ void LevelEditor::RenderEditor()
 	if (editor->showTiles)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(camera->position.x + 60.f, camera->position.y + m_screenWidth * 0.4f, 0.f);
+		modelStack.Translate(camera->position.x + 60.f, camera->position.y + m_screenHeight * 0.5f, 0.f);
 		modelStack.Scale(120.f, m_screenHeight * 1.1f, 1.f);
 		RenderMesh(editor->mapbackground);
 		modelStack.PopMatrix();

@@ -2,7 +2,7 @@
 #include "Application.h"
 
 CameraFree::CameraFree() :
-CAMERA_SPEED(100),
+CAMERA_SPEED(300),
 map(NULL)
 {
 

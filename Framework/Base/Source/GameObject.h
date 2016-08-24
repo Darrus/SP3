@@ -21,8 +21,7 @@ public:
 	Vector3 scale;
 	Vector3 vel;
 
-	float mass;
-	bool active, render;
+	bool active;
 };
 
 #endif

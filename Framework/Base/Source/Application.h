@@ -32,15 +32,15 @@ public:
 	static double scrollX, scrollY;
 
 	Controller* controller;
-
+	static int m_window_width;
+	static int m_window_height;
 private:
 	Application();
 	~Application();
 
 	// Declare the window width and height as constant integer
 	const static int m_window_deadzone = 1000;
-	const static int m_window_width = 1280;
-	const static int m_window_height = 720;
+	
 
 	//Declare a window object
 	StopWatch m_timer;

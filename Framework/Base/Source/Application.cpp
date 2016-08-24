@@ -16,6 +16,8 @@
 #include "LevelEditor.h"
 
 GLFWwindow* m_window;
+int Application::m_window_width = 1280;
+int Application::m_window_height = 720;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 double Application::mouse_last_x = 0.0, Application::mouse_last_y = 0.0, 
@@ -42,8 +44,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 void resize_callback(GLFWwindow* window, int w, int h)
 {
 	glViewport(0, 0, w, h);
+	Application::GetInstance().m_window_width = w;
+	Application::GetInstance().m_window_height = h;
 }
-
 bool Application::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 {
 	return glfwGetMouseButton(m_window, key) != 0;
@@ -162,7 +165,7 @@ void Application::Init()
 	}
 
 	// Hide the cursor
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	// Controller
 	controller = new Keyboard();

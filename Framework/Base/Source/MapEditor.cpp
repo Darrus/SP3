@@ -97,7 +97,7 @@ void MapEditor::Update(double dt)
 	{
 		if (Application::scrollY > 0)
 			offset.y -= 1;
-		if (Application::scrollY < 0)
+		if (Application::scrollY < 0 && offset.y + map->GetNumOfTiles_ScreenHeight() < row)
 			offset.y += 1;
 
 		if (offset.y < 0)
@@ -153,18 +153,11 @@ void MapEditor::Update(double dt)
 		if (Application::GetInstance().IsMousePressed(0))
 		{
 			double mouseX, mouseY;
-			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
+			Application::GetMousePos(mouseX, mouseY);
+			mouseY = screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
-			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
-			tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
-			//int tileX, tileY;
-
-			//tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize();
-			//tileY = (screenHeight - (mouseY + camera->GetFineOffset().y)) / map->GetTileSize();
-
-			//tileX += camera->GetTileOffset().x;
-			//tileY += camera->GetTileOffset().y;
+			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
 			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 			{
@@ -187,11 +180,12 @@ void MapEditor::Update(double dt)
 		if (Application::GetInstance().IsMousePressed(2))
 		{
 			double mouseX, mouseY;
-			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
+			Application::GetMousePos(mouseX, mouseY);
+			mouseY = screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
-			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
-			tileY = (screenHeight / map->GetTileSize()) - tileY;
+			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
+
 			switch (state)
 			{
 			case FRONT_MAP:
@@ -209,11 +203,12 @@ void MapEditor::Update(double dt)
 		if (Application::GetInstance().IsMousePressed(1))
 		{
 			double mouseX, mouseY;
-			Application::GetMousePos(mouseX, mouseY);
 			int tileX, tileY;
+			Application::GetMousePos(mouseX, mouseY);
+			mouseY = screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
-			tileY = (mouseY - camera->GetFineOffset().y) / map->GetTileSize() - camera->GetTileOffset().y;
-			tileY = (map->GetScreenHeight() / map->GetTileSize()) - tileY;
+			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
+
 			if (tileX >= 0 && tileX < map->GetNumOfTiles_MapWidth() && tileY >= 0 && tileY < map->GetNumOfTiles_MapWidth())
 			{
 				switch (state)
