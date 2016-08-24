@@ -46,6 +46,9 @@ void SP3::Init()
 	background.Init(&camera->position,800,600);
 
 	EnemyFactory::Create("Random", Vector3(200.f, 200.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(100.f, 600.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(200.f, 400.f, 0.f), map);
+	EnemyFactory::Create("Random", Vector3(600.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(550.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(1500.f, 200.f, 0.f), map);
 	EnemyFactory::Create("Random", Vector3(1700.f, 200.f, 0.f), map);
