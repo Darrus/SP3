@@ -52,6 +52,9 @@ public:
 
 	int GetWeaponType();
 
+	ELEMENTS GetElement();
+
+	int GetElementCount(ELEMENTS elem);
 
 private:
 	void Move(double dt);

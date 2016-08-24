@@ -238,6 +238,11 @@ void Player::regainHealth()
 	}
 }
 
+ELEMENTS Player::GetElement()
+{
+	return this->selectedElem;
+}
+
 void Player::CollisionCheck(double dt)
 {
 	// Updates position
@@ -356,4 +361,9 @@ Weapon* Player::GetWeapon()
 	if (weapon[weaponType])
 		return weapon[weaponType];
 	return NULL;
+}
+
+int Player::GetElementCount(ELEMENTS elem)
+{
+	return this->bulletElem[elem];
 }

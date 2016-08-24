@@ -9,6 +9,7 @@
 #include "CameraFollow.h"
 #include "Pistol.h"
 #include "Bullet.h"
+#include "Element.h"
 
 using std::vector;
 
