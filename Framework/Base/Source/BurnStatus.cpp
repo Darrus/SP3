@@ -3,7 +3,8 @@
 #include <istream>
 
 using std::stringstream;
-BurnStatus::BurnStatus()
+BurnStatus::BurnStatus() :
+particle(NULL)
 {
 	duration = 5.f;
 	timeBetweenBurn = 0.f;
@@ -12,7 +13,8 @@ BurnStatus::BurnStatus()
 
 BurnStatus::~BurnStatus()
 {
-
+	if (particle)
+		particle->active = false;
 }
 
 void BurnStatus::Update(double dt)
@@ -33,4 +35,5 @@ void BurnStatus::ApplyStatus(GameObject* go)
 {
 	enemy = dynamic_cast<Enemy*>(go);
 	damage = 0.05 * enemy->GetMaxHealth();
+	//particle = ParticleFactory::CreateFollow(P_BURN, enemy);
 }

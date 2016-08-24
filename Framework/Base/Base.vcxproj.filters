@@ -273,6 +273,9 @@
     <ClCompile Include="Source\TextParticle.cpp">
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SpriteParticle.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -474,6 +477,9 @@
       <Filter>Header Files\Others</Filter>
     </ClInclude>
     <ClInclude Include="Source\TextParticle.h">
+      <Filter>Header Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteParticle.h">
       <Filter>Header Files\Particles</Filter>
     </ClInclude>
   </ItemGroup>

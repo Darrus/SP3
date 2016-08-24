@@ -389,6 +389,14 @@ void SP3::RenderParticle()
 				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
 				modelStack.PopMatrix();
 			}
+			else
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(particle->pos.x, particle->pos.y, particle->pos.z);
+				modelStack.Scale(particle->scale.x, particle->scale.y, particle->scale.z);
+				RenderMesh(particle->mesh);
+				modelStack.PopMatrix();
+			}
 		}
 	}
 }

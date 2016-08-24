@@ -64,6 +64,7 @@
     <ClCompile Include="Source\SoundEngine.cpp" />
     <ClCompile Include="Source\SP3.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
+    <ClCompile Include="Source\SpriteParticle.cpp" />
     <ClCompile Include="Source\Status.cpp" />
     <ClCompile Include="Source\StatusEffects.cpp" />
     <ClCompile Include="Source\StunStatus.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Source\SP3.h" />
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\CameraFollow.h" />
+    <ClInclude Include="Source\SpriteParticle.h" />
     <ClInclude Include="Source\Status.h" />
     <ClInclude Include="Source\StatusEffects.h" />
     <ClInclude Include="Source\StunStatus.h" />

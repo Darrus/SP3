@@ -3,6 +3,7 @@
 
 #include "Status.h"
 #include "Enemy.h"
+#include "SpriteParticle.h"
 
 class BurnStatus : public Status
 {
@@ -16,6 +17,8 @@ public:
 	Enemy* enemy;
 	int damage;
 	float timeBetweenBurn;
+
+	ParticleObject* particle;
 };
 
 #endif

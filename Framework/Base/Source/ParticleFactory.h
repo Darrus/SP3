@@ -7,18 +7,14 @@
 
 using std::string;
 
-enum PARTICLES_TYPE
-{
-	P_LIGHTNING,
-};
-
 class ParticleFactory
 {
 public:
 	ParticleFactory();
 	~ParticleFactory();
 	
-	static ParticleObject* Create(PARTICLES_TYPE type, Vector3 pos, Vector3 view, GameObject* go = NULL);
+	static ParticleObject* Create(ParticleObject_TYPE type, Vector3 pos, Vector3 view);
+	static ParticleObject* CreateFollow(ParticleObject_TYPE type, GameObject* go);
 	static ParticleObject* CreateText(string text, float duration, Vector3 pos, Vector3 scale);
 };
 

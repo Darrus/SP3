@@ -2,12 +2,12 @@
 #define PARTICLE_H
 
 #include "Vector3.h"
-#include "GameObject.h"
 #include "Mesh.h"
 
 enum ParticleObject_TYPE
 {
 	P_NORMAL,
+	P_BURN,
 	P_TEXT,
 	P_TOTAL
 };
@@ -22,12 +22,12 @@ public:
 
 	ParticleObject_TYPE  type; // Particle Type
 	Vector3 pos; // Position
+	Vector3 *objPos;
 	Vector3 vel; // Velocity
 	Vector3 scale; // Scale
 	float rotation;
 	float rotationSpeed;
 
-	GameObject* go;
 	Mesh* mesh;
 	bool active;
 };

@@ -45,6 +45,7 @@ void StatusEffects::Update(double dt)
 		{
 			it->second->RevertStatus();
 			delete it->second;
+			it->second = NULL;
 			it = statusList.erase(it);
 		}
 		else

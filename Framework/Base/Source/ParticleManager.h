@@ -19,6 +19,7 @@ public:
 	vector<ParticleObject*>& GetList();
 
 	void Add(ParticleObject* particle);
+	void Remove(ParticleObject* particle);
 	void Update(double dt);
 	void ClearList();
 };
