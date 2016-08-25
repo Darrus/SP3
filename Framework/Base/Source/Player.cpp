@@ -124,7 +124,6 @@ void Player::Update(double dt)
 		weapon[i]->Update(dt);
 	}
 
-
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
 
@@ -139,6 +138,10 @@ int Player::GetWeaponType()
 void Player::TakeDamage(int damage)
 {
 	playerHealth -= damage;
+	if (playerHealth <= 0)
+	{
+		playerHealth = 0;
+	}
 }
 
 Player::PLAYER_STATE Player::getState()

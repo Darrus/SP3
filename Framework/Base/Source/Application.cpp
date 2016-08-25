@@ -16,8 +16,8 @@
 #include "LevelEditor.h"
 
 GLFWwindow* m_window;
-int Application::m_window_width = 1280;
-int Application::m_window_height = 720;
+int Application::m_window_width = 800;
+int Application::m_window_height = 600;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 double Application::mouse_last_x = 0.0, Application::mouse_last_y = 0.0, 
