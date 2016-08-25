@@ -71,24 +71,14 @@ void Player::SetPlayerHealth(int playerHealth) //setters for health
 	this->playerHealth = playerHealth;
 }
 
-int Player::GetHealthRegain(void)
+void Player::SetPlayerMaxHealth(int playerMaxHealth)
 {
-	return healthRegain;
+	this->playerMaxHealth = playerMaxHealth;
 }
 
-int Player::GetPotionCount(void)
+int Player::GetPlayerMaxHealth(void)
 {
-	return potionCount;
-}
-
-void Player::SetHealthRegain(int healthRegain)
-{
-	this->healthRegain = healthRegain;
-}
-
-void Player::SetPotionCount(int potionCount)
-{
-	this->potionCount = potionCount;
+	return playerMaxHealth;
 }
 
 void Player::AddBullet(ELEMENTS elem, int amount)
@@ -112,7 +102,6 @@ void Player::Update(double dt)
 	selectSkill();
 	CycleBullets();
 	PlayerJump(dt);
-	useItem();
 	ChangeWeapon();
 	ShootWeapon();
 	TossNet();
@@ -229,25 +218,19 @@ void Player::CycleBullets()
 		selectedElem = (ELEMENTS)((selectedElem + 1) % (int)ELEM_SIZE);
 }
 
-void Player::useItem()
+void Player::PlayerCycleItem()
 {
-	if (Application::GetInstance().controller->IsKeyPressed(USEITEM) && isUsed == true)
-	{
-		regainHealth();
-	}
+	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
+		items.cycleItems();
 }
 
-void Player::regainHealth()
+void Player::PlayerUseItem()
 {
-	if (items == POTION)
+	if (Application::GetInstance().controller->IsKeyPressed(USEITEM))
 	{
-		if (playerHealth < 200 && isUsed == true)
-		{
-			playerHealth += healthRegain;
-			potionCount--;
-		}
-		if (potionCount <= 0)
-			isUsed = false;
+		items.UseItem(this);
+		if (playerHealth > 200)
+			playerHealth = 200;
 	}
 }
 

@@ -30,6 +30,7 @@ void Keyboard::create()
 	keys[SHOW_COLLISION].Assign(VK_NUMPAD3);
 	keys[CYCLEBULLET].Assign('Q');
 	keys[USEITEM].Assign('E');
+	keys[CYCLEITEM].Assign('F');
 
 	timeBetweenPress = 0.f;
 }
