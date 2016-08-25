@@ -29,6 +29,7 @@ enum Controls
 	CTRL,
 	CYCLEBULLET,
 	USEITEM,
+	CYCLEITEM,
 	KEYS_SIZE,
 
 };

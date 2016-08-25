@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "NetBullet.h"
 #include "AABB_2D.h"
+#include "Items.h"
 
 class Player : public GameObject
 {
@@ -19,10 +20,6 @@ class Player : public GameObject
 		P_DEATH,
 	};
 
-	enum ITEMLIST
-	{
-		POTION,
-	};
 
 
 public:
@@ -44,6 +41,8 @@ public:
 
 	int GetHealthRegain(void);
 	int GetPotionCount(void);
+	void SetPlayerMaxHealth(int playerMaxHealth);
+	int GetPlayerMaxHealth(void);
 
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
@@ -68,8 +67,8 @@ private:
 
 	void playerDeath();
 	void selectSkill();
-	void useItem();
-	void regainHealth();
+	void PlayerUseItem();
+	void PlayerCycleItem();
 
 	const float PLAYER_SPEED;
 	const float JUMP_SPEED;
@@ -86,15 +85,14 @@ private:
 	Animation run;
 
 	PLAYER_STATE state;
-	ITEMLIST items;
+	Items items;
 	/*PLAYER_SKILLS skills;
 	PLAYER_BULLETS bullets;*/
 
 
 	int jumpHeight;
 	int playerHealth;
-	int healthRegain;
-	int potionCount;
+	int playerMaxHealth;
 
 	float mouseX, mouseY;
 
@@ -105,7 +103,6 @@ private:
 	ELEMENTS selectedElem;
 	NetBullet* net;
 
-	bool isUsed;
 	int weaponType;
 	int bulletType;
 };

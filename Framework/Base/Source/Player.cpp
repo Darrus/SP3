@@ -18,7 +18,6 @@ JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
 weaponType(0),
-isUsed(true),
 net(NULL)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player2.tga", 3, 8);
@@ -69,24 +68,14 @@ void Player::SetPlayerHealth(int playerHealth) //setters for health
 	this->playerHealth = playerHealth;
 }
 
-int Player::GetHealthRegain(void)
+void Player::SetPlayerMaxHealth(int playerMaxHealth)
 {
-	return healthRegain;
+	this->playerMaxHealth = playerMaxHealth;
 }
 
-int Player::GetPotionCount(void)
+int Player::GetPlayerMaxHealth(void)
 {
-	return potionCount;
-}
-
-void Player::SetHealthRegain(int healthRegain)
-{
-	this->healthRegain = healthRegain;
-}
-
-void Player::SetPotionCount(int potionCount)
-{
-	this->potionCount = potionCount;
+	return playerMaxHealth;
 }
 
 void Player::AddBullet(ELEMENTS elem, int amount)
@@ -110,9 +99,9 @@ void Player::Update(double dt)
 	selectSkill();
 	CycleBullets();
 	PlayerJump(dt);
-	useItem();
 	ChangeWeapon();
 	ShootWeapon();
+	PlayerUseItem();
 	TossNet();
 
 	collider.Update();
@@ -138,6 +127,7 @@ void Player::TakeDamage(int damage)
 	playerHealth -= damage;
 	if (playerHealth < 0)
 		playerHealth = 0;
+
 }
 
 Player::PLAYER_STATE Player::getState()
@@ -225,25 +215,19 @@ void Player::CycleBullets()
 		selectedElem = (ELEMENTS)((selectedElem + 1) % (int)ELEM_SIZE);
 }
 
-void Player::useItem()
+void Player::PlayerCycleItem()
 {
-	if (Application::GetInstance().controller->IsKeyPressed(USEITEM) && isUsed == true)
-	{
-		regainHealth();
-	}
+	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
+		items.cycleItems();
 }
 
-void Player::regainHealth()
+void Player::PlayerUseItem()
 {
-	if (items == POTION)
+	if (Application::GetInstance().controller->IsKeyPressed(USEITEM))
 	{
-		if (playerHealth < 200 && isUsed == true)
-		{
-			playerHealth += healthRegain;
-			potionCount--;
-		}
-		if (potionCount <= 0)
-			isUsed = false;
+		items.UseItem(this);
+		if (playerHealth > 200)
+			playerHealth = 200;
 	}
 }
 
@@ -296,7 +280,11 @@ void Player::CollisionCheck(double dt)
 
 		// Check the next tile
 		if (map->collisionMap[currentY][checkX] == 1)
+		{
 			newPos.x = pos.x;
+			vel.x = 0.f;
+			vel.y = 0.f;
+		}
 	}
 	else if (!isGrounded) // If enemy is in the air
 	{
@@ -314,6 +302,7 @@ void Player::CollisionCheck(double dt)
 			isGrounded = true;
 			newPos.y = checkDown * tileSize + scale.y * 0.5f + tileSize;
 			vel.y = 0.f;
+			vel.x = 0.f;
 		}
 
 		// Checks Up
