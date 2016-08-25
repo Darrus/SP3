@@ -13,7 +13,6 @@ BurnStatus::BurnStatus()
 
 BurnStatus::~BurnStatus()
 {
-	ParticleManager::GetInstance().Remove(particle);
 }
 
 void BurnStatus::Update(double dt)
@@ -35,4 +34,9 @@ void BurnStatus::ApplyStatus(GameObject* go)
 	enemy = dynamic_cast<Enemy*>(go);
 	damage = 0.05 * enemy->GetMaxHealth();
 	particle = ParticleFactory::CreateFollow(P_BURN, enemy);
+}
+
+void BurnStatus::RevertStatus()
+{
+	particle->active = false;
 }

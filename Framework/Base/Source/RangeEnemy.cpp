@@ -49,6 +49,7 @@ void RangeEnemy::Attack(Player* player)
 		bullet->pos = pos;
 		bullet->bulletSpeed = 400.f;
 		bullet->damage = attackDamage;
-		bullet->vel = (player->pos - pos).Normalized() * bullet->bulletSpeed;
+		Vector3 dir = (player->pos - pos).Normalized();
+		bullet->vel = dir * bullet->bulletSpeed;
 	}
 }

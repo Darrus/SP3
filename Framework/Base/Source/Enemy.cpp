@@ -15,7 +15,8 @@ attackCooldown(0.f),
 health(0),
 maxHealth(0),
 map(NULL),
-state(NULL)
+state(NULL),
+isGrounded(false)
 {
 	status.SetObject(this);
 }
@@ -98,10 +99,10 @@ void Enemy::MapCollision(double dt)
 	dir = newPos.x - pos.x;
 
 	// Checks next tile according to player's scale
-	checkRight = (newPos.x + 1.f + scale.x * 0.5f) / tileSize;
-	checkLeft = (newPos.x - 1.f - scale.x * 0.5f) / tileSize;
-	checkUp = (newPos.y + 1.f + scale.y * 0.5f) / tileSize;
-	checkDown = (newPos.y - 1.f - scale.y * 0.5f) / tileSize;
+	checkRight = (newPos.x + scale.x * 0.5f) / tileSize;
+	checkLeft = (newPos.x - scale.x * 0.5f) / tileSize;
+	checkUp = (newPos.y + scale.y * 0.5f - 1) / tileSize;
+	checkDown = (newPos.y - scale.y * 0.5f + 1) / tileSize;
 
 	if (dir > 0)
 		checkX = checkRight;
@@ -112,14 +113,15 @@ void Enemy::MapCollision(double dt)
 	if (isGrounded) // If enemy is grounded
 	{
 		// Checks the tile below enemy
-		if (map->collisionMap[checkDown][checkX] != 1)
+		if (map->collisionMap[checkDown - 1][checkX] != 1)
 		{
 			isGrounded = false;
 			collidedWall = true;
 		}
 
+		
 		// Check the next tile
-		if (map->collisionMap[currentY][checkX] == 1)
+		if (map->collisionMap[currentY][checkX] == 1 || map->collisionMap[checkDown][checkX] == 1 || map->collisionMap[checkUp][checkX] == 1)
 		{
 			newPos.x = pos.x;
 			collidedWall = true;

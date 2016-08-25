@@ -13,6 +13,7 @@ public:
 
 	virtual void Update(double dt);
 	virtual void ApplyStatus(GameObject* go);
+	virtual void RevertStatus();
 
 	Enemy* enemy;
 	int damage;
