@@ -7,7 +7,7 @@ LifeStealBullet::LifeStealBullet() :
 player(NULL)
 {
 	bulletSpeed = 750.f;
-	lifeStealRate = 1.f;
+	lifeStealRate = 2.f;
 	damage = 5.f;
 }
 
@@ -35,6 +35,9 @@ void LifeStealBullet::HandleInteraction(GameObject* go, double dt)
 		{
 			int playerTmpHP = player->GetPlayerHealth();
 			playerTmpHP += lifeStealRate;
+
+			enemy->TakeDamage(damage);
+
 			if (playerTmpHP > 200)
 			{
 				playerTmpHP = 200;

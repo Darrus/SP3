@@ -9,7 +9,7 @@ Shotgun::Shotgun()
 	fireRate = 0.f;
 	defaultFireRate = 0.6f;
 	cooldownRate = 20;
-	damage = 10;
+	damage = 20;
 	weaponType = WEAPON_TYPE::SHOTGUN;
 	overheated = false;
 	overheatRate = 30;
