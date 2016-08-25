@@ -140,6 +140,7 @@ void Player::TakeDamage(int damage)
 	playerHealth -= damage;
 	if (playerHealth < 0)
 		playerHealth = 0;
+
 }
 
 Player::PLAYER_STATE Player::getState()
@@ -299,7 +300,11 @@ void Player::CollisionCheck(double dt)
 
 		// Check the next tile
 		if (map->collisionMap[currentY][checkX] == 1)
+		{
 			newPos.x = pos.x;
+			vel.x = 0.f;
+			vel.y = 0.f;
+		}
 	}
 	else if (!isGrounded) // If enemy is in the air
 	{
@@ -317,6 +322,7 @@ void Player::CollisionCheck(double dt)
 			isGrounded = true;
 			newPos.y = checkDown * tileSize + scale.y * 0.5f + tileSize;
 			vel.y = 0.f;
+			vel.x = 0.f;
 		}
 
 		// Checks Up

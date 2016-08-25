@@ -23,6 +23,17 @@ void MeleeEnemy::Attack(Player* player)
 	{
 		attackCooldown = timeBetweenAttack;
 		player->TakeDamage(attackDamage);
+
+		if (pos.x > player->pos.x)
+		{
+			player->vel.x -= 100;
+			player->vel.y += 200;
+		}
+		else if (pos.x < player->pos.x)
+		{
+			player->vel.x += 100;
+			player->vel.y += 200;
+		}
 	}
 }
 
