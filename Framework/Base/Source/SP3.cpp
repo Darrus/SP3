@@ -148,6 +148,17 @@ void SP3::Render()
 			if (enemy)
 			{
 
+				modelStack.PushMatrix();
+				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5),enemy->pos.y + (enemy->scale.y *0.5),enemy->pos.z);
+				modelStack.Scale(enemy->scale.x * 4,15,1);
+				RenderMesh(meshList[GEO_HEALTHBACK],false);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+				modelStack.Scale(((enemy->GetHealth()/enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
+				RenderMesh(meshList[GEO_HEALTH], false);
+				modelStack.PopMatrix();
 			}
 		}
 	}
