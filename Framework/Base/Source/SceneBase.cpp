@@ -161,17 +161,17 @@ void SceneBase::Init()
 	meshList[GEO_WEAPONUI5] = MeshBuilder::GenerateQuad("UI", Color(1, 1, 1), 1.f);
 	meshList[GEO_WEAPONUI5]->textureArray[0] = LoadTGA("Image//WeaponUILifeSteal.tga");
 
-	meshList[GEO_BULLET1] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.f);
-	meshList[GEO_BULLET1]->textureArray[0] = LoadTGA("Image//FireBullet.tga");
+	meshList[GEO_BULLET1] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.5f);
+	meshList[GEO_BULLET1]->textureArray[0] = LoadTGA("Image//FireBall.tga");
 
-	meshList[GEO_BULLET2] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.f);
-	meshList[GEO_BULLET2]->textureArray[0] = LoadTGA("Image//LightningBullet.tga");
+	meshList[GEO_BULLET2] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.5f);
+	meshList[GEO_BULLET2]->textureArray[0] = LoadTGA("Image//LightningBall.tga");
 
 	meshList[GEO_BULLET3] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.f);
-	meshList[GEO_BULLET3]->textureArray[0] = LoadTGA("Image//IceBullet.tga");
+	meshList[GEO_BULLET3]->textureArray[0] = LoadTGA("Image//IceBall.tga");
 
 	meshList[GEO_BULLET4] = MeshBuilder::GenerateQuad("Bullet", Color(1, 1, 1), 1.f);
-	meshList[GEO_BULLET4]->textureArray[0] = LoadTGA("Image//LifeStealBullet.tga");
+	meshList[GEO_BULLET4]->textureArray[0] = LoadTGA("Image//LifeStealBall.tga");
 
 	meshList[GEO_CROSSHAIR] = MeshBuilder::GenerateQuad("GEO_CROSSHAIR", Color(1, 1, 1), 1.f);
 	meshList[GEO_CROSSHAIR]->textureArray[0] = LoadTGA("Image//CrossHair.tga");
