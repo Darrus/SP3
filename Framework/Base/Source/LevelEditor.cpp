@@ -78,7 +78,7 @@ void LevelEditor::Exit()
 
 void LevelEditor::RenderEditor()
 {
-	CameraFree* camFree = dynamic_cast<CameraFree*>(camera);
+	/*CameraFree* camFree = dynamic_cast<CameraFree*>(camera);
 	Vector2 tileOffset = camFree->GetTileOffset();
 	Vector2 fineOffset = camFree->GetFineOffset();
 	int tileSize = editor->GetMap()->GetTileSize();
@@ -135,7 +135,9 @@ void LevelEditor::RenderEditor()
 				}
 			}
 		}
-	}
+	}*/
+
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 25, 300, 300);
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "Editing:", Color(0.f, 1.f, 0.f), 25, 140, 15);
 
