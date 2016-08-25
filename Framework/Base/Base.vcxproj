@@ -37,7 +37,6 @@
     <ClCompile Include="Source\LevelEditor.cpp" />
     <ClCompile Include="Source\LifeStealBullet.cpp" />
     <ClCompile Include="Source\LightningBullet.cpp" />
-    <ClCompile Include="Source\LightningParticle.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -97,7 +96,6 @@
     <ClInclude Include="Source\IceBullet.h" />
     <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
-    <ClInclude Include="Source\LightningParticle.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
     <ClInclude Include="Source\NetBullet.h" />
     <ClInclude Include="Source\ParticleFactory.h" />

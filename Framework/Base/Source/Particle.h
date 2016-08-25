@@ -8,6 +8,8 @@ enum ParticleObject_TYPE
 {
 	P_NORMAL,
 	P_BURN,
+	P_STUN,
+	P_SLOW,
 	P_TEXT,
 	P_TOTAL
 };

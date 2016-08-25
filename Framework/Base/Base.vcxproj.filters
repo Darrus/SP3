@@ -261,9 +261,6 @@
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LightningParticle.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ParticleFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -466,9 +463,6 @@
     </ClInclude>
     <ClInclude Include="Source\Boss.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LightningParticle.h">
-      <Filter>Header Files\Particles</Filter>
     </ClInclude>
     <ClInclude Include="Source\ParticleFactory.h">
       <Filter>Header Files\Factories</Filter>

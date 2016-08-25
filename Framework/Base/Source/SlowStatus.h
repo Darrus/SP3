@@ -3,6 +3,7 @@
 
 #include "Status.h"
 #include "Enemy.h"
+#include "Particle.h"
 
 class SlowStatus : public Status
 {
@@ -15,6 +16,7 @@ public:
 	virtual void RevertStatus();
 
 	Enemy* enemy;
+	ParticleObject* particle;
 };
 
 #endif

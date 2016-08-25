@@ -85,7 +85,7 @@ void SP3::Init()
 void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
+	//std::cout << player->pos.x << " " << player->pos.y << std::endl;
 
 
 	//Get mouse pos in world
