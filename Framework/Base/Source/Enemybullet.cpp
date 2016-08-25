@@ -23,14 +23,6 @@ void EnemyBullet::HandleInteraction(GameObject* go, double dt)
 		if (collider.CheckCollision(player->collider))
 		{
 			player->TakeDamage(damage);
-			/*float dir = player->pos.x - pos.x;
-			if (dir > 0)
-				dir = 1;
-			else if (dir < 0)
-				dir = -1;
-			else
-				dir = 0;
-			player->vel += Vector3(200.f * dir, 100.f, 0.f);*/
 			active = false;
 		}
 	}

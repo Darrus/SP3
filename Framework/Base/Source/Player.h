@@ -71,7 +71,6 @@ private:
 	void useItem();
 	void regainHealth();
 
-
 	const float PLAYER_SPEED;
 	const float JUMP_SPEED;
 	const float MAX_HEIGHT;

@@ -49,9 +49,9 @@ public:
 	Mesh* collisionbox;
 	Mesh* mapbackground;
 
+	string name;
 private:
 
-	string name;
 
 	TileMap* map;
 

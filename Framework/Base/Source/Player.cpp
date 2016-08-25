@@ -23,7 +23,7 @@ net(NULL)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player2.tga", 3, 8);
 	sprite = dynamic_cast<SpriteAnimation*>(mesh);
-	idle.Set(0, 7, 3.f, active);
+	idle.Set(0, 7, 2.f, active, 1, true);
 	run.Set(8, 18, 1.f, active, 1, true);
 	sprite->SetAnimation(idle);
 
@@ -49,8 +49,6 @@ net(NULL)
 		bulletElem[i] = 100;
 	}
 	selectedElem = NONE;
-
-	
 }
 
 Player::~Player()
@@ -169,7 +167,8 @@ void Player::Move(double dt)
 	{
 		vel.x = 0.f;
 		state = P_IDLE;
-		sprite->SetAnimation(idle);
+		if (state != P_IDLE)
+			sprite->SetAnimation(idle);
 	}
 
 	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)
@@ -179,9 +178,7 @@ void Player::Move(double dt)
 	}
 
 	if (!isGrounded)
-	{
 		vel.y += -9.8f;
-	}
 }
 
 void Player::playerDeath()

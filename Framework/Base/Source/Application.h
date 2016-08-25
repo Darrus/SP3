@@ -24,7 +24,6 @@ public:
 	static void GetMousePos(double& x, double& y);
 	static int GetWindowWidth();
 	static int GetWindowHeight();
-	static void Scrollwheel_Callback(GLFWwindow* window, double xoffset, double yoffset);
 
 	//Declare variables to store the last and current mouse position
 	static double mouse_last_x, mouse_last_y, mouse_current_x, mouse_current_y, mouse_diff_x, mouse_diff_y;
@@ -34,6 +33,7 @@ public:
 	Controller* controller;
 	static int m_window_width;
 	static int m_window_height;
+	int key;
 private:
 	Application();
 	~Application();

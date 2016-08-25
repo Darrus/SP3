@@ -47,6 +47,18 @@ void resize_callback(GLFWwindow* window, int w, int h)
 	Application::GetInstance().m_window_width = w;
 	Application::GetInstance().m_window_height = h;
 }
+
+void Scrollwheel_Callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	Application::GetInstance().scrollX = xoffset;
+	Application::GetInstance().scrollY = yoffset;
+}
+
+void Character_Callback(GLFWwindow* window, unsigned int keyCode)
+{
+	Application::GetInstance().key = keyCode;
+}
+
 bool Application::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 {
 	return glfwGetMouseButton(m_window, key) != 0;
@@ -98,12 +110,6 @@ int Application::GetWindowWidth()
 	return m_window_width;
 }
 
-void Application::Scrollwheel_Callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	scrollX = xoffset;
-	scrollY = yoffset;
-}
-
 Application::Application()
 {
 }
@@ -152,6 +158,7 @@ void Application::Init()
 	//glfwSetKeyCallback(m_window, key_callback);
 	glfwSetWindowSizeCallback(m_window, resize_callback);
 	glfwSetScrollCallback(m_window, Scrollwheel_Callback);
+	glfwSetCharCallback(m_window, Character_Callback);
 
 	glewExperimental = true; // Needed for core profile
 	//Initialize GLEW

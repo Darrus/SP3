@@ -43,7 +43,7 @@ void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
 
-	if (!map)
+	/*if (!map)
 	{
 		bool answer = true;
 		cout << "Create new map?" << endl;
@@ -82,12 +82,17 @@ void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 		cout << "Please input tile sheet's cols" << endl;
 		cin >> column;
 		LoadTileSheet(tilename, row, column);
-	}
+	}*/
 }
 
 void MapEditor::Update(double dt)
 {
-	if (Application::GetInstance().controller->IsKeyPressed(TAB))
+	
+	char c = (char)Application::GetInstance().key;
+	if (c != 0)
+		name += c;
+	
+	/*if (Application::GetInstance().controller->IsKeyPressed(TAB))
 		showTiles = true;
 
 	if (Application::GetInstance().controller->IsKeyReleased(TAB))
@@ -235,7 +240,7 @@ void MapEditor::Update(double dt)
 			cin >> name;
 		}
 		SaveMap(name);
-	}
+	}*/
 }
 
 void MapEditor::CreateNewMap(int mapWidth, int mapHeight, int tileSize)
