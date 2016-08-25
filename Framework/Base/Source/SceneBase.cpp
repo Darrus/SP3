@@ -176,6 +176,17 @@ void SceneBase::Init()
 	meshList[GEO_CROSSHAIR] = MeshBuilder::GenerateQuad("GEO_CROSSHAIR", Color(1, 1, 1), 1.f);
 	meshList[GEO_CROSSHAIR]->textureArray[0] = LoadTGA("Image//CrossHair.tga");
 
+	meshList[GEO_ITEMSBACK] = MeshBuilder::GenerateQuad("Back Quad for Item UI", Color(1, 1, 1), 1.f);
+	meshList[GEO_ITEMSBACK]->textureArray[0] = LoadTGA("Image//ItemsBack.tga");
+
+	meshList[GEO_HEALTHPOTION] = MeshBuilder::GenerateQuad("Health Potion", Color(1, 1, 1), 1.f);
+	meshList[GEO_HEALTHPOTION]->textureArray[0] = LoadTGA("Image//healthPotion.tga");
+
+	meshList[GEO_SPEEDPOTION] = MeshBuilder::GenerateQuad("Speed Potion", Color(1, 1, 1), 1.f);
+	meshList[GEO_SPEEDPOTION]->textureArray[0] = LoadTGA("Image//SpeedPotion.tga");
+
+	meshList[GEO_JUMPPOTION] = MeshBuilder::GenerateQuad("Jump Potion", Color(1, 1, 1), 1.f);
+	meshList[GEO_JUMPPOTION]->textureArray[0] = LoadTGA("Image//JumpPotion.tga");
 
 	bLightEnabled = false;
 }

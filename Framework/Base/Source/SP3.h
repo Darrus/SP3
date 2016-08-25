@@ -36,6 +36,7 @@ private:
 	Player* player;
 	CameraFollow* camFollow;
 	Weapon* weapon;
+	Items* items;
 
 	float fps;
 

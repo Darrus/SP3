@@ -283,6 +283,27 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_OVERHEAT], (float)player->GetWeapon()->GetOverheatBar() * 2, 5.f, 1.f, 10, 95);
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_HEALTHPOTION], 10.f, 8.f, 1.f, 15, 89);
+	modelStack.PopMatrix();
+	//else if (items->SPEEDBOOST)
+	//{
+	//	modelStack.PushMatrix();
+	//	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
+	//	modelStack.PopMatrix();
+	//}
+	//else if (items->JUMPBOOST)
+	//{
+	//	modelStack.PushMatrix();
+	//	RenderObjOnScreen(meshList[GEO_JUMPPOTION], 10.f, 8.f, 1.f, 15, 89);
+	//	modelStack.PopMatrix();
+	//}
+
+
 
 	if (player->GetElement() == ELEMENTS::NONE)
 	{

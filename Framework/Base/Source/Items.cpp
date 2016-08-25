@@ -39,15 +39,6 @@ void Items::SetHealthRegain(int healthRegain)
 	this->healthRegain = healthRegain;
 }
 
-void Items::setItemType(ITEMLIST itemList)
-{
-	this->itemList = itemList;
-}
-
-Items::ITEMLIST Items::getItemType()
-{
-	return this->itemList;
-}
 
 void Items::HandleItemInteraction(GameObject* go, double dt)
 {
@@ -85,10 +76,10 @@ void Items::UseItem(GameObject* go)
 				}
 			}
 		}
-		else if (itemList == SPEEDBOOST)
-		{
-
-		}
+		//else if (itemList == SPEEDBOOST)
+		//{
+		//	//player->
+		//}
 	}
 }
 

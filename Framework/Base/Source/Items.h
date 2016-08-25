@@ -29,8 +29,6 @@ public:
 
 	virtual void HandleItemInteraction(GameObject* go, double dt);
 
-	void setItemType(ITEMLIST itemList);
-	ITEMLIST getItemType();
 
 	virtual void Update(double dt);
 	void UseItem(GameObject* go);

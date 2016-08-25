@@ -104,7 +104,6 @@ private:
 	ELEMENTS selectedElem;
 	NetBullet* net;
 
-	bool isUsed;
 	int weaponType;
 	int bulletType;
 };

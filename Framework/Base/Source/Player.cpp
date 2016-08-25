@@ -18,7 +18,6 @@ JUMP_SPEED(20),
 state(P_IDLE),
 MAX_HEIGHT(20),
 weaponType(0),
-isUsed(true),
 net(NULL)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player2.tga", 3, 8);
@@ -104,6 +103,7 @@ void Player::Update(double dt)
 	PlayerJump(dt);
 	ChangeWeapon();
 	ShootWeapon();
+	PlayerUseItem();
 	TossNet();
 
 	collider.Update();
