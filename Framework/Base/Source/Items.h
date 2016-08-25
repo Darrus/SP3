@@ -31,7 +31,7 @@ public:
 
 
 	virtual void Update(double dt);
-	void UseItem(GameObject* go);
+	void UseItem(Player* player);
 
 	void cycleItems();
 

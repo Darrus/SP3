@@ -4,7 +4,8 @@
 Items::Items() :
 potionCount(3),
 healthRegain(25),
-isUsed(true)
+isUsed(true),
+itemList(POTIONS)
 {
 	collider.Init(&this->pos, scale);
 }
@@ -53,33 +54,25 @@ void Items::HandleItemInteraction(GameObject* go, double dt)
 	}
 }
 
-void Items::UseItem(GameObject* go)
+void Items::UseItem(Player* player)
 {
-	Player* player = dynamic_cast<Player*>(go);
-	if (player)
+	if (itemList == POTIONS)
 	{
-		if (itemList == POTIONS)
+		int tempHealth = player->GetPlayerHealth();
+		if (tempHealth <= player->GetPlayerMaxHealth())
 		{
-			int tempHealth = player->GetPlayerHealth();
-			if (tempHealth <= player->GetPlayerMaxHealth())
+			if (potionCount > 0 && isUsed == true)
 			{
-				if (potionCount > 0 && isUsed == true)
-				{
-					potionCount--;
-					int gainHp = 25;
-					tempHealth += gainHp;
-					player->SetPlayerHealth(tempHealth);
-				}
-				else if (potionCount <= 0)
-				{
-					isUsed = false;
-				}
+				potionCount--;
+				int gainHp = 25;
+				tempHealth += gainHp;
+				player->SetPlayerHealth(tempHealth);
+			}
+			else if (potionCount <= 0)
+			{
+				isUsed = false;
 			}
 		}
-		//else if (itemList == SPEEDBOOST)
-		//{
-		//	//player->
-		//}
 	}
 }
 
