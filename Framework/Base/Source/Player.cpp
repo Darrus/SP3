@@ -21,11 +21,11 @@ weaponType(0),
 isUsed(true),
 net(NULL)
 {
-	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player.tga", 4, 9);
+	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player2.tga", 3, 8);
 	sprite = dynamic_cast<SpriteAnimation*>(mesh);
-	Animation test;
-	test.Set(18, 18, 1.f, true);
-	sprite->SetAnimation(test);
+	idle.Set(0, 7, 3.f, active);
+	run.Set(8, 18, 1.f, active, 1, true);
+	sprite->SetAnimation(idle);
 
 	weapon[0] = new Pistol();
 	weapon[0]->ReferencePlayerPos(&pos);
@@ -128,7 +128,7 @@ void Player::Update(double dt)
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
 
-	//sprite->Update(dt);
+	sprite->Update(dt);
 }
 
 int Player::GetWeaponType()
@@ -139,6 +139,8 @@ int Player::GetWeaponType()
 void Player::TakeDamage(int damage)
 {
 	playerHealth -= damage;
+	if (playerHealth < 0)
+		playerHealth = 0;
 }
 
 Player::PLAYER_STATE Player::getState()
@@ -151,18 +153,24 @@ void Player::Move(double dt)
 	if (Application::GetInstance().controller->OnHold(MOVE_RIGHT))
 	{
 		vel.x = PLAYER_SPEED;
-		state = P_WALK_RIGHT;
+		if (state != P_RUN)
+			sprite->SetAnimation(run);
+		state = P_RUN;
 	}
 
 	if (Application::GetInstance().controller->OnHold(MOVE_LEFT))
 	{
 		vel.x = -PLAYER_SPEED;
-		state = P_WALK_LEFT;
+		if (state != P_RUN)
+			sprite->SetAnimation(run);
+		state = P_RUN;
 	}
 
 	if (Application::GetInstance().controller->IsKeyReleased(MOVE_RIGHT) || Application::GetInstance().controller->IsKeyReleased(MOVE_LEFT))
 	{
 		vel.x = 0.f;
+		state = P_IDLE;
+		sprite->SetAnimation(idle);
 	}
 
 	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)
@@ -308,14 +316,14 @@ void Player::CollisionCheck(double dt)
 		if (map->collisionMap[checkDown][checkLeft] == 1 || map->collisionMap[checkDown][checkRight] == 1)
 		{
 			isGrounded = true;
-			newPos.y = (currentY * tileSize) + tileSize * 0.5f;
+			newPos.y = checkDown * tileSize + scale.y * 0.5f + tileSize;
 			vel.y = 0.f;
 		}
 
 		// Checks Up
 		if (map->collisionMap[checkUp][checkLeft] == 1 || map->collisionMap[checkUp][checkRight] == 1)
 		{
-			newPos.y = checkUp * tileSize - tileSize * 0.5f;
+			newPos.y = checkUp * tileSize - scale.y * 0.5f;
 			if (vel.y > 0.f)
 				vel.y = 0.f;
 		}

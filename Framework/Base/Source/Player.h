@@ -13,8 +13,7 @@ class Player : public GameObject
 	enum PLAYER_STATE
 	{
 		P_IDLE,
-		P_WALK_RIGHT,
-		P_WALK_LEFT,
+		P_RUN,
 		P_CLIMB,
 		P_JUMP,
 		P_DEATH,
@@ -84,6 +83,8 @@ private:
 	Vector3 newPos;
 	
 	SpriteAnimation* sprite;
+	Animation idle;
+	Animation run;
 
 	PLAYER_STATE state;
 	ITEMLIST items;

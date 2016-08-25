@@ -32,7 +32,7 @@ void SP3::Init()
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
-	player->Init(map, Vector3(50.f, 100.f, 0.f), Vector3(32.f, 32.f, 32.f));
+	player->Init(map, Vector3(50.f, 200.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 
@@ -210,6 +210,8 @@ void SP3::RenderObject(GameObject* go)
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
+	if (go->view.x < 0)
+		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
 	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 	RenderMesh(go->mesh);
 	modelStack.PopMatrix();
