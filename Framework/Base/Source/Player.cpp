@@ -157,9 +157,9 @@ void Player::Move(double dt)
 	if (Application::GetInstance().controller->IsKeyReleased(MOVE_RIGHT) || Application::GetInstance().controller->IsKeyReleased(MOVE_LEFT))
 	{
 		vel.x = 0.f;
-		state = P_IDLE;
 		if (state != P_IDLE)
 			sprite->SetAnimation(idle);
+		state = P_IDLE;
 	}
 
 	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)

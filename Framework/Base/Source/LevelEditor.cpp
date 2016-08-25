@@ -37,9 +37,6 @@ void LevelEditor::Update(double dt)
 	camera->Update(dt);
 	if (editor->active)
 		editor->Update(dt);
-
-	//if (Application::GetInstance().controller->IsKeyPressed(JUMP))
-		//SceneManager::GetInstance().ChangeScene("SP3");
 }
 
 void LevelEditor::Render()

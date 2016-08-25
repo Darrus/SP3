@@ -46,7 +46,7 @@ void resize_callback(GLFWwindow* window, int w, int h)
 	glViewport(0, 0, w, h);
 	Application::GetInstance().m_window_width = w;
 	Application::GetInstance().m_window_height = h;
-}
+} 
 
 void Scrollwheel_Callback(GLFWwindow* window, double xoffset, double yoffset)
 {

@@ -87,10 +87,17 @@ void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 
 void MapEditor::Update(double dt)
 {
-	
 	char c = (char)Application::GetInstance().key;
 	if (c != 0)
+	{
 		name += c;
+		Application::GetInstance().key = 0;
+	}
+	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		if (!name.empty())
+			name.pop_back();
+	}
 	
 	/*if (Application::GetInstance().controller->IsKeyPressed(TAB))
 		showTiles = true;

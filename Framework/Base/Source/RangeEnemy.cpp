@@ -45,8 +45,6 @@ void RangeEnemy::Attack(Player* player)
 	if (attackCooldown < 0)
 	{
 		attackCooldown = timeBetweenAttack;
-		player->TakeDamage(attackDamage);
-
 		Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//Bullet.tga", map);
 		bullet->pos = pos;
 		bullet->bulletSpeed = 500.f;
