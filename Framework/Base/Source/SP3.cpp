@@ -317,23 +317,23 @@ void SP3::RenderUI()
 
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_WEAPONUI1], 87.5f, 10.f, 10.f, 105, 98);
+	RenderObjOnScreen(meshList[GEO_WEAPONUI1], 87.5f, 8.f, 10.f, 105, 98);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_BULLET1], 5, 5, 5, 70, 98);
+	RenderObjOnScreen(meshList[GEO_BULLET1], 5, 4, 5, 70, 98);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_BULLET2], 5, 5, 5, 90, 98);
+	RenderObjOnScreen(meshList[GEO_BULLET2], 5, 4, 5, 90, 98);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_BULLET3], 5, 5, 5, 110, 98);
+	RenderObjOnScreen(meshList[GEO_BULLET3], 5, 4, 5, 110, 98);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_BULLET4], 5, 5, 5, 130, 98);
+	RenderObjOnScreen(meshList[GEO_BULLET4], 5, 4, 5, 130, 98);
 	modelStack.PopMatrix();
 
 	switch (player->GetWeaponType())
@@ -388,27 +388,27 @@ void SP3::RenderUI()
 
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();
-	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 98, 659);
+	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 60, 547);
 
 	std::stringstream text3;
 	text3 << (int)player->GetWeapon()->GetOverheatBar();
-	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 98, 626);
+	RenderTextOnScreen(meshList[GEO_TEXT], text3.str() + "/100", Color(1.f, 1.f, 0.f), 15, 60, 520);
 
 	std::stringstream text4;
 	text4 << player->GetElementCount(ELEMENTS::FIRE);
-	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text4.str(), Color(1.f, 1.f, 1.f), 23, 490, 643);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text4.str(), Color(1.f, 1.f, 1.f), 15, 305, 538);
 
 	std::stringstream text5;
 	text5 << player->GetElementCount(ELEMENTS::LIGHTNING);
-	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text5.str(), Color(1.f, 1.f, 1.f), 23, 625, 643);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text5.str(), Color(1.f, 1.f, 1.f), 15, 390, 538);
 
 	std::stringstream text6;
 	text6 << player->GetElementCount(ELEMENTS::ICE);
-	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text6.str(), Color(1.f, 1.f, 1.f), 23, 755, 643);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text6.str(), Color(1.f, 1.f, 1.f), 15, 475, 538);
 
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
-	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 23, 885, 643);
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
 }
 
 void SP3::RenderParticle()
