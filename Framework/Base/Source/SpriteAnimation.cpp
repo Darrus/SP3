@@ -41,8 +41,8 @@ void SpriteAnimation::Update(double dt)
 			{
 				m_anim->animActive = false;
 				m_anim->ended = true;
-				m_currentTime = 0.f;
-				m_currentFrame = m_anim->startFrame;
+				//m_currentTime = 0.f;
+				//m_currentFrame = m_anim->startFrame;
 			}
 			if (m_anim->repeatCount >= 1)
 			{
