@@ -95,6 +95,7 @@ protected:
 		GEO_JUMPPOTION,
 
 		GEO_GAMEOVER,
+		GEO_STORY,
 
 		GEO_TEXTBOX,
 

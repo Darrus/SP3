@@ -195,6 +195,9 @@ void SceneBase::Init()
 	meshList[GEO_GAMEOVER] = MeshBuilder::GenerateQuad("GameOver", Color(1, 1, 1), 1.f);
 	meshList[GEO_GAMEOVER]->textureArray[0] = LoadTGA("Image//GameOver.tga");
 
+	meshList[GEO_STORY] = MeshBuilder::GenerateQuad("Story", Color(1, 1, 1), 1.f);
+	meshList[GEO_STORY]->textureArray[0] = LoadTGA("Image//Story.tga");
+
 	meshList[GEO_TEXTBOX] = MeshBuilder::GenerateQuad("Textbox", Color(1.f, 1.f, 1.f), 1.f);
 	meshList[GEO_TEXTBOX]->textureArray[0] = LoadTGA("Image//textbox.tga");
 
