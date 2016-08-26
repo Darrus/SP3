@@ -1,12 +1,12 @@
 #include "SP3.h"
 #include "Application.h"
 #include "SceneManager.h"
-#include "MeshGenerator.h"
 #include <sstream>
-#include "GoManager.h"
 #include "EnemyFactory.h"
-#include "ParticleManager.h"
 #include "TextParticle.h"
+#include "MeshGenerator.h"
+#include "GoManager.h"
+#include "ParticleManager.h"
 
 
 
@@ -165,7 +165,6 @@ void SP3::Render()
 	}
 
 	RenderParticle();
-
 	RenderUI();
 }
 
@@ -175,10 +174,7 @@ void SP3::Exit()
 	if (map)
 		delete map;
 	map = NULL;
-	MeshGenerator::GetInstance().ClearMeshGenerator();
-	GoManager::GetInstance().ClearList();
 	background.ClearBackgrounds();
-	ParticleManager::GetInstance().ClearList();
 }
 
 // Renders
