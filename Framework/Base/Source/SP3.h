@@ -38,6 +38,8 @@ private:
 	Weapon* weapon;
 	Items* items;
 
+	bool story;
+
 	float fps;
 
 	double worldX, worldY;
