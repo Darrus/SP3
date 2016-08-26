@@ -1,11 +1,7 @@
 #include "Items.h"
 #include "Player.h"
 
-Items::Items() :
-potionCount(3),
-healthRegain(25),
-isUsed(true),
-itemList(POTIONS)
+Items::Items()
 {
 	collider.Init(&this->pos, scale);
 }
@@ -18,65 +14,97 @@ Items::~Items()
 void Items::Update(double dt)
 {
 	collider.Update();
+
+	//timer -= (float)(dt);
+
+	/*if (timer < 0.f)
+		player->setPlayerSpeed(100);
+
+	std::cout << timer << std::endl;*/
 }
 
-int Items::GetPotionCount(void)
-{
-	return potionCount;
-}
+//int Items::GetSpeedPotionCount(void)
+//{
+//	return SpeedPotionCount;
+//}
+//
+//void Items::SetSpeedPotionCount(int SpeedPotionCount)
+//{
+//	this->SpeedPotionCount = SpeedPotionCount;
+//}
+//
+//int Items::GetJumpPotionCount(void)
+//{
+//	return JumpPotionCount;
+//}
+//
+//void Items::SetJumpPotionCount(int JumpPotionCount)
+//{
+//	this->JumpPotionCount = JumpPotionCount;
+//}
 
-void Items::SetPotionCount(int potionCount)
-{
-	this->potionCount = potionCount;
-}
 
-int Items::GetHealthRegain(void)
-{
-	return healthRegain;
-}
-
-void Items::SetHealthRegain(int healthRegain)
-{
-	this->healthRegain = healthRegain;
-}
-
-
-void Items::HandleItemInteraction(GameObject* go, double dt)
+void Items::HandleInteraction(GameObject* go, double dt)
 {
 	Player* player = dynamic_cast<Player*>(go);
 	if (player)
 	{
 		if (collider.CheckCollision(player->collider))
 		{
-			potionCount += 1;
-			active = false;
+			//Add to inventory
 		}
 	}
 }
 
-void Items::UseItem(Player* player)
+bool Items::UseItem(Player* player)
 {
+	return false;
+	/*this->player = player;
 	if (itemList == POTIONS)
 	{
 		int tempHealth = player->GetPlayerHealth();
 		if (tempHealth <= player->GetPlayerMaxHealth())
 		{
-			if (potionCount > 0 && isUsed == true)
+			if (HealthPotionCount > 0 && isUsed == true)
 			{
-				potionCount--;
+				HealthPotionCount--;
 				int gainHp = 25;
 				tempHealth += gainHp;
 				player->SetPlayerHealth(tempHealth);
 			}
-			else if (potionCount <= 0)
+			else if (HealthPotionCount <= 0)
 			{
 				isUsed = false;
 			}
 		}
-	}
+	}*/
+
+	//else if (itemList == SPEEDBOOST)
+	//{
+	//	if (SpeedPotionCount > 0 && isUsed == true)
+	//	{
+	//		SpeedPotionCount--;
+	//		int gainSpeed = 100;
+	//		float tmpSpeed = player->getPlayerSpeed();
+	//		tmpSpeed += gainSpeed;
+	//		player->setPlayerSpeed(tmpSpeed);
+
+	//		/*for (float coolDown = 0; coolDown < 100; coolDown--)
+	//		{
+	//			if (coolDown <= 0)
+	//			{
+	//				tmpSpeed -= gainSpeed;
+	//				break;
+	//			}
+	//			std::cout << coolDown << std::endl;
+	//		}*/
+	//		
+	//	}
+	//}
+
 }
 
 void Items::cycleItems()
 {
-	itemList = (ITEMLIST)((itemList + 1) % (int)ITEMSIZE);
+	//itemList = (ITEMLIST)((itemList + 1) % (int)ITEMSIZE);
 }

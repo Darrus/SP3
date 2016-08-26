@@ -286,16 +286,17 @@ void SP3::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
-
+	
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_HEALTHPOTION], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
-	//else if (items->SPEEDBOOST)
-	//{
-	//	modelStack.PushMatrix();
-	//	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
-	//	modelStack.PopMatrix();
-	//}
+
+	/*else if (items->SPEEDBOOST)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
+		modelStack.PopMatrix();
+	}*/
 	//else if (items->JUMPBOOST)
 	//{
 	//	modelStack.PushMatrix();

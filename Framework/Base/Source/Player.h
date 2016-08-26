@@ -8,6 +8,7 @@
 #include "NetBullet.h"
 #include "AABB_2D.h"
 #include "Items.h"
+#include "ItemList.h"
 
 class Player : public GameObject
 {
@@ -44,6 +45,9 @@ public:
 	void SetPlayerMaxHealth(int playerMaxHealth);
 	int GetPlayerMaxHealth(void);
 
+	float getPlayerSpeed(void);
+	void setPlayerSpeed(float PLAYER_SPEED);
+
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
@@ -55,6 +59,7 @@ public:
 	int GetElementCount(ELEMENTS elem);
 
 	AABB_2D collider;
+	ItemList inventory;
 
 private:
 	void Move(double dt);
@@ -70,9 +75,9 @@ private:
 	void PlayerUseItem();
 	void PlayerCycleItem();
 
-	const float PLAYER_SPEED;
-	const float JUMP_SPEED;
-	const float MAX_HEIGHT;
+	float PLAYER_SPEED;
+	float JUMP_SPEED;
+
 	bool isMoving;
 	bool isClimbing;
 	bool isGrounded;
@@ -85,7 +90,7 @@ private:
 	Animation run;
 
 	PLAYER_STATE state;
-	Items items;
+	Items* items;
 	/*PLAYER_SKILLS skills;
 	PLAYER_BULLETS bullets;*/
 
@@ -95,6 +100,7 @@ private:
 	int playerMaxHealth;
 
 	float mouseX, mouseY;
+	float timer;
 
 	Weapon* weapon[4];
 

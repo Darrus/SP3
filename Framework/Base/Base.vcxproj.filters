@@ -91,6 +91,12 @@
     <Filter Include="Source Files\Factories">
       <UniqueIdentifier>{b6b48c0b-a9e8-4429-b4df-8d400966da79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\Items">
+      <UniqueIdentifier>{820ddd20-47db-490a-b762-b3808ec66349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Items">
+      <UniqueIdentifier>{beba44de-c7d0-49a3-a98b-f9176e2c93b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -274,7 +280,13 @@
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
     <ClCompile Include="Source\Items.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObjects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HealthPotion.cpp">
+      <Filter>Source Files\GameObjects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemList.cpp">
+      <Filter>Source Files\GameObjects\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -480,7 +492,13 @@
       <Filter>Header Files\Particles</Filter>
     </ClInclude>
     <ClInclude Include="Source\Items.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HealthPotions.h">
+      <Filter>Header Files\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemList.h">
+      <Filter>Header Files\GameObjects\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
