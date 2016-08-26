@@ -23,26 +23,6 @@ void Items::Update(double dt)
 	std::cout << timer << std::endl;*/
 }
 
-//int Items::GetSpeedPotionCount(void)
-//{
-//	return SpeedPotionCount;
-//}
-//
-//void Items::SetSpeedPotionCount(int SpeedPotionCount)
-//{
-//	this->SpeedPotionCount = SpeedPotionCount;
-//}
-//
-//int Items::GetJumpPotionCount(void)
-//{
-//	return JumpPotionCount;
-//}
-//
-//void Items::SetJumpPotionCount(int JumpPotionCount)
-//{
-//	this->JumpPotionCount = JumpPotionCount;
-//}
-
 
 void Items::HandleInteraction(GameObject* go, double dt)
 {

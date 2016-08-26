@@ -10,6 +10,7 @@ public:
 	~ItemList();
 	void UseItem();
 	void Add(Items item);
+	void Remove(Items item);
 
 	int GetSelectedItem(void);
 	void SetSelectedItem(int selectedItem);
@@ -21,6 +22,7 @@ private:
 	Items itemHold[3];
 	int selectedItem;
 	int TotalItemCount;
+
 };
 
 

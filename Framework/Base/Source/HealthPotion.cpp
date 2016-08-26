@@ -2,9 +2,7 @@
 #include "Player.h"
 
 HealthPotion::HealthPotion() :
-HealthPotionCount(3),
-healthRegain(25),
-isUsed(true)
+healthRegain(25)
 {
 
 }
@@ -22,16 +20,6 @@ int HealthPotion::GetHealthRegain(void)
 void HealthPotion::SetHealthRegain(int healthRegain)
 {
 	this->healthRegain = healthRegain;
-}
-
-int HealthPotion::GetHealthPotionCount(void)
-{
-	return HealthPotionCount;
-}
-
-void HealthPotion::SetHealthPotionCount(int HealthPotionCount)
-{
-	this->HealthPotionCount = HealthPotionCount;
 }
 
 void HealthPotion::Update(double dt)
@@ -52,22 +40,13 @@ void HealthPotion::HandleInteraction(GameObject* go, double dt)
 bool HealthPotion::UseItem(Player* player)
 {
 	this->player = player;
-		int tempHealth = player->GetPlayerHealth();
-		if (tempHealth <= player->GetPlayerMaxHealth())
-		{
-			if (HealthPotionCount > 0 && isUsed == true)
-			{
-				HealthPotionCount--;
-				int gainHp = 25;
-				tempHealth += gainHp;
-				player->SetPlayerHealth(tempHealth);
-				return true;
-			}
-			else if (HealthPotionCount <= 0)
-			{
-				isUsed = false;
-				return false;
-			}
-		}
-		return false;
+	int tempHealth = player->GetPlayerHealth();
+	if (tempHealth <= player->GetPlayerMaxHealth())
+	{
+		int gainHp = 25;
+		tempHealth += gainHp;
+		player->SetPlayerHealth(tempHealth);
+		return true;
+	}
+	return false;
 }

@@ -22,9 +22,6 @@ private:
 	Player *player;
 	Items *item;
 	int healthRegain;
-	int HealthPotionCount;
-
-	bool isUsed;
 
 };
 
