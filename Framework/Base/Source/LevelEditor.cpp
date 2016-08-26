@@ -33,7 +33,9 @@ void LevelEditor::Init()
 void LevelEditor::Update(double dt)
 {
 	SceneBase::Update(dt);
-	camera->Update(dt);
+	if (editor->editorState == MapEditor::EDIT)
+		camera->Update(dt);
+
 	if (editor->active)
 		editor->Update(dt);
 
@@ -60,9 +62,9 @@ void LevelEditor::Render()
 	// Model matrix : an identity matrix (model will be at the origin)
 	modelStack.LoadIdentity();
 
-	switch (editor->temp)
+	switch (editor->editorState)
 	{
-	case MapEditor::INIT:
+	case MapEditor::SETUP:
 		RenderMenu();
 		break;
 	case MapEditor::EDIT:
@@ -144,21 +146,21 @@ void LevelEditor::RenderEditor()
 		}
 	}
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Editing:", Color(0.f, 1.f, 0.f), 25, 140, 15);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Editing:", Color(0.f, 1.f, 0.f), 25, 200, 550);
 	RenderTile(meshList[GEO_TEXTBOX], 0, Application::GetInstance().m_window_width - 34, Application::GetInstance().m_window_height - 35, 50);
 
 	switch (editor->GetState())
 	{
 	case MapEditor::FRONT_MAP:
-		RenderTextOnScreen(meshList[GEO_TEXT], "Front Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Front Map", Color(0.f, 1.f, 0.f), 25, 400, 550);
 		RenderTile(editor->tileSheet, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	case MapEditor::REAR_MAP:
-		RenderTextOnScreen(meshList[GEO_TEXT], "Rear Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Rear Map", Color(0.f, 1.f, 0.f), 25, 400, 550);
 		RenderTile(editor->tileSheet, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	case MapEditor::COLLISION_MAP:
-		RenderTextOnScreen(meshList[GEO_TEXT], "Collision Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Collision Map", Color(0.f, 1.f, 0.f), 25, 400, 550);
 		RenderTile(editor->collisionbox, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	}
@@ -166,6 +168,19 @@ void LevelEditor::RenderEditor()
 
 void LevelEditor::RenderMenu()
 {
-	RenderObjOnScreen(meshList[GEO_TEXTBOX], 100, 35, 1, 95, 55);
-	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 20, 300, 300);
+	RenderObjOnScreen(meshList[GEO_TEXTBOX], 190, 30, 1, 95, 55);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->text, Color(0.f, 1.f, 0.f), 20, 70, 320);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 30, 260, 270);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(250.f, 150.f, 1.f);
+	modelStack.Scale(200.f, 100.f, 1.f);
+	RenderMesh(meshList[GEO_TEXTBOX]);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(550.f, 150.f, 1.f);
+	modelStack.Scale(200.f, 100.f, 1.f);
+	RenderMesh(meshList[GEO_TEXTBOX]);
+	modelStack.PopMatrix();
 }

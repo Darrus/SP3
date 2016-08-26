@@ -83,12 +83,10 @@ void SP3::Init()
 void SP3::Update(double dt)
 {
 	SceneBase::Update(dt);
-	//std::cout << player->pos.x << " " << player->pos.y << std::endl;
-
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
-	mouseY = m_screenHeight - mouseY;
+	mouseY = Application::GetInstance().m_window_height - mouseY;
 	worldX = mouseX + camera->position.x;
 	worldY = mouseY + camera->position.y;
 	player->SetMousePos((float)worldX, (float)worldY);
@@ -108,7 +106,7 @@ void SP3::Render()
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0.f, m_screenWidth, 0.f, m_screenHeight, -10.f, 10.f);
+	projection.SetToOrtho(0.f, Application::GetInstance().m_window_width, 0.f, Application::GetInstance().m_window_height, -10.f, 10.f);
 	projectionStack.LoadMatrix(projection);
 
 	// Camera matrix
@@ -403,9 +401,9 @@ void SP3::RenderUI()
 		break;
 	}
 
-	std::stringstream text;
-	text << fps;
-	RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
+	//std::stringstream text;
+	//text << fps;
+	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
 
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();

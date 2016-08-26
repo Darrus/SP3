@@ -23,9 +23,18 @@ void AABB_2D::Init(Vector3* objPos, Vector3 scale)
 	this->max.Set(pos.x + halvedScale.x, pos.y + halvedScale.y, 1.f);
 }
 
+void AABB_2D::Init(Vector3 pos, Vector3 scale)
+{
+	this->pos = pos;
+	this->halvedScale = scale * 0.5f;
+	this->min.Set(pos.x - halvedScale.x, pos.y - halvedScale.y, 1.f);
+	this->max.Set(pos.x + halvedScale.x, pos.y + halvedScale.y, 1.f);
+}
+
 void AABB_2D::Update()
 {
-	pos = *objPos;
+	if (objPos)
+		pos = *objPos;
 	min.Set(pos.x - halvedScale.x, pos.y - halvedScale.y, 1.f);
 	max.Set(pos.x + halvedScale.x, pos.y + halvedScale.y, 1.f);
 }

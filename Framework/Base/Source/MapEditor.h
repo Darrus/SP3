@@ -14,7 +14,9 @@ class MapEditor
 public:
 	enum EDITOR_STATE
 	{
-		INIT,
+		SETUP,
+		CREATE,
+		LOAD,
 		EDIT
 	};
 
@@ -32,6 +34,7 @@ public:
 	void Init(int *screenWidth, int *screenHeight, int tileSize);
 	void Update(double dt);
 	
+	void Setup();
 	void Edit();
 	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
 	void LoadMap(TileMap* map);
@@ -39,7 +42,7 @@ public:
 	void LoadRearMap(TileMap* map);
 	void LoadTileSheet(string name, int row, int column);
 	void SetCamera(CameraFree* camera);
-	void TextInput(string& text);
+	bool TextInput(string& text);
 	void SaveMap(string name);
 
 	TileMap* GetMap();
@@ -57,8 +60,10 @@ public:
 	Mesh* mapbackground;
 
 	string name;
-	EDITOR_STATE temp;
+	string text;
+	EDITOR_STATE editorState;
 	int selectedTile;
+	bool yes;
 private:
 	TileMap* map;
 	int *screenWidth, *screenHeight;

@@ -10,6 +10,7 @@ public:
 	~AABB_2D();
 
 	virtual void Init(Vector3* objPos, Vector3 scale);
+	virtual void Init(Vector3 pos, Vector3 scale);
 	virtual void Update();
 	virtual bool CheckCollision(AABB_2D col) const;
 	virtual bool CheckCollision(Vector3 point) const;

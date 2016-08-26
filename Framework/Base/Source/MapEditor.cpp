@@ -1,6 +1,7 @@
 #include "MapEditor.h"
 #include "Application.h"
 #include "MeshGenerator.h"
+#include "AABB_2D.h"
 
 #include <iostream>
 #include <sstream>
@@ -22,7 +23,7 @@ tileSheet(NULL),
 collisionbox(NULL),
 name(""),
 state(REAR_MAP),
-temp(INIT),
+editorState(SETUP),
 camera(NULL)
 {
 	tilesID.clear();
@@ -32,6 +33,7 @@ camera(NULL)
 	{
 		showMap[i] = true;
 	}
+	yes = true;
 }
 
 MapEditor::~MapEditor()
@@ -86,7 +88,7 @@ void MapEditor::Init(int *screenWidth, int *screenHeight, int tileSize)
 	}*/
 }
 
-void MapEditor::TextInput(string& text)
+bool MapEditor::TextInput(string& text)
 {
 	char c = (char)Application::GetInstance().key;
 	if (c != 0)
@@ -103,28 +105,42 @@ void MapEditor::TextInput(string& text)
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
 	{
-		if (LoadMap(name, 32))
-		{
-			temp = EDIT;
-			camera->SetMap(map);
-		}
-		else
-		{
-			text.clear();
-		}
+		return true;
 	}
+	
+	return false;
 }
 
 void MapEditor::Update(double dt)
 {
-	switch (temp)
+	switch (editorState)
 	{
-	case INIT:
-		TextInput(name);
+	case SETUP:
+		Setup();
 		break;
 	case EDIT:
 		Edit();
 		break;
+	}
+}
+
+void MapEditor::Setup()
+{
+	text = "Do you want to create a new level?";
+	if (Application::GetInstance().IsMousePressed(0))
+	{
+		double mouseX, mouseY;
+		Application::GetInstance().GetMousePos(mouseX, mouseY);
+		mouseY = Application::GetInstance().m_window_height - mouseY;
+		Vector3 mousePos(mouseX, mouseY, 1.f);
+		AABB_2D yesBox;
+		yesBox.Init(Vector3(250.f, 150.f, 1.f), Vector3(200.f, 100.f, 1.f));
+		AABB_2D noBox;
+		noBox.Init(Vector3(550.f, 150.f, 1.f), Vector3(200.f, 100.f, 1.f));
+		if (yesBox.CheckCollision(mousePos))
+			editorState = CREATE;
+		else if (noBox.CheckCollision(mousePos))
+			editorState = LOAD;
 	}
 }
 

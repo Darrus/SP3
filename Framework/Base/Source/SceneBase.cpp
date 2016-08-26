@@ -249,7 +249,8 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 		return;
 
 	Mtx44 ortho;
-	ortho.SetToOrtho(0, m_screenWidth, 0, m_screenHeight, -10, 10);
+	ortho.SetToOrtho(0, 800, 0, 600, -10, 10);
+	//ortho.SetToOrtho(0, 100, 0, 100, -10, 10);
 	projectionStack.PushMatrix();
 	projectionStack.LoadMatrix(ortho);
 	viewStack.PushMatrix();
@@ -289,6 +290,7 @@ void SceneBase::RenderObjOnScreen(Mesh* mesh, float sizeX , float sizeY ,float s
 	glDisable(GL_DEPTH_TEST);
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, 192, 0, 108, -10, 10);
+	//ortho.SetToOrtho(0, 800, 0, 600, -10, 10);
 	projectionStack.PushMatrix();
 	projectionStack.LoadMatrix(ortho);
 	viewStack.PushMatrix();

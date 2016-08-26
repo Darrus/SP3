@@ -13,6 +13,7 @@ BurnStatus::BurnStatus()
 
 BurnStatus::~BurnStatus()
 {
+	ParticleManager::GetInstance().Remove(particle);
 }
 
 void BurnStatus::Update(double dt)
