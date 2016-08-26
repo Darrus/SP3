@@ -115,7 +115,7 @@ void Player::Update(double dt)
 	ShootWeapon();
 	PlayerUseItem();
 	TossNet();
-	//PlayerCycleItem();
+	PlayerCycleItem();
 
 	if (items)
 		items->Update(dt);
@@ -228,8 +228,8 @@ void Player::CycleBullets()
 
 void Player::PlayerCycleItem()
 {
-	//if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
-		//items.cycleItems();
+	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
+		inventory.CycleItems();
 }
 
 void Player::PlayerUseItem()
@@ -237,10 +237,12 @@ void Player::PlayerUseItem()
 	if (Application::GetInstance().controller->IsKeyPressed(USEITEM))
 	{
 		//items.UseItem(this);
-		items = new HealthPotion();
-		items->UseItem(this);
+
+		/*items = new HealthPotion();
+		items->UseItem();
 		if (playerHealth > 200)
-			playerHealth = 200;
+			playerHealth = 200;*/
+		inventory.UseItem();
 	}
 }
 

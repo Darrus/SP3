@@ -10,7 +10,7 @@ public:
 	virtual ~HealthPotion();
 	virtual void Update(double dt);
 	virtual void HandleInteraction(GameObject* go, double dt);
-	virtual bool UseItem(Player* player);
+	virtual bool UseItem();
 
 	int GetHealthRegain(void);
 	void SetHealthRegain(int healthRegain);
@@ -19,10 +19,8 @@ public:
 	void SetHealthPotionCount(int HealthPotionCount);
 
 private:
-	Player *player;
-	Items *item;
 	int healthRegain;
-
+	bool canUse;
 };
 
 

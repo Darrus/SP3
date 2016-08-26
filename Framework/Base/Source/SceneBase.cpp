@@ -286,7 +286,7 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 
 void SceneBase::RenderObjOnScreen(Mesh* mesh, float sizeX , float sizeY ,float sizeZ, float x, float y)
 {
-	if (!mesh || mesh->textureID <= 0)
+	if (!mesh || mesh->textureArray[0] <= 0)
 		return;
 
 	glDisable(GL_DEPTH_TEST);

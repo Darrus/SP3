@@ -1,9 +1,16 @@
 #include "ItemList.h"
 
-ItemList::ItemList()
+ItemList::ItemList() :
+MaxItemHold(3),
+TotalItemCount(0),
+selectedItem(0)
 //HealthPotionCount(3)
 {
-
+	itemHold = new Items*[MaxItemHold];
+	for (int i = 0; i < MaxItemHold; ++i)
+	{
+		itemHold[i] = NULL;
+	}
 }
 
 ItemList::~ItemList()
@@ -33,31 +40,36 @@ void ItemList::SetTotalItemCount(int TotalItemCount)
 
 void ItemList::UseItem()
 {
-	/*if (itemHold[selectedItem].UseItem())
-	{
-
-	}*/
+	if (itemHold[selectedItem] && itemHold[selectedItem]->UseItem())
+		Remove();
 }
 
-void ItemList::Add(Items item)
+bool ItemList::Add(Items* item)
 {
-	if (TotalItemCount < 3)
+	for (int i = 0; i < MaxItemHold; ++i)
 	{
-		itemHold[TotalItemCount] = item;
-		TotalItemCount++;
+		if (!itemHold[i])
+		{
+			item->pos.Set(-500.f, -500.f, 1.f);
+			itemHold[i] = item;
+			return true;
+		}
 	}
+	return false;
 }
 
-void ItemList::Remove(Items item)
+void ItemList::Remove()
 {
-	if (TotalItemCount > 0)
-	{
-		itemHold[TotalItemCount] = item;
-		TotalItemCount--;
-	}
-	else if (TotalItemCount <= 0)
-	{
-		TotalItemCount = 0;
-	}
+	itemHold[selectedItem]->active = false;
+	itemHold[selectedItem] = NULL;
 }
 
+void ItemList::CycleItems()
+{
+	selectedItem = (selectedItem + 1) % MaxItemHold;
+}
+
+Items* ItemList::GetSelectedItem(void)
+{
+	return itemHold[selectedItem];
+}

@@ -7,7 +7,7 @@
 #include "MeshGenerator.h"
 #include "GoManager.h"
 #include "ParticleManager.h"
-
+#include "HealthPotions.h"
 
 
 SP3::SP3()
@@ -72,7 +72,26 @@ void SP3::Init()
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);
-	
+
+	Items *potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(200.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(300.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(200.f, 300.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(100.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
 	fps = 0.f;
 
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
@@ -292,9 +311,11 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
 	
-	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_HEALTHPOTION], 10.f, 8.f, 1.f, 15, 89);
-	modelStack.PopMatrix();
+	if (player->inventory.GetSelectedItem())
+	{
+		RenderObjOnScreen(player->inventory.GetSelectedItem()->mesh, 10.f, 8.f, 1.f, 15, 89);
+	}
+	
 
 	/*else if (items->SPEEDBOOST)
 	{

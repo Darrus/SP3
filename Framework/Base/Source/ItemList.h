@@ -9,20 +9,22 @@ public:
 	ItemList();
 	~ItemList();
 	void UseItem();
-	void Add(Items item);
-	void Remove(Items item);
+	bool Add(Items* item);
+	void Remove();
 
-	int GetSelectedItem(void);
+	Items* GetSelectedItem(void);
 	void SetSelectedItem(int selectedItem);
 
 	int GetTotalItemCount(void);
 	void SetTotalItemCount(int TotalItemCount);
 
+	void CycleItems();
+
 private:
-	Items itemHold[3];
+	const int MaxItemHold;
+	Items** itemHold;
 	int selectedItem;
 	int TotalItemCount;
-
 };
 
 

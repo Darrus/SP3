@@ -3,6 +3,7 @@
 
 Items::Items()
 {
+	scale.Set(32.f, 32.f, 32.f);
 	collider.Init(&this->pos, scale);
 }
 
@@ -36,7 +37,7 @@ void Items::HandleInteraction(GameObject* go, double dt)
 	}
 }
 
-bool Items::UseItem(Player* player)
+bool Items::UseItem()
 {
 	return false;
 	/*this->player = player;

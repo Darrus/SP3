@@ -20,18 +20,15 @@ public:
 	int GetJumpPotionCount(void);
 	void SetJumpPotionCount(int JumpPotionCount);
 
-
 	virtual void HandleInteraction(GameObject* go, double dt);
 
 	virtual void Update(double dt);
-	virtual bool UseItem(Player* player);
+	virtual bool UseItem();
 
 	void cycleItems();
 
-protected:
-
 	Player* player;
-	TileMap* map;
+protected:
 	AABB_2D collider;
 
 	float timer;
