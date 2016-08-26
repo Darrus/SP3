@@ -288,6 +288,9 @@
     <ClCompile Include="Source\ItemList.cpp">
       <Filter>Source Files\GameObjects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneGameOver.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="Source\ItemList.h">
       <Filter>Header Files\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneGameOver.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

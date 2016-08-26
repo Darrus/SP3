@@ -101,6 +101,11 @@ void SP3::Update(double dt)
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
 		SceneManager::GetInstance().ChangeScene("LevelEditor");
+
+	if (player->GetPlayerHealth() <= 0)
+	{
+		SceneManager::GetInstance().ChangeScene("SceneGameOver");
+	}
 }
 
 void SP3::Render()
