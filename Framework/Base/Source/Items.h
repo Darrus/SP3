@@ -36,8 +36,6 @@ public:
 	void cycleItems();
 
 private:
-
-
 	ITEMLIST itemList;
 	TileMap* map;
 	AABB_2D collider;

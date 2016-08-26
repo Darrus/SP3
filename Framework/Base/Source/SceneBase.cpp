@@ -188,6 +188,9 @@ void SceneBase::Init()
 	meshList[GEO_JUMPPOTION] = MeshBuilder::GenerateQuad("Jump Potion", Color(1, 1, 1), 1.f);
 	meshList[GEO_JUMPPOTION]->textureArray[0] = LoadTGA("Image//JumpPotion.tga");
 
+	meshList[GEO_TEXTBOX] = MeshBuilder::GenerateQuad("Textbox", Color(1.f, 1.f, 1.f), 1.f);
+	meshList[GEO_TEXTBOX]->textureArray[0] = LoadTGA("Image//textbox.tga");
+
 	bLightEnabled = false;
 }
 

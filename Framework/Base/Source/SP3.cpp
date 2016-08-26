@@ -27,7 +27,7 @@ void SP3::Init()
 	Math::InitRNG();
 
 	map = new TileMap();
-	map->Init((int)m_screenHeight, (int)m_screenWidth, 32);
+	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
 	map->LoadMap("Level01");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
@@ -78,8 +78,6 @@ void SP3::Init()
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
-
-
 }
 
 void SP3::Update(double dt)
@@ -100,6 +98,9 @@ void SP3::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
+		SceneManager::GetInstance().ChangeScene("LevelEditor");
 }
 
 void SP3::Render()
@@ -175,6 +176,9 @@ void SP3::Exit()
 		delete map;
 	map = NULL;
 	MeshGenerator::GetInstance().ClearMeshGenerator();
+	GoManager::GetInstance().ClearList();
+	background.ClearBackgrounds();
+	ParticleManager::GetInstance().ClearList();
 }
 
 // Renders

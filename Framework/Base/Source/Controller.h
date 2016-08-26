@@ -28,6 +28,8 @@ enum Controls
 	BACKSPACE,
 	ENTER,
 
+	NEXT,
+
 	EXIT,
 	CTRL,
 	CYCLEBULLET,

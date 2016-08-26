@@ -94,6 +94,8 @@ protected:
 		GEO_SPEEDPOTION,
 		GEO_JUMPPOTION,
 
+		GEO_TEXTBOX,
+
 		NUM_GEOMETRY,
 	};
 

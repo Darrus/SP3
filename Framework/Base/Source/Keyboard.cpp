@@ -33,6 +33,7 @@ void Keyboard::create()
 	keys[CYCLEITEM].Assign('F');
 	keys[BACKSPACE].Assign(VK_BACK);
 	keys[ENTER].Assign(VK_RETURN);
+	keys[NEXT].Assign('N');
 
 	timeBetweenPress = 0.f;
 }

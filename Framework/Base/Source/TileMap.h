@@ -16,8 +16,8 @@ public:
 	TileMap(void);
 	~TileMap(void);
 
-	void Init(const int screenHeight, const int screenWidth, const int tileSize = 25);
-	void Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize = 25);
+	void Init(int *screenHeight, int *screenWidth, const int tileSize = 25);
+	void Create(int *screenWidth, int *screenHeight, const int numOfTiles_MapWidth, const int numOfTiles_MapHeight, const int tileSize = 25);
 	bool LoadMap(const string name);
 	bool LoadTileSheet(const string fileLoc);
 
@@ -38,8 +38,8 @@ public:
 	vector<vector<int> > collisionMap;
 
 private:
-	int screenHeight;
-	int screenWidth;
+	int* screenHeight;
+	int* screenWidth;
 	int numOfTiles_ScreenHeight;		// Number of tiles in the screen's height
 	int numOfTiles_ScreenWidth;		// Number of tiles in the screen's width
 	int tileSize;
