@@ -42,6 +42,13 @@ void CameraFollow::SetNewPos(Vector3 newPos)
 
 void CameraFollow::Boundary()
 {
+	float boundX = map->GetMapWidth() - map->GetScreenWidth();
+	if (boundX < 0.f)
+		boundX = 0.f;
+	float boundY = map->GetMapHeight() - map->GetScreenHeight();
+	if (boundY < 0.f)
+		boundY = 0.f;
+
 	if (position.x < 0.f)
 		position.x = 0.f;
 

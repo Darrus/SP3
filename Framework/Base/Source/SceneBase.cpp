@@ -7,6 +7,10 @@
 #include "Utility.h"
 #include <sstream>
 #include "LoadTGA.h"
+#include "MeshGenerator.h"
+#include "GoManager.h"
+#include "ParticleManager.h"
+
 
 SceneBase::SceneBase() :
 camera(NULL)
@@ -437,6 +441,10 @@ void SceneBase::Exit()
 	if (camera)
 		delete camera;
 	camera = NULL;
+
+	MeshGenerator::GetInstance().ClearMeshGenerator();
+	GoManager::GetInstance().ClearList();
+	ParticleManager::GetInstance().ClearList();
 
 	glDeleteProgram(m_programID);
 	glDeleteVertexArrays(1, &m_vertexArrayID);
