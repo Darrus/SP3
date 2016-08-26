@@ -69,7 +69,12 @@ void ParallaxBackground::LoadBackground(string fileLoc, Vector3 scale)
 
 void ParallaxBackground::ClearBackgrounds()
 {
-	delete[] backgrounds;
+	while (bgCount >= 0)
+	{
+		delete backgrounds[bgCount];
+		backgrounds[bgCount] = NULL;
+		bgCount--;
+	}
 	bgCount = 0;
 }
 

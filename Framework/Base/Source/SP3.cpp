@@ -1,12 +1,12 @@
 #include "SP3.h"
 #include "Application.h"
 #include "SceneManager.h"
-#include "MeshGenerator.h"
 #include <sstream>
-#include "GoManager.h"
 #include "EnemyFactory.h"
-#include "ParticleManager.h"
 #include "TextParticle.h"
+#include "MeshGenerator.h"
+#include "GoManager.h"
+#include "ParticleManager.h"
 
 
 
@@ -27,7 +27,7 @@ void SP3::Init()
 	Math::InitRNG();
 
 	map = new TileMap();
-	map->Init((int)m_screenHeight, (int)m_screenWidth, 32);
+	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
 	map->LoadMap("Level01");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
@@ -67,7 +67,7 @@ void SP3::Init()
 	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 602.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
@@ -78,8 +78,6 @@ void SP3::Init()
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
-
-
 }
 
 void SP3::Update(double dt)
@@ -100,6 +98,9 @@ void SP3::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
+		SceneManager::GetInstance().ChangeScene("LevelEditor");
 }
 
 void SP3::Render()
@@ -164,7 +165,6 @@ void SP3::Render()
 	}
 
 	RenderParticle();
-
 	RenderUI();
 }
 
@@ -174,7 +174,7 @@ void SP3::Exit()
 	if (map)
 		delete map;
 	map = NULL;
-	MeshGenerator::GetInstance().ClearMeshGenerator();
+	background.ClearBackgrounds();
 }
 
 // Renders

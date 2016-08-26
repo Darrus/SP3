@@ -22,6 +22,7 @@ tileSheet(NULL),
 collisionbox(NULL),
 name(""),
 state(REAR_MAP),
+temp(INIT),
 camera(NULL)
 {
 	tilesID.clear();
@@ -38,7 +39,7 @@ MapEditor::~MapEditor()
 
 }
 
-void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
+void MapEditor::Init(int *screenWidth, int *screenHeight, int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
@@ -85,14 +86,53 @@ void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 	}*/
 }
 
-void MapEditor::Update(double dt)
+void MapEditor::TextInput(string& text)
 {
-	
 	char c = (char)Application::GetInstance().key;
 	if (c != 0)
-		name += c;
-	
-	/*if (Application::GetInstance().controller->IsKeyPressed(TAB))
+	{
+		Application::GetInstance().key = 0;
+		text += c;
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		if (!text.empty())
+			text.pop_back();
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
+	{
+		if (LoadMap(name, 32))
+		{
+			temp = EDIT;
+			camera->SetMap(map);
+		}
+		else
+		{
+			text.clear();
+		}
+	}
+}
+
+void MapEditor::Update(double dt)
+{
+	switch (temp)
+	{
+	case INIT:
+		TextInput(name);
+		break;
+	case EDIT:
+		Edit();
+		break;
+	}
+}
+
+void MapEditor::Edit()
+{
+	map->Init(screenHeight, screenWidth, 32);
+
+	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 		showTiles = true;
 
 	if (Application::GetInstance().controller->IsKeyReleased(TAB))
@@ -109,7 +149,7 @@ void MapEditor::Update(double dt)
 			offset.y = 0.f;
 		if (offset.y > row)
 			offset.y = row;
-		
+
 		Application::scrollY = 0;
 
 		if (Application::GetInstance().IsMousePressed(0))
@@ -138,8 +178,10 @@ void MapEditor::Update(double dt)
 
 	if (Application::GetInstance().controller->IsKeyPressed(ONE))
 		state = REAR_MAP;
+
 	if (Application::GetInstance().controller->IsKeyPressed(TWO))
 		state = FRONT_MAP;
+
 	if (Application::GetInstance().controller->IsKeyPressed(THREE))
 	{
 		state = COLLISION_MAP;
@@ -147,11 +189,11 @@ void MapEditor::Update(double dt)
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(SHOW_REAR))
-		showMap[0] = !showMap[0];
+	showMap[0] = !showMap[0];
 	if (Application::GetInstance().controller->IsKeyPressed(SHOW_FRONT))
-		showMap[1] = !showMap[1];
+	showMap[1] = !showMap[1];
 	if (Application::GetInstance().controller->IsKeyPressed(SHOW_COLLISION))
-		showMap[2] = !showMap[2];
+	showMap[2] = !showMap[2];
 
 	if (!showTiles)
 	{
@@ -160,7 +202,7 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = screenHeight - mouseY;
+			mouseY = *screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
@@ -187,7 +229,7 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = screenHeight - mouseY;
+			mouseY = *screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
@@ -210,7 +252,7 @@ void MapEditor::Update(double dt)
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = screenHeight - mouseY;
+			mouseY = *screenHeight - mouseY;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
@@ -240,7 +282,7 @@ void MapEditor::Update(double dt)
 			cin >> name;
 		}
 		SaveMap(name);
-	}*/
+	}
 }
 
 void MapEditor::CreateNewMap(int mapWidth, int mapHeight, int tileSize)

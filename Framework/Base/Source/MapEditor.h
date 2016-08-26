@@ -12,6 +12,12 @@ using std::string;
 class MapEditor
 {
 public:
+	enum EDITOR_STATE
+	{
+		INIT,
+		EDIT
+	};
+
 	enum EDIT_STATE
 	{
 		REAR_MAP,
@@ -23,16 +29,17 @@ public:
 	MapEditor();
 	~MapEditor();
 
-	void Init(int screenWidth, int screenHeight, int tileSize);
+	void Init(int *screenWidth, int *screenHeight, int tileSize);
 	void Update(double dt);
 	
+	void Edit();
 	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
 	void LoadMap(TileMap* map);
 	bool LoadMap(string name, int tileSize);
 	void LoadRearMap(TileMap* map);
 	void LoadTileSheet(string name, int row, int column);
 	void SetCamera(CameraFree* camera);
-
+	void TextInput(string& text);
 	void SaveMap(string name);
 
 	TileMap* GetMap();
@@ -50,17 +57,13 @@ public:
 	Mesh* mapbackground;
 
 	string name;
-private:
-
-
-	TileMap* map;
-
+	EDITOR_STATE temp;
 	int selectedTile;
-	int screenWidth, screenHeight;
-
+private:
+	TileMap* map;
+	int *screenWidth, *screenHeight;
 	CameraFree* camera;
 	EDIT_STATE state;
-	
 };
 
 #endif

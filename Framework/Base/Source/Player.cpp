@@ -16,7 +16,7 @@ isMoving(false),
 isClimbing(false),
 playerHealth(200),
 playerMaxHealth(200),
-JUMP_SPEED(20),
+JUMP_SPEED(400),
 state(P_IDLE),
 weaponType(0),
 net(NULL)
@@ -173,15 +173,9 @@ void Player::Move(double dt)
 	if (Application::GetInstance().controller->IsKeyReleased(MOVE_RIGHT) || Application::GetInstance().controller->IsKeyReleased(MOVE_LEFT))
 	{
 		vel.x = 0.f;
-		state = P_IDLE;
 		if (state != P_IDLE)
 			sprite->SetAnimation(idle);
-	}
-
-	if (Application::GetInstance().controller->OnHold(JUMP) && isGrounded)
-	{
-		vel.y = 450.f;
-		isGrounded = false;
+		state = P_IDLE;
 	}
 
 	if (!isGrounded)
@@ -338,8 +332,11 @@ void Player::CollisionCheck(double dt)
 
 void Player::PlayerJump(double dt)
 {
-	if (Application::GetInstance().controller->IsKeyPressed(JUMP) && isGrounded == true)
-		pos.y += JUMP_SPEED * (float)dt;
+	if (Application::GetInstance().controller->IsKeyPressed(JUMP) && isGrounded)
+	{
+		vel.y = JUMP_SPEED;
+		isGrounded = false;
+	}
 }
 
 void Player::SetMousePos(float mouseX, float mouseY)

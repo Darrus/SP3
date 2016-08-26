@@ -49,26 +49,26 @@ TileMap::~TileMap()
 	tileSheet = NULL;
 }
 
-void TileMap::Init(const int screenHeight, const int screenWidth, const int tileSize)
+void TileMap::Init(int *screenHeight, int *screenWidth, const int tileSize)
 {
 	this->screenHeight = screenHeight;
 	this->screenWidth = screenWidth;
 	this->tileSize = tileSize;
-	this->numOfTiles_ScreenHeight = ceil((float)screenHeight / (float)tileSize);
-	this->numOfTiles_ScreenWidth = ceil((float)screenWidth / (float)tileSize);
+	this->numOfTiles_ScreenHeight = ceil((float)*screenHeight / (float)tileSize);
+	this->numOfTiles_ScreenWidth = ceil((float)*screenWidth / (float)tileSize);
 }
 
-void TileMap::Create(const int screenWidth, const int screenHeight, const int mapWidth, const int mapHeight, const int tileSize)
+void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_MapWidth, const int numOfTiles_MapHeight, const int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
-	this->mapWidth = mapWidth;
-	this->mapHeight = mapHeight;
 	this->tileSize = tileSize;
-	this->numOfTiles_MapWidth = mapWidth / tileSize;
-	this->numOfTiles_MapHeight = mapHeight / tileSize;
-	this->numOfTiles_ScreenWidth = screenWidth / tileSize;
-	this->numOfTiles_ScreenHeight = screenHeight / tileSize;
+	this->numOfTiles_MapWidth = numOfTiles_MapWidth;
+	this->numOfTiles_MapHeight = numOfTiles_MapHeight;
+	this->mapWidth = numOfTiles_MapWidth * tileSize;
+	this->mapHeight = numOfTiles_MapHeight * tileSize;
+	this->numOfTiles_ScreenWidth = ceil((float)*screenWidth / tileSize);
+	this->numOfTiles_ScreenHeight = ceil((float)*screenHeight / tileSize);
 
 	for (int i = 0; i < numOfTiles_MapHeight; ++i)
 	{
@@ -209,12 +209,12 @@ int TileMap::GetNumOfTiles_MapWidth()
 
 int TileMap::GetScreenHeight()
 {
-	return screenHeight;
+	return *screenHeight;
 }
 
 int TileMap::GetScreenWidth()
 {
-	return screenWidth;
+	return *screenWidth;
 }
 
 int TileMap::GetTileSize()

@@ -23,12 +23,11 @@ void LevelEditor::Init()
 
 	editor = new MapEditor();
 	editor->LoadTileSheet("tilesheet", 16, 16);
-	editor->Init(m_screenWidth, m_screenHeight, 32);
+	editor->Init(&Application::GetInstance().m_window_width, &Application::GetInstance().m_window_height, 32);
 	editor->SetCamera(camFree);
 	editor->active = true;
 
 	camera->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
-	camFree->SetMap(editor->GetMap());
 }
 
 void LevelEditor::Update(double dt)
@@ -38,8 +37,8 @@ void LevelEditor::Update(double dt)
 	if (editor->active)
 		editor->Update(dt);
 
-	//if (Application::GetInstance().controller->IsKeyPressed(JUMP))
-		//SceneManager::GetInstance().ChangeScene("SP3");
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
+		SceneManager::GetInstance().ChangeScene("SP3");
 }
 
 void LevelEditor::Render()
@@ -47,7 +46,7 @@ void LevelEditor::Render()
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0.f, m_screenWidth, 0.f, m_screenHeight, -10.f, 10.f);
+	projection.SetToOrtho(0.f, Application::GetInstance().m_window_width, 0.f, Application::GetInstance().m_window_height, -10.f, 10.f);
 	projectionStack.LoadMatrix(projection);
 
 	// Camera matrix
@@ -61,7 +60,15 @@ void LevelEditor::Render()
 	// Model matrix : an identity matrix (model will be at the origin)
 	modelStack.LoadIdentity();
 
-	RenderEditor();
+	switch (editor->temp)
+	{
+	case MapEditor::INIT:
+		RenderMenu();
+		break;
+	case MapEditor::EDIT:
+		RenderEditor();
+		break;
+	}
 }
 
 void LevelEditor::Exit()
@@ -78,7 +85,7 @@ void LevelEditor::Exit()
 
 void LevelEditor::RenderEditor()
 {
-	/*CameraFree* camFree = dynamic_cast<CameraFree*>(camera);
+	CameraFree* camFree = dynamic_cast<CameraFree*>(camera);
 	Vector2 tileOffset = camFree->GetTileOffset();
 	Vector2 fineOffset = camFree->GetFineOffset();
 	int tileSize = editor->GetMap()->GetTileSize();
@@ -114,8 +121,8 @@ void LevelEditor::RenderEditor()
 	if (editor->showTiles)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(camera->position.x + 60.f, camera->position.y + m_screenHeight * 0.5f, 0.f);
-		modelStack.Scale(120.f, m_screenHeight * 1.1f, 1.f);
+		modelStack.Translate(camera->position.x + 60.f, camera->position.y + Application::GetInstance().m_window_height * 0.5f, 0.f);
+		modelStack.Scale(120.f, Application::GetInstance().m_window_height * 1.1f, 1.f);
 		RenderMesh(editor->mapbackground);
 		modelStack.PopMatrix();
 
@@ -123,7 +130,7 @@ void LevelEditor::RenderEditor()
 		if (editor->GetState() == MapEditor::COLLISION_MAP)
 		{
 			for (int i = 0; i < 3; ++i)
-				RenderTile(editor->collisionbox, i, i * tileSize, m_screenHeight - tileSize, tileSize);
+				RenderTile(editor->collisionbox, i, i * tileSize, Application::GetInstance().m_window_height - tileSize, tileSize);
 		}
 		else
 		{
@@ -131,26 +138,34 @@ void LevelEditor::RenderEditor()
 			{
 				for (int k = 0; k < editor->column; ++k)
 				{
-					RenderTile(editor->tileSheet, editor->tilesID[i][k], k * tileSize + moveX, m_screenHeight - tileSize - (i - editor->offset.y) * tileSize, tileSize);
+					RenderTile(editor->tileSheet, editor->tilesID[i][k], k * tileSize + moveX, Application::GetInstance().m_window_height - tileSize - (i - editor->offset.y) * tileSize, tileSize);
 				}
 			}
 		}
-	}*/
-
-	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 25, 300, 300);
+	}
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "Editing:", Color(0.f, 1.f, 0.f), 25, 140, 15);
+	RenderTile(meshList[GEO_TEXTBOX], 0, Application::GetInstance().m_window_width - 34, Application::GetInstance().m_window_height - 35, 50);
 
 	switch (editor->GetState())
 	{
 	case MapEditor::FRONT_MAP:
 		RenderTextOnScreen(meshList[GEO_TEXT], "Front Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTile(editor->tileSheet, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	case MapEditor::REAR_MAP:
 		RenderTextOnScreen(meshList[GEO_TEXT], "Rear Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTile(editor->tileSheet, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	case MapEditor::COLLISION_MAP:
 		RenderTextOnScreen(meshList[GEO_TEXT], "Collision Map", Color(0.f, 1.f, 0.f), 25, 340, 15);
+		RenderTile(editor->collisionbox, editor->selectedTile, Application::GetInstance().m_window_width - 50, Application::GetInstance().m_window_height - 50, 32);
 		break;
 	}
+}
+
+void LevelEditor::RenderMenu()
+{
+	RenderObjOnScreen(meshList[GEO_TEXTBOX], 100, 35, 1, 95, 55);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 20, 300, 300);
 }
