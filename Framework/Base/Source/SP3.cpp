@@ -67,7 +67,7 @@ void SP3::Init()
 	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 602.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
