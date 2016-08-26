@@ -7,6 +7,7 @@
 #include "BulletFactory.h"
 #include "Shotgun.h"
 #include "Sniper.h"
+#include "HealthPotions.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -17,7 +18,6 @@ playerHealth(200),
 playerMaxHealth(200),
 JUMP_SPEED(400),
 state(P_IDLE),
-MAX_HEIGHT(20),
 weaponType(0),
 net(NULL)
 {
@@ -46,9 +46,10 @@ net(NULL)
 	bulletElem[0] = -1;
 	for (int i = 1; i < ELEM_SIZE; ++i)
 	{
-		bulletElem[i] = 100;
+		bulletElem[i] = 20;
 	}
 	selectedElem = NONE;
+	items = NULL;
 }
 
 Player::~Player()
@@ -84,6 +85,16 @@ void Player::AddBullet(ELEMENTS elem, int amount)
 	bulletElem[elem] += amount;
 }
 
+float Player::getPlayerSpeed(void)
+{
+	return PLAYER_SPEED;
+}
+
+void Player::setPlayerSpeed(float PLAYER_SPEED)
+{
+	this->PLAYER_SPEED = PLAYER_SPEED;
+}
+
 void Player::Init(TileMap* map, Vector3 pos, Vector3 scale)
 {
 	this->map = map;
@@ -104,6 +115,10 @@ void Player::Update(double dt)
 	ShootWeapon();
 	PlayerUseItem();
 	TossNet();
+	PlayerCycleItem();
+
+	if (items)
+		items->Update(dt);
 
 	collider.Update();
 
@@ -116,6 +131,7 @@ void Player::Update(double dt)
 	view.Normalize();
 
 	sprite->Update(dt);
+
 }
 
 int Player::GetWeaponType()
@@ -213,16 +229,20 @@ void Player::CycleBullets()
 void Player::PlayerCycleItem()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
-		items.cycleItems();
+		inventory.CycleItems();
 }
 
 void Player::PlayerUseItem()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(USEITEM))
 	{
-		items.UseItem(this);
+		//items.UseItem(this);
+
+		/*items = new HealthPotion();
+		items->UseItem();
 		if (playerHealth > 200)
-			playerHealth = 200;
+			playerHealth = 200;*/
+		inventory.UseItem();
 	}
 }
 

@@ -7,7 +7,7 @@
 #include "MeshGenerator.h"
 #include "GoManager.h"
 #include "ParticleManager.h"
-
+#include "HealthPotions.h"
 
 
 SP3::SP3()
@@ -45,7 +45,6 @@ void SP3::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
 
-	EnemyFactory::Create("RandomAngel", Vector3(200.f, 200.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(400.f, 500.f, 0.f), map);
@@ -67,22 +66,45 @@ void SP3::Init()
 	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 602.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);
-	
+
+	Items *potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(200.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(300.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(200.f, 300.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(100.f, 200.f, 0.f);
+	GoManager::GetInstance().Add(potion);
 	fps = 0.f;
 
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
+
+	story = true;
 }
 
 void SP3::Update(double dt)
 {
+
 	SceneBase::Update(dt);
+
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -93,12 +115,25 @@ void SP3::Update(double dt)
 
 	camera->Update(dt);
 	background.Update();
-	GoManager::GetInstance().Update(dt);
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
 		SceneManager::GetInstance().ChangeScene("LevelEditor");
+
+	if (player->GetPlayerHealth() <= 0)
+	{
+		SceneManager::GetInstance().ChangeScene("SceneGameOver");
+	}
+
+	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		story = false;
+	}
+	else if (story == false)
+	{
+		GoManager::GetInstance().Update(dt);
+	}
 }
 
 void SP3::Render()
@@ -284,16 +319,19 @@ void SP3::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
+	
+	if (player->inventory.GetSelectedItem())
+	{
+		RenderObjOnScreen(player->inventory.GetSelectedItem()->mesh, 10.f, 8.f, 1.f, 15, 89);
+	}
+	
 
-	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_HEALTHPOTION], 10.f, 8.f, 1.f, 15, 89);
-	modelStack.PopMatrix();
-	//else if (items->SPEEDBOOST)
-	//{
-	//	modelStack.PushMatrix();
-	//	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
-	//	modelStack.PopMatrix();
-	//}
+	/*else if (items->SPEEDBOOST)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
+		modelStack.PopMatrix();
+	}*/
 	//else if (items->JUMPBOOST)
 	//{
 	//	modelStack.PushMatrix();
@@ -354,6 +392,7 @@ void SP3::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_BULLET4], 5, 4, 5, 130, 98);
 	modelStack.PopMatrix();
+
 
 	switch (player->GetWeaponType())
 	{
@@ -428,6 +467,13 @@ void SP3::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
+
+	if (story == true)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
+		modelStack.PopMatrix();
+	}
 }
 
 void SP3::RenderParticle()

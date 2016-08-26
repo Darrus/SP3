@@ -10,39 +10,30 @@ class Player;
 class Items : public GameObject
 {
 public:
-	enum ITEMLIST
-	{
-		POTIONS,
-		SPEEDBOOST,
-		JUMPBOOST,
-		ITEMSIZE,
-	};
 
 	Items();
 	virtual ~Items();
 
-	int GetHealthRegain(void);
-	int GetPotionCount(void);
+	int GetSpeedPotionCount(void);
+	void SetSpeedPotionCount(int SpeedPotionCount);
 
-	void SetPotionCount(int potionCount);
-	void SetHealthRegain(int healthRegain);
+	int GetJumpPotionCount(void);
+	void SetJumpPotionCount(int JumpPotionCount);
 
-	virtual void HandleItemInteraction(GameObject* go, double dt);
-
+	virtual void HandleInteraction(GameObject* go, double dt);
 
 	virtual void Update(double dt);
-	void UseItem(Player* player);
+	virtual bool UseItem();
 
 	void cycleItems();
 
-private:
-	ITEMLIST itemList;
-	TileMap* map;
+	Player* player;
+protected:
 	AABB_2D collider;
-	int potionCount;
-	int healthRegain;
 
-	bool isUsed;
+	float timer;
+	/*int SpeedPotionCount;
+	int JumpPotionCount;*/
 };
 
 

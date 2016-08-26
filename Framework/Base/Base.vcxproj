@@ -32,7 +32,9 @@
     <ClCompile Include="Source\FireBullet.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GoManager.cpp" />
+    <ClCompile Include="Source\HealthPotion.cpp" />
     <ClCompile Include="Source\IceBullet.cpp" />
+    <ClCompile Include="Source\ItemList.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
     <ClCompile Include="Source\LevelEditor.cpp" />
@@ -56,6 +58,7 @@
     <ClCompile Include="Source\RangeEnemy.cpp" />
     <ClCompile Include="Source\Rifle.cpp" />
     <ClCompile Include="Source\SceneBase.cpp" />
+    <ClCompile Include="Source\SceneGameOver.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Shotgun.cpp" />
@@ -94,7 +97,9 @@
     <ClInclude Include="Source\FireBullet.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
+    <ClInclude Include="Source\HealthPotions.h" />
     <ClInclude Include="Source\IceBullet.h" />
+    <ClInclude Include="Source\ItemList.h" />
     <ClInclude Include="Source\Items.h" />
     <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
@@ -124,6 +129,7 @@
     <ClInclude Include="Source\Rifle.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBase.h" />
+    <ClInclude Include="Source\SceneGameOver.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Shotgun.h" />

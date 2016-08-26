@@ -192,6 +192,12 @@ void SceneBase::Init()
 	meshList[GEO_JUMPPOTION] = MeshBuilder::GenerateQuad("Jump Potion", Color(1, 1, 1), 1.f);
 	meshList[GEO_JUMPPOTION]->textureArray[0] = LoadTGA("Image//JumpPotion.tga");
 
+	meshList[GEO_GAMEOVER] = MeshBuilder::GenerateQuad("GameOver", Color(1, 1, 1), 1.f);
+	meshList[GEO_GAMEOVER]->textureArray[0] = LoadTGA("Image//GameOver.tga");
+
+	meshList[GEO_STORY] = MeshBuilder::GenerateQuad("Story", Color(1, 1, 1), 1.f);
+	meshList[GEO_STORY]->textureArray[0] = LoadTGA("Image//Story.tga");
+
 	meshList[GEO_TEXTBOX] = MeshBuilder::GenerateQuad("Textbox", Color(1.f, 1.f, 1.f), 1.f);
 	meshList[GEO_TEXTBOX]->textureArray[0] = LoadTGA("Image//textbox.tga");
 
@@ -284,7 +290,7 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 
 void SceneBase::RenderObjOnScreen(Mesh* mesh, float sizeX , float sizeY ,float sizeZ, float x, float y)
 {
-	if (!mesh || mesh->textureID <= 0)
+	if (!mesh || mesh->textureArray[0] <= 0)
 		return;
 
 	glDisable(GL_DEPTH_TEST);

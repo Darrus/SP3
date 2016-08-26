@@ -1,5 +1,5 @@
-#ifndef STUDIO_PROJECT_3_H
-#define STUDIO_PROJECT_3_H
+#ifndef SCENEGAMEOVER_H
+#define SCENEGAMEOVER_H
 
 #include <vector>
 #include "SceneBase.h"
@@ -13,11 +13,11 @@
 
 using std::vector;
 
-class SP3 : public SceneBase
+class SceneGameOver : public SceneBase
 {
 public:
-	SP3();
-	virtual ~SP3();
+	SceneGameOver();
+	virtual ~SceneGameOver();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -25,9 +25,6 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderMap(TileMap* map);
-	void RenderObject(GameObject* go);
-	void RenderWeaponObject(GameObject * go);
 	void RenderParticle();
 	void RenderUI();
 
@@ -37,8 +34,6 @@ private:
 	CameraFollow* camFollow;
 	Weapon* weapon;
 	Items* items;
-
-	bool story;
 
 	float fps;
 
