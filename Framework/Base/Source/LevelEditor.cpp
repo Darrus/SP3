@@ -178,9 +178,13 @@ void LevelEditor::RenderMenu()
 	RenderMesh(meshList[GEO_TEXTBOX]);
 	modelStack.PopMatrix();
 
+	RenderTextOnScreen(meshList[GEO_TEXT], "Yes", Color(0.f, 1.f, 0.f), 50, 190.f, 130.f);
+
 	modelStack.PushMatrix();
 	modelStack.Translate(550.f, 150.f, 1.f);
 	modelStack.Scale(200.f, 100.f, 1.f);
 	RenderMesh(meshList[GEO_TEXTBOX]);
 	modelStack.PopMatrix();
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "No", Color(0.f, 1.f, 0.f), 50, 510.f, 130.f);
 }

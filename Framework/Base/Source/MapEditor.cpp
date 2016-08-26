@@ -144,6 +144,15 @@ void MapEditor::Setup()
 	}
 }
 
+void MapEditor::Create()
+{
+	text = "Please input amount of columns";
+	static bool column = false;
+	static bool row = false;
+
+
+}
+
 void MapEditor::Edit()
 {
 	map->Init(screenHeight, screenWidth, 32);

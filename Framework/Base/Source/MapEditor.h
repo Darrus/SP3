@@ -35,6 +35,7 @@ public:
 	void Update(double dt);
 	
 	void Setup();
+	void Create();
 	void Edit();
 	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
 	void LoadMap(TileMap* map);

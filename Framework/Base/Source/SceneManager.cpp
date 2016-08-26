@@ -42,7 +42,7 @@ void SceneManager::Init()
 	AddScene("LevelEditor", newScene);
 	newScene = new SceneGameOver();
 	AddScene("SceneGameOver", newScene);
-	currentScene = FindScene("SceneGameOver");
+	currentScene = FindScene("LevelEditor");
 }
 
 void SceneManager::Update(double dt)
