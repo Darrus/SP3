@@ -16,7 +16,9 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderMenu();
+	void RenderSetupMenu();
+	void RenderCreateMenu();
+	void RenderLoadMenu();
 	void RenderEditor();
 
 	MapEditor* editor;

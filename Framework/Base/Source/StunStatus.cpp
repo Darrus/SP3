@@ -2,6 +2,7 @@
 #include "EnemyStun.h"
 #include "EnemyIdle.h"
 #include "ParticleFactory.h"
+#include "ParticleManager.h"
 
 StunStatus::StunStatus() :
 particle(NULL)
@@ -12,7 +13,7 @@ particle(NULL)
 
 StunStatus::~StunStatus()
 {
-
+	ParticleManager::GetInstance().Remove(particle);
 }
 
 void StunStatus::Update(double dt)

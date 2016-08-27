@@ -1,5 +1,6 @@
 #include "SlowStatus.h"
 #include "ParticleFactory.h"
+#include "ParticleManager.h"
 
 SlowStatus::SlowStatus() :
 particle(NULL)
@@ -10,7 +11,7 @@ particle(NULL)
 
 SlowStatus::~SlowStatus()
 {
-
+	ParticleManager::GetInstance().Remove(particle);
 }
 
 void SlowStatus::Update(double dt)

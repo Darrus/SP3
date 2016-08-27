@@ -34,10 +34,8 @@ public:
 	void Init(int *screenWidth, int *screenHeight, int tileSize);
 	void Update(double dt);
 	
-	void Setup();
-	void Create();
-	void Edit();
-	void CreateNewMap(int mapWidth, int mapHeight, int tileSize);
+	
+	void CreateNewMap(int numOfTilesWidth, int numOfTilesHeight);
 	void LoadMap(TileMap* map);
 	bool LoadMap(string name, int tileSize);
 	void LoadRearMap(TileMap* map);
@@ -62,12 +60,19 @@ public:
 
 	string name;
 	string text;
+	string answer;
 	EDITOR_STATE editorState;
 	int selectedTile;
-	bool yes;
+
 private:
+	void Setup();
+	void Create();
+	void Load();
+	void Edit();
+
 	TileMap* map;
 	int *screenWidth, *screenHeight;
+	int tileSize;
 	CameraFree* camera;
 	EDIT_STATE state;
 };

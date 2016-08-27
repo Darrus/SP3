@@ -65,7 +65,13 @@ void LevelEditor::Render()
 	switch (editor->editorState)
 	{
 	case MapEditor::SETUP:
-		RenderMenu();
+		RenderSetupMenu();
+		break;
+	case MapEditor::CREATE:
+		RenderCreateMenu();
+		break;
+	case MapEditor::LOAD:
+		RenderLoadMenu();
 		break;
 	case MapEditor::EDIT:
 		RenderEditor();
@@ -140,7 +146,7 @@ void LevelEditor::RenderEditor()
 			{
 				for (int k = 0; k < editor->column; ++k)
 				{
-					RenderTile(editor->tileSheet, editor->tilesID[i][k], k * tileSize + moveX, Application::GetInstance().m_window_height - tileSize - (i - editor->offset.y) * tileSize, tileSize);
+						RenderTile(editor->tileSheet, editor->tilesID[i][k], k * tileSize + moveX, Application::GetInstance().m_window_height - tileSize - (i - editor->offset.y) * tileSize, tileSize);
 				}
 			}
 		}
@@ -166,11 +172,10 @@ void LevelEditor::RenderEditor()
 	}
 }
 
-void LevelEditor::RenderMenu()
+void LevelEditor::RenderSetupMenu()
 {
 	RenderObjOnScreen(meshList[GEO_TEXTBOX], 190, 30, 1, 95, 55);
 	RenderTextOnScreen(meshList[GEO_TEXT], editor->text, Color(0.f, 1.f, 0.f), 20, 70, 320);
-	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 30, 260, 270);
 
 	modelStack.PushMatrix();
 	modelStack.Translate(250.f, 150.f, 1.f);
@@ -187,4 +192,18 @@ void LevelEditor::RenderMenu()
 	modelStack.PopMatrix();
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "No", Color(0.f, 1.f, 0.f), 50, 510.f, 130.f);
+}
+
+void LevelEditor::RenderCreateMenu()
+{
+	RenderObjOnScreen(meshList[GEO_TEXTBOX], 190, 30, 1, 95, 55);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->text, Color(0.f, 1.f, 0.f), 20, 90, 320);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->answer, Color(0.f, 1.f, 0.f), 30, 330, 270);
+}
+
+void LevelEditor::RenderLoadMenu()
+{
+	RenderObjOnScreen(meshList[GEO_TEXTBOX], 190, 30, 1, 95, 55);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->text, Color(0.f, 1.f, 0.f), 20, 60, 320);
+	RenderTextOnScreen(meshList[GEO_TEXT], editor->name, Color(0.f, 1.f, 0.f), 30, 260, 270);
 }

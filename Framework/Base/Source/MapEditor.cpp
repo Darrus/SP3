@@ -7,6 +7,7 @@
 #include <sstream>
 #include <fstream>
 
+using std::stoi;
 using std::ofstream;
 using std::ifstream;
 using std::stringstream;
@@ -33,7 +34,6 @@ camera(NULL)
 	{
 		showMap[i] = true;
 	}
-	yes = true;
 }
 
 MapEditor::~MapEditor()
@@ -45,7 +45,7 @@ void MapEditor::Init(int *screenWidth, int *screenHeight, int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
-
+	this->tileSize = tileSize;
 	/*if (!map)
 	{
 		bool answer = true;
@@ -118,6 +118,12 @@ void MapEditor::Update(double dt)
 	case SETUP:
 		Setup();
 		break;
+	case CREATE:
+		Create();
+		break;
+	case LOAD:
+		Load();
+		break;
 	case EDIT:
 		Edit();
 		break;
@@ -146,11 +152,56 @@ void MapEditor::Setup()
 
 void MapEditor::Create()
 {
-	text = "Please input amount of columns";
 	static bool column = false;
 	static bool row = false;
+	static bool named = false;
+	static int columnCount = 0;
+	static int rowCount = 0;
+	if (!column)
+	{
+		text = "Please input amount of columns";
+		if (TextInput(answer))
+		{
+			column = true;
+			columnCount = stoi(answer);
+			answer.clear();
+		}
+	}
+	else if (!row && column)
+	{
+		text = "Please input amount of rows";
+		if (TextInput(answer))
+		{
+			row = true;
+			rowCount = stoi(answer);
+			answer.clear();
+		}
+	}
+	else if (!named)
+	{
+		text = "Please name the level.";
+		if (TextInput(answer))
+		{
+			name = answer;
+			CreateNewMap(columnCount, rowCount);
+			editorState = EDIT;
+		}
+	}
+}
 
-
+void MapEditor::Load()
+{
+	text = "Please enter the name of the level.";
+	if (TextInput(name))
+	{
+		if (LoadMap(name, tileSize))
+		{
+			editorState = EDIT;
+			camera->SetMap(map);
+		}
+		else
+			name.clear();
+	}
 }
 
 void MapEditor::Edit()
@@ -310,10 +361,11 @@ void MapEditor::Edit()
 	}
 }
 
-void MapEditor::CreateNewMap(int mapWidth, int mapHeight, int tileSize)
+void MapEditor::CreateNewMap(int numOfTilesWidth, int numOfTilesHeight)
 {
 	map = new TileMap();
-	map->Create(screenWidth, screenHeight, mapWidth, mapHeight, tileSize);
+	map->Create(screenWidth, screenHeight, numOfTilesWidth, numOfTilesHeight, this->tileSize);
+	camera->SetMap(map);
 }
 
 void MapEditor::LoadMap(TileMap* map)
