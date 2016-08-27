@@ -9,7 +9,6 @@
 #include "ParticleManager.h"
 #include "HealthPotions.h"
 
-
 SP3::SP3()
 {
 
@@ -44,6 +43,9 @@ void SP3::Init()
 
 	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
+
+	sound = new SoundEngine();
+	sound->AddSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", true, 0.5f);
 
 	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
@@ -118,11 +120,14 @@ void SP3::Update(double dt)
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 
+	sound->Play("BG_Sound", true);
+
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
 		SceneManager::GetInstance().ChangeScene("LevelEditor");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
+		sound->Stop("BG_Sound");
 		SceneManager::GetInstance().ChangeScene("SceneGameOver");
 	}
 

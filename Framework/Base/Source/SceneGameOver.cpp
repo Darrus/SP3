@@ -35,7 +35,10 @@ void SceneGameOver::Init()
 	camera->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
 	background.Init(&camera->position,800,600);
 
-	
+	sound = new SoundEngine();
+	sound->AddSound("GameOver", "Sound//GameOver.mp3", false, 0.5f);
+	sound->Play("GameOver", false);
+
 	fps = 0.f;
 }
 

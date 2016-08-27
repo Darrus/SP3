@@ -79,6 +79,7 @@ protected:
 	ELEMENTS element;
 	int captureWorth;
 
+
 	TileMap* map;
 	EnemyStates* state;
 	bool isGrounded;

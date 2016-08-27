@@ -11,6 +11,10 @@ selectedItem(0)
 	{
 		itemHold[i] = NULL;
 	}
+
+	sound = new SoundEngine();
+	sound->AddSound("Item", "Sound//Item.mp3", false, 20.f);
+	sound->AddSound("Pickup", "Sound//Pickup.mp3", false, 20.f);
 }
 
 ItemList::~ItemList()
@@ -41,7 +45,10 @@ void ItemList::SetTotalItemCount(int TotalItemCount)
 void ItemList::UseItem()
 {
 	if (itemHold[selectedItem] && itemHold[selectedItem]->UseItem())
+	{
+		sound->Play("Item", false);
 		Remove();
+	}
 }
 
 bool ItemList::Add(Items* item)
@@ -50,6 +57,7 @@ bool ItemList::Add(Items* item)
 	{
 		if (!itemHold[i])
 		{
+			sound->Play("Pickup", false);
 			item->pos.Set(-500.f, -500.f, 1.f);
 			itemHold[i] = item;
 			return true;
