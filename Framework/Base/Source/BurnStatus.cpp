@@ -2,6 +2,7 @@
 #include "ParticleFactory.h"
 #include "ParticleManager.h"
 #include <istream>
+#include "SoundEngine.h"
 
 using std::stringstream;
 BurnStatus::BurnStatus()

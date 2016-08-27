@@ -21,16 +21,25 @@ SoundEngine& SoundEngine::GetInstance()
 	return soundEngine;
 }
 
-void SoundEngine::AddSound(string name, string fileLoc, bool repeat, float volume)
+void SoundEngine::AddSound(string name, string fileLoc, float volume)
 {
-
-	if (sounds.find(name) == sounds.end())
+	if (sources.find(name) == sources.end())
 	{	
 		ISoundSource* source = engine->addSoundSourceFromFile(fileLoc.c_str());
 		source->setDefaultVolume(volume);
 		sources.insert(pair<string, ISoundSource*>(name, source));
+	}
+	else
+	{
+		std::cout << "File already exist!" << std::endl;
+	}
+}
 
-		ISound* sound = engine->play2D(source, repeat, true);
+void SoundEngine::AddRepeatSound(string name, string fileLoc, float volume)
+{
+	if (sounds.find(name) == sounds.end())
+	{
+		ISound* sound = engine->play2D(fileLoc.c_str(), true, true);
 		sound->setVolume(volume);
 		sounds.insert(pair<string, ISound*>(name, sound));
 	}
@@ -40,26 +49,29 @@ void SoundEngine::AddSound(string name, string fileLoc, bool repeat, float volum
 	}
 }
 
-void SoundEngine::Play(string name, bool repeat)
+void SoundEngine::Play(string name)
 {
+	map<string, ISoundSource*>::iterator sourceIt = sources.find(name);
+	if (sourceIt != sources.end())
+	{
+		engine->play2D(sourceIt->second);
+		return;
+	}
+
 	map<string, ISound*>::iterator it = sounds.find(name);
 	if (it != sounds.end())
 	{
-		if (!it->second || it->second->isFinished())
-		{
-			if (it->second)
-				it->second->drop();
-			
-			it->second = engine->play2D(sources.find(name)->second, repeat);
-		}
-		else
+		if (it->second->getIsPaused())
 			it->second->setIsPaused(false);
+		
+		it->second->setPlayPosition(0);
+		return;
 	}
-	else
-		std::cout << "Error playing " << name <<  " sound. Check filename." << std::endl;
+
+	std::cout << "Error playing" << name << " sound. Check filename." << std::endl;
 }
 
-void SoundEngine::Stop(string name)
+void SoundEngine::Pause(string name)
 {
 	map<string, ISound*>::iterator it = sounds.find(name);
 	if (it != sounds.end())
@@ -70,22 +82,30 @@ void SoundEngine::Stop(string name)
 
 void SoundEngine::Remove(string name)
 {
-	map<string, ISound*>::iterator it = sounds.find(name);
-	if (it != sounds.end())
+	bool check = false;
+	map<string, ISoundSource*>::iterator sourceIt = sources.find(name);
+	if (sourceIt != sources.end())
 	{
-		engine->removeSoundSource(it->second->getSoundSource());
-		if (it->second)
-			it->second->drop();
-		sounds.erase(it);
-
-		map<string, ISoundSource*>::iterator sourceIt = sources.find(name);
+		engine->removeSoundSource(sourceIt->second);
 		if (sourceIt->second)
 			sourceIt->second->drop();
 		sources.erase(sourceIt);
+		check = true;
 	}
-	else
+
+	map<string, ISound*>::iterator it = sounds.find(name);
+	if (it != sounds.end())
+	{
+		if (it->second)
+			it->second->drop();
+		sounds.erase(it);
+		check = true;
+	}
+
+	if (!check)
 		std::cout << "Error removing " << name << " sound. Check filename." << std::endl;
 }
+
 void SoundEngine::ClearSounds()
 {
 	for (map<string, ISound*>::iterator it = sounds.begin(); it != sounds.end();)

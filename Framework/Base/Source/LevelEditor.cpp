@@ -3,6 +3,7 @@
 #include "CameraFree.h"
 #include "Application.h"
 #include "MeshGenerator.h"
+#include "SoundEngine.h"
 
 LevelEditor::LevelEditor() :
 editor(NULL)
@@ -20,6 +21,9 @@ void LevelEditor::Init()
 	SceneBase::Init();
 	camera = new CameraFree();
 	CameraFree* camFree = dynamic_cast<CameraFree*>(camera);
+
+	SoundEngine::GetInstance().AddRepeatSound("Florina", "Sound//MapleStory_Florina.mp3");
+	SoundEngine::GetInstance().Play("Florina");
 
 	editor = new MapEditor();
 	editor->LoadTileSheet("tilesheet", 16, 16);

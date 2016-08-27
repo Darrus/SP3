@@ -13,8 +13,8 @@ selectedItem(0)
 		itemHold[i] = NULL;
 	}
 
-	SoundEngine::GetInstance().AddSound("Item", "Sound//Item.mp3", false, 20.f);
-	SoundEngine::GetInstance().AddSound("Pickup", "Sound//Pickup.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("Item", "Sound//Item.mp3");
+	SoundEngine::GetInstance().AddSound("Pickup", "Sound//Pickup.mp3");
 }
 
 ItemList::~ItemList()
@@ -46,7 +46,7 @@ void ItemList::UseItem()
 {
 	if (itemHold[selectedItem] && itemHold[selectedItem]->UseItem())
 	{
-		SoundEngine::GetInstance().Play("Item", false);
+		SoundEngine::GetInstance().Play("Item");
 		Remove();
 	}
 }
@@ -57,7 +57,7 @@ bool ItemList::Add(Items* item)
 	{
 		if (!itemHold[i])
 		{
-			SoundEngine::GetInstance().Play("Pickup", false);
+			SoundEngine::GetInstance().Play("Pickup");
 			item->pos.Set(-500.f, -500.f, 1.f);
 			itemHold[i] = item;
 			return true;

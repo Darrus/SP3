@@ -45,8 +45,8 @@ void SP3::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
 
-	SoundEngine::GetInstance().GetInstance().AddSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", true, 0.5f);
-	SoundEngine::GetInstance().GetInstance().Play("BG_Sound", true);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.5f);
+	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
@@ -126,7 +126,6 @@ void SP3::Update(double dt)
 
 	if (player->GetPlayerHealth() <= 0)
 	{
-		SoundEngine::GetInstance().Stop("BG_Sound");
 		SceneManager::GetInstance().ChangeScene("SceneGameOver");
 	}
 

@@ -10,7 +10,6 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
-#include "SoundEngine.h"
 
 using std::vector;
 
@@ -35,8 +34,6 @@ private:
 	CameraFollow* camFollow;
 	Weapon* weapon;
 	Items* items;
-
-	SoundEngine * sound;
 
 	float fps;
 

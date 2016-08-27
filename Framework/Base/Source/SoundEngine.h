@@ -23,9 +23,10 @@ public:
 	~SoundEngine();
 	static SoundEngine& GetInstance();
 	
-	void AddSound(string name, string fileLoc, bool repeat = false, float volume = 1.f);
-	void Play(string name, bool repeat = false);
-	void Stop(string name);
+	void AddSound(string name, string fileLoc, float volume = 1.f);
+	void AddRepeatSound(string name, string fileLoc, float volume = 1.f);
+	void Play(string name);
+	void Pause(string name);
 	void Remove(string name);
 	void ClearSounds();
 };
