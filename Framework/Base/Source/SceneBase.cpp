@@ -10,6 +10,7 @@
 #include "MeshGenerator.h"
 #include "GoManager.h"
 #include "ParticleManager.h"
+#include "SoundEngine.h"
 
 
 SceneBase::SceneBase() :
@@ -453,6 +454,7 @@ void SceneBase::Exit()
 	MeshGenerator::GetInstance().ClearMeshGenerator();
 	GoManager::GetInstance().ClearList();
 	ParticleManager::GetInstance().ClearList();
+	SoundEngine::GetInstance().ClearSounds();
 
 	glDeleteProgram(m_programID);
 	glDeleteVertexArrays(1, &m_vertexArrayID);

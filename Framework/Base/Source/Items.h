@@ -4,7 +4,6 @@
 #include "GameObject.h"
 #include "TileMap.h"
 #include "AABB_2D.h"
-#include "SoundEngine.h"
 
 class Player;
 
@@ -31,7 +30,6 @@ public:
 	Player* player;
 protected:
 	AABB_2D collider;
-	SoundEngine* sound;
 
 	float timer;
 	/*int SpeedPotionCount;

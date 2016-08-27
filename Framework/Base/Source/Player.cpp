@@ -8,6 +8,7 @@
 #include "Shotgun.h"
 #include "Sniper.h"
 #include "HealthPotions.h"
+#include "SoundEngine.h"
 
 Player::Player() :
 PLAYER_SPEED(100),
@@ -43,14 +44,13 @@ net(NULL)
 	weapon[3]->ReferencePlayerPos(&pos);
 	weapon[3]->ReferencePlayerView(&view);
 
-	sound = new SoundEngine();
-	sound->AddSound("Pistol", "Sound//Pistol.mp3",false, 20.f);
-	sound->AddSound("Rifle", "Sound//Rifle.mp3", false, 20.f);
-	sound->AddSound("Shotgun", "Sound//Shotgun.mp3", false, 20.f);
-	sound->AddSound("Sniper", "Sound//Sniper.mp3", false, 20.f);
-	sound->AddSound("SwitchWeapon", "Sound//SwitchWeapon.mp3", false, 20.f);
-	sound->AddSound("SwitchElementAndItem", "Sound//SwitchElementAndItem.mp3", false, 20.f);
-	sound->AddSound("Pickup", "Sound//Pickup.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("Pistol", "Sound//Pistol.mp3",false, 20.f);
+	SoundEngine::GetInstance().AddSound("Rifle", "Sound//Rifle.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("Shotgun", "Sound//Shotgun.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("Sniper", "Sound//Sniper.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("SwitchWeapon", "Sound//SwitchWeapon.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("SwitchElementAndItem", "Sound//SwitchElementAndItem.mp3", false, 20.f);
+	SoundEngine::GetInstance().AddSound("Pickup", "Sound//Pickup.mp3", false, 20.f);
 
 	bulletElem[0] = -1;
 	for (int i = 1; i < ELEM_SIZE; ++i)
@@ -217,7 +217,7 @@ void Player::ChangeWeapon()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
-		sound->Play("SwitchWeapon", false);
+		SoundEngine::GetInstance().Play("SwitchWeapon", false);
 		weaponType++;
 	}
 	if (weaponType > 3)
@@ -234,7 +234,7 @@ void Player::CycleBullets()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEBULLET))
 	{
-		sound->Play("SwitchElementAndItem",false);
+		SoundEngine::GetInstance().Play("SwitchElementAndItem", false);
 		selectedElem = (ELEMENTS)((selectedElem + 1) % (int)ELEM_SIZE);
 	}
 }
@@ -243,7 +243,7 @@ void Player::PlayerCycleItem()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
 	{
-		sound->Play("SwitchElementAndItem", false);
+		SoundEngine::GetInstance().Play("SwitchElementAndItem", false);
 		inventory.CycleItems();
 	}
 }
@@ -372,13 +372,13 @@ void Player::ShootWeapon()
 			if (weapon[weaponType]->Shoot(selectedElem, map))
 			{
 				if (weaponType == 0)
-					sound->Play("Pistol", false);
+					SoundEngine::GetInstance().Play("Pistol", false);
 				if (weaponType == 1)
-					sound->Play("Rifle", false);
+					SoundEngine::GetInstance().Play("Rifle", false);
 				if (weaponType == 2)
-					sound->Play("Shotgun", false);
+					SoundEngine::GetInstance().Play("Shotgun", false);
 				if (weaponType == 3)
-					sound->Play("Sniper", false);
+					SoundEngine::GetInstance().Play("Sniper", false);
 				if (bulletElem[selectedElem] > 0)
 				{
 					bulletElem[selectedElem] -= 1;
