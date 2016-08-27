@@ -11,6 +11,7 @@ Bullet::Bullet()
 	damage = 5;
 	active = false;
 	collider.Init(&this->pos, scale);
+
 }
 
 Bullet::~Bullet()

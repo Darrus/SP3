@@ -9,6 +9,7 @@
 #include "AABB_2D.h"
 #include "Items.h"
 #include "ItemList.h"
+#include "SoundEngine.h"
 
 class Player : public GameObject
 {
@@ -108,6 +109,8 @@ private:
 	int bulletElem[ELEM_SIZE];
 	ELEMENTS selectedElem;
 	NetBullet* net;
+
+	SoundEngine* sound;
 
 	int weaponType;
 	int bulletType;

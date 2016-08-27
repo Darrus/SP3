@@ -25,6 +25,8 @@ private:
 	Items** itemHold;
 	int selectedItem;
 	int TotalItemCount;
+
+	SoundEngine *sound;
 };
 
 

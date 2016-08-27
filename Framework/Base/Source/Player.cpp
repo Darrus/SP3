@@ -43,6 +43,15 @@ net(NULL)
 	weapon[3]->ReferencePlayerPos(&pos);
 	weapon[3]->ReferencePlayerView(&view);
 
+	sound = new SoundEngine();
+	sound->AddSound("Pistol", "Sound//Pistol.mp3",false, 20.f);
+	sound->AddSound("Rifle", "Sound//Rifle.mp3", false, 20.f);
+	sound->AddSound("Shotgun", "Sound//Shotgun.mp3", false, 20.f);
+	sound->AddSound("Sniper", "Sound//Sniper.mp3", false, 20.f);
+	sound->AddSound("SwitchWeapon", "Sound//SwitchWeapon.mp3", false, 20.f);
+	sound->AddSound("SwitchElementAndItem", "Sound//SwitchElementAndItem.mp3", false, 20.f);
+	sound->AddSound("Pickup", "Sound//Pickup.mp3", false, 20.f);
+
 	bulletElem[0] = -1;
 	for (int i = 1; i < ELEM_SIZE; ++i)
 	{
@@ -208,6 +217,7 @@ void Player::ChangeWeapon()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
+		sound->Play("SwitchWeapon", false);
 		weaponType++;
 	}
 	if (weaponType > 3)
@@ -223,13 +233,19 @@ void Player::ChangeWeapon()
 void Player::CycleBullets()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEBULLET))
+	{
+		sound->Play("SwitchElementAndItem",false);
 		selectedElem = (ELEMENTS)((selectedElem + 1) % (int)ELEM_SIZE);
+	}
 }
 
 void Player::PlayerCycleItem()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(CYCLEITEM))
+	{
+		sound->Play("SwitchElementAndItem", false);
 		inventory.CycleItems();
+	}
 }
 
 void Player::PlayerUseItem()
@@ -350,10 +366,26 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon[weaponType])
+	{
 		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0) && bulletElem[selectedElem] != 0)
+		{
 			if (weapon[weaponType]->Shoot(selectedElem, map))
+			{
+				if (weaponType == 0)
+					sound->Play("Pistol", false);
+				if (weaponType == 1)
+					sound->Play("Rifle", false);
+				if (weaponType == 2)
+					sound->Play("Shotgun", false);
+				if (weaponType == 3)
+					sound->Play("Sniper", false);
 				if (bulletElem[selectedElem] > 0)
+				{
 					bulletElem[selectedElem] -= 1;
+				}
+			}
+		}
+	}
 }
 
 void Player::TossNet()
