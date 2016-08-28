@@ -45,7 +45,7 @@ void SP3::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
 
-	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.5f);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);

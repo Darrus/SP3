@@ -9,6 +9,7 @@ using std::endl;
 #include "SP3.h"
 #include "LevelEditor.h"
 #include "SceneGameOver.h"
+#include "SceneMainMenu.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -41,8 +42,10 @@ void SceneManager::Init()
 	newScene = new LevelEditor();
 	AddScene("LevelEditor", newScene);
 	newScene = new SceneGameOver();
-	AddScene("SceneGameOver", newScene);
-	currentScene = FindScene("SP3");
+	AddScene("GameOver", newScene);
+	newScene = new SceneMainMenu();
+	AddScene("MainMenu", newScene);
+	currentScene = FindScene("MainMenu");
 }
 
 void SceneManager::Update(double dt)

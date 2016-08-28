@@ -17,6 +17,11 @@ enum Controls
 	TAB,
 	JUMP,
 
+	GOUP,
+	GODOWN,
+	GOLEFT,
+	GORIGHT,
+
 	ONE,
 	TWO,
 	THREE,

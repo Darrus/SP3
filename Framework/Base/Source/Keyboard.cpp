@@ -34,6 +34,10 @@ void Keyboard::create()
 	keys[BACKSPACE].Assign(VK_BACK);
 	keys[ENTER].Assign(VK_RETURN);
 	keys[NEXT].Assign('N');
+	keys[GOUP].Assign(VK_UP);
+	keys[GODOWN].Assign(VK_DOWN);
+	keys[GOLEFT].Assign(VK_LEFT);
+	keys[GORIGHT].Assign(VK_RIGHT);
 
 	timeBetweenPress = 0.f;
 }
