@@ -22,6 +22,7 @@ public:
 
 	void SetObject(GameObject* go);
 	void AddStatus(Status* status);
+	void AddImmune(string name);
 	void Update(double dt);
 };
 

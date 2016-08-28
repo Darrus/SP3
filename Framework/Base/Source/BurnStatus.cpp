@@ -10,6 +10,7 @@ BurnStatus::BurnStatus()
 	duration = 5.f;
 	timeBetweenBurn = 0.f;
 	name = "Burn";
+	SoundEngine::GetInstance().AddSound("burn", "Sound//burn.wav");
 }
 
 BurnStatus::~BurnStatus()
@@ -38,6 +39,7 @@ void BurnStatus::ApplyStatus(GameObject* go)
 	{
 		damage = 0.05 * enemy->GetMaxHealth();
 		particle = ParticleFactory::CreateFollow(P_BURN, enemy);
+		SoundEngine::GetInstance().Play("burn");
 	}
 }
 

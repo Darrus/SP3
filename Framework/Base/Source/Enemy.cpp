@@ -30,6 +30,7 @@ void Enemy::Init(TileMap* map, Vector3 pos, Vector3 scale)
 {
 	this->map = map;
 	this->pos = pos;
+	this->defaultPos = pos;
 	this->scale = scale;
 	collider.Init(&this->pos, scale);
 }

@@ -3,12 +3,13 @@
 #include "EnemyIdle.h"
 #include "ParticleFactory.h"
 #include "ParticleManager.h"
-
+#include "SoundEngine.h"
 StunStatus::StunStatus() :
 particle(NULL)
 {
 	duration = 2.f;
 	name = "Stun";
+	SoundEngine::GetInstance().AddSound("stun", "Sound//stun.wav");
 }
 
 StunStatus::~StunStatus()
@@ -30,6 +31,8 @@ void StunStatus::ApplyStatus(GameObject* go)
 		enemy->SetState(stun);
 		enemy->GetState()->Enter(enemy, NULL);
 		particle = ParticleFactory::CreateFollow(P_STUN, enemy);
+		ParticleFactory::CreateText("Stunned!", 1.f, enemy->pos, Vector3(15.f, 15.f, 1.f));
+		SoundEngine::GetInstance().Play("stun");
 	}
 }
 

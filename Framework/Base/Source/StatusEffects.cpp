@@ -27,8 +27,11 @@ void StatusEffects::AddStatus(Status* status)
 	map<string, Status*>::iterator it = statusList.find(status->GetName());
 	if (it != statusList.end())
 	{
-		it->second->SetDuration(status->GetDuration());
-		delete status;
+		if (it->second)
+		{
+			it->second->SetDuration(status->GetDuration());
+			delete status;
+		}
 	}
 	else
 	{
@@ -37,19 +40,27 @@ void StatusEffects::AddStatus(Status* status)
 	}
 }
 
+void StatusEffects::AddImmune(string name)
+{
+	statusList.insert(pair<string, Status*>(name, NULL));
+}
+
 void StatusEffects::Update(double dt)
 {
 	for (map<string, Status*>::iterator it = statusList.begin(); it != statusList.end();)
 	{
-		it->second->Update(dt);
-		if (it->second->end)
+		if (it->second)
 		{
-			it->second->RevertStatus();
-			delete it->second;
-			it->second = NULL;
-			it = statusList.erase(it);
+			it->second->Update(dt);
+			if (it->second->end)
+			{
+				it->second->RevertStatus();
+				delete it->second;
+				it->second = NULL;
+				it = statusList.erase(it);
+				continue;
+			}
 		}
-		else
-			++it;
+		++it;
 	}
 }

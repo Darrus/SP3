@@ -1,7 +1,6 @@
 #include "LightningBullet.h"
 #include "StunStatus.h"
 #include "Enemy.h"
-#include "ParticleFactory.h"
 
 LightningBullet::LightningBullet()
 {
@@ -30,7 +29,6 @@ void LightningBullet::HandleInteraction(GameObject* go, double dt)
 			int chance = Math::RandIntMinMax(0, 10);
 			if (chance <= 5)
 			{
-				ParticleFactory::CreateText("Stunned!", 1.f, pos, Vector3(15.f, 15.f, 1.f));
 				Status* stun = new StunStatus();
 				enemy->status.AddStatus(stun);
 			}

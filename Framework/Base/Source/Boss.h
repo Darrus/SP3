@@ -1,9 +1,13 @@
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "GameObject.h"
+#include "Enemy.h"
+#include "TileMap.h"
+#include "Player.h"
+#include "StatusEffects.h"
+#include "AABB_2D.h"
 
-class Boss : public GameObject
+class Boss : public Enemy
 {
 public:
 	Boss();
@@ -12,10 +16,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void HandleInteraction(GameObject* go, double dt);
-
-private:
-	void Phase1();
-	void Phase2();
 };
 
 #endif

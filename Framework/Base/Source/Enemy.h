@@ -51,10 +51,11 @@ public:
 	Animation GetAttackAnim();
 
 	Vector3 newPos;
+	Vector3 defaultPos;
 	bool collidedWall;
 	StatusEffects status;
-
 	AABB_2D collider;
+
 protected:
 	void MapCollision(double dt);
 
@@ -78,7 +79,6 @@ protected:
 
 	ELEMENTS element;
 	int captureWorth;
-
 
 	TileMap* map;
 	EnemyStates* state;

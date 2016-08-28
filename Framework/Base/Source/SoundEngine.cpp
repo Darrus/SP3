@@ -96,6 +96,7 @@ void SoundEngine::Remove(string name)
 	map<string, ISound*>::iterator it = sounds.find(name);
 	if (it != sounds.end())
 	{
+		engine->removeSoundSource(it->second->getSoundSource());
 		if (it->second)
 			it->second->drop();
 		sounds.erase(it);
