@@ -10,6 +10,7 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
+#include "GoManager.h"
 
 using std::vector;
 
@@ -37,6 +38,7 @@ private:
 	CameraFollow* camFollow;
 	Weapon* weapon;
 	Items* items;
+
 
 	bool story;
 

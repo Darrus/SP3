@@ -108,7 +108,8 @@ void SP3::Update(double dt)
 
 	SceneBase::Update(dt);
 
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
+	std::cout << GoManager::GetInstance().GetEnemyCount() << std::endl;
+
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -137,6 +138,10 @@ void SP3::Update(double dt)
 	else if (story == false)
 	{
 		GoManager::GetInstance().Update(dt);
+	}
+	if (GoManager::GetInstance().GetEnemyCount() <= 0)
+	{ 
+		SceneManager::GetInstance().ChangeScene("SceneEarth");
 	}
 }
 
