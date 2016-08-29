@@ -10,6 +10,7 @@ using std::endl;
 #include "LevelEditor.h"
 #include "SceneGameOver.h"
 #include "SceneMainMenu.h"
+#include "Level03.h"
 #include "SceneEarth.h"
 #include "SceneBoss.h"
 
@@ -47,6 +48,8 @@ void SceneManager::Init()
 	AddScene("GameOver", newScene);
 	newScene = new SceneMainMenu();
 	AddScene("MainMenu", newScene);
+	newScene = new Level03();
+	AddScene("Level03", newScene);
 	newScene = new SceneEarth();
 	AddScene("SceneEarth", newScene);
 	newScene = new SceneBoss();
