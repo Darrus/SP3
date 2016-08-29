@@ -51,10 +51,10 @@ void SceneManager::Init()
 	newScene = new Level03();
 	AddScene("Level03", newScene);
 	newScene = new SceneEarth();
-	AddScene("SceneEarth", newScene);
+	AddScene("Earth", newScene);
 	newScene = new SceneBoss();
-	AddScene("SceneBoss", newScene);
-	currentScene = FindScene("SceneBoss");
+	AddScene("Boss", newScene);
+	currentScene = FindScene("Boss");
 }
 
 void SceneManager::Update(double dt)

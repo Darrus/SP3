@@ -1,8 +1,8 @@
 #include "EnemyStun.h"
-#include "EnemyIdle.h"
 
 EnemyStun::EnemyStun()
 {
+	state = ENEMY_STUN;
 	end = false;
 }
 
@@ -11,13 +11,6 @@ EnemyStun::~EnemyStun()
 
 }
 
-EnemyStates* EnemyStun::CheckState()
-{
-	EnemyIdle* idle = new EnemyIdle();
-	if (end)
-		return idle;
-	return this;
-}
 
 void EnemyStun::Enter(Enemy* enemy, Player* player)
 {

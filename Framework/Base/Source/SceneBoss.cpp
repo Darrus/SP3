@@ -42,7 +42,7 @@ void SceneBoss::Init()
 	camera = camFollow;
 
 	boss = new Boss();
-	boss->Init(map, Vector3(500.f, 100.f, 0.f), Vector3(256.f, 256.f, 1.f));
+	boss->Init(map, Vector3(500.f, 100.f, 0.f), Vector3(256.f, 180.f, 1.f));
 	boss->active = true;
 	GoManager::GetInstance().Add(boss);
 

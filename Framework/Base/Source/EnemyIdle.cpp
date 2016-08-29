@@ -1,11 +1,8 @@
 #include "EnemyIdle.h"
-#include "EnemyChase.h"
-#include "MeleeEnemy.h"
-#include "RangeEnemy.h"
 
 EnemyIdle::EnemyIdle()
 {
-
+	state = ENEMY_IDLE;
 }
 
 EnemyIdle::~EnemyIdle()
@@ -29,16 +26,6 @@ void EnemyIdle::Enter(Enemy* enemy, Player* player)
 	sprite->SetAnimation(enemy->GetWalkAnim());
 	enemy->view.x = dir;
 	enemy->vel.x = enemy->GetSpeed() * dir;
-}
-
-EnemyStates* EnemyIdle::CheckState()
-{
-	float dist = (enemy->pos - player->pos).LengthSquared();
-
-	if (dist < enemy->GetAlertRange() * enemy->GetAlertRange())
-		return new EnemyChase();
-
-	return this;
 }
 
 void EnemyIdle::Update(double dt)

@@ -1,6 +1,13 @@
-#include "Enemy.h"
+
+
+
+    #include "Enemy.h"
 #include "Player.h"
 #include "EnemyIdle.h"
+#include "EnemyStun.h"
+#include "EnemyChase.h"
+#include "EnemyAttack.h"
+
 
 Enemy::Enemy() :
 collidedWall(false),
@@ -19,6 +26,7 @@ state(NULL),
 isGrounded(false)
 {
 	status.SetObject(this);
+	
 }
 
 Enemy::~Enemy()
@@ -65,20 +73,54 @@ void Enemy::HandleInteraction(GameObject* go, double dt)
 	Player* player = dynamic_cast<Player*>(go);
 	if (player)
 	{
-		if (state)
-		{
-			EnemyStates* tempState = state->CheckState();
-			if (state != tempState)
-			{
-				delete state;
-				state = tempState;
-				state->Enter(this, player);
-			}
-		}
-		else
+		if (!state)
 		{
 			state = new EnemyIdle();
-			state->Enter(this, player);
+			state->Enter(this, NULL);
+		}
+
+		float dist = (player->pos - pos).LengthSquared();
+		switch (state->GetState())
+		{
+		case EnemyStates::ENEMY_IDLE:
+			if (dist < alertRange * alertRange)
+			{
+				delete state;
+				state = new EnemyChase();
+				state->Enter(this, player);
+			}
+			break;
+		case EnemyStates::ENEMY_CHASE:
+			if (dist < attackRange * attackRange)
+			{
+				delete state;
+				state = new EnemyAttack();
+				state->Enter(this, player);
+			}
+			else if (dist > alertRange * alertRange)
+			{
+				delete state;
+				state = new EnemyIdle();
+				state->Enter(this, player);
+			}
+			break;
+		case EnemyStates::ENEMY_ATTACK:
+			if (dist > attackRange * attackRange)
+			{
+				delete state;
+				state = new EnemyChase();
+				state->Enter(this, player);
+			}
+			break;
+		case EnemyStates::ENEMY_STUN:
+			EnemyStun* stun = dynamic_cast<EnemyStun*>(state);
+			if (stun->end)
+			{
+				delete state;
+				state = new EnemyIdle();
+				state->Enter(this, NULL);
+			}
+			break;
 		}
 	}
 }

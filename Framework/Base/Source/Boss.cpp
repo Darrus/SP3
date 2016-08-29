@@ -3,17 +3,17 @@
 
 Boss::Boss()
 {
-	status.AddImmune("Stun");
-	health = 10000;
-	maxHealth = 10000;
-	attackRange = 64.f;
+	status.AddImmune("Slow");
+	health = 5000;
+	maxHealth = 5000;
+	attackRange = 140.f;
 	alertRange = 1000.f;
 	patrolRange = 1000.f;
 	speed = 50;
 	defaultSpeed = 50;
 	timeBetweenAttack = 2.f;
 	attackCooldown = 0.f;
-	attackDamage = 20.f;
+	attackDamage = 30.f;
 	mesh = MeshGenerator::GetInstance().GenerateSprite("Ice Golem", "Image//IceGolem.tga", 4, 8);
 	animWalk.Set(8, 11, 1.f, true, 1, true);
 	animAttack.Set(16, 23, 1.f, true);
@@ -48,7 +48,12 @@ void Boss::Attack(Player* player)
 		}
 	}
 }
+/*
+void Boss::HandleInteraction(GameObject* go, double dt)
+{
 
+}
+*/
 void Boss::MapCollision(double dt)
 {
 	// Updates position
