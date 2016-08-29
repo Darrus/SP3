@@ -297,6 +297,9 @@
     <ClCompile Include="Source\SceneMainMenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneEarth.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -513,6 +516,9 @@
       <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneMainMenu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneEarth.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

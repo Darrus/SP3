@@ -58,6 +58,7 @@
     <ClCompile Include="Source\RangeEnemy.cpp" />
     <ClCompile Include="Source\Rifle.cpp" />
     <ClCompile Include="Source\SceneBase.cpp" />
+    <ClCompile Include="Source\SceneEarth.cpp" />
     <ClCompile Include="Source\SceneGameOver.cpp" />
     <ClCompile Include="Source\SceneMainMenu.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Source\Rifle.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBase.h" />
+    <ClInclude Include="Source\SceneEarth.h" />
     <ClInclude Include="Source\SceneGameOver.h" />
     <ClInclude Include="Source\SceneMainMenu.h" />
     <ClInclude Include="Source\SceneManager.h" />
