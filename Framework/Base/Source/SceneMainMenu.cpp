@@ -41,8 +41,15 @@ void SceneMainMenu::Init()
 	meshList[GEO_ARROWPOINTER] = MeshBuilder::GenerateQuad("arrowPointer", Color(1, 1, 1), 1.f);
 	meshList[GEO_ARROWPOINTER]->textureArray[0] = LoadTGA("Image//arrowPointer.tga");
 
+	meshList[GEO_LEVELEDITOR1] = MeshBuilder::GenerateQuad("MapEditor1", Color(1, 1, 1), 1.f);
+	meshList[GEO_LEVELEDITOR1]->textureArray[0] = LoadTGA("Image//MapEditor1.tga");
+
+	meshList[GEO_LEVELEDITOR2] = MeshBuilder::GenerateQuad("MapEditor2", Color(1, 1, 1), 1.f);
+	meshList[GEO_LEVELEDITOR2]->textureArray[0] = LoadTGA("Image//MapEditor2.tga");
+
 	selectedOption = 0;
-	page = 0;
+	InstructionsPage = 0;
+	LevelEditorPage = 0;
 }
 
 void SceneMainMenu::Update(double dt)
@@ -58,6 +65,9 @@ void SceneMainMenu::Update(double dt)
 		break;
 	case INSTRUCTIONS:
 		InstructionSelection();
+		break;
+	case LEVELEDITOR:
+		LevelEditorSelection();
 		break;
 	}
 }
@@ -90,6 +100,9 @@ void SceneMainMenu::Render()
 	case INSTRUCTIONS:
 		RenderInstruction();
 		break;
+	case LEVELEDITOR:
+		RenderLevelEditor();
+		break;
 	}
 }
 
@@ -104,13 +117,13 @@ void SceneMainMenu::RenderMainMenu()
 	if (selectedOption == 0)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 40, 0);
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
 		modelStack.Scale(100, 100, 1);
 		RenderMesh(meshList[GEO_ARROWPOINTER], false);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 40, 0);
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
 		modelStack.Rotate(180, 0, 1, 0);
 		modelStack.Scale(100, 100, 1);
 		RenderMesh(meshList[GEO_ARROWPOINTER], false);
@@ -119,13 +132,28 @@ void SceneMainMenu::RenderMainMenu()
 	else if (selectedOption == 1)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 120, 0);
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
 		modelStack.Scale(100, 100, 1);
 		RenderMesh(meshList[GEO_ARROWPOINTER], false);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 120, 0);
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
+		modelStack.Rotate(180, 0, 1, 0);
+		modelStack.Scale(100, 100, 1);
+		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		modelStack.PopMatrix();
+	}
+	else if (selectedOption == 2)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
+		modelStack.Scale(100, 100, 1);
+		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
 		modelStack.Rotate(180, 0, 1, 0);
 		modelStack.Scale(100, 100, 1);
 		RenderMesh(meshList[GEO_ARROWPOINTER], false);
@@ -135,7 +163,7 @@ void SceneMainMenu::RenderMainMenu()
 
 void SceneMainMenu::RenderInstruction()
 {
-	if (page == 0)
+	if (InstructionsPage == 0)
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(Application::GetInstance().m_window_width * 0.5, Application::GetInstance().m_window_height * 0.5, 0);
@@ -144,12 +172,32 @@ void SceneMainMenu::RenderInstruction()
 		modelStack.PopMatrix();
 	}
 
-	if (page == 1)
+	if (InstructionsPage == 1)
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(Application::GetInstance().m_window_width * 0.5, Application::GetInstance().m_window_height * 0.5, 0);
 		modelStack.Scale(Application::GetInstance().m_window_width, Application::GetInstance().m_window_height, 1);
 		RenderMesh(meshList[GEO_INSTRUCTIONS2], false);
+		modelStack.PopMatrix();
+	}
+}
+
+void SceneMainMenu::RenderLevelEditor()
+{
+	if (LevelEditorPage == 0)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(Application::GetInstance().m_window_width * 0.5, Application::GetInstance().m_window_height * 0.5, 0);
+		modelStack.Scale(Application::GetInstance().m_window_width, Application::GetInstance().m_window_height, 1);
+		RenderMesh(meshList[GEO_LEVELEDITOR1], false);
+		modelStack.PopMatrix();
+	}
+	else if (LevelEditorPage == 1)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(Application::GetInstance().m_window_width * 0.5, Application::GetInstance().m_window_height * 0.5, 0);
+		modelStack.Scale(Application::GetInstance().m_window_width, Application::GetInstance().m_window_height, 1);
+		RenderMesh(meshList[GEO_LEVELEDITOR2], false);
 		modelStack.PopMatrix();
 	}
 }
@@ -174,13 +222,13 @@ void SceneMainMenu::MenuSelection()
 void SceneMainMenu::InstructionSelection()
 {
 	if (Application::GetInstance().controller->IsKeyPressed(GORIGHT) || Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT))
-		page = (page + 1) % 2;
+		InstructionsPage = (InstructionsPage + 1) % 2;
 
 	if (Application::GetInstance().controller->IsKeyPressed(GOLEFT) || Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT))
 	{
-		page = (page - 1) % 2;
-		if (page < 0)
-			page = 1;
+		InstructionsPage = (InstructionsPage - 1) % 2;
+		if (InstructionsPage < 0)
+			InstructionsPage = 1;
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
@@ -188,6 +236,28 @@ void SceneMainMenu::InstructionSelection()
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
 		SceneManager::GetInstance().ChangeScene("SP3");
+}
+
+void SceneMainMenu::LevelEditorSelection()
+{
+	if (selectedOption == 2)
+	{
+		if (Application::GetInstance().controller->IsKeyPressed(GORIGHT) || Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT))
+			LevelEditorPage = (LevelEditorPage + 1) % 2;
+
+		if (Application::GetInstance().controller->IsKeyPressed(GOLEFT) || Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT))
+		{
+			LevelEditorPage = (LevelEditorPage - 1) % 2;
+			if (LevelEditorPage < 0)
+				LevelEditorPage = 1;
+		}
+
+		if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+			MenuStates = MAINMENU;
+
+		if (Application::GetInstance().controller->IsKeyPressed(ENTER))
+			SceneManager::GetInstance().ChangeScene("LevelEditor");
+	}
 }
 
 void SceneMainMenu::Exit()
