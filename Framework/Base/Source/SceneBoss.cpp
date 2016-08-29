@@ -7,6 +7,7 @@
 #include "GoManager.h"
 #include "ParticleManager.h"
 #include "SoundEngine.h"
+#include "GoManager.h"
 
 SceneBoss::SceneBoss()
 {
@@ -39,6 +40,11 @@ void SceneBoss::Init()
 	camFollow->LookAt(player);
 	camFollow->SetMap(map);
 	camera = camFollow;
+
+	boss = new Boss();
+	boss->Init(map, Vector3(500.f, 100.f, 0.f), Vector3(256.f, 256.f, 1.f));
+	boss->active = true;
+	GoManager::GetInstance().Add(boss);
 
 	background.Init(&camera->position, 800, 600);
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));

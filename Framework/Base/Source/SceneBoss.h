@@ -9,6 +9,7 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
+#include "Boss.h"
 
 class SceneBoss : public SceneBase
 {
@@ -34,6 +35,8 @@ private:
 	CameraFollow* camFollow;
 	Weapon* weapon;
 	Items* items;
+	Boss* boss;
+
 
 	double worldX, worldY;
 	double mouseX, mouseY;
