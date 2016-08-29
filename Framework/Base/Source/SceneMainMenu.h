@@ -10,6 +10,7 @@ public:
 	{
 		STARTGAME,
 		INSTRUCTIONS,
+		LEVELEDITOR,
 		MAINMENU,
 		STATES_END,
 	};
@@ -25,13 +26,16 @@ public:
 private:
 	void RenderMainMenu();
 	void RenderInstruction();
+	void RenderLevelEditor();
 
 	void MenuSelection();
 	void InstructionSelection();
+	void LevelEditorSelection();
 
 	MENUSTATES MenuStates;
 	int selectedOption;
-	int page;
+	int InstructionsPage;
+	int LevelEditorPage;
 };
 
 #endif
