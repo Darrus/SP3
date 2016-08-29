@@ -103,6 +103,7 @@ protected:
 		GEO_INSTRUCTIONS1,
 		GEO_INSTRUCTIONS2,
 
+
 		NUM_GEOMETRY,
 	};
 
