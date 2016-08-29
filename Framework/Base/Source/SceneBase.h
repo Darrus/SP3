@@ -105,6 +105,7 @@ protected:
 		GEO_LEVELEDITOR1,
 		GEO_LEVELEDITOR2,
 
+
 		NUM_GEOMETRY,
 	};
 

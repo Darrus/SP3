@@ -297,7 +297,10 @@
     <ClCompile Include="Source\SceneMainMenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Level03.cpp">
+    <ClCompile Include="Source\SceneEarth.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneBoss.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -518,7 +521,10 @@
     <ClInclude Include="Source\SceneMainMenu.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Level03.h">
+    <ClInclude Include="Source\SceneEarth.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneBoss.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

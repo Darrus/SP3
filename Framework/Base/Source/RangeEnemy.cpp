@@ -18,28 +18,6 @@ void RangeEnemy::Update(double dt)
 	Enemy::Update(dt);
 }
 
-void RangeEnemy::HandleInteraction(GameObject* go, double dt)
-{
-	Player* player = dynamic_cast<Player*>(go);
-	if (player)
-	{
-		if (state)
-		{
-			EnemyStates* tempState = state->CheckState();
-			if (state != tempState)
-			{
-				delete state;
-				state = tempState;
-				state->Enter(this, player);
-			}
-		}
-		else
-		{
-			state = new EnemyIdle();
-			state->Enter(this, player);
-		}
-	}
-}
 void RangeEnemy::Attack(Player* player)
 {
 	if (attackCooldown < 0)

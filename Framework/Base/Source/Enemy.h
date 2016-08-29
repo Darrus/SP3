@@ -22,8 +22,7 @@ public:
 	void TakeDamage(int damage);
 
 	void SetAttackAnim(int start, int end, float time);
-	void SetWalkLeftAnim(int start, int end, float time);
-	void SetWalkRightAnim(int start, int end, float time);
+	void SetWalkAnim(int start, int end, float time);
 	void SetAlertRange(float range);
 	void SetAttackRange(float range);
 	void SetPatrolRange(float range);
@@ -43,15 +42,13 @@ public:
 	float GetMaxHealth();
 	float GetDefaultSpeed();
 	float GetSpeed();
-	ELEMENTS GetElement();
 	int GetWorth();
+	ELEMENTS GetElement();
 	EnemyStates* GetState();
-	Animation GetWalkLeftAnim();
-	Animation GetWalkRightAnim();
+	Animation GetWalkAnim();
 	Animation GetAttackAnim();
 
 	Vector3 newPos;
-	Vector3 defaultPos;
 	bool collidedWall;
 	StatusEffects status;
 	AABB_2D collider;
@@ -59,8 +56,7 @@ public:
 protected:
 	void MapCollision(double dt);
 
-	Animation animWalkLeft;
-	Animation animWalkRight;
+	Animation animWalk;
 	Animation animAttack;
 
 	float alertRange;

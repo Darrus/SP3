@@ -1,7 +1,6 @@
 #ifndef STUDIO_PROJECT_3_H
 #define STUDIO_PROJECT_3_H
 
-#include <vector>
 #include "SceneBase.h"
 #include "ParallaxBackground.h"
 #include "TileMap.h"
@@ -10,8 +9,7 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
-
-using std::vector;
+#include "GoManager.h"
 
 class SP3 : public SceneBase
 {
@@ -35,8 +33,8 @@ private:
 	ParallaxBackground background;
 	Player* player;
 	CameraFollow* camFollow;
-	Weapon* weapon;
 	Items* items;
+
 
 	bool story;
 

@@ -30,7 +30,6 @@ void Enemy::Init(TileMap* map, Vector3 pos, Vector3 scale)
 {
 	this->map = map;
 	this->pos = pos;
-	this->defaultPos = pos;
 	this->scale = scale;
 	collider.Init(&this->pos, scale);
 }
@@ -63,7 +62,25 @@ void Enemy::Update(double dt)
 
 void Enemy::HandleInteraction(GameObject* go, double dt)
 {
-	
+	Player* player = dynamic_cast<Player*>(go);
+	if (player)
+	{
+		if (state)
+		{
+			EnemyStates* tempState = state->CheckState();
+			if (state != tempState)
+			{
+				delete state;
+				state = tempState;
+				state->Enter(this, player);
+			}
+		}
+		else
+		{
+			state = new EnemyIdle();
+			state->Enter(this, player);
+		}
+	}
 }
 
 void Enemy::TakeDamage(int damage)
@@ -160,14 +177,9 @@ void Enemy::SetAttackAnim(int start, int end, float time)
 	animAttack.Set(start, end, time, true, 1);
 }
 
-void Enemy::SetWalkLeftAnim(int start, int end, float time)
+void Enemy::SetWalkAnim(int start, int end, float time)
 {
-	animWalkLeft.Set(start, end, time, true, 1, true);
-}
-
-void Enemy::SetWalkRightAnim(int start, int end, float time)
-{
-	animWalkRight.Set(start, end, time, 1, true);
+	animWalk.Set(start, end, time, 1, true);
 }
 
 void Enemy::SetAlertRange(float range)
@@ -281,17 +293,12 @@ EnemyStates* Enemy::GetState()
 	return state;
 }
 
-Animation Enemy::GetWalkLeftAnim()
-{
-	return animWalkLeft;
-}
-
-Animation Enemy::GetWalkRightAnim()
-{
-	return animWalkRight;
-}
-
 Animation Enemy::GetAttackAnim()
 {
 	return animAttack;
+}
+
+Animation Enemy::GetWalkAnim()
+{
+	return animWalk;
 }

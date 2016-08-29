@@ -1,4 +1,5 @@
 #include "GoManager.h"
+#include "Enemy.h"
 #include "Player.h"
 
 GoManager::GoManager() : 
@@ -97,4 +98,16 @@ GameObject* GoManager::FetchGO()
 int GoManager::GetObjCount()
 {
 	return objCount;
+}
+
+int GoManager::GetEnemyCount()
+{
+	int count = 0;
+	for (std::vector<GameObject*>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*>(*it);
+		if (enemy)
+			count++;
+	}
+	return count;
 }

@@ -1,14 +1,14 @@
 #include "SP3.h"
-#include "Application.h"
 #include "SceneManager.h"
-#include <sstream>
+#include "Application.h"
 #include "EnemyFactory.h"
 #include "TextParticle.h"
 #include "MeshGenerator.h"
 #include "GoManager.h"
 #include "ParticleManager.h"
-#include "HealthPotions.h"
 #include "SoundEngine.h"
+#include "HealthPotions.h"
+#include <sstream>
 
 SP3::SP3()
 {
@@ -42,7 +42,6 @@ void SP3::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
-	weapon = new Weapon();
 	background.Init(&camera->position,800,600);
 
 	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
@@ -77,22 +76,22 @@ void SP3::Init()
 
 	Items *potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(200.f, 200.f, 0.f);
+	potion->pos.Set(417.29f, 592.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(300.f, 200.f, 0.f);
+	potion->pos.Set(1008.04f, 80.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(200.f, 300.f, 0.f);
+	potion->pos.Set(1914.97f, 720.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(100.f, 200.f, 0.f);
+	potion->pos.Set(3153.f, 624.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 	fps = 0.f;
 
@@ -105,8 +104,9 @@ void SP3::Init()
 
 void SP3::Update(double dt)
 {
-
 	SceneBase::Update(dt);
+
+	std::cout << GoManager::GetInstance().GetEnemyCount() << std::endl;
 
 
 	//Get mouse pos in world
@@ -126,7 +126,7 @@ void SP3::Update(double dt)
 
 	if (player->GetPlayerHealth() <= 0)
 	{
-		SceneManager::GetInstance().ChangeScene("SceneGameOver");
+		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
 	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
@@ -136,6 +136,10 @@ void SP3::Update(double dt)
 	else if (story == false)
 	{
 		GoManager::GetInstance().Update(dt);
+	}
+	if (GoManager::GetInstance().GetEnemyCount() <= 0)
+	{ 
+		SceneManager::GetInstance().ChangeScene("SceneEarth");
 	}
 }
 

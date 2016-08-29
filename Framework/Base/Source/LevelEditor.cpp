@@ -43,8 +43,8 @@ void LevelEditor::Update(double dt)
 	if (editor->active)
 		editor->Update(dt);
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("SP3");
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 }
 
 void LevelEditor::Render()
