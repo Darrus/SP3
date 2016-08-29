@@ -250,7 +250,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 
 	if (name == "RandomGoblin")
 	{
-		int choice = Math::RandIntMinMax(0, 6);
+		int choice = Math::RandIntMinMax(Goblin, BigRange);
 		string name = GetName((ENEMY_TYPES)choice);
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;
@@ -258,7 +258,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 
 	if (name == "RandomAngel")
 	{
-		int choice = Math::RandIntMinMax(4, ENEMY_SIZE - 1);
+		int choice = Math::RandIntMinMax(Angel, BigRangeAngel);
 		string name = GetName((ENEMY_TYPES)choice);
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;

@@ -160,8 +160,9 @@ void Level03::Update(double dt)
 
 	if (player->GetPlayerHealth() <= 0)
 	{
-		SceneManager::GetInstance().ChangeScene("SceneGameOver");
+		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
+
 	std::cout << player->pos.x << " " << player->pos.y << std::endl;
 
 	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
