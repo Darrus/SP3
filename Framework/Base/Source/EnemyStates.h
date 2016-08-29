@@ -12,7 +12,8 @@ public:
 		ENEMY_IDLE,
 		ENEMY_CHASE,
 		ENEMY_ATTACK,
-		ENEMY_STUN
+		ENEMY_STUN,
+		ENEMY_SKILL
 	};
 
 	EnemyStates();

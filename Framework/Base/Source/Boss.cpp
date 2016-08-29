@@ -1,5 +1,7 @@
 #include "Boss.h"
+#include "BossSkill.h"
 #include "MeshGenerator.h"
+#include "GoManager.h"
 
 Boss::Boss()
 {
@@ -11,7 +13,7 @@ Boss::Boss()
 	patrolRange = 1000.f;
 	speed = 50;
 	defaultSpeed = 50;
-	timeBetweenAttack = 2.f;
+	timeBetweenAttack = 5.f;
 	attackCooldown = 0.f;
 	attackDamage = 30.f;
 	mesh = MeshGenerator::GetInstance().GenerateSprite("Ice Golem", "Image//IceGolem.tga", 4, 8);
@@ -107,4 +109,20 @@ void Boss::MapCollision(double dt)
 	}
 
 	pos = newPos;
+}
+
+void Boss::Skill()
+{
+	for (int i = 1; i < 10; ++i)
+	{
+		attackCooldown = timeBetweenAttack;
+		BossSkill* skill = new BossSkill();
+		skill->active = true;
+		Animation anim;
+		anim.Set(0, 7, 2.f, true);
+		skill->Init(Vector3(100.f * i, 90.f, 1.f), Vector3(64.f, 128.f, 1.f), 50);
+		skill->SetSprite("Image//Icicle.tga", 1, 7, anim);
+		skill->attackOnFrame = 3;
+		GoManager::GetInstance().Add(skill);
+	}
 }
