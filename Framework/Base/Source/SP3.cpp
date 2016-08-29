@@ -108,7 +108,6 @@ void SP3::Update(double dt)
 
 	SceneBase::Update(dt);
 
-
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
 	mouseY = Application::GetInstance().m_window_height - mouseY;
@@ -126,7 +125,7 @@ void SP3::Update(double dt)
 
 	if (player->GetPlayerHealth() <= 0)
 	{
-		SceneManager::GetInstance().ChangeScene("SceneGameOver");
+		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
 	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))

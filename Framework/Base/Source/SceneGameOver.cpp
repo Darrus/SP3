@@ -32,8 +32,8 @@ void SceneGameOver::Update(double dt)
 {
 	SceneBase::Update(dt);
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("SP3");
+	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 }
 
 void SceneGameOver::Render()

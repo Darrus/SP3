@@ -19,6 +19,7 @@ public:
 	void Update(double dt);
 	void ClearList();
 	int GetObjCount();
+	int GetEnemyCount();
 	GameObject* FetchGO();
 
 private:
