@@ -2,10 +2,6 @@
 #define BOSS_H
 
 #include "Enemy.h"
-#include "TileMap.h"
-#include "Player.h"
-#include "StatusEffects.h"
-#include "AABB_2D.h"
 
 class Boss : public Enemy
 {
@@ -13,9 +9,12 @@ public:
 	Boss();
 	~Boss();
 
-	virtual void Init();
 	virtual void Update(double dt);
+	virtual void Attack(Player* player);
 	virtual void HandleInteraction(GameObject* go, double dt);
+
+	void Attack1();
+	void Attack2();
 };
 
 #endif

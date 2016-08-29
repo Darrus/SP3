@@ -1,4 +1,4 @@
-#include "SP3.h"
+#include "SceneBoss.h"
 #include "SceneManager.h"
 #include "Application.h"
 #include "EnemyFactory.h"
@@ -7,20 +7,18 @@
 #include "GoManager.h"
 #include "ParticleManager.h"
 #include "SoundEngine.h"
-#include "HealthPotions.h"
-#include <sstream>
 
-SP3::SP3()
+SceneBoss::SceneBoss()
 {
 
 }
 
-SP3::~SP3()
+SceneBoss::~SceneBoss()
 {
 	Exit();
 }
 
-void SP3::Init()
+void SceneBoss::Init()
 {
 	SceneBase::Init();
 
@@ -28,7 +26,7 @@ void SP3::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("Level01");
+	map->LoadMap("Boss");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
@@ -42,67 +40,13 @@ void SP3::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
-	background.Init(&camera->position,800,600);
-
-	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
-	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
-
-	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(400.f, 500.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(600.f, 150.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(550.f, 150.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(600.f, 700.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(900.f, 650.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1000.f, 480.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1100.f, 300.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1200.f, 800.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1400.f, 800.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1500.f, 200.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 200.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2000.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1950.f, 645.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2340.f, 600.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2477.f, 400.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);
-
-	Items *potion = new HealthPotion();
-	potion->active = true;
-	potion->pos.Set(200.f, 200.f, 0.f);
-	GoManager::GetInstance().Add(potion);
-
-	potion = new HealthPotion();
-	potion->active = true;
-	potion->pos.Set(300.f, 200.f, 0.f);
-	GoManager::GetInstance().Add(potion);
-
-	potion = new HealthPotion();
-	potion->active = true;
-	potion->pos.Set(200.f, 300.f, 0.f);
-	GoManager::GetInstance().Add(potion);
-
-	potion = new HealthPotion();
-	potion->active = true;
-	potion->pos.Set(100.f, 200.f, 0.f);
-	GoManager::GetInstance().Add(potion);
-	fps = 0.f;
-
+	background.Init(&camera->position, 800, 600);
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
-
-	story = true;
 }
 
-void SP3::Update(double dt)
+void SceneBoss::Update(double dt)
 {
 	SceneBase::Update(dt);
 
@@ -116,7 +60,7 @@ void SP3::Update(double dt)
 	camera->Update(dt);
 	background.Update();
 	ParticleManager::GetInstance().Update(dt);
-	fps = 1 / (float)dt;
+	GoManager::GetInstance().Update(dt);
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
 		SceneManager::GetInstance().ChangeScene("LevelEditor");
@@ -126,17 +70,9 @@ void SP3::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
-	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
-	{
-		story = false;
-	}
-	else if (story == false)
-	{
-		GoManager::GetInstance().Update(dt);
-	}
 }
 
-void SP3::Render()
+void SceneBoss::Render()
 {
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
@@ -183,14 +119,14 @@ void SP3::Render()
 			{
 
 				modelStack.PushMatrix();
-				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5),enemy->pos.y + (enemy->scale.y *0.5),enemy->pos.z);
-				modelStack.Scale(enemy->scale.x * 4,15,1);
-				RenderMesh(meshList[GEO_HEALTHBACK],false);
+				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+				modelStack.Scale(enemy->scale.x * 4, 15, 1);
+				RenderMesh(meshList[GEO_HEALTHBACK], false);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();
 				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
-				modelStack.Scale(((enemy->GetHealth()/enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
+				modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
 				RenderMesh(meshList[GEO_HEALTH], false);
 				modelStack.PopMatrix();
 			}
@@ -201,7 +137,7 @@ void SP3::Render()
 	RenderUI();
 }
 
-void SP3::Exit()
+void SceneBoss::Exit()
 {
 	SceneBase::Exit();
 	if (map)
@@ -210,8 +146,7 @@ void SP3::Exit()
 	background.ClearBackgrounds();
 }
 
-// Renders
-void SP3::RenderMap(TileMap* map)
+void SceneBoss::RenderMap(TileMap* map)
 {
 	int tileSize = map->GetTileSize();
 	Vector2 tileOffset = camFollow->GetTileOffset();
@@ -239,7 +174,7 @@ void SP3::RenderMap(TileMap* map)
 	}
 }
 
-void SP3::RenderObject(GameObject* go)
+void SceneBoss::RenderObject(GameObject* go)
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
@@ -250,7 +185,7 @@ void SP3::RenderObject(GameObject* go)
 	modelStack.PopMatrix();
 }
 
-void SP3::RenderWeaponObject(GameObject* go)
+void SceneBoss::RenderWeaponObject(GameObject * go)
 {
 	if (go->view.x > 0)
 	{
@@ -298,14 +233,42 @@ void SP3::RenderWeaponObject(GameObject* go)
 	}
 }
 
-void SP3::RenderUI()
+void SceneBoss::RenderParticle()
+{
+	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
+	{
+		ParticleObject* particle = (ParticleObject *)*it;
+		if (particle->active)
+		{
+			if (particle->type == P_TEXT)
+			{
+				TextParticle* textParticle = dynamic_cast<TextParticle*>(particle);
+				modelStack.PushMatrix();
+				modelStack.Translate(textParticle->pos.x, textParticle->pos.y, textParticle->pos.z);
+				modelStack.Scale(textParticle->scale.x, textParticle->scale.y, textParticle->scale.z);
+				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
+				modelStack.PopMatrix();
+			}
+			else
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(particle->pos.x, particle->pos.y, particle->pos.z);
+				modelStack.Scale(particle->scale.x, particle->scale.y, particle->scale.z);
+				RenderMesh(particle->mesh);
+				modelStack.PopMatrix();
+			}
+		}
+	}
+}
+
+void SceneBoss::RenderUI()
 {
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_HEALTH], (float)player->GetPlayerHealth(),5.f,1.f, 10,100);
+	RenderObjOnScreen(meshList[GEO_HEALTH], (float)player->GetPlayerHealth(), 5.f, 1.f, 10, 100);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -319,18 +282,18 @@ void SP3::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
-	
+
 	if (player->inventory.GetSelectedItem())
 	{
 		RenderObjOnScreen(player->inventory.GetSelectedItem()->mesh, 10.f, 8.f, 1.f, 15, 89);
 	}
-	
+
 
 	/*else if (items->SPEEDBOOST)
 	{
-		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
-		modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
+	modelStack.PopMatrix();
 	}*/
 	//else if (items->JUMPBOOST)
 	//{
@@ -347,7 +310,7 @@ void SP3::RenderUI()
 		RenderObjOnScreen(meshList[GEO_WEAPONUI1], 35.f, 15.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 	}
-	else if (player->GetElement() ==  ELEMENTS::FIRE)
+	else if (player->GetElement() == ELEMENTS::FIRE)
 	{
 		modelStack.PushMatrix();
 		RenderObjOnScreen(meshList[GEO_WEAPONUI2], 35.f, 15.f, 10.f, 170, 98);
@@ -398,7 +361,7 @@ void SP3::RenderUI()
 	{
 	case 0:
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_PISTOL],10.f, 10.f, 10.f, 170, 98);
+		RenderObjOnScreen(meshList[GEO_PISTOL], 10.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
@@ -410,7 +373,7 @@ void SP3::RenderUI()
 		break;
 	case 1:
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_RIFLE],25.f, 10.f, 10.f, 170, 98);
+		RenderObjOnScreen(meshList[GEO_RIFLE], 25.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
@@ -467,39 +430,4 @@ void SP3::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
-
-	if (story == true)
-	{
-		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
-		modelStack.PopMatrix();
-	}
-}
-
-void SP3::RenderParticle()
-{
-	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
-	{
-		ParticleObject* particle = (ParticleObject *)*it;
-		if (particle->active)
-		{
-			if (particle->type == P_TEXT)
-			{
-				TextParticle* textParticle = dynamic_cast<TextParticle*>(particle);
-				modelStack.PushMatrix();
-				modelStack.Translate(textParticle->pos.x, textParticle->pos.y, textParticle->pos.z);
-				modelStack.Scale(textParticle->scale.x, textParticle->scale.y, textParticle->scale.z);
-				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
-				modelStack.PopMatrix();
-			}
-			else
-			{
-				modelStack.PushMatrix();
-				modelStack.Translate(particle->pos.x, particle->pos.y, particle->pos.z);
-				modelStack.Scale(particle->scale.x, particle->scale.y, particle->scale.z);
-				RenderMesh(particle->mesh);
-				modelStack.PopMatrix();
-			}
-		}
-	}
 }

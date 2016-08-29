@@ -14,6 +14,7 @@
     <ClCompile Include="Source\AABB_2D.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Background.cpp" />
+    <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\BulletFactory.cpp" />
     <ClCompile Include="Source\BurnStatus.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="Source\EnemyChase.cpp" />
     <ClCompile Include="Source\EnemyFactory.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
+    <ClCompile Include="Source\EnemySkill.cpp" />
     <ClCompile Include="Source\EnemyStates.cpp" />
     <ClCompile Include="Source\EnemyStun.cpp" />
     <ClCompile Include="Source\FireBullet.cpp" />
@@ -58,6 +60,7 @@
     <ClCompile Include="Source\RangeEnemy.cpp" />
     <ClCompile Include="Source\Rifle.cpp" />
     <ClCompile Include="Source\SceneBase.cpp" />
+    <ClCompile Include="Source\SceneBoss.cpp" />
     <ClCompile Include="Source\SceneGameOver.cpp" />
     <ClCompile Include="Source\SceneMainMenu.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
@@ -93,6 +96,7 @@
     <ClInclude Include="Source\EnemyChase.h" />
     <ClInclude Include="Source\EnemyFactory.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
+    <ClInclude Include="Source\EnemySkill.h" />
     <ClInclude Include="Source\EnemyStates.h" />
     <ClInclude Include="Source\EnemyStun.h" />
     <ClInclude Include="Source\FireBullet.h" />
@@ -130,6 +134,7 @@
     <ClInclude Include="Source\Rifle.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBase.h" />
+    <ClInclude Include="Source\SceneBoss.h" />
     <ClInclude Include="Source\SceneGameOver.h" />
     <ClInclude Include="Source\SceneMainMenu.h" />
     <ClInclude Include="Source\SceneManager.h" />

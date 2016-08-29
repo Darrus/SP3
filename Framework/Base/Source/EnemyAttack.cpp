@@ -28,5 +28,7 @@ EnemyStates* EnemyAttack::CheckState()
 
 void EnemyAttack::Update(double dt)
 {
+	float dir = player->pos.x - enemy->pos.x;
+	enemy->view.x = dir;
 	enemy->Attack(player);
 }

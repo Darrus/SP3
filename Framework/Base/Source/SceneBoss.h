@@ -1,5 +1,5 @@
-#ifndef STUDIO_PROJECT_3_H
-#define STUDIO_PROJECT_3_H
+#ifndef SCENE_BOSS_H
+#define SCENE_BOSS_H
 
 #include "SceneBase.h"
 #include "ParallaxBackground.h"
@@ -10,11 +10,11 @@
 #include "Bullet.h"
 #include "Element.h"
 
-class SP3 : public SceneBase
+class SceneBoss : public SceneBase
 {
 public:
-	SP3();
-	virtual ~SP3();
+	SceneBoss();
+	virtual ~SceneBoss();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -32,14 +32,10 @@ private:
 	ParallaxBackground background;
 	Player* player;
 	CameraFollow* camFollow;
+	Weapon* weapon;
 	Items* items;
-
-	bool story;
-
-	float fps;
 
 	double worldX, worldY;
 	double mouseX, mouseY;
 };
-
 #endif

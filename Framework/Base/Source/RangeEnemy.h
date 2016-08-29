@@ -10,7 +10,6 @@ public:
 	virtual ~RangeEnemy();
 
 	virtual void Update(double dt);
-	virtual void HandleInteraction(GameObject* go, double dt);
 	virtual void Attack(Player* player);
 };
 

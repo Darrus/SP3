@@ -21,8 +21,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		MeleeEnemy* enemy = new MeleeEnemy();
 		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(15, 17, 1.f);
-		enemy->SetWalkRightAnim(27, 29, 1.f);
+		enemy->SetWalkAnim(27, 29, 1.f);
 		enemy->SetAlertRange(50.f);
 		enemy->SetPatrolRange(200.f);
 		enemy->SetDefaultSpeed(100.f);
@@ -41,8 +40,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		MeleeEnemy* enemy = new MeleeEnemy();
 		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(15, 17, 1.f);
-		enemy->SetWalkRightAnim(27, 29, 1.f);
+		enemy->SetWalkAnim(27, 29, 1.f);
 		enemy->SetAlertRange(50.f);
 		enemy->SetPatrolRange(200.f);
 		enemy->SetDefaultSpeed(100.f);
@@ -63,8 +61,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		RangeEnemy* enemy = new RangeEnemy();
 		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(60, 62, 1.f);
-		enemy->SetWalkRightAnim(72, 74, 1.f);
+		enemy->SetWalkAnim(72, 74, 1.f);
 		enemy->SetAlertRange(150.f);
 		enemy->SetPatrolRange(200.f);
 		enemy->SetAttackRange(150.f);
@@ -83,8 +80,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		RangeEnemy* enemy = new RangeEnemy();
 		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(60, 62, 1.f);
-		enemy->SetWalkRightAnim(72, 74, 1.f);
+		enemy->SetWalkAnim(72, 74, 1.f);
 		enemy->SetAlertRange(150.f);
 		enemy->SetPatrolRange(200.f);
 		enemy->SetAttackRange(150.f);
@@ -103,8 +99,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		MeleeEnemy* enemy = new MeleeEnemy();
 		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
 		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Angel", "Image//AngelSprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(69, 71, 1.f);
-		enemy->SetWalkRightAnim(81, 83, 1.f);
+		enemy->SetWalkAnim(81, 83, 1.f);
 		enemy->SetAlertRange(50.f);
 		enemy->SetPatrolRange(300.f);
 		enemy->SetDefaultSpeed(100.f);
@@ -122,9 +117,8 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	{
 		MeleeEnemy* enemy = new MeleeEnemy();
 		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("ANgel", "Image//AngelSprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(69, 71, 1.f);
-		enemy->SetWalkRightAnim(81, 83, 1.f);
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Big Angel", "Image//AngelSprite.tga", 8, 12);
+		enemy->SetWalkAnim(81, 83, 1.f);
 		enemy->SetAlertRange(50.f);
 		enemy->SetPatrolRange(500.f);
 		enemy->SetDefaultSpeed(50.f);
@@ -143,9 +137,8 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	{
 		RangeEnemy* enemy = new RangeEnemy();
 		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//AngelSprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(21, 23, 1.f);
-		enemy->SetWalkRightAnim(33, 35, 1.f);
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Range Angel", "Image//AngelSprite.tga", 8, 12);
+		enemy->SetWalkAnim(33, 35, 1.f);
 		enemy->SetAlertRange(150.f);
 		enemy->SetPatrolRange(100.f);
 		enemy->SetAttackRange(150.f);
@@ -163,9 +156,8 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	{
 		RangeEnemy* enemy = new RangeEnemy();
 		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//AngelSprite.tga", 8, 12);
-		enemy->SetWalkLeftAnim(21, 23, 1.f);
-		enemy->SetWalkRightAnim(33, 35, 1.f);
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Big Range Angel", "Image//AngelSprite.tga", 8, 12);
+		enemy->SetWalkAnim(33, 35, 1.f);
 		enemy->SetAlertRange(150.f);
 		enemy->SetPatrolRange(100.f);
 		enemy->SetAttackRange(150.f);
@@ -186,6 +178,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;
 	}
+
 	if (name == "RandomAngel")
 	{
 		int choice = Math::RandIntMinMax(4, ENEMY_SIZE - 1);

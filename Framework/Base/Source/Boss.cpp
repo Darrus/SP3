@@ -10,12 +10,12 @@ Boss::~Boss()
 
 }
 
-void Boss::Init()
+void Boss::Update(double dt)
 {
 
 }
 
-void Boss::Update(double dt)
+void Boss::Attack(Player* player)
 {
 
 }

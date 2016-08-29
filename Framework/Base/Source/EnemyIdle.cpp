@@ -26,11 +26,8 @@ void EnemyIdle::Enter(Enemy* enemy, Player* player)
 	if (dir == 0)
 		dir = 1;
 
-	if (dir > 0)
-		sprite->SetAnimation(enemy->GetWalkRightAnim());
-	else
-		sprite->SetAnimation(enemy->GetWalkLeftAnim());
-
+	sprite->SetAnimation(enemy->GetWalkAnim());
+	enemy->view.x = dir;
 	enemy->vel.x = enemy->GetSpeed() * dir;
 }
 
@@ -52,10 +49,7 @@ void EnemyIdle::Update(double dt)
 	{
 		patrolDistance = 0.f;
 		dir = -dir;
-		if (dir > 0)
-			sprite->SetAnimation(enemy->GetWalkRightAnim());
-		else
-			sprite->SetAnimation(enemy->GetWalkLeftAnim());
+		enemy->view.x = dir;
 		enemy->vel.x = enemy->GetSpeed() * dir;
 	}
 	enemy->newPos.x += enemy->vel.x * dt;
