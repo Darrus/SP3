@@ -179,7 +179,7 @@ void Enemy::SetAttackAnim(int start, int end, float time)
 
 void Enemy::SetWalkAnim(int start, int end, float time)
 {
-	animWalk.Set(start, end, time, 1, true);
+	animWalk.Set(start, end, time, true, 1, true);
 }
 
 void Enemy::SetAlertRange(float range)

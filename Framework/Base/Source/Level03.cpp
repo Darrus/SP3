@@ -226,11 +226,31 @@ void Level03::Render()
 				RenderMesh(meshList[GEO_HEALTHBACK], false);
 				modelStack.PopMatrix();
 
-				modelStack.PushMatrix();
-				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
-				modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
-				RenderMesh(meshList[GEO_HEALTH], false);
-				modelStack.PopMatrix();
+
+				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 76 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 100)
+				{
+					modelStack.PushMatrix();
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
+					RenderMesh(meshList[GEO_HEALTHFRONT01], false);
+					modelStack.PopMatrix();
+				}
+				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 40 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 76)
+				{
+					modelStack.PushMatrix();
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
+					RenderMesh(meshList[GEO_HEALTHFRONT02], false);
+					modelStack.PopMatrix();
+				}
+				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 0 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 40)
+				{
+					modelStack.PushMatrix();
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
+					RenderMesh(meshList[GEO_HEALTHFRONT03], false);
+					modelStack.PopMatrix();
+				}
 			}
 		}
 	}
@@ -342,9 +362,25 @@ void Level03::RenderUI()
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_HEALTH], (float)player->GetPlayerHealth(), 5.f, 1.f, 10, 100);
-	modelStack.PopMatrix();
+
+	if ((float)player->GetPlayerHealth() >= 0.f && (float)player->GetPlayerHealth() <= 50.f)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_HEALTHFRONT03], (float)player->GetPlayerHealth(), 5.f, 1.f, 10, 100);
+		modelStack.PopMatrix();
+	}
+	if ((float)player->GetPlayerHealth() >= 51.f && (float)player->GetPlayerHealth() <= 150.f)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_HEALTHFRONT02], (float)player->GetPlayerHealth(), 5.f, 1.f, 10, 100);
+		modelStack.PopMatrix();
+	}
+	if ((float)player->GetPlayerHealth() >= 151.f && (float)player->GetPlayerHealth() <= 200.f)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_HEALTHFRONT01], (float)player->GetPlayerHealth(), 5.f, 1.f, 10, 100);
+		modelStack.PopMatrix();
+	}
 
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_OVERHEATBACK], 200.f, 5.f, 1.f, 10, 95);

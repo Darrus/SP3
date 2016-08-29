@@ -124,8 +124,14 @@ void SceneBase::Init()
 	meshList[GEO_TEXT]->textureArray[0] = LoadTGA("Image//pixel.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[GEO_HEALTH] = MeshBuilder::GenerateQuad("HealthBar",Color(1,1,1),0.5f);
-	meshList[GEO_HEALTH]->textureArray[0] = LoadTGA("Image//healthBarFront.tga");
+	meshList[GEO_HEALTHFRONT01] = MeshBuilder::GenerateQuad("HealthBar",Color(1,1,1),0.5f);
+	meshList[GEO_HEALTHFRONT01]->textureArray[0] = LoadTGA("Image//healthBarFront01.tga");
+
+	meshList[GEO_HEALTHFRONT02] = MeshBuilder::GenerateQuad("HealthBar", Color(1, 1, 1), 0.5f);
+	meshList[GEO_HEALTHFRONT02]->textureArray[0] = LoadTGA("Image//healthBarFront02.tga");
+
+	meshList[GEO_HEALTHFRONT03] = MeshBuilder::GenerateQuad("HealthBar", Color(1, 1, 1), 0.5f);
+	meshList[GEO_HEALTHFRONT03]->textureArray[0] = LoadTGA("Image//healthBarFront03.tga");
 
 	meshList[GEO_HEALTHBACK] = MeshBuilder::GenerateQuad("HealthBar", Color(1, 1, 1), 0.5f);
 	meshList[GEO_HEALTHBACK]->textureArray[0] = LoadTGA("Image//healthBarBacK.tga");
