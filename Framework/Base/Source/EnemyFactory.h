@@ -17,6 +17,11 @@ public:
 		RangeAngel,
 		BigAngel,
 		BigRangeAngel,
+
+		Demon,
+		RangeDemon,
+		BigDemon,
+		BigRangeDemon,
 		ENEMY_SIZE
 	};
 

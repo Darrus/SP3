@@ -32,7 +32,7 @@ void Level03::Init()
 	map->LoadTileSheet("Image//tilesheet2.tga");
 
 	player = new Player();
-	player->Init(map, Vector3(50.f, 200.f, 0.f), Vector3(32.f, 32.f, 1.f));
+	player->Init(map, Vector3(48.f, 368.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 
@@ -75,6 +75,16 @@ void Level03::Init()
 	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
 	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);*/
 
+	EnemyFactory::Create("Demon", Vector3(80.f, 80.f, 0.f), map);
+	EnemyFactory::Create("RangeDemon", Vector3(655.f, 432.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(1235.f, 80.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(1262.f, 336.f, 0.f), map);
+	EnemyFactory::Create("BigRangeDemon", Vector3(1973.f, 624.f, 0.f), map);
+	EnemyFactory::Create("Demon", Vector3(2040.f, 80.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(2924.f, 80.f, 0.f), map);
+	EnemyFactory::Create("RangeDemon", Vector3(2777.f, 336.f, 0.f), map);
+	EnemyFactory::Create("BigRangeDemon", Vector3(3053.f, 664.f, 0.f), map);
+
 	Items *potion = new HealthPotion();
 	potion->active = true;
 	potion->pos.Set(48.f, 80.f, 0.f);
@@ -98,6 +108,26 @@ void Level03::Init()
 	potion = new HealthPotion();
 	potion->active = true;
 	potion->pos.Set(2895.f, 80.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(139.f, 368.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(1876.f, 208.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(2515.f, 240.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(3347.f, 144.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 	fps = 0.f;
 
