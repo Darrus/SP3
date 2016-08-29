@@ -9,6 +9,7 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
+#include "GoManager.h"
 
 class SP3 : public SceneBase
 {
@@ -33,6 +34,7 @@ private:
 	Player* player;
 	CameraFollow* camFollow;
 	Items* items;
+
 
 	bool story;
 

@@ -97,6 +97,9 @@
     <Filter Include="Header Files\GameObjects\Items">
       <UniqueIdentifier>{beba44de-c7d0-49a3-a98b-f9176e2c93b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Enemy\Boss">
+      <UniqueIdentifier>{ab4c2439-4335-426e-8ef4-924032b402cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -294,14 +297,11 @@
     <ClCompile Include="Source\SceneMainMenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss.cpp">
-      <Filter>Source Files\GameObjects\Enemy</Filter>
+    <ClCompile Include="Source\SceneEarth.cpp">
+      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneBoss.cpp">
       <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EnemySkill.cpp">
-      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,17 +515,17 @@
     <ClInclude Include="Source\SceneGameOver.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
+    </ClInclude>
     <ClInclude Include="Source\SceneMainMenu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneEarth.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneBoss.h">
       <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Boss.h">
-      <Filter>Header Files\GameObjects\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EnemySkill.h">
-      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
