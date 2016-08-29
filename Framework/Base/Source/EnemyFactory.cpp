@@ -171,9 +171,86 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		return enemy;
 	}
 
+
+	if (name == "Demon")
+	{
+		MeleeEnemy* enemy = new MeleeEnemy();
+		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Demon", "Image//DemonSprite.tga", 2, 9);
+		enemy->SetWalkAnim(0, 6, 1.f);
+		enemy->SetAlertRange(75.f);
+		enemy->SetPatrolRange(300.f);
+		enemy->SetDefaultSpeed(80.f);
+		enemy->SetAttackDamage(30.f);
+		enemy->SetAttackRange(40.f);
+		enemy->SetTimeBetweenAttack(1.f);
+		enemy->SetHealth(200);
+		enemy->SetElement(FIRE, 10);
+		enemy->active = true;
+		GoManager::GetInstance().Add(enemy);
+		return enemy;
+	}
+
+	if (name == "BigDemon")
+	{
+		MeleeEnemy* enemy = new MeleeEnemy();
+		enemy->Init(map, pos, Vector3(80.f, 80.f, 80.f));
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Demon", "Image//DemonSprite.tga", 2, 9);
+		enemy->SetWalkAnim(0, 6, 1.f);
+		enemy->SetAlertRange(75.f);
+		enemy->SetPatrolRange(300.f);
+		enemy->SetDefaultSpeed(80.f);
+		enemy->SetAttackDamage(30.f);
+		enemy->SetAttackRange(40.f);
+		enemy->SetTimeBetweenAttack(1.f);
+		enemy->SetHealth(300);
+		enemy->SetElement(FIRE, 10);
+		enemy->active = true;
+		GoManager::GetInstance().Add(enemy);
+		return enemy;
+	}
+
+	if (name == "RangeDemon")
+	{
+		RangeEnemy* enemy = new RangeEnemy();
+		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Range Demon", "Image//DemonSprite.tga", 2, 9);
+		enemy->SetWalkAnim(0, 6, 1.f);
+		enemy->SetAlertRange(100.f);
+		enemy->SetPatrolRange(150.f);
+		enemy->SetAttackRange(150.f);
+		enemy->SetAttackDamage(20.f);
+		enemy->SetDefaultSpeed(150.f);
+		enemy->SetTimeBetweenAttack(1.f);
+		enemy->SetHealth(120);
+		enemy->SetElement(LIFESTEAL, 10);
+		enemy->active = true;
+		GoManager::GetInstance().Add(enemy);
+		return enemy;
+	}
+
+	if (name == "BigRangeDemon")
+	{
+		RangeEnemy* enemy = new RangeEnemy();
+		enemy->Init(map, pos, Vector3(80.f, 80.f, 80.f));
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Range Demon", "Image//DemonSprite.tga", 2, 9);
+		enemy->SetWalkAnim(0, 6, 1.f);
+		enemy->SetAlertRange(100.f);
+		enemy->SetPatrolRange(200.f);
+		enemy->SetAttackRange(100.f);
+		enemy->SetAttackDamage(50.f);
+		enemy->SetDefaultSpeed(80.f);
+		enemy->SetTimeBetweenAttack(0.8f);
+		enemy->SetHealth(200);
+		enemy->SetElement(LIFESTEAL, 10);
+		enemy->active = true;
+		GoManager::GetInstance().Add(enemy);
+		return enemy;
+	}
+
 	if (name == "RandomGoblin")
 	{
-		int choice = Math::RandIntMinMax(0, 6);
+		int choice = Math::RandIntMinMax(Goblin, BigRange);
 		string name = GetName((ENEMY_TYPES)choice);
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;
@@ -181,7 +258,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 
 	if (name == "RandomAngel")
 	{
-		int choice = Math::RandIntMinMax(4, ENEMY_SIZE - 1);
+		int choice = Math::RandIntMinMax(Angel, BigRangeAngel);
 		string name = GetName((ENEMY_TYPES)choice);
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;
@@ -217,6 +294,18 @@ string EnemyFactory::GetName(ENEMY_TYPES type)
 		break;
 	case BigRangeAngel:
 		name = "BigRangeAngel";
+		break;
+	case Demon:
+		name = "Demon";
+		break;
+	case RangeDemon:
+		name = "RangeDemon";
+		break;
+	case BigDemon:
+		name = "BigDemon";
+		break;
+	case BigRangeDemon:
+		name = "BigRangeDemon";
 		break;
 	default:
 		name = "";
