@@ -235,6 +235,7 @@ void SceneMainMenu::InstructionSelection()
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
 		SceneManager::GetInstance().ChangeScene("SP3");
+
 }
 
 void SceneMainMenu::LevelEditorSelection()
