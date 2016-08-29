@@ -11,10 +11,7 @@ public:
 
 	virtual void Update(double dt);
 	virtual void Attack(Player* player);
-	virtual void HandleInteraction(GameObject* go, double dt);
-
-	void Attack1();
-	void Attack2();
+	virtual void MapCollision(double dt);
 };
 
 #endif

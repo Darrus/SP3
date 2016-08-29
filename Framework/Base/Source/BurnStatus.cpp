@@ -3,6 +3,7 @@
 #include "ParticleManager.h"
 #include <istream>
 #include "SoundEngine.h"
+#include "Boss.h"
 
 using std::stringstream;
 BurnStatus::BurnStatus()
@@ -35,9 +36,10 @@ void BurnStatus::Update(double dt)
 void BurnStatus::ApplyStatus(GameObject* go)
 {
 	enemy = dynamic_cast<Enemy*>(go);
+
 	if (enemy)
 	{
-		damage = 0.05 * enemy->GetMaxHealth();
+		damage = 0.02 * enemy->GetHealth();
 		particle = ParticleFactory::CreateFollow(P_BURN, enemy);
 		SoundEngine::GetInstance().Play("burn");
 	}

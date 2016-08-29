@@ -54,7 +54,7 @@ public:
 	AABB_2D collider;
 
 protected:
-	void MapCollision(double dt);
+	virtual void MapCollision(double dt);
 
 	Animation animWalk;
 	Animation animAttack;
