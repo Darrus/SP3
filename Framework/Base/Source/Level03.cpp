@@ -132,6 +132,7 @@ void Level03::Init()
 	fps = 0.f;
 
 	background.LoadBackground("Image//HellBackground.tga", Vector3(1980, 1080, 0));
+	background.LoadBackground("Image//HellMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
 
 	story = true;
