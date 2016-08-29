@@ -148,8 +148,8 @@ void SceneBase::Init()
 	meshList[GEO_RIFLE] = MeshBuilder::GenerateQuad("Rifle", Color(1, 1, 1), 1.f);
 	meshList[GEO_RIFLE]->textureArray[0] = LoadTGA("Image//Rifle.tga");
 
-	meshList[GEO_LASER] = MeshBuilder::GenerateQuad("Rifle", Color(1, 0, 0), 1.f);
-	meshList[GEO_LASER]->textureArray[0] = LoadTGA("Image//healthBarFront.tga");
+	meshList[GEO_LASER] = MeshBuilder::GenerateQuad("Laser", Color(1, 0, 0), 1.f);
+	meshList[GEO_LASER]->textureArray[0] = LoadTGA("Image//Laser.tga");
 
 	meshList[GEO_SHOTGUN] = MeshBuilder::GenerateQuad("Shotgun", Color(1, 1, 1), 1.f);
 	meshList[GEO_SHOTGUN]->textureArray[0] = LoadTGA("Image//Shotgun.tga");
