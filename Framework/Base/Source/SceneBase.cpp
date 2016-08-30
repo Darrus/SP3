@@ -205,6 +205,17 @@ void SceneBase::Init()
 	meshList[GEO_STORY] = MeshBuilder::GenerateQuad("Story", Color(1, 1, 1), 1.f);
 	meshList[GEO_STORY]->textureArray[0] = LoadTGA("Image//Story.tga");
 
+	meshList[GEO_COIN] = MeshBuilder::GenerateSpriteAnimation("Coin",8,8);
+	meshList[GEO_COIN]->textureArray[0] = LoadTGA("Image//Coin.tga");
+
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(meshList[GEO_COIN]);
+	if (sprite)
+	{
+		Animation anim;
+		anim.Set(0, 63, 1.f, true, 1, true);
+		sprite->SetAnimation(anim);
+	}
+
 	meshList[GEO_TEXTBOX] = MeshBuilder::GenerateQuad("Textbox", Color(1.f, 1.f, 1.f), 1.f);
 	meshList[GEO_TEXTBOX]->textureArray[0] = LoadTGA("Image//textbox.tga");
 
@@ -225,6 +236,9 @@ void SceneBase::Update(double dt)
 	//if(Application::IsKeyPressed('4'))
 	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(meshList[GEO_COIN]);
+	if (sprite)
+		sprite->Update(dt);
 
 	fps = (float)(1.f / dt);
 }

@@ -46,7 +46,11 @@ void SceneMainMenu::Init()
 	meshList[GEO_LEVELEDITOR2] = MeshBuilder::GenerateQuad("MapEditor2", Color(1, 1, 1), 1.f);
 	meshList[GEO_LEVELEDITOR2]->textureArray[0] = LoadTGA("Image//MapEditor2.tga");
 
+	meshList[GEO_LEVELSELECT] = MeshBuilder::GenerateQuad("LevelSelect", Color(1, 1, 1), 1.f);
+	meshList[GEO_LEVELSELECT]->textureArray[0] = LoadTGA("Image//LevelSelect.tga");
+
 	selectedOption = 0;
+	selectedLevel = 0;
 	InstructionsPage = 0;
 	LevelEditorPage = 0;
 }
@@ -57,7 +61,7 @@ void SceneMainMenu::Update(double dt)
 	switch (MenuStates)
 	{
 	case STARTGAME:
-		SceneManager::GetInstance().ChangeScene("SP3");
+		SceneManager::GetInstance().ChangeScene("Level03");
 		break;
 	case MAINMENU:
 		MenuSelection();
@@ -67,6 +71,9 @@ void SceneMainMenu::Update(double dt)
 		break;
 	case LEVELEDITOR:
 		LevelEditorSelection();
+		break;
+	case LEVELSELECT:
+		LevelSelectSelection();
 		break;
 	}
 }
@@ -102,6 +109,9 @@ void SceneMainMenu::Render()
 	case LEVELEDITOR:
 		RenderLevelEditor();
 		break;
+	case LEVELSELECT:
+		RenderLevelSelect();
+		break;
 	}
 }
 
@@ -115,47 +125,48 @@ void SceneMainMenu::RenderMainMenu()
 
 	if (selectedOption == 0)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 54);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 54);
 		modelStack.PopMatrix();
+
 	}
 	else if (selectedOption == 1)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 39);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 39);
 		modelStack.PopMatrix();
 	}
 	else if (selectedOption == 2)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 24);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 24);
+		modelStack.PopMatrix();
+
+	}
+	else if (selectedOption == 3)
+	{
+
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 12);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 12);
 		modelStack.PopMatrix();
 	}
 }
@@ -199,6 +210,38 @@ void SceneMainMenu::RenderLevelEditor()
 		RenderMesh(meshList[GEO_LEVELEDITOR2], false);
 		modelStack.PopMatrix();
 	}
+}
+
+void SceneMainMenu::RenderLevelSelect()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(Application::GetInstance().m_window_width * 0.5, Application::GetInstance().m_window_height * 0.5, 0);
+	modelStack.Scale(Application::GetInstance().m_window_width, Application::GetInstance().m_window_height, 1);
+	RenderMesh(meshList[GEO_LEVELSELECT], false);
+	modelStack.PopMatrix();
+
+
+	if (selectedLevel == 0)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Level: Level 01", Color(1.f, 1.f, 1.f), 25, 400, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Earth", Color(1.f, 1.f, 1.f), 25, 530, 150);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Difficulty: Easy", Color(1.f, 1.f, 1.f), 25, 400, 100);
+	}
+
+	else if (selectedLevel == 1)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Level: Level 02", Color(1.f, 1.f, 1.f), 25, 400, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Heaven", Color(1.f, 1.f, 1.f), 25, 530, 150);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Difficulty: Medium", Color(1.f, 1.f, 1.f), 23, 390, 100);
+	}
+	else if (selectedLevel == 2)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Level: Level 03", Color(1.f, 1.f, 1.f), 25, 400, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Hell", Color(1.f, 1.f, 1.f), 25, 530, 150);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Difficulty: Hard", Color(1.f, 1.f, 1.f), 25, 400, 100);
+	}
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "Backspace to Go Back", Color(1.f, 1.f, 1.f), 25, 300, 20);
 }
 
 void SceneMainMenu::MenuSelection()
@@ -258,6 +301,32 @@ void SceneMainMenu::LevelEditorSelection()
 		if (Application::GetInstance().controller->IsKeyPressed(ENTER))
 			SceneManager::GetInstance().ChangeScene("LevelEditor");
 	}
+}
+
+void SceneMainMenu::LevelSelectSelection()
+{
+	if (Application::GetInstance().controller->IsKeyPressed(GORIGHT) || Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT))
+		selectedLevel = (selectedLevel + 1) % LEVEL_END;
+
+	if (Application::GetInstance().controller->IsKeyPressed(GOLEFT) || Application::GetInstance().controller->IsKeyPressed(MOVE_LEFT))
+	{
+		selectedLevel = (selectedLevel - 1) % LEVEL_END;
+		if (selectedLevel < 0)
+			selectedLevel = LEVEL_END - 1;
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 0)
+		SceneManager::GetInstance().ChangeScene("SceneEarth");
+
+	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 1)
+		SceneManager::GetInstance().ChangeScene("SP3");
+
+	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 2)
+		SceneManager::GetInstance().ChangeScene("Level03");
+
+	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+		MenuStates = MAINMENU;
+
 }
 
 void SceneMainMenu::Exit()
