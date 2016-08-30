@@ -141,6 +141,8 @@ void SP3::Update(double dt)
 	{ 
 		SceneManager::GetInstance().ChangeScene("SceneEarth");
 	}
+
+
 }
 
 void SP3::Render()
@@ -330,6 +332,9 @@ void SP3::RenderUI()
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_COIN], 10, 10, 10, 0, 0);
+	modelStack.PopMatrix();
 
 	if ((float)player->GetPlayerHealth() >= 0.f && (float)player->GetPlayerHealth() <= 50.f)
 	{
@@ -480,6 +485,10 @@ void SP3::RenderUI()
 
 		break;
 	}
+
+	modelStack.PushMatrix();
+	RenderObjOnScreen(meshList[GEO_COIN], 10, 8, 10, 15, 80);
+	modelStack.PopMatrix();
 
 	//std::stringstream text;
 	//text << fps;

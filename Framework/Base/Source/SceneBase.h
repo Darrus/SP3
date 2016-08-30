@@ -108,6 +108,8 @@ protected:
 		GEO_LEVELEDITOR2,
 		GEO_LEVELSELECT,
 
+		GEO_COIN,
+
 		NUM_GEOMETRY,
 	};
 
