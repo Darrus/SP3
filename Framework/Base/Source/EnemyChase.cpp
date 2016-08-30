@@ -25,6 +25,7 @@ void EnemyChase::Enter(Enemy* enemy, Player* player)
 	sprite->SetAnimation(enemy->GetWalkAnim());
 	enemy->view.x = dir;
 	enemy->vel.x = enemy->GetSpeed() * dir;
+	enemy->chaseTimer = enemy->chaseDuration;
 }
 
 void EnemyChase::Update(double dt)
@@ -40,4 +41,5 @@ void EnemyChase::Update(double dt)
 	enemy->view.x = dir;
 	enemy->vel.x = enemy->GetSpeed() * dir;
 	enemy->newPos.x += enemy->vel.x * dt;
+	enemy->chaseTimer -= dt;
 }

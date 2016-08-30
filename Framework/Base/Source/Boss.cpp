@@ -26,7 +26,8 @@ Boss::Boss()
 	animWalk.Set(8, 11, 1.f, true, 1, true);
 	animAttack.Set(16, 23, 1.f, true);
 	animDeath.Set(24, 30, 1.f, true);
-	chaseTimer = 0.f;
+	chaseDuration = 10.f;
+	chaseTimer = chaseDuration;
 }
 
 Boss::~Boss()
@@ -36,8 +37,6 @@ Boss::~Boss()
 
 void Boss::Update(double dt)
 {
-	chaseTimer += dt;
-
 	status.Update(dt);
 
 	attackCooldown -= dt;
@@ -131,12 +130,11 @@ void Boss::HandleInteraction(GameObject* go, double dt)
 				state = new EnemyAttack();
 				state->Enter(this, player);
 			}
-			else if (chaseTimer > 10.f)
+			else if (chaseTimer < 0.f)
 			{
 				delete state;
 				state = new EnemyIdle();
 				state->Enter(this, NULL);
-				chaseTimer = 0.f;
 			}
 			break;
 		case EnemyStates::ENEMY_STUN:

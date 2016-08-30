@@ -76,6 +76,8 @@ void HeavenBoss::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 }
 
 void HeavenBoss::Render()
@@ -169,45 +171,6 @@ void HeavenBoss::Exit()
 		delete map;
 	map = NULL;
 	background.ClearBackgrounds();
-}
-
-void HeavenBoss::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void HeavenBoss::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
 }
 
 void HeavenBoss::RenderWeaponObject(GameObject * go)

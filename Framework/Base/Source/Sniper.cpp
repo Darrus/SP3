@@ -8,7 +8,7 @@ Sniper::Sniper()
 	fireRate = 0.f;
 	defaultFireRate = 0.2f;
 	cooldownRate = 10;
-	damage = 100;
+	damage = 300;
 	weaponType = WEAPON_TYPE::SNIPER;
 	overheated = false;
 	overheatRate = 110;

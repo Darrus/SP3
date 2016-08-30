@@ -16,11 +16,14 @@ defaultSpeed(0.f),
 attackDamage(0.f),
 timeBetweenAttack(0.f),
 attackCooldown(0.f),
+chaseTimer(0.f),
+chaseDuration(5.f),
 health(0),
 maxHealth(0),
 map(NULL),
 state(NULL),
-isGrounded(false)
+isGrounded(false),
+damaged(false)
 {
 	status.SetObject(this);
 	
@@ -86,6 +89,13 @@ void Enemy::HandleInteraction(GameObject* go, double dt)
 				state = new EnemyChase();
 				state->Enter(this, player);
 			}
+			if (damaged)
+			{
+				delete state;
+				state = new EnemyChase();
+				state->Enter(this, player);
+				damaged = false;
+			}
 			break;
 		case EnemyStates::ENEMY_CHASE:
 			if (dist < attackRange * attackRange)
@@ -94,7 +104,7 @@ void Enemy::HandleInteraction(GameObject* go, double dt)
 				state = new EnemyAttack();
 				state->Enter(this, player);
 			}
-			else if (dist > alertRange * alertRange)
+			else if (chaseTimer < 0)
 			{
 				delete state;
 				state = new EnemyIdle();
@@ -125,6 +135,7 @@ void Enemy::HandleInteraction(GameObject* go, double dt)
 void Enemy::TakeDamage(int damage)
 {
 	this->health -= damage;
+	damaged = true;
 }
 
 void Enemy::MapCollision(double dt)

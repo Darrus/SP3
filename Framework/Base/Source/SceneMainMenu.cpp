@@ -241,7 +241,7 @@ void SceneMainMenu::RenderLevelSelect()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Difficulty: Hard", Color(1.f, 1.f, 1.f), 25, 400, 100);
 	}
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Backspace to Go Back", Color(1.f, 1.f, 1.f), 25, 300, 20);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Escape to Go Back", Color(1.f, 1.f, 1.f), 25, 300, 20);
 }
 
 void SceneMainMenu::MenuSelection()
@@ -255,6 +255,11 @@ void SceneMainMenu::MenuSelection()
 		selectedOption = (selectedOption - 1) % MAINMENU;
 		if (selectedOption < 0)
 			selectedOption = MAINMENU - 1;
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(EXIT))
+	{
+		SceneManager::GetInstance().quit = true;
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
@@ -273,12 +278,11 @@ void SceneMainMenu::InstructionSelection()
 			InstructionsPage = 1;
 	}
 
-	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	if (Application::GetInstance().controller->IsKeyPressed(EXIT))
 		MenuStates = MAINMENU;
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
-		SceneManager::GetInstance().ChangeScene("SP3");
-
+		SceneManager::GetInstance().ChangeScene("Earth");
 }
 
 void SceneMainMenu::LevelEditorSelection()
@@ -295,7 +299,7 @@ void SceneMainMenu::LevelEditorSelection()
 				LevelEditorPage = 1;
 		}
 
-		if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+		if (Application::GetInstance().controller->IsKeyPressed(EXIT))
 			MenuStates = MAINMENU;
 
 		if (Application::GetInstance().controller->IsKeyPressed(ENTER))
@@ -324,7 +328,7 @@ void SceneMainMenu::LevelSelectSelection()
 	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 2)
 		SceneManager::GetInstance().ChangeScene("Hell");
 
-	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	if (Application::GetInstance().controller->IsKeyPressed(EXIT))
 		MenuStates = MAINMENU;
 
 }

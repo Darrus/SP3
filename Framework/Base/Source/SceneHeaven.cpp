@@ -118,8 +118,8 @@ void SceneHeaven::Update(double dt)
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("Boss");
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || GoManager::GetInstance().GetEnemyCount() <= 0)
+		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
@@ -134,10 +134,9 @@ void SceneHeaven::Update(double dt)
 	{
 		GoManager::GetInstance().Update(dt);
 	}
-	if (GoManager::GetInstance().GetEnemyCount() <= 0)
-	{ 
-		SceneManager::GetInstance().ChangeScene("HeavenBoss");
-	}
+
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 
 
 }
@@ -236,45 +235,6 @@ void SceneHeaven::Exit()
 }
 
 // Renders
-void SceneHeaven::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void SceneHeaven::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
-}
-
 void SceneHeaven::RenderWeaponObject(GameObject* go)
 {
 	if (go->view.x > 0)

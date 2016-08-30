@@ -22,7 +22,6 @@ public:
 	virtual void MapCollision(double dt);
 
 	void Skill();
-	float chaseTimer;
 };
 
 #endif

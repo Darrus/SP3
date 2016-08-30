@@ -55,6 +55,8 @@ public:
 	bool collidedWall;
 	StatusEffects status;
 	AABB_2D collider;
+	float chaseTimer;
+	float chaseDuration;
 
 protected:
 	virtual void MapCollision(double dt);
@@ -83,6 +85,7 @@ protected:
 	TileMap* map;
 	EnemyStates* state;
 	bool isGrounded;
+	bool damaged;
 };
 
 #endif

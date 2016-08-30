@@ -25,8 +25,6 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderMap(TileMap* map);
-	void RenderObject(GameObject* go);
 	void RenderWeaponObject(GameObject * go);
 	void RenderParticle();
 	void RenderUI();

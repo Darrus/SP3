@@ -45,7 +45,7 @@ void SceneEarth::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position, 800, 600);
 
-	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//BadGuys.mp3", 0.2f);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//BadGuys.mp3", 1.f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	//EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
@@ -121,7 +121,10 @@ void SceneEarth::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("HeavenBoss");
+		SceneManager::GetInstance().ChangeScene("Heaven");
+
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
@@ -222,45 +225,6 @@ void SceneEarth::Exit()
 }
 
 // Renders
-void SceneEarth::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void SceneEarth::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
-}
-
 void SceneEarth::RenderWeaponObject(GameObject* go)
 {
 	if (go->view.x > 0)
@@ -474,9 +438,9 @@ void SceneEarth::RenderUI()
 	text << player->getCoinAmount();
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(1.f, 1.f, 1.f), 15, 85, 440);
 
-	//std::stringstream text;
-	//text << fps;
-	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
+	text.str("");
+	text << fps;
+	RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
 
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();

@@ -11,6 +11,7 @@
 #include "GoManager.h"
 #include "ParticleManager.h"
 #include "SoundEngine.h"
+#include "CameraFollow.h"
 
 
 SceneBase::SceneBase() :
@@ -448,6 +449,49 @@ void SceneBase::RenderTile(Mesh *mesh, int id, float x, float y, float size)
 	mesh->Render(id * 6, 6);
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
+}
+
+void SceneBase::RenderMap(TileMap* map)
+{
+	int tileSize = map->GetTileSize();
+	CameraFollow* follow = dynamic_cast<CameraFollow*>(camera);
+	if (follow)
+	{
+		Vector2 tileOffset = follow->GetTileOffset();
+		Vector2 fineOffset = follow->GetFineOffset();
+
+		int m, n;
+		for (int i = 0; i < map->GetNumOfTiles_ScreenHeight() + 1; ++i)
+		{
+			n = i + (int)tileOffset.y;
+
+			if (n >= map->GetNumOfTiles_MapHeight())
+				break;
+
+			for (int k = 0; k < map->GetNumOfTiles_ScreenWidth() + 1; ++k)
+			{
+				m = k + (int)tileOffset.x;
+
+				if (m >= map->GetNumOfTiles_MapWidth())
+					break;
+				if (map->rearMap[n][m] > 0)
+					RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
+				if (map->frontMap[n][m] > 0)
+					RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
+			}
+		}
+	}
+}
+
+void SceneBase::RenderObject(GameObject* go)
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
+	if (go->view.x < 0)
+		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
+	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
+	RenderMesh(go->mesh);
+	modelStack.PopMatrix();
 }
 
 void SceneBase::Render()

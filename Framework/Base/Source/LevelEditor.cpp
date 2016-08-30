@@ -43,7 +43,7 @@ void LevelEditor::Update(double dt)
 	if (editor->active)
 		editor->Update(dt);
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	if (Application::GetInstance().controller->OnHold(EXIT))
 		SceneManager::GetInstance().ChangeScene("MainMenu");
 }
 

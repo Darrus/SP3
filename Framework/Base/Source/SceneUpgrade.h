@@ -39,24 +39,5 @@ private:
 	Weapon* weapon;
 
 	int selectedWeapon;
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif

@@ -8,6 +8,8 @@
 #include "Light.h"
 #include <vector>
 #include "Camera.h"
+#include "TileMap.h"
+#include "GameObject.h"
 
 class SceneBase : public Scene
 {
@@ -55,6 +57,8 @@ public:
 	void Render2DMesh(Mesh *mesh, bool enableLight, float size, float x, float y, bool flip);
 	void RenderMesh(Mesh *mesh, bool enableLight = false);
 	void RenderTile(Mesh *mesh, int id, float x, float y, float size);
+	void RenderMap(TileMap* map);
+	void RenderObject(GameObject* go);
 
 protected:
 	enum GEOMETRY_TYPE
