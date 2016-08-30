@@ -40,7 +40,7 @@
     <ClCompile Include="Source\ItemList.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
-    <ClCompile Include="Source\Level03.cpp" />
+    <ClCompile Include="Source\SceneHell.cpp" />
     <ClCompile Include="Source\LevelEditor.cpp" />
     <ClCompile Include="Source\LifeStealBullet.cpp" />
     <ClCompile Include="Source\LightningBullet.cpp" />
@@ -67,6 +67,7 @@
     <ClCompile Include="Source\SceneGameOver.cpp" />
     <ClCompile Include="Source\SceneMainMenu.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
+    <ClCompile Include="Source\SceneUpgrade.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Shotgun.cpp" />
     <ClCompile Include="Source\SlowStatus.cpp" />
@@ -110,7 +111,7 @@
     <ClInclude Include="Source\IceBullet.h" />
     <ClInclude Include="Source\ItemList.h" />
     <ClInclude Include="Source\Items.h" />
-    <ClInclude Include="Source\Level03.h" />
+    <ClInclude Include="Source\SceneHell.h" />
     <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />
     <ClInclude Include="Source\MeleeEnemy.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Source\SceneGameOver.h" />
     <ClInclude Include="Source\SceneMainMenu.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\SceneUpgrade.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Shotgun.h" />
     <ClInclude Include="Source\SlowStatus.h" />

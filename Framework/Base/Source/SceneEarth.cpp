@@ -472,6 +472,10 @@ void SceneEarth::RenderUI()
 	RenderObjOnScreen(meshList[GEO_COIN], 10, 8, 10, 15, 80);
 	modelStack.PopMatrix();
 
+	std::stringstream text;
+	text << player->getCoinAmount();
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(1.f, 1.f, 1.f), 15, 85, 440);
+
 	//std::stringstream text;
 	//text << fps;
 	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
