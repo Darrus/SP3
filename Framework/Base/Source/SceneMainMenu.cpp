@@ -254,6 +254,8 @@ void SceneMainMenu::RenderLevelSelect()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Hell", Color(1.f, 1.f, 1.f), 25, 530, 150);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Difficulty: Hard", Color(1.f, 1.f, 1.f), 25, 400, 100);
 	}
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "Backspace to Go Back", Color(1.f, 1.f, 1.f), 25, 300, 20);
 }
 
 void SceneMainMenu::MenuSelection()
@@ -335,6 +337,9 @@ void SceneMainMenu::LevelSelectSelection()
 
 	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 2)
 		SceneManager::GetInstance().ChangeScene("Level03");
+
+	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+		MenuStates = MAINMENU;
 
 }
 
