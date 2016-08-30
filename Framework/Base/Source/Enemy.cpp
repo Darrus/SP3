@@ -1,7 +1,4 @@
-
-
-
-    #include "Enemy.h"
+ #include "Enemy.h"
 #include "Player.h"
 #include "EnemyIdle.h"
 #include "EnemyStun.h"
@@ -224,6 +221,11 @@ void Enemy::SetWalkAnim(int start, int end, float time)
 	animWalk.Set(start, end, time, true, 1, true);
 }
 
+void Enemy::SetDeathAnim(int start, int end, float time)
+{
+	animDeath.Set(start, end, time, true);
+}
+
 void Enemy::SetAlertRange(float range)
 {
 	alertRange = range;
@@ -344,3 +346,9 @@ Animation Enemy::GetWalkAnim()
 {
 	return animWalk;
 }
+
+Animation Enemy::GetDeathAnim()
+{
+	return animDeath;
+}
+

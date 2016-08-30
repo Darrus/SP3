@@ -13,7 +13,8 @@ public:
 		ENEMY_CHASE,
 		ENEMY_ATTACK,
 		ENEMY_STUN,
-		ENEMY_SKILL
+		ENEMY_SKILL,
+		ENEMY_DEATH
 	};
 
 	EnemyStates();

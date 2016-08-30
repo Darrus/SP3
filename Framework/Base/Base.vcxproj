@@ -26,6 +26,7 @@
     <ClCompile Include="Source\EnemyAttack.cpp" />
     <ClCompile Include="Source\Enemybullet.cpp" />
     <ClCompile Include="Source\EnemyChase.cpp" />
+    <ClCompile Include="Source\EnemyDeath.cpp" />
     <ClCompile Include="Source\EnemyFactory.cpp" />
     <ClCompile Include="Source\EnemyIdle.cpp" />
     <ClCompile Include="Source\BossSkill.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="Source\EnemyAttack.h" />
     <ClInclude Include="Source\EnemyBullet.h" />
     <ClInclude Include="Source\EnemyChase.h" />
+    <ClInclude Include="Source\EnemyDeath.h" />
     <ClInclude Include="Source\EnemyFactory.h" />
     <ClInclude Include="Source\EnemyIdle.h" />
     <ClInclude Include="Source\BossSkill.h" />

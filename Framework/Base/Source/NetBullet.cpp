@@ -1,6 +1,7 @@
 #include "NetBullet.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Boss.h"
 #include "ParticleFactory.h"
 
 NetBullet::NetBullet()
@@ -21,7 +22,8 @@ void NetBullet::Update(double dt)
 void NetBullet::HandleInteraction(GameObject* go, double dt)
 {
 	Enemy* enemy = dynamic_cast<Enemy*>(go);
-	if (enemy)
+	Boss* boss = dynamic_cast<Boss*>(go);
+	if (enemy && !boss)
 	{
 		if (collider.CheckCollision(enemy->collider))
 		{

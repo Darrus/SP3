@@ -2,12 +2,18 @@
 #include "BossSkill.h"
 #include "MeshGenerator.h"
 #include "GoManager.h"
+#include "EnemyIdle.h"
+#include "EnemyAttack.h"
+#include "EnemySkill.h"
+#include "EnemyChase.h"
+#include "EnemyStun.h"
+#include "EnemyDeath.h"
 
 Boss::Boss()
 {
 	status.AddImmune("Slow");
-	health = 5000;
 	maxHealth = 5000;
+	health = maxHealth;
 	attackRange = 140.f;
 	alertRange = 1000.f;
 	patrolRange = 1000.f;
@@ -19,6 +25,8 @@ Boss::Boss()
 	mesh = MeshGenerator::GetInstance().GenerateSprite("Ice Golem", "Image//IceGolem.tga", 4, 8);
 	animWalk.Set(8, 11, 1.f, true, 1, true);
 	animAttack.Set(16, 23, 1.f, true);
+	animDeath.Set(24, 30, 1.f, true);
+	chaseTimer = 0.f;
 }
 
 Boss::~Boss()
@@ -28,34 +36,122 @@ Boss::~Boss()
 
 void Boss::Update(double dt)
 {
-	Enemy::Update(dt);
+	chaseTimer += dt;
+
+	status.Update(dt);
+
+	attackCooldown -= dt;
+
+	if (state)
+		state->Update(dt);
+
+	collidedWall = false;
+
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(mesh);
+	if (sprite)
+		sprite->Update(dt);
+
+	if (!isGrounded)
+		vel.y -= 9.8;
+
+	MapCollision(dt);
+
+	if (health <= 0 && active)
+	{
+		if (state->GetState() != EnemyStates::ENEMY_DEATH)
+		{
+			delete state;
+			state = new EnemyDeath();
+			state->Enter(this, NULL);
+		}
+	}
+
+	collider.Update();
 }
 
 void Boss::Attack(Player* player)
 {
-	if (attackCooldown < 0)
-	{
-		attackCooldown = timeBetweenAttack;
-		player->TakeDamage(attackDamage);
+	attackCooldown = timeBetweenAttack;
+	player->TakeDamage(attackDamage);
 
-		if (pos.x > player->pos.x)
+	if (pos.x > player->pos.x)
+	{
+		player->vel.x -= 100;
+		player->vel.y += 200;
+	}
+	else if (pos.x < player->pos.x)
+	{
+		player->vel.x += 100;
+		player->vel.y += 200;
+	}
+
+	delete state;
+	state = new EnemyIdle();
+	state->Enter(this, NULL);
+}
+
+void Boss::HandleInteraction(GameObject* go, double dt)
+{
+	Player* player = dynamic_cast<Player*>(go);
+	if (player)
+	{
+		float dist = (player->pos - pos).LengthSquared();
+		if (!state)
 		{
-			player->vel.x -= 100;
-			player->vel.y += 200;
+			state = new EnemyIdle();
+			state->Enter(this, NULL);
 		}
-		else if (pos.x < player->pos.x)
+
+		switch (state->GetState())
 		{
-			player->vel.x += 100;
-			player->vel.y += 200;
+		case EnemyStates::ENEMY_IDLE:
+			if (attackCooldown < 0)
+			{
+				attackCooldown = timeBetweenAttack;
+				ATTACK_DECISION decision = (ATTACK_DECISION)Math::RandIntMinMax((int)ATTACK, (int)SKILL);
+				switch (decision)
+				{
+				case ATTACK:
+					delete state;
+					state = new EnemyChase();
+					state->Enter(this, player);
+					break;
+				case SKILL:
+					delete state;
+					state = new EnemySkill();
+					state->Enter(this, player);
+					break;
+				}
+			}
+			break;
+		case EnemyStates::ENEMY_CHASE:
+			if (dist < attackRange * attackRange)
+			{
+				delete state;
+				state = new EnemyAttack();
+				state->Enter(this, player);
+			}
+			else if (chaseTimer > 10.f)
+			{
+				delete state;
+				state = new EnemyIdle();
+				state->Enter(this, NULL);
+				chaseTimer = 0.f;
+			}
+			break;
+		case EnemyStates::ENEMY_STUN:
+			EnemyStun* stun = dynamic_cast<EnemyStun*>(state);
+			if (stun && stun->end)
+			{
+				delete state;
+				state = new EnemyIdle();
+				state->Enter(this, NULL);
+			}
+			break;
 		}
 	}
 }
-/*
-void Boss::HandleInteraction(GameObject* go, double dt)
-{
 
-}
-*/
 void Boss::MapCollision(double dt)
 {
 	// Updates position
@@ -113,16 +209,29 @@ void Boss::MapCollision(double dt)
 
 void Boss::Skill()
 {
-	for (int i = 1; i < 10; ++i)
+	SpriteAnimation* sprite = dynamic_cast<SpriteAnimation*>(mesh);
+	static bool skill = false;
+	if (sprite->m_currentFrame == 19 && !skill)
 	{
-		attackCooldown = timeBetweenAttack;
-		BossSkill* skill = new BossSkill();
-		skill->active = true;
-		Animation anim;
-		anim.Set(0, 7, 2.f, true);
-		skill->Init(Vector3(100.f * i, 90.f, 1.f), Vector3(64.f, 128.f, 1.f), 50);
-		skill->SetSprite("Image//Icicle.tga", 1, 7, anim);
-		skill->attackOnFrame = 3;
-		GoManager::GetInstance().Add(skill);
+		for (int i = 1; i < 10; ++i)
+		{
+			attackCooldown = timeBetweenAttack;
+			BossSkill* skill = new BossSkill();
+			skill->active = true;
+			Animation anim;
+			anim.Set(0, 7, 2.f, true);
+			skill->Init(Vector3(100.f * i, 90.f, 1.f), Vector3(64.f, 128.f, 1.f), 50);
+			skill->SetSprite("Image//Icicle.tga", 1, 7, anim);
+			skill->attackOnFrame = 3;
+			GoManager::GetInstance().Add(skill);
+		}
+		skill = true;
+	}
+	else if (sprite->m_anim->ended)
+	{
+		delete state;
+		state = new EnemyIdle();
+		state->Enter(this, NULL);
+		skill = false;
 	}
 }

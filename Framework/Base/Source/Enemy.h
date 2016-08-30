@@ -23,6 +23,7 @@ public:
 
 	void SetAttackAnim(int start, int end, float time);
 	void SetWalkAnim(int start, int end, float time);
+	void SetDeathAnim(int start, int end, float time);
 	void SetAlertRange(float range);
 	void SetAttackRange(float range);
 	void SetPatrolRange(float range);
@@ -45,8 +46,10 @@ public:
 	int GetWorth();
 	ELEMENTS GetElement();
 	EnemyStates* GetState();
+
 	Animation GetWalkAnim();
 	Animation GetAttackAnim();
+	Animation GetDeathAnim();
 
 	Vector3 newPos;
 	bool collidedWall;
@@ -58,6 +61,7 @@ protected:
 
 	Animation animWalk;
 	Animation animAttack;
+	Animation animDeath;
 
 	float alertRange;
 	float attackRange;
