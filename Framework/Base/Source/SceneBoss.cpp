@@ -31,7 +31,7 @@ void SceneBoss::Init()
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
-	player->Init(map, Vector3(50.f, 200.f, 0.f), Vector3(32.f, 32.f, 1.f));
+	player->Init(map, Vector3(50.f, 64.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 

@@ -1,4 +1,4 @@
-#include "SP3.h"
+#include "SceneHeaven.h"
 #include "SceneManager.h"
 #include "Application.h"
 #include "EnemyFactory.h"
@@ -10,17 +10,17 @@
 #include "HealthPotions.h"
 #include <sstream>
 
-SP3::SP3()
+SceneHeaven::SceneHeaven()
 {
 
 }
 
-SP3::~SP3()
+SceneHeaven::~SceneHeaven()
 {
 	Exit();
 }
 
-void SP3::Init()
+void SceneHeaven::Init()
 {
 	SceneBase::Init();
 
@@ -28,11 +28,11 @@ void SP3::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("Level01");
+	map->LoadMap("Heaven");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
-	player->Init(map, Vector3(50.f, 200.f, 0.f), Vector3(32.f, 32.f, 1.f));
+	player->Init(map, Vector3(50.f, 100.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 
@@ -102,12 +102,9 @@ void SP3::Init()
 	story = true;
 }
 
-void SP3::Update(double dt)
+void SceneHeaven::Update(double dt)
 {
 	SceneBase::Update(dt);
-
-	std::cout << GoManager::GetInstance().GetEnemyCount() << std::endl;
-
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -122,7 +119,7 @@ void SP3::Update(double dt)
 	fps = 1 / (float)dt;
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("SceneEarth");
+		SceneManager::GetInstance().ChangeScene("Boss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
@@ -139,13 +136,13 @@ void SP3::Update(double dt)
 	}
 	if (GoManager::GetInstance().GetEnemyCount() <= 0)
 	{ 
-		SceneManager::GetInstance().ChangeScene("SceneEarth");
+		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 	}
 
 
 }
 
-void SP3::Render()
+void SceneHeaven::Render()
 {
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
@@ -229,7 +226,7 @@ void SP3::Render()
 	RenderUI();
 }
 
-void SP3::Exit()
+void SceneHeaven::Exit()
 {
 	SceneBase::Exit();
 	if (map)
@@ -239,7 +236,7 @@ void SP3::Exit()
 }
 
 // Renders
-void SP3::RenderMap(TileMap* map)
+void SceneHeaven::RenderMap(TileMap* map)
 {
 	int tileSize = map->GetTileSize();
 	Vector2 tileOffset = camFollow->GetTileOffset();
@@ -267,7 +264,7 @@ void SP3::RenderMap(TileMap* map)
 	}
 }
 
-void SP3::RenderObject(GameObject* go)
+void SceneHeaven::RenderObject(GameObject* go)
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
@@ -278,7 +275,7 @@ void SP3::RenderObject(GameObject* go)
 	modelStack.PopMatrix();
 }
 
-void SP3::RenderWeaponObject(GameObject* go)
+void SceneHeaven::RenderWeaponObject(GameObject* go)
 {
 	if (go->view.x > 0)
 	{
@@ -326,7 +323,7 @@ void SP3::RenderWeaponObject(GameObject* go)
 	}
 }
 
-void SP3::RenderUI()
+void SceneHeaven::RenderUI()
 {
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
@@ -522,7 +519,7 @@ void SP3::RenderUI()
 	}
 }
 
-void SP3::RenderParticle()
+void SceneHeaven::RenderParticle()
 {
 	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
 	{

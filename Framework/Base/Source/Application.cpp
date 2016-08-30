@@ -11,9 +11,6 @@
 #include <stdlib.h>
 
 #include "SceneManager.h"
-#include "SoundEngine.h"
-#include "SP3.h"
-#include "LevelEditor.h"
 
 GLFWwindow* m_window;
 int Application::m_window_width = 800;

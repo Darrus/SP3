@@ -48,33 +48,6 @@ void Level03::Init()
 	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
-	/*EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(400.f, 500.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(600.f, 150.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(550.f, 150.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(600.f, 700.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(900.f, 650.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1000.f, 480.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1100.f, 300.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1200.f, 800.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1400.f, 800.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1500.f, 200.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 200.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2000.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(1950.f, 645.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2340.f, 600.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2477.f, 400.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
-	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);*/
-
 	EnemyFactory::Create("Demon", Vector3(80.f, 80.f, 0.f), map);
 	EnemyFactory::Create("RangeDemon", Vector3(655.f, 432.f, 0.f), map);
 	EnemyFactory::Create("BigDemon", Vector3(1235.f, 80.f, 0.f), map);

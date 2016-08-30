@@ -37,7 +37,6 @@ private:
 	Items* items;
 	Boss* boss;
 
-
 	double worldX, worldY;
 	double mouseX, mouseY;
 };

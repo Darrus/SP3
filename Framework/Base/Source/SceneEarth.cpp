@@ -28,7 +28,7 @@ void SceneEarth::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("LevelEarth");
+	map->LoadMap("Earth");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
@@ -107,8 +107,6 @@ void SceneEarth::Update(double dt)
 
 	SceneBase::Update(dt);
 
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
-
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
 	mouseY = Application::GetInstance().m_window_height - mouseY;
@@ -123,7 +121,7 @@ void SceneEarth::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+		SceneManager::GetInstance().ChangeScene("Heaven");
 
 	if (player->GetPlayerHealth() <= 0)
 	{

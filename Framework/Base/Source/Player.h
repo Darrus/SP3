@@ -70,16 +70,12 @@ private:
 	void ShootWeapon();
 	void TossNet();
 
-	void playerDeath();
-	void selectSkill();
 	void PlayerUseItem();
 	void PlayerCycleItem();
 
 	float PLAYER_SPEED;
 	float JUMP_SPEED;
 
-	bool isMoving;
-	bool isClimbing;
 	bool isGrounded;
 
 	TileMap* map;
@@ -90,10 +86,6 @@ private:
 	Animation run;
 
 	PLAYER_STATE state;
-	Items* items;
-	/*PLAYER_SKILLS skills;
-	PLAYER_BULLETS bullets;*/
-
 
 	int jumpHeight;
 	int playerHealth;
@@ -103,7 +95,6 @@ private:
 	float timer;
 
 	Weapon* weapon[4];
-
 
 	int bulletElem[ELEM_SIZE];
 	ELEMENTS selectedElem;

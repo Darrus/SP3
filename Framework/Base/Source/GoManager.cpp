@@ -26,7 +26,7 @@ GoManager& GoManager::GetInstance()
 
 void GoManager::Update(double dt)
 {
-	for (unsigned int i = 0; i < m_goList.size(); ++i)
+	for (unsigned int i = 0; i < m_goList.size();)
 	{
 		if (m_goList[i]->active)
 		{
@@ -39,6 +39,7 @@ void GoManager::Update(double dt)
 				if (m_goList[k]->active)
 					m_goList[i]->HandleInteraction(m_goList[k], dt);
 			}
+			++i;
 		}
 		else
 		{

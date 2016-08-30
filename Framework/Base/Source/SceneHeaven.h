@@ -1,5 +1,5 @@
-#ifndef STUDIO_PROJECT_3_H
-#define STUDIO_PROJECT_3_H
+#ifndef SCENE_HEAVEN_H
+#define SCENE_HEAVEN_H
 
 #include "SceneBase.h"
 #include "ParallaxBackground.h"
@@ -11,11 +11,11 @@
 #include "Element.h"
 #include "GoManager.h"
 
-class SP3 : public SceneBase
+class SceneHeaven : public SceneBase
 {
 public:
-	SP3();
-	virtual ~SP3();
+	SceneHeaven();
+	virtual ~SceneHeaven();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -35,9 +35,7 @@ private:
 	CameraFollow* camFollow;
 	Items* items;
 
-
 	bool story;
-
 	float fps;
 
 	double worldX, worldY;

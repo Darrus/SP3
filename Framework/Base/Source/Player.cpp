@@ -13,8 +13,6 @@
 Player::Player() :
 PLAYER_SPEED(100),
 isGrounded(false),
-isMoving(false),
-isClimbing(false),
 playerHealth(200),
 playerMaxHealth(200),
 JUMP_SPEED(400),
@@ -58,7 +56,6 @@ net(NULL)
 		bulletElem[i] = 20;
 	}
 	selectedElem = NONE;
-	items = NULL;
 }
 
 Player::~Player()
@@ -116,8 +113,6 @@ void Player::Update(double dt)
 {
 	Move(dt);
 	CollisionCheck(dt);
-	playerDeath();
-	selectSkill();
 	CycleBullets();
 	PlayerJump(dt);
 	ChangeWeapon();
@@ -125,9 +120,6 @@ void Player::Update(double dt)
 	PlayerUseItem();
 	TossNet();
 	PlayerCycleItem();
-
-	if (items)
-		items->Update(dt);
 
 	collider.Update();
 
@@ -189,28 +181,6 @@ void Player::Move(double dt)
 
 	if (!isGrounded)
 		vel.y += -9.8f;
-}
-
-void Player::playerDeath()
-{
-	if (playerHealth <= 0)
-		state = P_DEATH;
-}
-
-void Player::selectSkill()
-{
-	if (Application::GetInstance().controller->IsKeyPressed(ONE))
-	{
-		//select skill 1
-	}
-	else if (Application::GetInstance().controller->IsKeyPressed(TWO))
-	{
-		//select skill 2
-	}
-	else if (Application::GetInstance().controller->IsKeyPressed(THREE))
-	{
-		//select skill 3
-	}
 }
 
 void Player::ChangeWeapon()

@@ -73,7 +73,7 @@
     <ClCompile Include="Source\SlowStatus.cpp" />
     <ClCompile Include="Source\Sniper.cpp" />
     <ClCompile Include="Source\SoundEngine.cpp" />
-    <ClCompile Include="Source\SP3.cpp" />
+    <ClCompile Include="Source\SceneHeaven.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\SpriteParticle.cpp" />
     <ClCompile Include="Source\Status.cpp" />
@@ -151,7 +151,7 @@
     <ClInclude Include="Source\SlowStatus.h" />
     <ClInclude Include="Source\Sniper.h" />
     <ClInclude Include="Source\SoundEngine.h" />
-    <ClInclude Include="Source\SP3.h" />
+    <ClInclude Include="Source\SceneHeaven.h" />
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\CameraFollow.h" />
     <ClInclude Include="Source\SpriteParticle.h" />
