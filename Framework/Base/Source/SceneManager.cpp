@@ -54,7 +54,7 @@ void SceneManager::Init()
 	AddScene("SceneEarth", newScene);
 	newScene = new SceneBoss();
 	AddScene("SceneBoss", newScene);
-	currentScene = FindScene("SceneBoss");
+	currentScene = FindScene("MainMenu");
 }
 
 void SceneManager::Update(double dt)

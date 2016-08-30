@@ -11,8 +11,17 @@ public:
 		STARTGAME,
 		INSTRUCTIONS,
 		LEVELEDITOR,
+		LEVELSELECT,
 		MAINMENU,
 		STATES_END,
+	};
+
+	enum LEVELS
+	{
+		LEVEL1,
+		LEVEL2,
+		LEVEL3,
+		LEVEL_END,
 	};
 
 	SceneMainMenu();
@@ -27,13 +36,16 @@ private:
 	void RenderMainMenu();
 	void RenderInstruction();
 	void RenderLevelEditor();
+	void RenderLevelSelect();
 
 	void MenuSelection();
 	void InstructionSelection();
 	void LevelEditorSelection();
+	void LevelSelectSelection();
 
 	MENUSTATES MenuStates;
 	int selectedOption;
+	int selectedLevel;
 	int InstructionsPage;
 	int LevelEditorPage;
 };
