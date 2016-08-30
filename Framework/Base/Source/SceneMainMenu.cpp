@@ -125,62 +125,48 @@ void SceneMainMenu::RenderMainMenu()
 
 	if (selectedOption == 0)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 54);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 5, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 54);
 		modelStack.PopMatrix();
+
 	}
 	else if (selectedOption == 1)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 39);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 90, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 39);
 		modelStack.PopMatrix();
 	}
 	else if (selectedOption == 2)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 24);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 170, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 24);
 		modelStack.PopMatrix();
+
 	}
 	else if (selectedOption == 3)
 	{
+
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) - 190, (Application::GetInstance().m_window_height * 0.5) - 230, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 25, 15, 10, 50, 12);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate((Application::GetInstance().m_window_width * 0.5) + 190, (Application::GetInstance().m_window_height * 0.5) - 230, 0);
-		modelStack.Rotate(180, 0, 1, 0);
-		modelStack.Scale(100, 100, 1);
-		RenderMesh(meshList[GEO_ARROWPOINTER], false);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], -25, 15, 10, 142, 12);
 		modelStack.PopMatrix();
 	}
 }
