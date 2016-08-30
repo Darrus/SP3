@@ -312,6 +312,9 @@
     <ClCompile Include="Source\EnemySkill.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnemyDeath.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -543,6 +546,9 @@
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemySkill.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyDeath.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,8 @@
 #include "EnemyStates.h"
 
-EnemyStates::EnemyStates()
+EnemyStates::EnemyStates() :
+enemy(NULL),
+player(NULL)
 {
 
 }
