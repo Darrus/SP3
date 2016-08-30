@@ -137,19 +137,15 @@ void Player::Update(double dt)
 	PlayerUseItem();
 	TossNet();
 	PlayerCycleItem();
-
 	collider.Update();
 
 	for (int i = 0; i < 4; ++i)
-	{
 		weapon[i]->Update(dt);
-	}
 
 	view.Set(mouseX - pos.x, mouseY - pos.y, 1.f);
 	view.Normalize();
 
 	sprite->Update(dt);
-
 }
 
 int Player::GetWeaponType()
@@ -205,15 +201,7 @@ void Player::ChangeWeapon()
 	if (Application::GetInstance().controller->IsKeyPressed(TAB))
 	{
 		SoundEngine::GetInstance().Play("SwitchWeapon");
-		weaponType++;
-	}
-	if (weaponType > 3)
-	{
-		weaponType = 0;
-	}
-	else if (weaponType < 0)
-	{
-		weaponType = 0;
+		weaponType = (weaponType + 1) % 4;
 	}
 }
 

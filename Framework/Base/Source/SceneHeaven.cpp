@@ -235,7 +235,7 @@ void SceneHeaven::Exit()
 }
 
 // Renders
-void SceneHeaven::RenderWeaponObject(GameObject* go)
+void SceneHeaven::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{

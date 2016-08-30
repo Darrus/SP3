@@ -111,9 +111,7 @@ void SceneHell::Init()
 
 void SceneHell::Update(double dt)
 {
-
 	SceneBase::Update(dt);
-
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -236,7 +234,7 @@ void SceneHell::Exit()
 }
 
 // Renders
-void SceneHell::RenderWeaponObject(GameObject* go)
+void SceneHell::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{
@@ -247,7 +245,6 @@ void SceneHell::RenderWeaponObject(GameObject* go)
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
-
 
 		if (player->GetWeaponType() == 3)
 		{

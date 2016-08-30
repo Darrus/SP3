@@ -173,7 +173,7 @@ void HeavenBoss::Exit()
 	background.ClearBackgrounds();
 }
 
-void HeavenBoss::RenderWeaponObject(GameObject * go)
+void HeavenBoss::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{

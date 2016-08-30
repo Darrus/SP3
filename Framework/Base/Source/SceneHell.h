@@ -25,7 +25,7 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderWeaponObject(GameObject * go);
+	void RenderWeaponObject(Weapon* go);
 	void RenderParticle();
 	void RenderUI();
 
