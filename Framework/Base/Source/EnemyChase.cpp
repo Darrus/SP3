@@ -1,10 +1,8 @@
 #include "EnemyChase.h"
-#include "EnemyIdle.h"
-#include "EnemyAttack.h"
 
 EnemyChase::EnemyChase()
 {
-
+	state = ENEMY_CHASE;
 }
 
 EnemyChase::~EnemyChase()
@@ -27,16 +25,6 @@ void EnemyChase::Enter(Enemy* enemy, Player* player)
 	sprite->SetAnimation(enemy->GetWalkAnim());
 	enemy->view.x = dir;
 	enemy->vel.x = enemy->GetSpeed() * dir;
-}
-
-EnemyStates* EnemyChase::CheckState()
-{
-	float dist = (enemy->pos - player->pos).LengthSquared();
-	if (dist > enemy->GetAlertRange() * enemy->GetAlertRange())
-		return new EnemyIdle();
-	else if (dist < enemy->GetAttackRange() * enemy->GetAttackRange())
-		return new EnemyAttack();
-	return this;
 }
 
 void EnemyChase::Update(double dt)

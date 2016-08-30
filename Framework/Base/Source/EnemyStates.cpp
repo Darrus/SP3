@@ -16,12 +16,12 @@ void EnemyStates::Enter(Enemy* enemy, Player* player)
 	this->player = player;
 }
 
-EnemyStates* EnemyStates::CheckState()
-{
-	return this;
-}
-
 void EnemyStates::Update(double dt)
 {
 
+}
+
+EnemyStates::ENEMY_STATES EnemyStates::GetState()
+{
+	return state;
 }

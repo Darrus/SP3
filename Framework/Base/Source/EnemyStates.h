@@ -7,15 +7,25 @@
 class EnemyStates
 {
 public:
+	enum ENEMY_STATES
+	{
+		ENEMY_IDLE,
+		ENEMY_CHASE,
+		ENEMY_ATTACK,
+		ENEMY_STUN,
+		ENEMY_SKILL
+	};
+
 	EnemyStates();
 	virtual ~EnemyStates();
 
 	virtual void Enter(Enemy* enemy, Player* player);
-	virtual EnemyStates* CheckState();
 	virtual void Update(double dt);
+	ENEMY_STATES GetState();
 
 	Enemy* enemy;
 	Player* player;
+	ENEMY_STATES state;
 };
 
 #endif

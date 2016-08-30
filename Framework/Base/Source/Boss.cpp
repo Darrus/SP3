@@ -1,19 +1,21 @@
 #include "Boss.h"
+#include "BossSkill.h"
 #include "MeshGenerator.h"
+#include "GoManager.h"
 
 Boss::Boss()
 {
-	status.AddImmune("Stun");
-	health = 10000;
-	maxHealth = 10000;
-	attackRange = 64.f;
+	status.AddImmune("Slow");
+	health = 5000;
+	maxHealth = 5000;
+	attackRange = 140.f;
 	alertRange = 1000.f;
 	patrolRange = 1000.f;
 	speed = 50;
 	defaultSpeed = 50;
-	timeBetweenAttack = 2.f;
+	timeBetweenAttack = 5.f;
 	attackCooldown = 0.f;
-	attackDamage = 20.f;
+	attackDamage = 30.f;
 	mesh = MeshGenerator::GetInstance().GenerateSprite("Ice Golem", "Image//IceGolem.tga", 4, 8);
 	animWalk.Set(8, 11, 1.f, true, 1, true);
 	animAttack.Set(16, 23, 1.f, true);
@@ -48,7 +50,12 @@ void Boss::Attack(Player* player)
 		}
 	}
 }
+/*
+void Boss::HandleInteraction(GameObject* go, double dt)
+{
 
+}
+*/
 void Boss::MapCollision(double dt)
 {
 	// Updates position
@@ -102,4 +109,20 @@ void Boss::MapCollision(double dt)
 	}
 
 	pos = newPos;
+}
+
+void Boss::Skill()
+{
+	for (int i = 1; i < 10; ++i)
+	{
+		attackCooldown = timeBetweenAttack;
+		BossSkill* skill = new BossSkill();
+		skill->active = true;
+		Animation anim;
+		anim.Set(0, 7, 2.f, true);
+		skill->Init(Vector3(100.f * i, 90.f, 1.f), Vector3(64.f, 128.f, 1.f), 50);
+		skill->SetSprite("Image//Icicle.tga", 1, 7, anim);
+		skill->attackOnFrame = 3;
+		GoManager::GetInstance().Add(skill);
+	}
 }

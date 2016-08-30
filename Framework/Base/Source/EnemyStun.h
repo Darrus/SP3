@@ -10,7 +10,6 @@ public:
 	virtual ~EnemyStun();
 
 	virtual void Enter(Enemy* enemy, Player* player);
-	virtual EnemyStates* CheckState();
 
 	bool end;
 };
