@@ -71,4 +71,6 @@ void SceneGameOver::RenderUI()
 	modelStack.Scale(Application::GetInstance().m_window_width, Application::GetInstance().m_window_height, 1);
 	RenderMesh(meshList[GEO_GAMEOVER], false);
 	modelStack.PopMatrix();
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press Enter to menu", Color(0.f, 1.f, 0.f), 15, 260, 280);
 }
