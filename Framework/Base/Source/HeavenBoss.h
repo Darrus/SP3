@@ -11,11 +11,11 @@
 #include "Element.h"
 #include "Boss.h"
 
-class SceneBoss : public SceneBase
+class HeavenBoss : public SceneBase
 {
 public:
-	SceneBoss();
-	virtual ~SceneBoss();
+	HeavenBoss();
+	virtual ~HeavenBoss();
 
 	virtual void Init();
 	virtual void Update(double dt);

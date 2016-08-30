@@ -107,8 +107,6 @@ void SceneHell::Init()
 	background.LoadBackground("Image//HellBackground.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
-
-	story = true;
 }
 
 void SceneHell::Update(double dt)
@@ -137,16 +135,7 @@ void SceneHell::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
-
-	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
-	{
-		story = false;
-	}
-	else if (story == false)
-	{
-		GoManager::GetInstance().Update(dt);
-	}
+	GoManager::GetInstance().Update(dt);
 }
 
 void SceneHell::Render()
@@ -497,11 +486,6 @@ void SceneHell::RenderUI()
 	text << player->getCoinAmount();
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(1.f, 1.f, 1.f), 15, 85, 440);
 
-
-	//std::stringstream text;
-	//text << fps;
-	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
-
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();
 	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 60, 547);
@@ -525,13 +509,6 @@ void SceneHell::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
-
-	if (story == true)
-	{
-		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
-		modelStack.PopMatrix();
-	}
 }
 
 void SceneHell::RenderParticle()

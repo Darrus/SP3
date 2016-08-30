@@ -121,7 +121,7 @@ void SceneEarth::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("Heaven");
+		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{

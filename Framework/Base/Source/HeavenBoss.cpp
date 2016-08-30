@@ -1,4 +1,4 @@
-#include "SceneBoss.h"
+#include "HeavenBoss.h"
 #include "SceneManager.h"
 #include "Application.h"
 #include "EnemyFactory.h"
@@ -9,17 +9,17 @@
 #include "SoundEngine.h"
 #include "GoManager.h"
 
-SceneBoss::SceneBoss()
+HeavenBoss::HeavenBoss()
 {
 
 }
 
-SceneBoss::~SceneBoss()
+HeavenBoss::~HeavenBoss()
 {
 	Exit();
 }
 
-void SceneBoss::Init()
+void HeavenBoss::Init()
 {
 	SceneBase::Init();
 
@@ -52,7 +52,7 @@ void SceneBoss::Init()
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 }
 
-void SceneBoss::Update(double dt)
+void HeavenBoss::Update(double dt)
 {
 	SceneBase::Update(dt);
 
@@ -78,7 +78,7 @@ void SceneBoss::Update(double dt)
 
 }
 
-void SceneBoss::Render()
+void HeavenBoss::Render()
 {
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
@@ -162,7 +162,7 @@ void SceneBoss::Render()
 	RenderUI();
 }
 
-void SceneBoss::Exit()
+void HeavenBoss::Exit()
 {
 	SceneBase::Exit();
 	if (map)
@@ -171,7 +171,7 @@ void SceneBoss::Exit()
 	background.ClearBackgrounds();
 }
 
-void SceneBoss::RenderMap(TileMap* map)
+void HeavenBoss::RenderMap(TileMap* map)
 {
 	int tileSize = map->GetTileSize();
 	Vector2 tileOffset = camFollow->GetTileOffset();
@@ -199,7 +199,7 @@ void SceneBoss::RenderMap(TileMap* map)
 	}
 }
 
-void SceneBoss::RenderObject(GameObject* go)
+void HeavenBoss::RenderObject(GameObject* go)
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
@@ -210,7 +210,7 @@ void SceneBoss::RenderObject(GameObject* go)
 	modelStack.PopMatrix();
 }
 
-void SceneBoss::RenderWeaponObject(GameObject * go)
+void HeavenBoss::RenderWeaponObject(GameObject * go)
 {
 	if (go->view.x > 0)
 	{
@@ -258,7 +258,7 @@ void SceneBoss::RenderWeaponObject(GameObject * go)
 	}
 }
 
-void SceneBoss::RenderParticle()
+void HeavenBoss::RenderParticle()
 {
 	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
 	{
@@ -286,7 +286,7 @@ void SceneBoss::RenderParticle()
 	}
 }
 
-void SceneBoss::RenderUI()
+void HeavenBoss::RenderUI()
 {
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
