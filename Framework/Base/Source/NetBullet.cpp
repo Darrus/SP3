@@ -31,6 +31,7 @@ void NetBullet::HandleInteraction(GameObject* go, double dt)
 			{
 				enemy->active = false;
 				player->AddBullet(enemy->GetElement(), enemy->GetWorth());
+				player->AddCoints();
 				ParticleFactory::CreateText("Captured!", 1.f, pos, Vector3(15.f, 15.f, 1.f));
 			}
 			else

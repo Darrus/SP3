@@ -51,7 +51,11 @@ public:
 	void SetHealthRegain(int healthRegain);
 	void SetPotionCount(int potionCount);
 
+	int getCoinAmount(void);
+	void SetCoinAmount(int coinAmount);
+
 	void AddBullet(ELEMENTS elem, int amount);
+	void AddCoints();
 
 	int GetWeaponType();
 
@@ -102,6 +106,8 @@ private:
 
 	int weaponType;
 	int bulletType;
+
+	int coinAmount;
 };
 
 #endif

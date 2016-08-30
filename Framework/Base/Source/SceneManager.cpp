@@ -6,13 +6,14 @@ using std::cout;
 using std::endl;
 
 // Scenes
-#include "SceneHeaven.h"
+#include "SP3.h"
 #include "LevelEditor.h"
 #include "SceneGameOver.h"
 #include "SceneMainMenu.h"
-#include "Level03.h"
+#include "SceneHell.h"
 #include "SceneEarth.h"
 #include "SceneBoss.h"
+#include "SceneUpgrade.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -40,28 +41,22 @@ SceneManager& SceneManager::GetInstance()
 void SceneManager::Init()
 {
 	quit = false;
-
-	Scene* newScene = new LevelEditor();
+	Scene* newScene = new SP3();
+	AddScene("SP3", newScene);
+	newScene = new LevelEditor();
 	AddScene("LevelEditor", newScene);
-
-	newScene = new SceneBoss();
-	AddScene("HeavenBoss", newScene);
-
 	newScene = new SceneGameOver();
 	AddScene("GameOver", newScene);
-
 	newScene = new SceneMainMenu();
 	AddScene("MainMenu", newScene);
-
+	newScene = new SceneHell();
+	AddScene("Hell", newScene);
 	newScene = new SceneEarth();
 	AddScene("Earth", newScene);
-
-	newScene = new SceneHeaven();
-	AddScene("Heaven", newScene);
-
-	newScene = new Level03();
-	AddScene("Level03", newScene);
-
+	newScene = new SceneBoss();
+	AddScene("Boss", newScene);
+	newScene = new SceneUpgrade();
+	AddScene("SceneUpgrade", newScene);
 	currentScene = FindScene("MainMenu");
 }
 

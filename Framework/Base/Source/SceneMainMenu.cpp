@@ -61,7 +61,7 @@ void SceneMainMenu::Update(double dt)
 	switch (MenuStates)
 	{
 	case STARTGAME:
-		SceneManager::GetInstance().ChangeScene("Earth");
+		SceneManager::GetInstance().ChangeScene("SP3");
 		break;
 	case MAINMENU:
 		MenuSelection();
@@ -316,13 +316,13 @@ void SceneMainMenu::LevelSelectSelection()
 	}
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 0)
-		SceneManager::GetInstance().ChangeScene("Earth");
+		SceneManager::GetInstance().ChangeScene("SceneEarth");
 
 	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 1)
-		SceneManager::GetInstance().ChangeScene("Heaven");
+		SceneManager::GetInstance().ChangeScene("SP3");
 
 	else if (Application::GetInstance().controller->IsKeyPressed(ENTER) && selectedLevel == 2)
-		SceneManager::GetInstance().ChangeScene("Level03");
+		SceneManager::GetInstance().ChangeScene("Hell");
 
 	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
 		MenuStates = MAINMENU;

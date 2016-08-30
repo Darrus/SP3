@@ -18,6 +18,7 @@ playerMaxHealth(200),
 JUMP_SPEED(400),
 state(P_IDLE),
 weaponType(0),
+coinAmount(0),
 net(NULL)
 {
 	mesh = MeshGenerator::GetInstance().GenerateSprite("player", "Image//player2.tga", 3, 8);
@@ -91,6 +92,12 @@ void Player::AddBullet(ELEMENTS elem, int amount)
 	bulletElem[elem] += amount;
 }
 
+void Player::AddCoints()
+{
+	coinAmount += 20;
+	SetCoinAmount(coinAmount);
+}
+
 float Player::getPlayerSpeed(void)
 {
 	return PLAYER_SPEED;
@@ -99,6 +106,16 @@ float Player::getPlayerSpeed(void)
 void Player::setPlayerSpeed(float PLAYER_SPEED)
 {
 	this->PLAYER_SPEED = PLAYER_SPEED;
+}
+
+int Player::getCoinAmount(void)
+{
+	return coinAmount;
+}
+
+void Player::SetCoinAmount(int coinAmount)
+{
+	this->coinAmount = coinAmount;
 }
 
 void Player::Init(TileMap* map, Vector3 pos, Vector3 scale)
