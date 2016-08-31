@@ -40,6 +40,7 @@ private:
 	void RenderArrowStats();
 	void DisplayStats();
 	void DisplayUpgrades();
+	void nextLevel();
 
 	
 	void selectWeapon();

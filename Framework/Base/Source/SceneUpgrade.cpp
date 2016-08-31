@@ -48,6 +48,7 @@ void SceneUpgrade::Update(double dt)
 		selectStats();
 
 	Upgrade();
+	nextLevel();
 }
 
 void SceneUpgrade::Render()
@@ -214,6 +215,11 @@ void SceneUpgrade::DisplayUpgrades()
 		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() - 0.1f;
 		RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text2.str(), Color(0.f, 0.f, 1.f), 22, 400, 100);
 
+		if (WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() < 0.1f)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: 0.1", Color(0.f, 0.f, 1.f), 22, 400, 100);
+		}
+
 	}
 
 	else if (selectedStats == 2)
@@ -224,14 +230,24 @@ void SceneUpgrade::DisplayUpgrades()
 
 		std::stringstream text2;
 		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() - 2;
-		RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text2.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text2.str(), Color(0.f, 0.f, 1.f), 25, 400, 100);
+
+		if (WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() < 2)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: 1", Color(0.f, 0.f, 1.f), 25, 400, 100);
+		}
+
 	}
 
 	else if (selectedStats == 3)
 	{
-		std::stringstream text4;
-		text4 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text4.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+		std::stringstream text;
+		text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+
+		std::stringstream text2;
+		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate() + 2;
+		RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text2.str(), Color(0.f, 0.f, 1.f), 25, 400, 100);
 	}
 }
 
@@ -294,13 +310,32 @@ void SceneUpgrade::Upgrade()
 		else if (selectedStats == 1)
 		{
 			WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setFireRate(WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() - 0.1f);
-			std::cout << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() << std::endl;
+			if (WeaponStorage::GetInstance().GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() < 0.1f)
+				WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setDefaultFireRate(0.1f);
 				
 		}
 		else if (selectedStats == 2)
 		{
-			
+			WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setOverheatRate(WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() - 2);
+			if (WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() < 2)
+				WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setOverheatRate(2);
+			std::cout << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() << std::endl;
+
 		}
+		else if (selectedStats == 3)
+		{
+			WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->SetCoolDownRate(WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate() + 2);
+		}
+
+
+	}
+}
+
+void SceneUpgrade::nextLevel()
+{
+	if (Application::GetInstance().controller->IsKeyPressed(MOVE_RIGHT) || Application::GetInstance().controller->IsKeyPressed(GORIGHT))
+	{
+		SceneManager::GetInstance().ChangeScene("Hell");
 	}
 }
 

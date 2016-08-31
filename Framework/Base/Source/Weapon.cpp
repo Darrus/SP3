@@ -103,6 +103,10 @@ float Weapon::GetCoolDownRate()
 	return this->cooldownRate;
 }
 
+void Weapon::SetCoolDownRate(float cooldownRate)
+{
+	this->cooldownRate = cooldownRate;
+}
 bool Weapon::Overheating()
 {
 	return this->overheated;

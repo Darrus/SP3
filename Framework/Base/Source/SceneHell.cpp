@@ -34,7 +34,7 @@ void SceneHell::Init()
 
 
 	player = new Player();
-	player->LoadWeapons(*WeaponStorage::GetInstance().GetWeapon(), 4);
+	//player->LoadWeapons(*WeaponStorage::GetInstance().GetWeapon(), 4);
 	player->Init(map, Vector3(48.f, 368.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
@@ -140,6 +140,7 @@ void SceneHell::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("MainMenu");
 
 	GoManager::GetInstance().Update(dt);
+	
 }
 
 void SceneHell::Render()
