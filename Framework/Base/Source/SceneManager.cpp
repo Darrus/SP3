@@ -16,6 +16,7 @@ using std::endl;
 #include "SceneHeaven.h"
 #include "HeavenBoss.h"
 #include "HellBoss.h"
+#include "SceneCredit.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -69,6 +70,9 @@ void SceneManager::Init()
 	
 	newScene = new SceneUpgrade();
 	AddScene("SceneUpgrade", newScene);
+
+	newScene = new SceneCredit();
+	AddScene("SceneCredit", newScene);
 	
 	currentScene = FindScene("MainMenu");
 }

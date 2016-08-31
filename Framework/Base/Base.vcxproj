@@ -46,6 +46,7 @@
     <ClCompile Include="Source\ItemList.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
+    <ClCompile Include="Source\SceneCredit.cpp" />
     <ClCompile Include="Source\SceneHell.cpp" />
     <ClCompile Include="Source\LevelEditor.cpp" />
     <ClCompile Include="Source\LifeStealBullet.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Source\IceGolem.h" />
     <ClInclude Include="Source\ItemList.h" />
     <ClInclude Include="Source\Items.h" />
+    <ClInclude Include="Source\SceneCredit.h" />
     <ClInclude Include="Source\SceneHell.h" />
     <ClInclude Include="Source\LifeStealBullet.h" />
     <ClInclude Include="Source\LightningBullet.h" />

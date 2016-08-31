@@ -342,6 +342,9 @@
     <ClCompile Include="Source\FireGolem.cpp">
       <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneCredit.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -598,6 +601,9 @@
     </ClInclude>
     <ClInclude Include="Source\FireGolem.h">
       <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneCredit.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
