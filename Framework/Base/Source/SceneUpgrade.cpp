@@ -34,8 +34,9 @@ void SceneUpgrade::Init()
 	selectedWeapon = 0;
 	selectedStats = 0;
 
-	upgradable = false;
+	statsDisplay = false;
 	selectable = true;
+	upgradable = false;
 }
 
 void SceneUpgrade::Update(double dt)
@@ -43,8 +44,10 @@ void SceneUpgrade::Update(double dt)
 	SceneBase::Update(dt);
 	selectWeapon();
 
-	if (upgradable == true)
+	if (statsDisplay == true)
 		selectStats();
+
+	Upgrade();
 }
 
 void SceneUpgrade::Render()
@@ -75,10 +78,13 @@ void SceneUpgrade::Render()
 	DisplayWeapons();
 	RenderArrowWeapons();
 
-	if (upgradable == true)
+	if (statsDisplay == true)
 		RenderArrowStats();
 
 	DisplayStats();
+
+	if (upgradable == true)
+		DisplayUpgrades();
 }
 
 void SceneUpgrade::DisplayWeapons()
@@ -134,6 +140,25 @@ void SceneUpgrade::RenderArrowWeapons()
 	}
 }
 
+void SceneUpgrade::DisplayStats()
+{
+	std::stringstream text;
+	text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 450);
+
+	std::stringstream text2;
+	text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text2.str(), Color(0.f, 0.f, 0.f), 25, 400, 400);
+
+	std::stringstream text3;
+	text3 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text3.str(), Color(0.f, 0.f, 0.f), 25, 400, 350);
+
+	std::stringstream text4;
+	text4 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text4.str(), Color(0.f, 0.f, 0.f), 25, 400, 300);
+}
+
 void SceneUpgrade::RenderArrowStats()
 {
 	if (selectedStats == 0)
@@ -165,24 +190,49 @@ void SceneUpgrade::RenderArrowStats()
 	}
 }
 
-void SceneUpgrade::DisplayStats()
+void SceneUpgrade::DisplayUpgrades()
 {
-	
-	std::stringstream text;
-	text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage();
-	RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 450);
+	if (selectedStats == 0)
+	{
+		std::stringstream text;
+		text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
 
-	std::stringstream text2;
-	text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate();
-	RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text2.str(), Color(0.f, 0.f, 0.f), 25, 400, 400);
+		std::stringstream text2;
+		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage() + 20;
+		RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text2.str(), Color(0.f, 0.f, 1.f), 25, 400, 100);
 
-	std::stringstream text3;
-	text3 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate();
-	RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text3.str(), Color(0.f, 0.f, 0.f), 25, 400, 350);
+	}
 
-	std::stringstream text4;
-	text4 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
-	RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text4.str(), Color(0.f, 0.f, 0.f), 25, 400, 300);
+	else if (selectedStats == 1)
+	{
+		std::stringstream text;
+		text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text.str(), Color(0.f, 0.f, 0.f), 22, 400, 120);
+
+		std::stringstream text2;
+		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() - 0.1f;
+		RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text2.str(), Color(0.f, 0.f, 1.f), 22, 400, 100);
+
+	}
+
+	else if (selectedStats == 2)
+	{
+		std::stringstream text;
+		text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+
+		std::stringstream text2;
+		text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate() - 2;
+		RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text2.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+	}
+
+	else if (selectedStats == 3)
+	{
+		std::stringstream text4;
+		text4 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text4.str(), Color(0.f, 0.f, 0.f), 25, 400, 120);
+	}
 }
 
 void SceneUpgrade::selectWeapon()
@@ -202,12 +252,13 @@ void SceneUpgrade::selectWeapon()
 
 	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
 	{
-		upgradable = true;
+		statsDisplay = true;
 		selectable = false;
-		if (selectedWeapon == 0)
+		upgradable = true;
+		/*if (selectedWeapon == 0)
 		{
 			selectedStats = 0;
-		}
+		}*/
 	}
 }
 
@@ -218,15 +269,38 @@ void SceneUpgrade::selectStats()
 
 	if (Application::GetInstance().controller->IsKeyPressed(GOUP) || Application::GetInstance().controller->IsKeyPressed(MOVE_UP))
 	{
-		selectedStats = (selectedWeapon - 1) % STATS_END;
+		selectedStats = (selectedStats - 1) % STATS_END;
 		if (selectedStats < 0)
 			selectedStats = STATS_END - 1;
 	}
 
-	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	if (Application::GetInstance().controller->IsKeyPressed(EXIT))
 	{
-		upgradable = false;
+		statsDisplay = false;
 		selectable = true;
+		upgradable = false;
+	}
+
+
+}
+
+void SceneUpgrade::Upgrade()
+{
+	if (Application::GetInstance().controller->IsKeyPressed(JUMP))
+	{
+		if (selectedStats == 0)
+			WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setDamage(WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage() + 20);
+
+		else if (selectedStats == 1)
+		{
+			WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->setFireRate(WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() - 0.1f);
+			std::cout << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate() << std::endl;
+				
+		}
+		else if (selectedStats == 2)
+		{
+			
+		}
 	}
 }
 

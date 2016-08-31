@@ -53,6 +53,11 @@ float Weapon::getFireRate()
 	return this->fireRate;
 }
 
+void Weapon::setDefaultFireRate(float defaultFireRate)
+{
+	this->defaultFireRate = defaultFireRate;
+}
+
 float Weapon::getDefaultFireRate()
 {
 	return this->defaultFireRate;
@@ -86,6 +91,11 @@ float Weapon::GetOverheatBar()
 float Weapon::GetOverheatRate()
 {
 	return this->overheatRate;
+}
+
+void Weapon::setOverheatRate(float overheatRate)
+{
+	this->overheatRate = overheatRate;
 }
 
 float Weapon::GetCoolDownRate()

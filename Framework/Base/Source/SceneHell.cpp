@@ -9,6 +9,7 @@
 #include "ParticleManager.h"
 #include "HealthPotions.h"
 #include "SoundEngine.h"
+#include "WeaponStorage.h"
 
 SceneHell::SceneHell()
 {
@@ -31,7 +32,9 @@ void SceneHell::Init()
 	map->LoadMap("Level03");
 	map->LoadTileSheet("Image//tilesheet2.tga");
 
+
 	player = new Player();
+	player->LoadWeapons(*WeaponStorage::GetInstance().GetWeapon(), 4);
 	player->Init(map, Vector3(48.f, 368.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);

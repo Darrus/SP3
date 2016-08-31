@@ -39,10 +39,12 @@ private:
 	void RenderArrowWeapons();
 	void RenderArrowStats();
 	void DisplayStats();
+	void DisplayUpgrades();
 
 	
 	void selectWeapon();
 	void selectStats();
+	void Upgrade();
 
 	WEAPONDISPLAY weaponDisplay;
 	STATS stats;
@@ -51,6 +53,7 @@ private:
 	int selectedStats;
 
 	bool selectable;
+	bool statsDisplay;
 	bool upgradable;
 };
 #endif

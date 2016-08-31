@@ -365,3 +365,11 @@ int Player::GetElementCount(ELEMENTS elem)
 {
 	return this->bulletElem[elem];
 }
+
+void Player::LoadWeapons(Weapon weapon[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		*this->weapon[i] = weapon[i];
+	}
+}
