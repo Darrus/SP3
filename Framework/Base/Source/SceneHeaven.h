@@ -1,5 +1,5 @@
-#ifndef SCENE_BOSS_H
-#define SCENE_BOSS_H
+#ifndef SCENE_HEAVEN_H
+#define SCENE_HEAVEN_H
 
 #include "SceneBase.h"
 #include "ParallaxBackground.h"
@@ -9,13 +9,13 @@
 #include "Pistol.h"
 #include "Bullet.h"
 #include "Element.h"
-#include "Boss.h"
+#include "GoManager.h"
 
-class SceneBoss : public SceneBase
+class SceneHeaven : public SceneBase
 {
 public:
-	SceneBoss();
-	virtual ~SceneBoss();
+	SceneHeaven();
+	virtual ~SceneHeaven();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -23,9 +23,7 @@ public:
 	virtual void Exit();
 
 private:
-	void RenderMap(TileMap* map);
-	void RenderObject(GameObject* go);
-	void RenderWeaponObject(GameObject * go);
+	void RenderWeaponObject(Weapon* go);
 	void RenderParticle();
 	void RenderUI();
 
@@ -33,12 +31,13 @@ private:
 	ParallaxBackground background;
 	Player* player;
 	CameraFollow* camFollow;
-	Weapon* weapon;
 	Items* items;
-	Boss* boss;
 
+	bool story;
+	float fps;
 
 	double worldX, worldY;
 	double mouseX, mouseY;
 };
+
 #endif

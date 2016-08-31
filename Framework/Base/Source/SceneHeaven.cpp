@@ -1,4 +1,4 @@
-#include "SceneBoss.h"
+#include "SceneHeaven.h"
 #include "SceneManager.h"
 #include "Application.h"
 #include "EnemyFactory.h"
@@ -7,19 +7,20 @@
 #include "GoManager.h"
 #include "ParticleManager.h"
 #include "SoundEngine.h"
-#include "GoManager.h"
+#include "HealthPotions.h"
+#include <sstream>
 
-SceneBoss::SceneBoss()
+SceneHeaven::SceneHeaven()
 {
 
 }
 
-SceneBoss::~SceneBoss()
+SceneHeaven::~SceneHeaven()
 {
 	Exit();
 }
 
-void SceneBoss::Init()
+void SceneHeaven::Init()
 {
 	SceneBase::Init();
 
@@ -27,11 +28,11 @@ void SceneBoss::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("Boss");
+	map->LoadMap("Heaven");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
-	player->Init(map, Vector3(50.f, 200.f, 0.f), Vector3(32.f, 32.f, 1.f));
+	player->Init(map, Vector3(50.f, 100.f, 0.f), Vector3(32.f, 32.f, 1.f));
 	player->active = true;
 	GoManager::GetInstance().Add(player);
 
@@ -41,18 +42,67 @@ void SceneBoss::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
-	boss = new Boss();
-	boss->Init(map, Vector3(500.f, 100.f, 0.f), Vector3(256.f, 180.f, 1.f));
-	boss->active = true;
-	GoManager::GetInstance().Add(boss);
+	background.Init(&camera->position,800,600);
 
-	background.Init(&camera->position, 800, 600);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
+	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
+
+	EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(400.f, 500.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(600.f, 150.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(550.f, 150.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(600.f, 700.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(900.f, 650.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1000.f, 480.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1100.f, 300.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1200.f, 800.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1400.f, 800.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1500.f, 200.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 200.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1700.f, 100.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2000.f, 100.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(1950.f, 645.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2340.f, 600.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2477.f, 400.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
+	EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);
+
+	Items *potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(417.29f, 592.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(1008.04f, 80.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(1914.97f, 720.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(3153.f, 624.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+	fps = 0.f;
+
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
+
+	story = true;
 }
 
-void SceneBoss::Update(double dt)
+void SceneHeaven::Update(double dt)
 {
 	SceneBase::Update(dt);
 
@@ -66,19 +116,32 @@ void SceneBoss::Update(double dt)
 	camera->Update(dt);
 	background.Update();
 	ParticleManager::GetInstance().Update(dt);
-	GoManager::GetInstance().Update(dt);
+	fps = 1 / (float)dt;
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || GoManager::GetInstance().GetEnemyCount() <= 0)
+		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
+	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		story = false;
+	}
+	else if (story == false)
+	{
+		GoManager::GetInstance().Update(dt);
+	}
+
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
+
+
 }
 
-void SceneBoss::Render()
+void SceneHeaven::Render()
 {
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
@@ -125,9 +188,9 @@ void SceneBoss::Render()
 			{
 
 				modelStack.PushMatrix();
-				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
-				modelStack.Scale(enemy->scale.x * 4, 15, 1);
-				RenderMesh(meshList[GEO_HEALTHBACK], false);
+				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5),enemy->pos.y + (enemy->scale.y *0.5),enemy->pos.z);
+				modelStack.Scale(enemy->scale.x * 4,15,1);
+				RenderMesh(meshList[GEO_HEALTHBACK],false);
 				modelStack.PopMatrix();
 
 				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 76 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 100)
@@ -162,7 +225,7 @@ void SceneBoss::Render()
 	RenderUI();
 }
 
-void SceneBoss::Exit()
+void SceneHeaven::Exit()
 {
 	SceneBase::Exit();
 	if (map)
@@ -171,46 +234,8 @@ void SceneBoss::Exit()
 	background.ClearBackgrounds();
 }
 
-void SceneBoss::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void SceneBoss::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
-}
-
-void SceneBoss::RenderWeaponObject(GameObject * go)
+// Renders
+void SceneHeaven::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{
@@ -258,35 +283,7 @@ void SceneBoss::RenderWeaponObject(GameObject * go)
 	}
 }
 
-void SceneBoss::RenderParticle()
-{
-	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
-	{
-		ParticleObject* particle = (ParticleObject *)*it;
-		if (particle->active)
-		{
-			if (particle->type == P_TEXT)
-			{
-				TextParticle* textParticle = dynamic_cast<TextParticle*>(particle);
-				modelStack.PushMatrix();
-				modelStack.Translate(textParticle->pos.x, textParticle->pos.y, textParticle->pos.z);
-				modelStack.Scale(textParticle->scale.x, textParticle->scale.y, textParticle->scale.z);
-				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
-				modelStack.PopMatrix();
-			}
-			else
-			{
-				modelStack.PushMatrix();
-				modelStack.Translate(particle->pos.x, particle->pos.y, particle->pos.z);
-				modelStack.Scale(particle->scale.x, particle->scale.y, particle->scale.z);
-				RenderMesh(particle->mesh);
-				modelStack.PopMatrix();
-			}
-		}
-	}
-}
-
-void SceneBoss::RenderUI()
+void SceneHeaven::RenderUI()
 {
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_HEALTHBACK], 200.f, 5.f, 1.f, 10, 100);
@@ -321,18 +318,18 @@ void SceneBoss::RenderUI()
 	modelStack.PushMatrix();
 	RenderObjOnScreen(meshList[GEO_ITEMSBACK], 10.f, 8.f, 1.f, 15, 89);
 	modelStack.PopMatrix();
-
+	
 	if (player->inventory.GetSelectedItem())
 	{
 		RenderObjOnScreen(player->inventory.GetSelectedItem()->mesh, 10.f, 8.f, 1.f, 15, 89);
 	}
-
+	
 
 	/*else if (items->SPEEDBOOST)
 	{
-	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
+		modelStack.PopMatrix();
 	}*/
 	//else if (items->JUMPBOOST)
 	//{
@@ -349,7 +346,7 @@ void SceneBoss::RenderUI()
 		RenderObjOnScreen(meshList[GEO_WEAPONUI1], 35.f, 15.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 	}
-	else if (player->GetElement() == ELEMENTS::FIRE)
+	else if (player->GetElement() ==  ELEMENTS::FIRE)
 	{
 		modelStack.PushMatrix();
 		RenderObjOnScreen(meshList[GEO_WEAPONUI2], 35.f, 15.f, 10.f, 170, 98);
@@ -400,7 +397,7 @@ void SceneBoss::RenderUI()
 	{
 	case 0:
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_PISTOL], 10.f, 10.f, 10.f, 170, 98);
+		RenderObjOnScreen(meshList[GEO_PISTOL],10.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
@@ -412,7 +409,7 @@ void SceneBoss::RenderUI()
 		break;
 	case 1:
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_RIFLE], 25.f, 10.f, 10.f, 170, 98);
+		RenderObjOnScreen(meshList[GEO_RIFLE],25.f, 10.f, 10.f, 170, 98);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
@@ -446,6 +443,10 @@ void SceneBoss::RenderUI()
 	RenderObjOnScreen(meshList[GEO_COIN], 10, 8, 10, 15, 80);
 	modelStack.PopMatrix();
 
+	std::stringstream text;
+	text << player->getCoinAmount();
+	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(0.f, 0.f, 0.f), 15, 85, 440);
+
 	//std::stringstream text;
 	//text << fps;
 	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
@@ -473,4 +474,39 @@ void SceneBoss::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
+
+	if (story == true)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
+		modelStack.PopMatrix();
+	}
+}
+
+void SceneHeaven::RenderParticle()
+{
+	for (vector<ParticleObject*>::iterator it = ParticleManager::GetInstance().GetList().begin(); it != ParticleManager::GetInstance().GetList().end(); ++it)
+	{
+		ParticleObject* particle = (ParticleObject *)*it;
+		if (particle->active)
+		{
+			if (particle->type == P_TEXT)
+			{
+				TextParticle* textParticle = dynamic_cast<TextParticle*>(particle);
+				modelStack.PushMatrix();
+				modelStack.Translate(textParticle->pos.x, textParticle->pos.y, textParticle->pos.z);
+				modelStack.Scale(textParticle->scale.x, textParticle->scale.y, textParticle->scale.z);
+				RenderText(meshList[GEO_TEXT], textParticle->text, Color(1.f, 0.f, 0.f));
+				modelStack.PopMatrix();
+			}
+			else
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(particle->pos.x, particle->pos.y, particle->pos.z);
+				modelStack.Scale(particle->scale.x, particle->scale.y, particle->scale.z);
+				RenderMesh(particle->mesh);
+				modelStack.PopMatrix();
+			}
+		}
+	}
 }

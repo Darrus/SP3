@@ -10,9 +10,10 @@ public:
 	enum ENEMY_TYPES
 	{
 		Goblin,
+		WarriorGoblin,
 		RangeGoblin,
 		BigGoblin,
-		BigRange,
+
 		Angel,
 		RangeAngel,
 		BigAngel,

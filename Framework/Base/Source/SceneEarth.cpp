@@ -28,7 +28,7 @@ void SceneEarth::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("LevelEarth");
+	map->LoadMap("Earth");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
@@ -48,58 +48,48 @@ void SceneEarth::Init()
 	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//BadGuys.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
-	//EnemyFactory::Create("RandomAngel", Vector3(100.f, 600.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(200.f, 400.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(400.f, 500.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(600.f, 150.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(550.f, 150.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(600.f, 700.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(900.f, 650.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1000.f, 480.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1100.f, 300.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1200.f, 800.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1400.f, 800.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1500.f, 200.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1700.f, 200.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1700.f, 100.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2000.f, 100.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(1950.f, 645.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2340.f, 600.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2477.f, 400.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(3020.f, 666.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2724.f, 538.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2800.f, 794.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(3389.f, 640.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(3219.f, 378.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(3219.f, 100.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2982.f, 100.f, 0.f), map);
-	//EnemyFactory::Create("RandomAngel", Vector3(2576.f, 100.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(600.f, 340.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(400.f, 600.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(1000.f, 150.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(1600.f, 150.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(2000.f, 150.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(910.f, 340.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(1540.f, 380.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(1550.f, 500.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(2500.f, 300.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(2870.f, 440.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(2600.f, 730.f, 0.f), map);
 
-	//Items *potion = new HealthPotion();
-	//potion->active = true;
-	//potion->pos.Set(417.29f, 592.f, 0.f);
-	//GoManager::GetInstance().Add(potion);
+	Items *potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(419.f, 816.f, 0.f);
+	GoManager::GetInstance().Add(potion);
 
-	//potion = new HealthPotion();
-	//potion->active = true;
-	//potion->pos.Set(1008.04f, 80.f, 0.f);
-	//GoManager::GetInstance().Add(potion);
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(1147.77f, 624.f, 0.f);
+	GoManager::GetInstance().Add(potion);
 
-	//potion = new HealthPotion();
-	//potion->active = true;
-	//potion->pos.Set(1914.97f, 720.f, 0.f);
-	//GoManager::GetInstance().Add(potion);
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(2070.53, 656.f, 0.f);
+	GoManager::GetInstance().Add(potion);
 
-	//potion = new HealthPotion();
-	//potion->active = true;
-	//potion->pos.Set(3153.f, 624.f, 0.f);
-	//GoManager::GetInstance().Add(potion);
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(2298.85f, 80.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
+	potion = new HealthPotion();
+	potion->active = true;
+	potion->pos.Set(2802.46, 912.f, 0.f);
+	GoManager::GetInstance().Add(potion);
+
 	fps = 0.f;
 
 	background.LoadBackground("Image//EarthRear.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthFront.tga", Vector3(1980, 1080, 0));
-
 }
 
 void SceneEarth::Update(double dt)
@@ -107,7 +97,7 @@ void SceneEarth::Update(double dt)
 
 	SceneBase::Update(dt);
 
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
+	std::cout << player->pos << std::endl;
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -123,7 +113,10 @@ void SceneEarth::Update(double dt)
 	GoManager::GetInstance().Update(dt);
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+		SceneManager::GetInstance().ChangeScene("Heaven");
+
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
@@ -224,46 +217,7 @@ void SceneEarth::Exit()
 }
 
 // Renders
-void SceneEarth::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void SceneEarth::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
-}
-
-void SceneEarth::RenderWeaponObject(GameObject* go)
+void SceneEarth::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{
@@ -278,7 +232,7 @@ void SceneEarth::RenderWeaponObject(GameObject* go)
 
 		if (player->GetWeaponType() == 3)
 		{
-			Vector3 worldPos(worldX, worldY, 0.f);
+			Vector3 worldPos((float)worldX, (float)worldY, 0.f);
 			modelStack.PushMatrix();
 			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 			modelStack.Rotate(weaponRot, 0, 0, 1);
@@ -300,7 +254,7 @@ void SceneEarth::RenderWeaponObject(GameObject* go)
 
 		if (player->GetWeaponType() == 3)
 		{
-			Vector3 worldPos(worldX, worldY, 0.f);
+			Vector3 worldPos((float)worldX, (float)worldY, 0.f);
 			modelStack.PushMatrix();
 			modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
 			modelStack.Rotate(weaponRot, 0, 0, 1);
@@ -476,9 +430,9 @@ void SceneEarth::RenderUI()
 	text << player->getCoinAmount();
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(1.f, 1.f, 1.f), 15, 85, 440);
 
-	//std::stringstream text;
-	//text << fps;
-	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
+	text.str("");
+	text << fps;
+	RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
 
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();

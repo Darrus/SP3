@@ -2,7 +2,7 @@
 #define WEAPON_H
 #include "Bullet.h"
 
-class Weapon : public GameObject
+class Weapon
 {
 public:
 	enum WEAPON_TYPE
@@ -36,6 +36,11 @@ public:
 
 	void ReferencePlayerPos(Vector3* pos);
 	void ReferencePlayerView(Vector3* view);
+
+	Vector3 pos;
+	Vector3 scale;
+	Vector3 view;
+	Mesh* mesh;
 
 protected:
 	float defaultFireRate;

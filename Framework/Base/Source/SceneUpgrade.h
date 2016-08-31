@@ -38,24 +38,5 @@ private:
 	WEAPONDISPLAY weaponDisplay;
 
 	int selectedWeapon;
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif

@@ -11,9 +11,6 @@
 #include <stdlib.h>
 
 #include "SceneManager.h"
-#include "SoundEngine.h"
-#include "SP3.h"
-#include "LevelEditor.h"
 
 GLFWwindow* m_window;
 int Application::m_window_width = 800;
@@ -204,10 +201,10 @@ void Application::Run()
 	SceneManager::GetInstance().Init();
 	m_timer.startTimer();
 
-	while (!SceneManager::GetInstance().quit && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
+	while (!SceneManager::GetInstance().quit && !glfwWindowShouldClose(m_window))
 	{
 		SceneManager::GetInstance().InitCurrent();
-		while (!SceneManager::GetInstance().CheckChange() && !glfwWindowShouldClose(m_window) && !controller->IsKeyPressed(EXIT))
+		while (!SceneManager::GetInstance().CheckChange() && !glfwWindowShouldClose(m_window) && !SceneManager::GetInstance().quit)
 		{
 			float delta = m_timer.getElapsedTime();
 			controller->read(delta);

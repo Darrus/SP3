@@ -39,14 +39,14 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 	{
 		MeleeEnemy* enemy = new MeleeEnemy();
 		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkAnim(27, 29, 1.f);
-		enemy->SetAlertRange(50.f);
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Big Goblin", "Image//enemysprite.tga", 8, 12);
+		enemy->SetWalkAnim(75, 77, 1.f);
+		enemy->SetAlertRange(100.f);
 		enemy->SetPatrolRange(200.f);
 		enemy->SetDefaultSpeed(100.f);
-		enemy->SetAttackDamage(25.f);
-		enemy->SetAttackRange(40.f);
-		enemy->SetTimeBetweenAttack(1.f);
+		enemy->SetAttackDamage(30.f);
+		enemy->SetAttackRange(50.f);
+		enemy->SetTimeBetweenAttack(2.f);
 		enemy->SetHealth(300);
 		enemy->SetElement(ICE, 10);
 		enemy->active = true;
@@ -54,13 +54,11 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		return enemy;
 	}
 
-
-
 	if (name == "RangeGoblin")
 	{
 		RangeEnemy* enemy = new RangeEnemy();
 		enemy->Init(map, pos, Vector3(32.f, 32.f, 32.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Range Goblin", "Image//enemysprite.tga", 8, 12);
 		enemy->SetWalkAnim(72, 74, 1.f);
 		enemy->SetAlertRange(150.f);
 		enemy->SetPatrolRange(200.f);
@@ -75,19 +73,19 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 		return enemy;
 	}
 
-	if (name == "BigRangeGoblin")
+	if (name == "WarriorGoblin")
 	{
 		RangeEnemy* enemy = new RangeEnemy();
-		enemy->Init(map, pos, Vector3(64.f, 64.f, 64.f));
-		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Goblin", "Image//enemysprite.tga", 8, 12);
-		enemy->SetWalkAnim(72, 74, 1.f);
-		enemy->SetAlertRange(150.f);
+		enemy->Init(map, pos, Vector3(32.f, 32.f, 1.f));
+		enemy->mesh = MeshGenerator::GetInstance().GenerateSprite("Warrior Goblin", "Image//enemysprite.tga", 8, 12);
+		enemy->SetWalkAnim(30, 32, 1.f);
+		enemy->SetAlertRange(80.f);
 		enemy->SetPatrolRange(200.f);
-		enemy->SetAttackRange(150.f);
+		enemy->SetAttackRange(40.f);
 		enemy->SetAttackDamage(25.f);
 		enemy->SetDefaultSpeed(100.f);
 		enemy->SetTimeBetweenAttack(1.f);
-		enemy->SetHealth(200);
+		enemy->SetHealth(150);
 		enemy->SetElement(LIFESTEAL, 10);
 		enemy->active = true;
 		GoManager::GetInstance().Add(enemy);
@@ -250,7 +248,7 @@ Enemy* EnemyFactory::Create(const string& name, Vector3 pos, TileMap* map)
 
 	if (name == "RandomGoblin")
 	{
-		int choice = Math::RandIntMinMax(Goblin, BigRange);
+		int choice = Math::RandIntMinMax(Goblin, BigGoblin);
 		string name = GetName((ENEMY_TYPES)choice);
 		Enemy* enemy = Create(name, pos, map);
 		return enemy;
@@ -280,8 +278,8 @@ string EnemyFactory::GetName(ENEMY_TYPES type)
 	case BigGoblin:
 		name = "BigGoblin";
 		break;
-	case BigRange:
-		name = "BigRangeGoblin";
+	case WarriorGoblin:
+		name = "WarriorGoblin";
 		break;
 	case Angel:
 		name = "Angel";

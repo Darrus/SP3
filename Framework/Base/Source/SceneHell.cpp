@@ -107,15 +107,11 @@ void SceneHell::Init()
 	background.LoadBackground("Image//HellBackground.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
-
-	story = true;
 }
 
 void SceneHell::Update(double dt)
 {
-
 	SceneBase::Update(dt);
-
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -137,15 +133,10 @@ void SceneHell::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
+	if (Application::GetInstance().controller->OnHold(EXIT))
+		SceneManager::GetInstance().ChangeScene("MainMenu");
 
-	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
-	{
-		story = false;
-	}
-	else if (story == false)
-	{
-		GoManager::GetInstance().Update(dt);
-	}
+	GoManager::GetInstance().Update(dt);
 }
 
 void SceneHell::Render()
@@ -243,46 +234,7 @@ void SceneHell::Exit()
 }
 
 // Renders
-void SceneHell::RenderMap(TileMap* map)
-{
-	int tileSize = map->GetTileSize();
-	Vector2 tileOffset = camFollow->GetTileOffset();
-	Vector2 fineOffset = camFollow->GetFineOffset();
-
-	int m, n;
-	for (int i = 0; i < map->GetNumOfTiles_MapHeight() + 1; ++i)
-	{
-		n = i + (int)tileOffset.y;
-
-		if (n >= map->GetNumOfTiles_MapHeight())
-			break;
-
-		for (int k = 0; k < map->GetNumOfTiles_MapWidth() + 1; ++k)
-		{
-			m = k + (int)tileOffset.x;
-
-			if (m >= map->GetNumOfTiles_MapWidth())
-				break;
-			if (map->rearMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-			if (map->frontMap[n][m] > 0)
-				RenderTile(map->GetTileSheet(), map->frontMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
-		}
-	}
-}
-
-void SceneHell::RenderObject(GameObject* go)
-{
-	modelStack.PushMatrix();
-	modelStack.Translate(go->pos.x, go->pos.y, go->pos.z);
-	if (go->view.x < 0)
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-	modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-	RenderMesh(go->mesh);
-	modelStack.PopMatrix();
-}
-
-void SceneHell::RenderWeaponObject(GameObject* go)
+void SceneHell::RenderWeaponObject(Weapon* go)
 {
 	if (go->view.x > 0)
 	{
@@ -293,7 +245,6 @@ void SceneHell::RenderWeaponObject(GameObject* go)
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
 		RenderMesh(go->mesh);
 		modelStack.PopMatrix();
-
 
 		if (player->GetWeaponType() == 3)
 		{
@@ -496,11 +447,6 @@ void SceneHell::RenderUI()
 	text << player->getCoinAmount();
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text.str(), Color(1.f, 1.f, 1.f), 15, 85, 440);
 
-
-	//std::stringstream text;
-	//text << fps;
-	//RenderTextOnScreen(meshList[GEO_TEXT], text.str(), Color(0.f, 1.f, 0.f), 20, 10, 10);
-
 	std::stringstream text2;
 	text2 << player->GetPlayerHealth();
 	RenderTextOnScreen(meshList[GEO_TEXT], text2.str() + "/200", Color(0.f, 1.f, 0.f), 15, 60, 547);
@@ -524,13 +470,6 @@ void SceneHell::RenderUI()
 	std::stringstream text7;
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
-
-	if (story == true)
-	{
-		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
-		modelStack.PopMatrix();
-	}
 }
 
 void SceneHell::RenderParticle()

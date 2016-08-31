@@ -171,9 +171,6 @@
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SP3.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LevelEditor.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
@@ -297,9 +294,6 @@
     <ClCompile Include="Source\SceneEarth.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneBoss.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Boss.cpp">
       <Filter>Source Files\GameObjects\Enemy</Filter>
     </ClCompile>
@@ -312,14 +306,26 @@
     <ClCompile Include="Source\EnemyDeath.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\SceneHell.cpp">
+=======
+    <ClCompile Include="Source\SceneHeaven.cpp">
+>>>>>>> 8c6739150e763af2a5ba6232d0472920e5cabbcc
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneUpgrade.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\WeaponStorage.cpp">
       <Filter>Source Files\GameObjects\Weapons</Filter>
+=======
+    <ClCompile Include="Source\SceneHell.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HeavenBoss.cpp">
+      <Filter>Source Files\Scenes</Filter>
+>>>>>>> 8c6739150e763af2a5ba6232d0472920e5cabbcc
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -408,9 +414,6 @@
       <Filter>Header Files\Others</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SP3.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\LevelEditor.h">
@@ -539,9 +542,6 @@
     <ClInclude Include="Source\SceneEarth.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneBoss.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Boss.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
@@ -554,14 +554,26 @@
     <ClInclude Include="Source\EnemyDeath.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\SceneUpgrade.h">
+=======
+    <ClInclude Include="Source\SceneHeaven.h">
+>>>>>>> 8c6739150e763af2a5ba6232d0472920e5cabbcc
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneHell.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\WeaponStorage.h">
       <Filter>Header Files\GameObjects\Weapons</Filter>
+=======
+    <ClInclude Include="Source\SceneUpgrade.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HeavenBoss.h">
+      <Filter>Header Files\Scenes</Filter>
+>>>>>>> 8c6739150e763af2a5ba6232d0472920e5cabbcc
     </ClInclude>
   </ItemGroup>
 </Project>
