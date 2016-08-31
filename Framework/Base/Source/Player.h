@@ -80,6 +80,7 @@ private:
 
 	void PlayerUseItem();
 	void PlayerCycleItem();
+	void PlayerGodMode();
 
 	float PLAYER_SPEED;
 	float JUMP_SPEED;
@@ -112,6 +113,7 @@ private:
 	int bulletType;
 
 	int coinAmount;
+	bool godMode;
 };
 
 #endif
