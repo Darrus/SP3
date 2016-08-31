@@ -32,12 +32,19 @@ void SceneUpgrade::Init()
 	meshList[GEO_UPGRADEMENU]->textureArray[0] = LoadTGA("Image//UpgradeMenu.tga");
 
 	selectedWeapon = 0;
+	selectedStats = 0;
+
+	upgradable = false;
+	selectable = true;
 }
 
 void SceneUpgrade::Update(double dt)
 {
 	SceneBase::Update(dt);
 	selectWeapon();
+
+	if (upgradable == true)
+		selectStats();
 }
 
 void SceneUpgrade::Render()
@@ -66,8 +73,12 @@ void SceneUpgrade::Render()
 	modelStack.PopMatrix();
 
 	DisplayWeapons();
-	RenderArrow();
-	DisplayUpgradePistol();
+	RenderArrowWeapons();
+
+	if (upgradable == true)
+		RenderArrowStats();
+
+	DisplayStats();
 }
 
 void SceneUpgrade::DisplayWeapons()
@@ -89,63 +100,136 @@ void SceneUpgrade::DisplayWeapons()
 	modelStack.PopMatrix();
 }
 
-void SceneUpgrade::RenderArrow()
+void SceneUpgrade::RenderArrowWeapons()
 {
-	if (selectedWeapon == 0)
+	if (selectable == true)
+	{
+		if (selectedWeapon == 0)
+		{
+			modelStack.PushMatrix();
+			RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 83);
+			modelStack.PopMatrix();
+		}
+
+		else if (selectedWeapon == 1)
+		{
+			modelStack.PushMatrix();
+			RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 68);
+			modelStack.PopMatrix();
+		}
+
+		if (selectedWeapon == 2)
+		{
+			modelStack.PushMatrix();
+			RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 45);
+			modelStack.PopMatrix();
+		}
+
+		if (selectedWeapon == 3)
+		{
+			modelStack.PushMatrix();
+			RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 25);
+			modelStack.PopMatrix();
+		}
+	}
+}
+
+void SceneUpgrade::RenderArrowStats()
+{
+	if (selectedStats == 0)
 	{
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 83);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 85, 83);
 		modelStack.PopMatrix();
 	}
 
-	else if (selectedWeapon == 1)
+	else if (selectedStats == 1)
 	{
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 68);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 85, 74);
 		modelStack.PopMatrix();
 	}
 
-	if (selectedWeapon == 2)
+	else if (selectedStats == 2)
 	{
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 45);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 85, 65);
 		modelStack.PopMatrix();
 	}
 
-	if (selectedWeapon == 3)
+	else if (selectedStats == 3)
 	{
 		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 10, 25);
+		RenderObjOnScreen(meshList[GEO_ARROWPOINTER], 15, 20, 10, 85, 56);
 		modelStack.PopMatrix();
 	}
 }
 
-void SceneUpgrade::DisplayUpgradePistol()
+void SceneUpgrade::DisplayStats()
 {
 	
 	std::stringstream text;
 	text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage();
 	RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 450);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 400);
+	std::stringstream text2;
+	text2 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDefaultFireRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " + text2.str(), Color(0.f, 0.f, 0.f), 25, 400, 400);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 350);
+	std::stringstream text3;
+	text3 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetOverheatRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " + text3.str(), Color(0.f, 0.f, 0.f), 25, 400, 350);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 300);
+	std::stringstream text4;
+	text4 << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->GetCoolDownRate();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " + text4.str(), Color(0.f, 0.f, 0.f), 25, 400, 300);
 }
 
 void SceneUpgrade::selectWeapon()
 {
+	if (selectable == true)
+	{
+		if (Application::GetInstance().controller->IsKeyPressed(GODOWN) || Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN))
+			selectedWeapon = (selectedWeapon + 1) % DISPLAY_END;
+
+		if (Application::GetInstance().controller->IsKeyPressed(GOUP) || Application::GetInstance().controller->IsKeyPressed(MOVE_UP))
+		{
+			selectedWeapon = (selectedWeapon - 1) % DISPLAY_END;
+			if (selectedWeapon < 0)
+				selectedWeapon = DISPLAY_END - 1;
+		}
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
+	{
+		upgradable = true;
+		selectable = false;
+		if (selectedWeapon == 0)
+		{
+			selectedStats = 0;
+		}
+	}
+}
+
+void SceneUpgrade::selectStats()
+{
 	if (Application::GetInstance().controller->IsKeyPressed(GODOWN) || Application::GetInstance().controller->IsKeyPressed(MOVE_DOWN))
-		selectedWeapon = (selectedWeapon + 1) % DISPLAY_END;
+		selectedStats = (selectedStats + 1) % STATS_END;
 
 	if (Application::GetInstance().controller->IsKeyPressed(GOUP) || Application::GetInstance().controller->IsKeyPressed(MOVE_UP))
 	{
-		selectedWeapon = (selectedWeapon - 1) % DISPLAY_END;
-		if (selectedWeapon < 0)
-			selectedWeapon = DISPLAY_END - 1;
+		selectedStats = (selectedWeapon - 1) % STATS_END;
+		if (selectedStats < 0)
+			selectedStats = STATS_END - 1;
+	}
+
+	if (Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		upgradable = false;
+		selectable = true;
 	}
 }
+
 
 void SceneUpgrade::Exit()
 {

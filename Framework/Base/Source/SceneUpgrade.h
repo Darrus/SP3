@@ -16,6 +16,15 @@ public:
 		DISPLAY_END,
 	};
 
+	enum STATS
+	{
+		DAMAGE,
+		FIRERATE,
+		OVERHEAT,
+		COOLDOWN,
+		STATS_END,
+	};
+
 	SceneUpgrade();
 	virtual ~SceneUpgrade();
 
@@ -27,16 +36,21 @@ public:
 private:
 	//Render Stuff
 	void DisplayWeapons();
-	void RenderArrow();
-	void DisplayUpgradePistol();
-	void DisplayUpgradeRifle();
-	void DisplayUpgradeShotgun();
-	void DisplayUpgradeSniper();
+	void RenderArrowWeapons();
+	void RenderArrowStats();
+	void DisplayStats();
+
 	
 	void selectWeapon();
+	void selectStats();
 
 	WEAPONDISPLAY weaponDisplay;
+	STATS stats;
 
 	int selectedWeapon;
+	int selectedStats;
+
+	bool selectable;
+	bool upgradable;
 };
 #endif
