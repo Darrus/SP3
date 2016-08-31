@@ -9,7 +9,7 @@ IceGolem::IceGolem()
 	status.AddImmune("Slow");
 	maxHealth = 5000;
 	health = maxHealth;
-	attackRange = 140.f;
+	attackRange = 100.f;
 	alertRange = 1000.f;
 	patrolRange = 1000.f;
 	speed = 50;

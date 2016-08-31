@@ -129,7 +129,7 @@ void SceneHell::Update(double dt)
 	fps = 1 / (float)dt;
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+		SceneManager::GetInstance().ChangeScene("HellBoss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{

@@ -13,6 +13,8 @@ public:
 	virtual void Update(double dt);
 
 	float dir;
+	float timer;
+	float timeBetwenChecks;
 };
 
 #endif

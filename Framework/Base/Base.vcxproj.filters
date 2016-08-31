@@ -336,6 +336,12 @@
     <ClCompile Include="Source\EarthBoss.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\HellBoss.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FireGolem.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -586,6 +592,12 @@
     </ClInclude>
     <ClInclude Include="Source\EarthBoss.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HellBoss.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FireGolem.h">
+      <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

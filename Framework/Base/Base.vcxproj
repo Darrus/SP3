@@ -36,9 +36,11 @@
     <ClCompile Include="Source\EnemyStates.cpp" />
     <ClCompile Include="Source\EnemyStun.cpp" />
     <ClCompile Include="Source\FireBullet.cpp" />
+    <ClCompile Include="Source\FireGolem.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GoManager.cpp" />
     <ClCompile Include="Source\HealthPotion.cpp" />
+    <ClCompile Include="Source\HellBoss.cpp" />
     <ClCompile Include="Source\IceBullet.cpp" />
     <ClCompile Include="Source\IceGolem.cpp" />
     <ClCompile Include="Source\ItemList.cpp" />
@@ -113,9 +115,11 @@
     <ClInclude Include="Source\EnemyStates.h" />
     <ClInclude Include="Source\EnemyStun.h" />
     <ClInclude Include="Source\FireBullet.h" />
+    <ClInclude Include="Source\FireGolem.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GoManager.h" />
     <ClInclude Include="Source\HealthPotions.h" />
+    <ClInclude Include="Source\HellBoss.h" />
     <ClInclude Include="Source\IceBullet.h" />
     <ClInclude Include="Source\IceGolem.h" />
     <ClInclude Include="Source\ItemList.h" />

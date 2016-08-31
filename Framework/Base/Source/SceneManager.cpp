@@ -15,6 +15,7 @@ using std::endl;
 #include "EarthBoss.h"
 #include "SceneHeaven.h"
 #include "HeavenBoss.h"
+#include "HellBoss.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -44,7 +45,6 @@ void SceneManager::Init()
 	quit = false;
 	Scene* newScene = new SceneHeaven();
 	AddScene("Heaven", newScene);
-
 	newScene = new HeavenBoss();
 	AddScene("HeavenBoss", newScene);
 	
@@ -53,9 +53,10 @@ void SceneManager::Init()
 	newScene = new EarthBoss();
 	AddScene("EarthBoss", newScene);
 
-
 	newScene = new SceneHell();
 	AddScene("Hell", newScene);
+	newScene = new HellBoss();
+	AddScene("HellBoss", newScene);
 	
 	newScene = new LevelEditor();
 	AddScene("LevelEditor", newScene);
