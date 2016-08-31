@@ -33,6 +33,8 @@ enum Controls
 	BACKSPACE,
 	ENTER,
 
+	G,
+
 	NEXT,
 
 	EXIT,

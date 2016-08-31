@@ -45,6 +45,10 @@ public:
 	void SetPlayerMaxHealth(int playerMaxHealth);
 	int GetPlayerMaxHealth(void);
 
+	
+	void LoadWeapons(Weapon weapon[], int size);
+	void LoadBullets(Bullet bullet[], int size);
+
 	float getPlayerSpeed(void);
 	void setPlayerSpeed(float PLAYER_SPEED);
 
@@ -76,6 +80,7 @@ private:
 
 	void PlayerUseItem();
 	void PlayerCycleItem();
+	void PlayerGodMode();
 
 	float PLAYER_SPEED;
 	float JUMP_SPEED;
@@ -108,6 +113,7 @@ private:
 	int bulletType;
 
 	int coinAmount;
+	bool godMode;
 };
 
 #endif

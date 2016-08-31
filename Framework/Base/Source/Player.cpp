@@ -13,6 +13,7 @@
 Player::Player() :
 PLAYER_SPEED(100),
 isGrounded(false),
+godMode(false),
 playerHealth(200),
 playerMaxHealth(200),
 JUMP_SPEED(400),
@@ -53,6 +54,7 @@ net(NULL)
 		bulletElem[i] = 20;
 	}
 	selectedElem = NONE;
+
 }
 
 Player::~Player()
@@ -134,6 +136,7 @@ void Player::Update(double dt)
 	TossNet();
 	PlayerCycleItem();
 	collider.Update();
+	PlayerGodMode();
 
 	for (int i = 0; i < 4; ++i)
 		weapon[i]->Update(dt);
@@ -364,4 +367,30 @@ Weapon* Player::GetWeapon()
 int Player::GetElementCount(ELEMENTS elem)
 {
 	return this->bulletElem[elem];
+}
+
+
+void Player::LoadWeapons(Weapon weapon[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		*this->weapon[i] = weapon[i];
+	}
+}
+
+void Player::PlayerGodMode()
+{
+	if (godMode == false && Application::GetInstance().controller->IsKeyPressed(G))
+	{
+		godMode = true;
+	}
+	else if (godMode == true && Application::GetInstance().controller->IsKeyPressed(G))
+	{
+		godMode = false;
+	}
+	if (godMode == true)
+	{
+		playerHealth = 200;
+
+	}
 }

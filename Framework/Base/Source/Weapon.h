@@ -25,6 +25,7 @@ public:
 
 	void setFireRate(float fireRate);
 	float getFireRate();
+	void setDefaultFireRate(float defaultFireRate);
 	float getDefaultFireRate();
 
 	void setDamage(int damage);
@@ -35,7 +36,9 @@ public:
 
 	float GetOverheatBar();
 	float GetOverheatRate();
+	void setOverheatRate(float overheatRate);
 	float GetCoolDownRate();
+	void SetCoolDownRate(float cooldownRate);
 
 	void ReferencePlayerPos(Vector3* pos);
 	void ReferencePlayerView(Vector3* view);
