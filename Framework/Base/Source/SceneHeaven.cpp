@@ -99,7 +99,7 @@ void SceneHeaven::Init()
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 
-
+	timer = 5.f;
 }
 
 void SceneHeaven::Update(double dt)
@@ -120,7 +120,10 @@ void SceneHeaven::Update(double dt)
 
 	GoManager::GetInstance().Update(dt);
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || GoManager::GetInstance().GetEnemyCount() <= 0)
+	if (GoManager::GetInstance().GetEnemyCount() <= 0)
+		timer -= dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
 		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 
 	if (player->GetPlayerHealth() <= 0)

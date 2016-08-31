@@ -34,6 +34,7 @@ private:
 	Items* items;
 
 	float fps;
+	float timer;
 
 	double worldX, worldY;
 	double mouseX, mouseY;

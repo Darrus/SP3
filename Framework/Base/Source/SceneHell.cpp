@@ -48,7 +48,7 @@ void SceneHell::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position, 800, 600);
 
-	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Lord.mp3", 0.2f);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Core.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	EnemyFactory::Create("Demon", Vector3(80.f, 80.f, 0.f), map);
@@ -107,6 +107,8 @@ void SceneHell::Init()
 	GoManager::GetInstance().Add(potion);
 	fps = 0.f;
 
+	timer = 5.f;
+
 	background.LoadBackground("Image//HellBackground.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
@@ -128,7 +130,10 @@ void SceneHell::Update(double dt)
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
+	if (GoManager::GetInstance().GetEnemyCount() <= 0)
+		timer -= dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
 		SceneManager::GetInstance().ChangeScene("HellBoss");
 
 	if (player->GetPlayerHealth() <= 0)

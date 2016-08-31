@@ -53,6 +53,9 @@ void HeavenBoss::Init()
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 
 	timer = 5.f;
+
+	SoundEngine::GetInstance().AddSound("Boss", "Sound//MapleStory_Horntail.mp3", 0.5f);
+	SoundEngine::GetInstance().Play("Boss");
 }
 
 void HeavenBoss::Update(double dt)

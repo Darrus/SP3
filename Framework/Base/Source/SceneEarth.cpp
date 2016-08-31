@@ -45,7 +45,7 @@ void SceneEarth::Init()
 	weapon = new Weapon();
 	background.Init(&camera->position, 800, 600);
 
-	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//BadGuys.mp3", 0.2f);
+	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Here_Comes.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	EnemyFactory::Create("RandomGoblin", Vector3(600.f, 340.f, 0.f), map);
@@ -93,6 +93,8 @@ void SceneEarth::Init()
 	background.LoadBackground("Image//EarthFront.tga", Vector3(1980, 1080, 0));
 
 	story = true;
+
+	timer = 5.f;
 }
 
 void SceneEarth::Update(double dt)
@@ -124,7 +126,10 @@ void SceneEarth::Update(double dt)
 		GoManager::GetInstance().Update(dt);
 	}
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
+	if(GoManager::GetInstance().GetEnemyCount() <= 0)
+		timer -= dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
 		SceneManager::GetInstance().ChangeScene("EarthBoss");
 
 	if (Application::GetInstance().controller->OnHold(EXIT))

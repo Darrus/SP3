@@ -39,6 +39,7 @@ private:
 	bool story;
 
 	float fps;
+	float timer;
 
 	double worldX, worldY;
 	double mouseX, mouseY;

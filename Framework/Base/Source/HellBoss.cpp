@@ -53,6 +53,9 @@ void HellBoss::Init()
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
 
 	timer = 5.f;
+
+	SoundEngine::GetInstance().AddSound("Boss", "Sound//MapleStory_Horntail.mp3", 0.5f);
+	SoundEngine::GetInstance().Play("Boss");
 }
 
 void HellBoss::Update(double dt)
@@ -75,7 +78,7 @@ void HellBoss::Update(double dt)
 		timer -= dt;
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
-		SceneManager::GetInstance().ChangeScene("Hell");
+		SceneManager::GetInstance().ChangeScene("SceneCredit");
 
 	if (player->GetPlayerHealth() <= 0)
 		SceneManager::GetInstance().ChangeScene("GameOver");

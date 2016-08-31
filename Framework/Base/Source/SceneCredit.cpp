@@ -24,8 +24,8 @@ void SceneCredit::Init()
 	camera = new Camera();
 	camera->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
 
-	SoundEngine::GetInstance().AddSound("GameOver", "Sound//GameOver.mp3", 0.5f);
-	SoundEngine::GetInstance().Play("GameOver");
+	SoundEngine::GetInstance().AddSound("Credit", "Sound//Maplestory_Signal _Medium.mp3", 0.5f);
+	SoundEngine::GetInstance().Play("Credit");
 }
 
 void SceneCredit::Update(double dt)
