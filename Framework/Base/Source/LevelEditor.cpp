@@ -26,7 +26,7 @@ void LevelEditor::Init()
 	SoundEngine::GetInstance().Play("Florina");
 
 	editor = new MapEditor();
-	editor->LoadTileSheet("tilesheet", 16, 16);
+	editor->LoadTileSheet("tilesheet2", 16, 16);
 	editor->Init(&Application::GetInstance().m_window_width, &Application::GetInstance().m_window_height, 32);
 	editor->SetCamera(camFree);
 	editor->active = true;

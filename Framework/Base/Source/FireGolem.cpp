@@ -47,7 +47,7 @@ void FireGolem::Skill()
 		for (int i = 0; i < 15; ++i)
 		{
 			attackCooldown = timeBetweenAttack;
-			Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//rock.tga", map);
+			Bullet* bullet = BulletFactory::CreateEnemyBullet("Image//LavaRock.tga", map);
 			float spawn = Math::RandFloatMinMax(0.f, 1000.f);
 			bullet->pos.Set(spawn, 800.f, 0.f);
 			bullet->scale.Set(64.f, 64.f, 1.f);
@@ -55,16 +55,16 @@ void FireGolem::Skill()
 			bullet->damage = 50.f;
 		}
 
-		for (int i = 1; i < 10; ++i)
+		for (int i = 1; i < 5; ++i)
 		{
 			attackCooldown = timeBetweenAttack;
 			BossSkill* skill = new BossSkill();
 			skill->active = true;
 			Animation anim;
-			anim.Set(0, 7, 2.f, true);
-			skill->Init(Vector3(100.f * i, 90.f, 1.f), Vector3(64.f, 128.f, 1.f), 50);
-			skill->SetSprite("Image//Icicle.tga", 1, 7, anim);
-			skill->attackOnFrame = 3;
+			anim.Set(0, 8, 1.5f, true);
+			skill->Init(Vector3(200.f * i, 80.f, 1.f), Vector3(128.f, 128.f, 1.f), 50);
+			skill->SetSprite("Image//FirePunch.tga", 1, 9, anim);
+			skill->attackOnFrame = 7;
 			GoManager::GetInstance().Add(skill);
 		}
 

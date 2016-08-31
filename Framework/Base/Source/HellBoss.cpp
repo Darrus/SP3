@@ -28,7 +28,7 @@ void HellBoss::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("EarthBoss");
+	map->LoadMap("HellBoss");
 	map->LoadTileSheet("Image//tilesheet2.tga");
 
 	player = new Player();

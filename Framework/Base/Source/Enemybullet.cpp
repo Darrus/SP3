@@ -1,5 +1,7 @@
 #include "EnemyBullet.h"
 #include "Player.h"
+#include "SpriteAnimation.h"
+
 EnemyBullet::EnemyBullet()
 {
 
