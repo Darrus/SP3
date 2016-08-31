@@ -6,6 +6,7 @@
 #include <sstream>
 #include "MeshBuilder.h"
 #include "LoadTGA.h"
+#include "WeaponStorage.h"
 
 SceneUpgrade::SceneUpgrade()
 {
@@ -122,20 +123,15 @@ void SceneUpgrade::RenderArrow()
 void SceneUpgrade::DisplayUpgradePistol()
 {
 	
-	//std::stringstream text;
-	//text << weapon->getDamage();
-	
-	{
-		std::stringstream text;
-		text << weapon->getDamage();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 450);
+	std::stringstream text;
+	text << WeaponStorage::GetInstance().GetWeapon()[selectedWeapon]->getDamage();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Damage: " + text.str(), Color(0.f, 0.f, 0.f), 25, 400, 450);
 
-		RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 400);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Fire Rate: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 400);
 
-		RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 350);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Overheat: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 350);
 
-		RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 300);
-	}
+	RenderTextOnScreen(meshList[GEO_TEXT], "Cooldown: " /*+ text.str()*/, Color(0.f, 0.f, 0.f), 25, 400, 300);
 }
 
 void SceneUpgrade::selectWeapon()
