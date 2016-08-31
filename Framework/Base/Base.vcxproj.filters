@@ -336,6 +336,9 @@
     <ClCompile Include="Source\EarthBoss.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneCredit.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -585,6 +588,9 @@
       <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Source\EarthBoss.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneCredit.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
