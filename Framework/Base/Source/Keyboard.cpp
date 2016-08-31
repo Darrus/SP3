@@ -38,6 +38,7 @@ void Keyboard::create()
 	keys[GODOWN].Assign(VK_DOWN);
 	keys[GOLEFT].Assign(VK_LEFT);
 	keys[GORIGHT].Assign(VK_RIGHT);
+	keys[G].Assign('G');
 
 	timeBetweenPress = 0.f;
 }
