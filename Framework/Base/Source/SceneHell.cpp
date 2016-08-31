@@ -137,7 +137,6 @@ void SceneHell::Update(double dt)
 		SceneManager::GetInstance().ChangeScene("GameOver");
 	}
 
-	std::cout << player->pos.x << " " << player->pos.y << std::endl;
 
 	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
 	{

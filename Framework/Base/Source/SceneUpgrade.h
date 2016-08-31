@@ -36,7 +36,6 @@ private:
 	void selectWeapon();
 
 	WEAPONDISPLAY weaponDisplay;
-	Weapon* weapon;
 
 	int selectedWeapon;
 

@@ -303,9 +303,6 @@
     <ClCompile Include="Source\Boss.cpp">
       <Filter>Source Files\GameObjects\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Level03.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BossSkill.cpp">
       <Filter>Source Files\GameObjects\Enemy</Filter>
     </ClCompile>
@@ -314,6 +311,15 @@
     </ClCompile>
     <ClCompile Include="Source\EnemyDeath.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneHell.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneUpgrade.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WeaponStorage.cpp">
+      <Filter>Source Files\GameObjects\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,9 +545,6 @@
     <ClInclude Include="Source\Boss.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Level03.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BossSkill.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
@@ -550,6 +553,15 @@
     </ClInclude>
     <ClInclude Include="Source\EnemyDeath.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneUpgrade.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneHell.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponStorage.h">
+      <Filter>Header Files\GameObjects\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

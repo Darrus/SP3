@@ -61,7 +61,7 @@ void SceneMainMenu::Update(double dt)
 	switch (MenuStates)
 	{
 	case STARTGAME:
-		SceneManager::GetInstance().ChangeScene("SP3");
+		SceneManager::GetInstance().ChangeScene("Hell");
 		break;
 	case MAINMENU:
 		MenuSelection();
