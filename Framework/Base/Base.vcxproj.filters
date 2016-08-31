@@ -327,6 +327,9 @@
     <ClCompile Include="Source\IceGolem.cpp">
       <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\WeaponStorage.cpp">
+      <Filter>Source Files\GameObjects\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -568,6 +571,9 @@
     </ClInclude>
     <ClInclude Include="Source\IceGolem.h">
       <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponStorage.h">
+      <Filter>Header Files\GameObjects\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
