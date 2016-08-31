@@ -99,7 +99,7 @@ void SceneHeaven::Init()
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 
-	story = true;
+
 }
 
 void SceneHeaven::Update(double dt)
@@ -118,21 +118,14 @@ void SceneHeaven::Update(double dt)
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
 
+	GoManager::GetInstance().Update(dt);
+
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || GoManager::GetInstance().GetEnemyCount() <= 0)
 		SceneManager::GetInstance().ChangeScene("HeavenBoss");
 
 	if (player->GetPlayerHealth() <= 0)
 	{
 		SceneManager::GetInstance().ChangeScene("GameOver");
-	}
-
-	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
-	{
-		story = false;
-	}
-	else if (story == false)
-	{
-		GoManager::GetInstance().Update(dt);
 	}
 
 	if (Application::GetInstance().controller->OnHold(EXIT))
@@ -475,12 +468,7 @@ void SceneHeaven::RenderUI()
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
 
-	if (story == true)
-	{
-		modelStack.PushMatrix();
-		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
-		modelStack.PopMatrix();
-	}
+
 }
 
 void SceneHeaven::RenderParticle()

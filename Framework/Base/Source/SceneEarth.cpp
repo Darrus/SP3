@@ -90,6 +90,8 @@ void SceneEarth::Init()
 	background.LoadBackground("Image//EarthRear.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthFront.tga", Vector3(1980, 1080, 0));
+
+	story = true;
 }
 
 void SceneEarth::Update(double dt)
@@ -110,7 +112,16 @@ void SceneEarth::Update(double dt)
 	background.Update();
 	ParticleManager::GetInstance().Update(dt);
 	fps = 1 / (float)dt;
-	GoManager::GetInstance().Update(dt);
+
+
+	if (story == true && Application::GetInstance().controller->IsKeyPressed(BACKSPACE))
+	{
+		story = false;
+	}
+	else if (story == false)
+	{
+		GoManager::GetInstance().Update(dt);
+	}
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
 		SceneManager::GetInstance().ChangeScene("Heaven");
@@ -458,6 +469,12 @@ void SceneEarth::RenderUI()
 	text7 << player->GetElementCount(ELEMENTS::LIFESTEAL);
 	RenderTextOnScreen(meshList[GEO_TEXT], "X" + text7.str(), Color(1.f, 1.f, 1.f), 15, 555, 538);
 
+	if (story == true)
+	{
+		modelStack.PushMatrix();
+		RenderObjOnScreen(meshList[GEO_STORY], 180.f, 100.f, 50.f, 97, 54);
+		modelStack.PopMatrix();
+	}
 }
 
 void SceneEarth::RenderParticle()
