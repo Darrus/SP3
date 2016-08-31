@@ -97,6 +97,12 @@
     <Filter Include="Header Files\GameObjects\Items">
       <UniqueIdentifier>{beba44de-c7d0-49a3-a98b-f9176e2c93b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Enemy\Boss">
+      <UniqueIdentifier>{ef14e586-ba1f-442f-8e83-d3cc1193ec89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enemy\Boss">
+      <UniqueIdentifier>{271d6bdb-8934-433f-b9f1-376453294dc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\SceneBase.cpp">
@@ -294,9 +300,6 @@
     <ClCompile Include="Source\SceneEarth.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss.cpp">
-      <Filter>Source Files\GameObjects\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BossSkill.cpp">
       <Filter>Source Files\GameObjects\Enemy</Filter>
     </ClCompile>
@@ -317,6 +320,12 @@
     </ClCompile>
     <ClCompile Include="Source\HeavenBoss.cpp">
       <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Boss.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IceGolem.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -533,9 +542,6 @@
     <ClInclude Include="Source\SceneEarth.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Boss.h">
-      <Filter>Header Files\GameObjects\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BossSkill.h">
       <Filter>Header Files\GameObjects\Enemy</Filter>
     </ClInclude>
@@ -556,6 +562,12 @@
     </ClInclude>
     <ClInclude Include="Source\HeavenBoss.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IceGolem.h">
+      <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

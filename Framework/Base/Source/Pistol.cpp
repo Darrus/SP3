@@ -2,6 +2,7 @@
 #include "MeshGenerator.h"
 #include "BulletFactory.h"
 #include "Application.h"
+#include "SoundEngine.h"
 
 Pistol::Pistol()
 {
@@ -14,6 +15,7 @@ Pistol::Pistol()
 	cooldownRate = 20;
 	scale.Set(20, 20, 1);
 	mesh = MeshGenerator::GetInstance().GenerateQuad("Pistol", Color(1.f, 1.f, 1.f), "Image//Pistol.tga", 1.f);
+	SoundEngine::GetInstance().AddSound("Pistol", "Sound//Pistol.mp3");
 
 	bulletSpeed = 100.f;
 
@@ -24,4 +26,15 @@ Pistol::Pistol()
 Pistol::~Pistol()
 {
 
+}
+
+bool Pistol::Shoot(ELEMENTS element, TileMap* map)
+{
+	if (Weapon::Shoot(element, map))
+	{
+		SoundEngine::GetInstance().Play("Pistol");
+		return true;
+	}
+
+	return false;
 }

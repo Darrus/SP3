@@ -34,6 +34,7 @@ private:
 	Weapon* weapon;
 	Items* items;
 	Boss* boss;
+	float timer;
 
 	double worldX, worldY;
 	double mouseX, mouseY;

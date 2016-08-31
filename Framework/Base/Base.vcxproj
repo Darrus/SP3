@@ -38,6 +38,7 @@
     <ClCompile Include="Source\GoManager.cpp" />
     <ClCompile Include="Source\HealthPotion.cpp" />
     <ClCompile Include="Source\IceBullet.cpp" />
+    <ClCompile Include="Source\IceGolem.cpp" />
     <ClCompile Include="Source\ItemList.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="Source\GoManager.h" />
     <ClInclude Include="Source\HealthPotions.h" />
     <ClInclude Include="Source\IceBullet.h" />
+    <ClInclude Include="Source\IceGolem.h" />
     <ClInclude Include="Source\ItemList.h" />
     <ClInclude Include="Source\Items.h" />
     <ClInclude Include="Source\SceneHell.h" />

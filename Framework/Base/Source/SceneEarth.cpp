@@ -49,7 +49,7 @@ void SceneEarth::Init()
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
 	EnemyFactory::Create("RandomGoblin", Vector3(600.f, 340.f, 0.f), map);
-	EnemyFactory::Create("RandomGoblin", Vector3(400.f, 600.f, 0.f), map);
+	EnemyFactory::Create("RandomGoblin", Vector3(300.f, 650.f, 0.f), map);
 	EnemyFactory::Create("RandomGoblin", Vector3(1000.f, 150.f, 0.f), map);
 	EnemyFactory::Create("RandomGoblin", Vector3(1600.f, 150.f, 0.f), map);
 	EnemyFactory::Create("RandomGoblin", Vector3(2000.f, 150.f, 0.f), map);
@@ -77,7 +77,7 @@ void SceneEarth::Init()
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(2298.85f, 80.f, 0.f);
+	potion->pos.Set(2298.85f, 800.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();

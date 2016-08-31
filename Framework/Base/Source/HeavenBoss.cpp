@@ -8,6 +8,7 @@
 #include "ParticleManager.h"
 #include "SoundEngine.h"
 #include "GoManager.h"
+#include "IceGolem.h"
 
 HeavenBoss::HeavenBoss()
 {
@@ -41,7 +42,7 @@ void HeavenBoss::Init()
 	camFollow->SetMap(map);
 	camera = camFollow;
 
-	boss = new Boss();
+	boss = new IceGolem();
 	boss->Init(map, Vector3(500.f, 100.f, 0.f), Vector3(256.f, 180.f, 1.f));
 	boss->active = true;
 	GoManager::GetInstance().Add(boss);
@@ -50,6 +51,8 @@ void HeavenBoss::Init()
 	background.LoadBackground("Image//RearBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//MidBg.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
+
+	timer = 5.f;
 }
 
 void HeavenBoss::Update(double dt)
@@ -68,13 +71,14 @@ void HeavenBoss::Update(double dt)
 	ParticleManager::GetInstance().Update(dt);
 	GoManager::GetInstance().Update(dt);
 
-	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("LevelEditor");
+	if (boss->GetHealth() <= 0)
+		timer -= dt;
+
+	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
+		SceneManager::GetInstance().ChangeScene("Hell");
 
 	if (player->GetPlayerHealth() <= 0)
-	{
 		SceneManager::GetInstance().ChangeScene("GameOver");
-	}
 
 	if (Application::GetInstance().controller->OnHold(EXIT))
 		SceneManager::GetInstance().ChangeScene("MainMenu");
