@@ -22,6 +22,8 @@
     <ClCompile Include="Source\CameraFollow.cpp" />
     <ClCompile Include="Source\CameraFree.cpp" />
     <ClCompile Include="Source\DepthFBO.cpp" />
+    <ClCompile Include="Source\EarthBoss.cpp" />
+    <ClCompile Include="Source\EarthGolem.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyAttack.cpp" />
     <ClCompile Include="Source\Enemybullet.cpp" />
@@ -96,6 +98,8 @@
     <ClInclude Include="Source\BurnStatus.h" />
     <ClInclude Include="Source\CameraFree.h" />
     <ClInclude Include="Source\DepthFBO.h" />
+    <ClInclude Include="Source\EarthBoss.h" />
+    <ClInclude Include="Source\EarthGolem.h" />
     <ClInclude Include="Source\Element.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyAttack.h" />

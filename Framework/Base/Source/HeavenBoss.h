@@ -1,5 +1,5 @@
-#ifndef SCENE_BOSS_H
-#define SCENE_BOSS_H
+#ifndef HEAVEN_BOSS_H
+#define HEAVEN_BOSS_H
 
 #include "SceneBase.h"
 #include "ParallaxBackground.h"

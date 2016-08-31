@@ -9,11 +9,12 @@ using std::endl;
 #include "LevelEditor.h"
 #include "SceneGameOver.h"
 #include "SceneMainMenu.h"
+#include "SceneUpgrade.h"
 #include "SceneHell.h"
 #include "SceneEarth.h"
-#include "HeavenBoss.h"
-#include "SceneUpgrade.h"
+#include "EarthBoss.h"
 #include "SceneHeaven.h"
+#include "HeavenBoss.h"
 
 SceneManager::SceneManager() :
 quit(false),
@@ -49,6 +50,9 @@ void SceneManager::Init()
 	
 	newScene = new SceneEarth();
 	AddScene("Earth", newScene);
+	newScene = new EarthBoss();
+	AddScene("EarthBoss", newScene);
+
 
 	newScene = new SceneHell();
 	AddScene("Hell", newScene);

@@ -25,6 +25,7 @@ void BurnStatus::Update(double dt)
 	timeBetweenBurn -= dt;
 	if (timeBetweenBurn < 0.f)
 	{
+		damage = 0.02 * enemy->GetHealth();
 		enemy->TakeDamage(damage);
 		timeBetweenBurn = 1.f;
 		stringstream ss;

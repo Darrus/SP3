@@ -330,6 +330,12 @@
     <ClCompile Include="Source\WeaponStorage.cpp">
       <Filter>Source Files\GameObjects\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EarthGolem.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EarthBoss.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Scene.h">
@@ -503,9 +509,6 @@
     <ClInclude Include="Source\BurnStatus.h">
       <Filter>Header Files\StatusEffects</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Element.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LifeStealBullet.h">
       <Filter>Header Files\GameObjects\Bullets</Filter>
     </ClInclude>
@@ -574,6 +577,15 @@
     </ClInclude>
     <ClInclude Include="Source\WeaponStorage.h">
       <Filter>Header Files\GameObjects\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Element.h">
+      <Filter>Header Files\GameObjects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EarthGolem.h">
+      <Filter>Header Files\GameObjects\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EarthBoss.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

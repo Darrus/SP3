@@ -21,7 +21,7 @@ Bullet::~Bullet()
 
 void Bullet::Update(double dt)
 {
-	vel.y -= 2.f;
+	vel.y -= 3.f;
 	collider.Update();
 	pos += vel * dt;
 	CheckCollision();

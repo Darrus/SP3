@@ -32,7 +32,7 @@ void SceneGameOver::Update(double dt)
 {
 	SceneBase::Update(dt);
 
-	if (Application::GetInstance().controller->IsKeyPressed(ENTER))
+	if (Application::GetInstance().controller->IsKeyPressed(ENTER) || Application::GetInstance().controller->IsKeyPressed(EXIT))
 		SceneManager::GetInstance().ChangeScene("MainMenu");
 }
 

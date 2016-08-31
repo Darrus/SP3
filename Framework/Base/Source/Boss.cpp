@@ -21,6 +21,7 @@ Boss::~Boss()
 
 void Boss::Update(double dt)
 {
+	MapCollision(dt);
 	status.Update(dt);
 
 	attackCooldown -= dt;
@@ -37,7 +38,6 @@ void Boss::Update(double dt)
 	if (!isGrounded)
 		vel.y -= 9.8;
 
-	MapCollision(dt);
 
 	if (health <= 0 && active)
 	{

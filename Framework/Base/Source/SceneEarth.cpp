@@ -87,6 +87,7 @@ void SceneEarth::Init()
 
 	fps = 0.f;
 
+	background.Init(&camera->position, 800, 600);
 	background.LoadBackground("Image//EarthRear.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//EarthFront.tga", Vector3(1980, 1080, 0));
@@ -124,7 +125,7 @@ void SceneEarth::Update(double dt)
 	}
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT))
-		SceneManager::GetInstance().ChangeScene("Heaven");
+		SceneManager::GetInstance().ChangeScene("EarthBoss");
 
 	if (Application::GetInstance().controller->OnHold(EXIT))
 		SceneManager::GetInstance().ChangeScene("MainMenu");

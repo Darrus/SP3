@@ -28,7 +28,7 @@ void HeavenBoss::Init()
 
 	map = new TileMap();
 	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
-	map->LoadMap("Boss");
+	map->LoadMap("HeavenBoss");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
 	player = new Player();
