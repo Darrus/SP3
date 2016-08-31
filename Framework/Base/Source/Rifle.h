@@ -7,6 +7,8 @@ class Rifle : public Weapon
 public:
 	Rifle();
 	~Rifle();
+
+	virtual bool Shoot(ELEMENTS element, TileMap* map);
 };
 
 #endif 

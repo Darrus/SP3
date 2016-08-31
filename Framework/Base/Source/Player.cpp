@@ -43,10 +43,6 @@ net(NULL)
 	weapon[3]->ReferencePlayerPos(&pos);
 	weapon[3]->ReferencePlayerView(&view);
 
-	SoundEngine::GetInstance().AddSound("Pistol", "Sound//Pistol.mp3");
-	SoundEngine::GetInstance().AddSound("Rifle", "Sound//Rifle.mp3");
-	SoundEngine::GetInstance().AddSound("Shotgun", "Sound//Shotgun.mp3");
-	SoundEngine::GetInstance().AddSound("Sniper", "Sound//Sniper.mp3");
 	SoundEngine::GetInstance().AddSound("SwitchWeapon", "Sound//SwitchWeapon.mp3");
 	SoundEngine::GetInstance().AddSound("SwitchElementAndItem", "Sound//SwitchElementAndItem.mp3");
 	SoundEngine::GetInstance().AddSound("Pickup", "Sound//Pickup.mp3");
@@ -341,26 +337,10 @@ void Player::SetMousePos(float mouseX, float mouseY)
 void Player::ShootWeapon()
 {
 	if (weapon[weaponType])
-	{
 		if (!weapon[weaponType]->Overheating() && Application::IsMousePressed(0) && bulletElem[selectedElem] != 0)
-		{
 			if (weapon[weaponType]->Shoot(selectedElem, map))
-			{
-				if (weaponType == 0)
-					SoundEngine::GetInstance().Play("Pistol");
-				if (weaponType == 1)
-					SoundEngine::GetInstance().Play("Rifle");
-				if (weaponType == 2)
-					SoundEngine::GetInstance().Play("Shotgun");
-				if (weaponType == 3)
-					SoundEngine::GetInstance().Play("Sniper");
 				if (bulletElem[selectedElem] > 0)
-				{
 					bulletElem[selectedElem] -= 1;
-				}
-			}
-		}
-	}
 }
 
 void Player::TossNet()

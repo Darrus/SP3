@@ -38,6 +38,7 @@
     <ClCompile Include="Source\GoManager.cpp" />
     <ClCompile Include="Source\HealthPotion.cpp" />
     <ClCompile Include="Source\IceBullet.cpp" />
+    <ClCompile Include="Source\IceGolem.cpp" />
     <ClCompile Include="Source\ItemList.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Keyboard.cpp" />
@@ -84,7 +85,6 @@
     <ClCompile Include="Source\TileMap.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
-    <ClCompile Include="Source\WeaponStorage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AABB_2D.h" />
@@ -112,6 +112,7 @@
     <ClInclude Include="Source\GoManager.h" />
     <ClInclude Include="Source\HealthPotions.h" />
     <ClInclude Include="Source\IceBullet.h" />
+    <ClInclude Include="Source\IceGolem.h" />
     <ClInclude Include="Source\ItemList.h" />
     <ClInclude Include="Source\Items.h" />
     <ClInclude Include="Source\SceneHell.h" />
@@ -166,7 +167,6 @@
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Weapon.h" />
-    <ClInclude Include="Source\WeaponStorage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9B172635-4E2B-46F1-A403-08F4194D00F5}</ProjectGuid>

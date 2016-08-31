@@ -2,6 +2,7 @@
 #include "MeshGenerator.h"
 #include "BulletFactory.h"
 #include "Application.h"
+#include "SoundEngine.h"
 #include "Mtx44.h"
 
 Shotgun::Shotgun()
@@ -15,6 +16,7 @@ Shotgun::Shotgun()
 	overheatRate = 30;
 	scale.Set(40, 20, 1);
 	mesh = MeshGenerator::GetInstance().GenerateQuad("Shotgun", Color(1.f, 1.f, 1.f), "Image//Shotgun.tga", 1.f);
+	SoundEngine::GetInstance().AddSound("Shotgun", "Sound//Shotgun.mp3");
 	offset = 15.f;
 	fineOffset.Set(0.f, -2.f, 0.f);
 }
@@ -47,6 +49,7 @@ bool Shotgun::Shoot(ELEMENTS element, TileMap* map)
 			overheated = true;
 			overheatBar = 100.f;
 		}
+		SoundEngine::GetInstance().Play("Shotgun");
 		return true;
 	}
 	return false;

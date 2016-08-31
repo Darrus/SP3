@@ -8,6 +8,7 @@ public:
 	Sniper();
 	~Sniper();
 
+	virtual bool Shoot(ELEMENTS element, TileMap* map);
 };
 
 
