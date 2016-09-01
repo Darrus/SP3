@@ -87,8 +87,8 @@ void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_M
 
 void TileMap::Update()
 {
-	this->numOfTiles_ScreenHeight = *screenHeight / tileSize;
-	this->numOfTiles_ScreenWidth = *screenWidth / tileSize;
+	this->numOfTiles_ScreenHeight = (int)ceil((float)*screenHeight / (float)tileSize);
+	this->numOfTiles_ScreenWidth = (int)ceil((float)*screenWidth / (float)tileSize);
 }
 
 bool TileMap::LoadMap(const string name)
