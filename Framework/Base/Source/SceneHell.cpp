@@ -51,15 +51,15 @@ void SceneHell::Init()
 	SoundEngine::GetInstance().GetInstance().AddRepeatSound("BG_Sound", "Sound//MapleStory_Gravity_Core.mp3", 0.2f);
 	SoundEngine::GetInstance().GetInstance().Play("BG_Sound");
 
-	EnemyFactory::Create("Demon", Vector3(80.f, 80.f, 0.f), map);
-	EnemyFactory::Create("RangeDemon", Vector3(655.f, 432.f, 0.f), map);
-	EnemyFactory::Create("BigDemon", Vector3(1235.f, 80.f, 0.f), map);
-	EnemyFactory::Create("BigDemon", Vector3(1262.f, 336.f, 0.f), map);
-	EnemyFactory::Create("BigRangeDemon", Vector3(1973.f, 624.f, 0.f), map);
-	EnemyFactory::Create("Demon", Vector3(2040.f, 80.f, 0.f), map);
-	EnemyFactory::Create("BigDemon", Vector3(2924.f, 80.f, 0.f), map);
-	EnemyFactory::Create("RangeDemon", Vector3(2777.f, 336.f, 0.f), map);
-	EnemyFactory::Create("BigRangeDemon", Vector3(3053.f, 664.f, 0.f), map);
+	EnemyFactory::Create("Demon", Vector3(80.f, 90.f, 0.f), map);
+	EnemyFactory::Create("RangeDemon", Vector3(655.f, 445.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(1235.f, 90.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(1262.f, 345.f, 0.f), map);
+	EnemyFactory::Create("BigRangeDemon", Vector3(1973.f, 635.f, 0.f), map);
+	EnemyFactory::Create("Demon", Vector3(2040.f, 90.f, 0.f), map);
+	EnemyFactory::Create("BigDemon", Vector3(2924.f, 90.f, 0.f), map);
+	EnemyFactory::Create("RangeDemon", Vector3(2777.f, 345.f, 0.f), map);
+	EnemyFactory::Create("BigRangeDemon", Vector3(3053.f, 675.f, 0.f), map);
 
 	Items *potion = new HealthPotion();
 	potion->active = true;
