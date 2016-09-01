@@ -244,6 +244,9 @@ ELEMENTS Player::GetElement()
 void Player::CollisionCheck(double dt)
 {
 	// Updates position
+	if (vel.y > JUMP_SPEED)
+		vel.y = JUMP_SPEED;
+
 	newPos = pos + vel * (float)dt;
 	
 	// Init Variables
