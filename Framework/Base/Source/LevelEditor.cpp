@@ -32,6 +32,8 @@ void LevelEditor::Init()
 	editor->active = true;
 
 	camera->Init(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f));
+
+	Application::ShowCursor(true);
 }
 
 void LevelEditor::Update(double dt)

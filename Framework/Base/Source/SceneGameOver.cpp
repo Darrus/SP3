@@ -26,6 +26,8 @@ void SceneGameOver::Init()
 
 	SoundEngine::GetInstance().AddSound("GameOver", "Sound//GameOver.mp3", 0.5f);
 	SoundEngine::GetInstance().Play("GameOver");
+
+	Application::ShowCursor(false);
 }
 
 void SceneGameOver::Update(double dt)

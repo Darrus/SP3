@@ -72,17 +72,17 @@ void SceneEarth::Init()
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(2070.53, 656.f, 0.f);
+	potion->pos.Set(2070.53f, 656.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(2298.85f, 800.f, 0.f);
+	potion->pos.Set(2298.85f, 845.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	potion = new HealthPotion();
 	potion->active = true;
-	potion->pos.Set(2802.46, 912.f, 0.f);
+	potion->pos.Set(2802.46f, 912.f, 0.f);
 	GoManager::GetInstance().Add(potion);
 
 	fps = 0.f;
@@ -95,14 +95,13 @@ void SceneEarth::Init()
 	story = true;
 
 	timer = 5.f;
+
+	Application::ShowCursor(false);
 }
 
 void SceneEarth::Update(double dt)
 {
-
 	SceneBase::Update(dt);
-
-	std::cout << player->pos << std::endl;
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -127,7 +126,7 @@ void SceneEarth::Update(double dt)
 	}
 
 	if(GoManager::GetInstance().GetEnemyCount() <= 0)
-		timer -= dt;
+		timer -= (float)dt;
 
 	if (Application::GetInstance().controller->OnHold(CTRL) && Application::GetInstance().controller->IsKeyPressed(NEXT) || timer < 0.f)
 		SceneManager::GetInstance().ChangeScene("EarthBoss");
@@ -188,14 +187,14 @@ void SceneEarth::Render()
 			{
 
 				modelStack.PushMatrix();
-				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5f), enemy->pos.y + (enemy->scale.y *0.5f), enemy->pos.z);
 				modelStack.Scale(enemy->scale.x * 4, 15, 1);
 				RenderMesh(meshList[GEO_HEALTHBACK], false);
 				modelStack.PopMatrix();
 				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 76 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 100)
 				{
 					modelStack.PushMatrix();
-					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5f), enemy->pos.y + (enemy->scale.y *0.5f), enemy->pos.z);
 					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
 					RenderMesh(meshList[GEO_HEALTHFRONT01], false);
 					modelStack.PopMatrix();
@@ -203,7 +202,7 @@ void SceneEarth::Render()
 				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 40 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 76)
 				{
 					modelStack.PushMatrix();
-					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5f), enemy->pos.y + (enemy->scale.y *0.5f), enemy->pos.z);
 					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
 					RenderMesh(meshList[GEO_HEALTHFRONT02], false);
 					modelStack.PopMatrix();
@@ -211,7 +210,7 @@ void SceneEarth::Render()
 				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 0 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 40)
 				{
 					modelStack.PushMatrix();
-					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5), enemy->pos.y + (enemy->scale.y *0.5), enemy->pos.z);
+					modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5f), enemy->pos.y + (enemy->scale.y *0.5f), enemy->pos.z);
 					modelStack.Scale(((enemy->GetHealth() / enemy->GetMaxHealth()) *  enemy->scale.x) * 4, 15, 1);
 					RenderMesh(meshList[GEO_HEALTHFRONT03], false);
 					modelStack.PopMatrix();

@@ -100,6 +100,8 @@ void SceneHeaven::Init()
 	background.LoadBackground("Image//FrontBg.tga", Vector3(1980, 1080, 0));
 
 	timer = 5.f;
+
+	Application::ShowCursor(false);
 }
 
 void SceneHeaven::Update(double dt)

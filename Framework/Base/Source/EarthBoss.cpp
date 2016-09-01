@@ -57,7 +57,7 @@ void EarthBoss::Init()
 	SoundEngine::GetInstance().AddSound("Boss", "Sound//MapleStory_Horntail.mp3", 0.5f);
 	SoundEngine::GetInstance().Play("Boss");
 
-	Math::InitRNG();
+	Application::ShowCursor(false);
 }
 
 void EarthBoss::Update(double dt)

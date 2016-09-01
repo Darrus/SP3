@@ -37,6 +37,8 @@ void SceneUpgrade::Init()
 	statsDisplay = false;
 	selectable = true;
 	upgradable = false;
+
+	Application::ShowCursor(false);
 }
 
 void SceneUpgrade::Update(double dt)

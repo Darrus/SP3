@@ -53,6 +53,8 @@ void SceneMainMenu::Init()
 	selectedLevel = 0;
 	InstructionsPage = 0;
 	LevelEditorPage = 0;
+
+	Application::ShowCursor(false);
 }
 
 void SceneMainMenu::Update(double dt)

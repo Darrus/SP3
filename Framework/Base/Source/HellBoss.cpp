@@ -56,6 +56,8 @@ void HellBoss::Init()
 
 	SoundEngine::GetInstance().AddSound("Boss", "Sound//MapleStory_Horntail.mp3", 0.5f);
 	SoundEngine::GetInstance().Play("Boss");
+
+	Application::ShowCursor(false);
 }
 
 void HellBoss::Update(double dt)

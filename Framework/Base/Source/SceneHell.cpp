@@ -112,6 +112,8 @@ void SceneHell::Init()
 	background.LoadBackground("Image//HellBackground.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellMid.tga", Vector3(1980, 1080, 0));
 	background.LoadBackground("Image//HellFront.tga", Vector3(1980, 1080, 0));
+
+	Application::ShowCursor(false);
 }
 
 void SceneHell::Update(double dt)

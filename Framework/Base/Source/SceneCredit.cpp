@@ -26,6 +26,8 @@ void SceneCredit::Init()
 
 	SoundEngine::GetInstance().AddSound("Credit", "Sound//Maplestory_Signal _Medium.mp3", 0.5f);
 	SoundEngine::GetInstance().Play("Credit");
+
+	Application::ShowCursor(false);
 }
 
 void SceneCredit::Update(double dt)

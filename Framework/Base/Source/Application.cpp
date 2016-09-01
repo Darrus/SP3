@@ -107,6 +107,14 @@ int Application::GetWindowWidth()
 	return m_window_width;
 }
 
+void Application::ShowCursor(bool active)
+{
+	if (active)
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	else
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+}
+
 Application::Application()
 {
 }
@@ -167,9 +175,6 @@ void Application::Init()
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		//return -1;
 	}
-
-	// Hide the cursor
-	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	// Controller
 	controller = new Keyboard();
