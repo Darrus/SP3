@@ -27,7 +27,7 @@ void SceneEarth::Init()
 	Math::InitRNG();
 
 	map = new TileMap();
-	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
+	map->Init(m_screenHeight, m_screenWidth, 32);
 	map->LoadMap("Earth");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
@@ -102,7 +102,6 @@ void SceneEarth::Init()
 void SceneEarth::Update(double dt)
 {
 	SceneBase::Update(dt);
-	map->Update();
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -146,7 +145,7 @@ void SceneEarth::Render()
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0.f, Application::GetInstance().m_window_width, 0.f, Application::GetInstance().m_window_height, -10.f, 10.f);
+	projection.SetToOrtho(0.f, 800, 0.f, 600, -10.f, 10.f);
 	projectionStack.LoadMatrix(projection);
 
 	// Camera matrix

@@ -31,7 +31,7 @@ public:
 	MapEditor();
 	~MapEditor();
 
-	void Init(int *screenWidth, int *screenHeight, int tileSize);
+	void Init(int screenWidth, int screenHeight, int tileSize);
 	void Update(double dt);
 	
 	
@@ -71,7 +71,7 @@ private:
 	void Edit();
 
 	TileMap* map;
-	int *screenWidth, *screenHeight;
+	int screenWidth, screenHeight;
 	int tileSize;
 	CameraFree* camera;
 	EDIT_STATE state;

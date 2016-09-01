@@ -5,7 +5,6 @@ ItemList::ItemList() :
 MaxItemHold(3),
 TotalItemCount(0),
 selectedItem(0)
-//HealthPotionCount(3)
 {
 	itemHold = new Items*[MaxItemHold];
 	for (int i = 0; i < MaxItemHold; ++i)
@@ -21,16 +20,6 @@ ItemList::~ItemList()
 {
 
 }
-
-//int ItemList::GetHealthPotionCount(void)
-//{
-//	return HealthPotionCount;
-//}
-//
-//void ItemList::SetHealthPotionCount(int HealthPotionCount)
-//{
-//	this->HealthPotionCount = HealthPotionCount;
-//}
 
 int ItemList::GetTotalItemCount(void)
 {

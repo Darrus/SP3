@@ -27,7 +27,7 @@ void EarthBoss::Init()
 	Math::InitRNG();
 
 	map = new TileMap();
-	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
+	map->Init(m_screenHeight, m_screenWidth, 32);
 	map->LoadMap("EarthBoss");
 	map->LoadTileSheet("Image//tilesheet.tga");
 
@@ -63,7 +63,6 @@ void EarthBoss::Init()
 void EarthBoss::Update(double dt)
 {
 	SceneBase::Update(dt);
-	map->Update();
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -95,7 +94,7 @@ void EarthBoss::Render()
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0.f, Application::GetInstance().m_window_width, 0.f, Application::GetInstance().m_window_height, -10.f, 10.f);
+	projection.SetToOrtho(0.f, 800, 0.f, 600, -10.f, 10.f);
 	projectionStack.LoadMatrix(projection);
 
 	// Camera matrix
@@ -294,22 +293,6 @@ void EarthBoss::RenderUI()
 	{
 		RenderObjOnScreen(player->inventory.GetSelectedItem()->mesh, 10.f, 8.f, 1.f, 15, 89);
 	}
-
-
-	/*else if (items->SPEEDBOOST)
-	{
-	modelStack.PushMatrix();
-	RenderObjOnScreen(meshList[GEO_SPEEDPOTION], 10.f, 8.f, 1.f, 15, 89);
-	modelStack.PopMatrix();
-	}*/
-	//else if (items->JUMPBOOST)
-	//{
-	//	modelStack.PushMatrix();
-	//	RenderObjOnScreen(meshList[GEO_JUMPPOTION], 10.f, 8.f, 1.f, 15, 89);
-	//	modelStack.PopMatrix();
-	//}
-
-
 
 	if (player->GetElement() == ELEMENTS::NONE)
 	{

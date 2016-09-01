@@ -36,15 +36,15 @@ void SceneBase::Init()
 	// Accept fragment if it closer to the camera than the former one
 	//glDepthFunc(GL_LESS); 
 
-	m_screenHeight = Application::GetWindowHeight();
-	m_screenWidth = Application::GetWindowWidth();
-	
-	glDisable(GL_CULL_FACE);
+	m_screenHeight = 600;
+	m_screenWidth = 800;
 	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glDisable(GL_CULL_FACE);
 
 	glGenVertexArrays(1, &m_vertexArrayID);
 	glBindVertexArray(m_vertexArrayID);
@@ -478,6 +478,7 @@ void SceneBase::RenderMap(TileMap* map)
 
 				if (m >= map->GetNumOfTiles_MapWidth())
 					break;
+
 				if (map->rearMap[n][m] > 0)
 					RenderTile(map->GetTileSheet(), map->rearMap[n][m], k * tileSize - fineOffset.x, i * tileSize - fineOffset.y, tileSize);
 				if (map->frontMap[n][m] > 0)

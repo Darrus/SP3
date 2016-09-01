@@ -27,7 +27,7 @@ void HellBoss::Init()
 	Math::InitRNG();
 
 	map = new TileMap();
-	map->Init(&Application::GetInstance().m_window_height, &Application::GetInstance().m_window_width, 32);
+	map->Init(m_screenHeight, m_screenWidth, 32);
 	map->LoadMap("HellBoss");
 	map->LoadTileSheet("Image//tilesheet2.tga");
 
@@ -63,7 +63,6 @@ void HellBoss::Init()
 void HellBoss::Update(double dt)
 {
 	SceneBase::Update(dt);
-	map->Update();
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
@@ -95,7 +94,7 @@ void HellBoss::Render()
 	SceneBase::Render();
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0.f, Application::GetInstance().m_window_width, 0.f, Application::GetInstance().m_window_height, -10.f, 10.f);
+	projection.SetToOrtho(0.f, m_screenWidth, 0.f, m_screenHeight, -10.f, 10.f);
 	projectionStack.LoadMatrix(projection);
 
 	// Camera matrix

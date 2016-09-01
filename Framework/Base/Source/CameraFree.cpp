@@ -71,7 +71,6 @@ void CameraFree::Boundary()
 		tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
 		fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
 	}
-	
 }
 
 Vector2 CameraFree::GetTileOffset()

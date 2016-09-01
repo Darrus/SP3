@@ -49,16 +49,16 @@ TileMap::~TileMap()
 	tileSheet = NULL;
 }
 
-void TileMap::Init(int *screenHeight, int *screenWidth, const int tileSize)
+void TileMap::Init(int screenHeight, int screenWidth, const int tileSize)
 {
 	this->screenHeight = screenHeight;
 	this->screenWidth = screenWidth;
 	this->tileSize = tileSize;
-	this->numOfTiles_ScreenHeight = ceil((float)*screenHeight / (float)tileSize);
-	this->numOfTiles_ScreenWidth = ceil((float)*screenWidth / (float)tileSize);
+	this->numOfTiles_ScreenHeight = ceil((float)screenHeight / (float)tileSize);
+	this->numOfTiles_ScreenWidth = ceil((float)screenWidth / (float)tileSize);
 }
 
-void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_MapWidth, const int numOfTiles_MapHeight, const int tileSize)
+void TileMap::Create(int screenWidth, int screenHeight, const int numOfTiles_MapWidth, const int numOfTiles_MapHeight, const int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
@@ -67,8 +67,8 @@ void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_M
 	this->numOfTiles_MapHeight = numOfTiles_MapHeight;
 	this->mapWidth = numOfTiles_MapWidth * tileSize;
 	this->mapHeight = numOfTiles_MapHeight * tileSize;
-	this->numOfTiles_ScreenWidth = ceil((float)*screenWidth / tileSize);
-	this->numOfTiles_ScreenHeight = ceil((float)*screenHeight / tileSize);
+	this->numOfTiles_ScreenWidth = ceil((float)screenWidth / tileSize);
+	this->numOfTiles_ScreenHeight = ceil((float)screenHeight / tileSize);
 
 	for (int i = 0; i < numOfTiles_MapHeight; ++i)
 	{
@@ -83,12 +83,6 @@ void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_M
 		rearMap.push_back(row);
 		collisionMap.push_back(row);
 	}
-}
-
-void TileMap::Update()
-{
-	this->numOfTiles_ScreenHeight = (int)ceil((float)*screenHeight / (float)tileSize);
-	this->numOfTiles_ScreenWidth = (int)ceil((float)*screenWidth / (float)tileSize);
 }
 
 bool TileMap::LoadMap(const string name)
@@ -215,12 +209,12 @@ int TileMap::GetNumOfTiles_MapWidth()
 
 int TileMap::GetScreenHeight()
 {
-	return *screenHeight;
+	return screenHeight;
 }
 
 int TileMap::GetScreenWidth()
 {
-	return *screenWidth;
+	return screenWidth;
 }
 
 int TileMap::GetTileSize()

@@ -41,51 +41,11 @@ MapEditor::~MapEditor()
 
 }
 
-void MapEditor::Init(int *screenWidth, int *screenHeight, int tileSize)
+void MapEditor::Init(int screenWidth, int screenHeight, int tileSize)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
 	this->tileSize = tileSize;
-	/*if (!map)
-	{
-		bool answer = true;
-		cout << "Create new map?" << endl;
-		cout << "0) Yes" << endl;
-		cout << "1) No" << endl;
-		cin >> answer;
-
-		if (answer == false)
-		{
-			int mapWidth, mapHeight, tileSize;
-			cout << "Please type in the Map's width." << endl;
-			cin >> mapWidth;
-			cout << "Please type in the Map's height." << endl;
-			cin >> mapHeight;
-			cout << "Please type in the Map's tile size." << endl;
-			cin >> tileSize;
-
-			CreateNewMap(mapWidth, mapHeight, tileSize);
-		}
-		else
-		{
-			cout << "Input name of map" << endl;
-			cin >> name;
-			if (!LoadMap(name, tileSize))
-				return;
-		}
-	}
-
-	if (!tileSheet)
-	{
-		string tilename;
-		cout << "Input name of tilesheet" << endl;
-		cin >> tilename;
-		cout << "Please input tile sheet's rows" << endl;
-		cin >> row;
-		cout << "Please input tile sheet's cols" << endl;
-		cin >> column;
-		LoadTileSheet(tilename, row, column);
-	}*/
 }
 
 bool MapEditor::TextInput(string& text)
@@ -138,6 +98,8 @@ void MapEditor::Setup()
 		double mouseX, mouseY;
 		Application::GetInstance().GetMousePos(mouseX, mouseY);
 		mouseY = Application::GetInstance().m_window_height - mouseY;
+		mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+		mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
 		Vector3 mousePos(mouseX, mouseY, 1.f);
 		AABB_2D yesBox;
 		yesBox.Init(Vector3(250.f, 150.f, 1.f), Vector3(200.f, 100.f, 1.f));
@@ -232,6 +194,9 @@ void MapEditor::Edit()
 		{
 			double mouseX, mouseY;
 			Application::GetMousePos(mouseX, mouseY);
+			mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+			mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
+
 			int tileX, tileY;
 			tileX = mouseX / map->GetTileSize();
 			tileY = mouseY / map->GetTileSize();
@@ -278,7 +243,9 @@ void MapEditor::Edit()
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = *screenHeight - mouseY;
+			mouseY = Application::GetInstance().m_window_height - mouseY;
+			mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+			mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
@@ -305,7 +272,9 @@ void MapEditor::Edit()
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = *screenHeight - mouseY;
+			mouseY = Application::GetInstance().m_window_height - mouseY;
+			mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+			mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 
@@ -328,7 +297,9 @@ void MapEditor::Edit()
 			double mouseX, mouseY;
 			int tileX, tileY;
 			Application::GetMousePos(mouseX, mouseY);
-			mouseY = *screenHeight - mouseY;
+			mouseY = Application::GetInstance().m_window_height - mouseY;
+			mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+			mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
 			tileX = (mouseX + camera->GetFineOffset().x) / map->GetTileSize() + camera->GetTileOffset().x;
 			tileY = (mouseY + camera->GetFineOffset().y) / map->GetTileSize() + camera->GetTileOffset().y;
 

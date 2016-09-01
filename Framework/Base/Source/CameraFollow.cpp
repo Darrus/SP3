@@ -25,8 +25,6 @@ void CameraFollow::Update(double dt)
 	newPos.Set(go->pos.x - map->GetScreenWidth() * 0.5f, go->pos.y - map->GetScreenHeight() * 0.5f, 1.f);
 	position.Lerp(newPos, dt);
 	Boundary();
-	tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
-	fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
 	target.Set(position.x, position.y, 0.f);
 }
 
@@ -42,24 +40,31 @@ void CameraFollow::SetNewPos(Vector3 newPos)
 
 void CameraFollow::Boundary()
 {
-	float boundX = map->GetMapWidth() - map->GetScreenWidth();
-	if (boundX < 0.f)
-		boundX = 0.f;
-	float boundY = map->GetMapHeight() - map->GetScreenHeight();
-	if (boundY < 0.f)
-		boundY = 0.f;
+	if (map)
+	{
+		if (position.x < 0.f)
+			position.x = 0.f;
 
-	if (position.x < 0.f)
-		position.x = 0.f;
+		float boundX = map->GetMapWidth() - map->GetScreenWidth();
+		if (boundX < 0.f)
+			boundX = 0.f;
 
-	if (position.x > map->GetMapWidth() - map->GetScreenWidth())
-		position.x = map->GetMapWidth() - map->GetScreenWidth();
+		float boundY = map->GetMapHeight() - map->GetScreenHeight();
+		if (boundY < 0.f)
+			boundY = 0.f;
 
-	if (position.y < 0.f)
-		position.y = 0.f;
+		if (position.x >= boundX)
+			position.x = boundX;
 
-	if (position.y > map->GetMapHeight() - map->GetScreenHeight())
-		position.y = map->GetMapHeight() - map->GetScreenHeight();
+		if (position.y < 0.f)
+			position.y = 0.f;
+
+		if (position.y >= boundY)
+			position.y = boundY;
+
+		tileOffset.Set((int)position.x / map->GetTileSize(), (int)position.y / map->GetTileSize());
+		fineOffset.Set((int)position.x % map->GetTileSize(), (int)position.y % map->GetTileSize());
+	}
 }
 
 void CameraFollow::LookAt(GameObject *go)
