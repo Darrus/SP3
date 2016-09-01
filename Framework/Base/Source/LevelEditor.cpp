@@ -39,6 +39,8 @@ void LevelEditor::Init()
 void LevelEditor::Update(double dt)
 {
 	SceneBase::Update(dt);
+	editor->GetMap()->Update();
+
 	if (editor->editorState == MapEditor::EDIT)
 		camera->Update(dt);
 

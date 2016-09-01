@@ -63,6 +63,7 @@ void HeavenBoss::Init()
 void HeavenBoss::Update(double dt)
 {
 	SceneBase::Update(dt);
+	map->Update();
 
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);

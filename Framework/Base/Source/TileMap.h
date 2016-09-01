@@ -20,6 +20,7 @@ public:
 	void Create(int *screenWidth, int *screenHeight, const int numOfTiles_MapWidth, const int numOfTiles_MapHeight, const int tileSize = 25);
 	bool LoadMap(const string name);
 	bool LoadTileSheet(const string fileLoc);
+	void Update();
 
 	int GetNumOfTiles_ScreenHeight();		// Get the number of tiles for height of the screen
 	int GetNumOfTiles_ScreenWidth();		// Get the number of tiles for width of the screen
@@ -30,7 +31,6 @@ public:
 	int GetTileSize();
 	int GetMapWidth();
 	int GetMapHeight();
-
 	Mesh* GetTileSheet();
 
 	vector<vector<int> > frontMap;

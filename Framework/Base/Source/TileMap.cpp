@@ -85,6 +85,12 @@ void TileMap::Create(int *screenWidth, int *screenHeight, const int numOfTiles_M
 	}
 }
 
+void TileMap::Update()
+{
+	this->numOfTiles_ScreenHeight = *screenHeight / tileSize;
+	this->numOfTiles_ScreenWidth = *screenWidth / tileSize;
+}
+
 bool TileMap::LoadMap(const string name)
 {
 	string fileLoc = "Maps\\";

@@ -146,7 +146,7 @@ void Application::Init()
 
 
 	//Create a window and create its OpenGL context
-	m_window = glfwCreateWindow(m_window_width, m_window_height, "Game Development", NULL, NULL);
+	m_window = glfwCreateWindow(m_window_width, m_window_height, "Studio Project 3", NULL, NULL);
 
 	//If the window couldn't be created
 	if (!m_window)
