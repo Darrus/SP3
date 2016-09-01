@@ -123,6 +123,8 @@ void SceneHell::Update(double dt)
 	//Get mouse pos in world
 	Application::GetInstance().GetMousePos(mouseX, mouseY);
 	mouseY = Application::GetInstance().m_window_height - mouseY;
+	mouseY = (mouseY / Application::GetInstance().m_window_height) * 600;
+	mouseX = (mouseX / Application::GetInstance().m_window_width) * 800;
 	worldX = mouseX + camera->position.x;
 	worldY = mouseY + camera->position.y;
 	player->SetMousePos((float)worldX, (float)worldY);
