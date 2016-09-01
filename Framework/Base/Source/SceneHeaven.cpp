@@ -186,11 +186,6 @@ void SceneHeaven::Render()
 			if (enemy)
 			{
 
-				modelStack.PushMatrix();
-				modelStack.Translate(enemy->pos.x - (enemy->scale.x * 0.5),enemy->pos.y + (enemy->scale.y *0.5),enemy->pos.z);
-				modelStack.Scale(enemy->scale.x * 4,15,1);
-				RenderMesh(meshList[GEO_HEALTHBACK],false);
-				modelStack.PopMatrix();
 
 				if (((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 >= 76 && ((enemy->GetHealth() / enemy->GetMaxHealth())) * 100 <= 100)
 				{
